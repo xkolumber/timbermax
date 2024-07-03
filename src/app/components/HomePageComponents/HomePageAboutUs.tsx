@@ -1,6 +1,7 @@
 import React from "react";
 import IconTerasa from "../icons/IconTerasa";
 import HomePageAboutIsElements from "./HomePageAboutIsElements";
+import HomePageIcons from "./HomePageIcons";
 
 const HomePageAboutUs = () => {
   return (
@@ -21,6 +22,7 @@ const HomePageAboutUs = () => {
         </p>
       </div>
       <HomePageAboutIsElements />
+      <HomePageIcons />
     </div>
   );
 };

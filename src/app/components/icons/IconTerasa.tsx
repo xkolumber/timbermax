@@ -7,7 +7,6 @@ const IconTerasa = () => {
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 116.4 116.4"
-      className="w-16 h-16"
     >
       <g id="MainScroll">
         <g id="_1_NaseSluzby" data-name="1_NaseSluzby">
