@@ -4,7 +4,7 @@
 
 :root {
   --color-primary: #1f2820;
-  --color-secondary: #d9d9d9;
+  --color-secondary: #dad5ce;
 }
 
 html {
@@ -31,6 +31,7 @@ b {
 }
 p {
   color: white;
+  font-weight: 300;
 }
 
 .navbar {

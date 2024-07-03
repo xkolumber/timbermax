@@ -1,4 +1,7 @@
 import Image from "next/image";
+import IconDoubleArrow from "./components/icons/IconDoubleArrow";
+import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
+import IconTerasa from "./components/icons/IconTerasa";
 
 export default function Home() {
   return (
@@ -12,7 +15,9 @@ export default function Home() {
         priority={true}
         className="w-full h-full max-h-[1200px] object-cover"
       />
-      <h5>uvod stranka</h5>
+      {/* <IconDoubleArrow /> */}
+      <HomePageAboutUs />
+      <IconTerasa />
     </main>
   );
 }
