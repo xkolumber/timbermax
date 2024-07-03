@@ -52,7 +52,7 @@ const HomePageAboutIsElements = () => {
       <div className="grid grid-cols-3 gap-6">
         {data.map((object, index) => (
           <div
-            className="h-[450px] relative rounded-[8px] flex justify-center items-center flex-col"
+            className="h-[450px] relative rounded-[8px] flex justify-center items-center flex-col cursor-pointer overflow-hidden group"
             key={index}
           >
             <Image
@@ -61,12 +61,21 @@ const HomePageAboutIsElements = () => {
               width={1000}
               height={1000}
               quality={100}
-              className="absolute h-full w-full  z-5 rounded-[8px]"
+              className="absolute h-full w-full z-5 rounded-[8px] object-cover"
             />
-            <div className="w-16 h-16  relative"> {object.svg_icon}</div>
+            <div className="w-16 h-16 relative z-10"> {object.svg_icon}</div>
+            <h5 className="relative text-white z-10">{object.title}</h5>
 
-            <h5 className="relative text-white">{object.title}</h5>
-            <p className="text-white relative">{object.description}</p>
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 z-6"></div>
+
+            <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+              <div className="text-center text-white p-4">
+                <p className="text-white">{object.description}</p>
+              </div>
+              <div className="btn btn--secondary absolute bottom-0 !mb-8">
+                Čítať viac
+              </div>
+            </div>
           </div>
         ))}
       </div>

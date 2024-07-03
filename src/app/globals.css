@@ -120,3 +120,39 @@ p {
     max-width: 1556px;
   }
 }
+
+/*Buttons*/
+.btn {
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+  outline: 0;
+  padding: 1.5rem 3.1rem;
+  text-align: center;
+  white-space: nowrap;
+  max-width: fit-content;
+  justify-content: center;
+  display: flex;
+  transition: 0.1s ease-in;
+  align-items: center;
+  font-weight: 500;
+  z-index: 10;
+  text-transform: uppercase;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: white;
+}
+.btn--primary:hover {
+  color: black;
+}
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: black;
+}
+.btn--secondary:hover {
+  color: var(--color-primary);
+}
