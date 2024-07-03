@@ -1,7 +1,6 @@
 import Image from "next/image";
-import IconDoubleArrow from "./components/icons/IconDoubleArrow";
 import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
-import IconTerasa from "./components/icons/IconTerasa";
+import HomePagePriceOffer from "./components/HomePageComponents/HomePagePriceOffer";
 
 export default function Home() {
   return (
@@ -15,9 +14,8 @@ export default function Home() {
         priority={true}
         className="w-full h-full max-h-[1200px] object-cover"
       />
-      {/* <IconDoubleArrow /> */}
       <HomePageAboutUs />
-      <IconTerasa />
+      <HomePagePriceOffer />
     </main>
   );
 }

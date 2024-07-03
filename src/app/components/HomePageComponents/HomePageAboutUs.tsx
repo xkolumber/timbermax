@@ -1,5 +1,3 @@
-import React from "react";
-import IconTerasa from "../icons/IconTerasa";
 import HomePageAboutIsElements from "./HomePageAboutIsElements";
 import HomePageIcons from "./HomePageIcons";
 
