@@ -7,6 +7,7 @@ const IconCalculate = () => {
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 52.38 52.38"
+      className="w-16 h-16"
     >
       <g id="Hlavna_Lista">
         <g id="HlavnaLista">
