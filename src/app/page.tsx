@@ -1,6 +1,7 @@
 import Image from "next/image";
 import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
 import HomePagePriceOffer from "./components/HomePageComponents/HomePagePriceOffer";
+import HomePageTimbermaxLike from "./components/HomePageComponents/HomePageTimbermaxLike";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       />
       <HomePageAboutUs />
       <HomePagePriceOffer />
+      <HomePageTimbermaxLike />
     </main>
   );
 }

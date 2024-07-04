@@ -64,7 +64,7 @@ const Navbar = () => {
                 alt="logo"
                 width={1000}
                 height={1000}
-                className="w-[130px] md:w-[150px] h-full  object-contain"
+                className="w-[130px] md:w-[150px]   object-contain"
               />
             </Link>
             <div className="hidden xl:flex flex-row gap-12 items-center">

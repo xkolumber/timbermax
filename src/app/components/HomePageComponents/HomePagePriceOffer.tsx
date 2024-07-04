@@ -15,6 +15,9 @@ const HomePagePriceOffer = () => {
       />
 
       <IconCalculatePriceOffer />
+      <button className="btn btn--secondary absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20">
+        Výpočet ceny ihneď
+      </button>
 
       <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
       <div className="absolute inset-0 flex flex-col justify-center  text-white z-10 p-4  md:pl-40 max-w-[630px]">
