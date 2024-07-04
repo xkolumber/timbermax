@@ -3,6 +3,7 @@ import HomePageOurServices from "./components/HomePageComponents/HomePageOurServ
 import HomePagePriceOffer from "./components/HomePageComponents/HomePagePriceOffer";
 import HomePageTimbermaxLike from "./components/HomePageComponents/HomePageTimbermaxLike";
 import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
+import HomePageReferencies from "./components/HomePageComponents/HomePageReferencies";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <HomePagePriceOffer />
       <HomePageTimbermaxLike />
       <HomePageAboutUs />
+      <HomePageReferencies />
     </main>
   );
 }
