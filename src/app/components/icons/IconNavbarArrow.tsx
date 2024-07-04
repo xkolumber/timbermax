@@ -1,13 +1,20 @@
 import React from "react";
 
-const IconNavbarArrow = () => {
+interface Props {
+  index: number;
+  hoveredIndex: number;
+}
+
+const IconNavbarArrow = ({ index, hoveredIndex }: Props) => {
   return (
     <svg
       id="Layer_2"
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 12.23 6.86"
-      className="w-4 h-4"
+      className={`w-4 h-4 ${
+        index === hoveredIndex ? "rotate-180" : "rotate-0"
+      } duration-200`}
     >
       <g id="Hlavna_Lista">
         <g id="HlavnaLista">

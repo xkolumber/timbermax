@@ -44,6 +44,9 @@ p {
   position: absolute;
   top: 0;
 }
+.navbar_roller_color {
+  background-color: rgba(53, 64, 28, 0.64);
+}
 
 /*main section */
 .main_section {

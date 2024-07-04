@@ -13,6 +13,39 @@ import IconFacebook from "./icons/IconFacebook";
 import IconInstagram from "./icons/IconInstagram";
 import IconNavbarArrow from "./icons/IconNavbarArrow";
 import IconCalculate from "./icons/IconCalculate";
+import IconTerasa from "./icons/IconTerasa";
+import IconFasady from "./icons/IconFasady";
+import IconBazeny from "./icons/IconBazeny";
+import IconSlnolamy from "./icons/IconSlnolamy";
+import IconPloty from "./icons/IconPloty";
+import IconOstatne from "./icons/IconOstatne";
+
+const services = [
+  {
+    icon: <IconTerasa />,
+    title: "Terasy",
+  },
+  {
+    icon: <IconFasady />,
+    title: "Fasády",
+  },
+  {
+    icon: <IconBazeny />,
+    title: "Bazény",
+  },
+  {
+    icon: <IconSlnolamy />,
+    title: "Slnolamy",
+  },
+  {
+    icon: <IconPloty />,
+    title: "Ploty",
+  },
+  {
+    icon: <IconOstatne />,
+    title: "Ostatné",
+  },
+];
 
 const Navbar = () => {
   const router = useRouter();
@@ -27,6 +60,7 @@ const Navbar = () => {
   const handleItemClick = (item: string) => {
     setExpandedItem(expandedItem === item ? null : item);
   };
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
 
   return (
     <nav className="w-full relative  flex flex-col navbar ">
@@ -48,9 +82,13 @@ const Navbar = () => {
             <div className="flex flex-row gap-4 items-center">
               <IconFacebook />
               <IconInstagram />
-              <div className="flex flex-row items-center gap-4">
+              <div
+                className="flex flex-row items-center gap-4"
+                onMouseEnter={() => setHoveredIndex(3)}
+                onMouseLeave={() => setHoveredIndex(-1)}
+              >
                 <p className="pl-12">SK</p>
-                <IconNavbarArrow />
+                <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} />
               </div>
             </div>
           </div>
@@ -68,9 +106,36 @@ const Navbar = () => {
               />
             </Link>
             <div className="hidden xl:flex flex-row gap-12 items-center">
-              <p className="uppercase  cursor-pointer">Firma</p>
-              <p className="uppercase   cursor-pointer">Služby</p>
-              <p className="uppercase cursor-pointer">Produkty</p>
+              <div className="flex flex-row items-center gap-2">
+                <p
+                  className="uppercase  cursor-pointer"
+                  onMouseEnter={() => setHoveredIndex(0)}
+                  onMouseLeave={() => setHoveredIndex(-1)}
+                >
+                  Firma
+                </p>
+                <IconNavbarArrow index={0} hoveredIndex={hoveredIndex} />
+              </div>
+              <div className="flex flex-row items-center gap-2">
+                <p
+                  className="uppercase  cursor-pointer"
+                  onMouseEnter={() => setHoveredIndex(1)}
+                  onMouseLeave={() => setHoveredIndex(-1)}
+                >
+                  Služby
+                </p>
+                <IconNavbarArrow index={1} hoveredIndex={hoveredIndex} />
+              </div>
+              <div
+                className="flex flex-row items-center gap-2"
+                onMouseEnter={() => setHoveredIndex(2)}
+                onMouseLeave={() => setHoveredIndex(-1)}
+              >
+                {" "}
+                <p className="uppercase  cursor-pointer">Produkty</p>
+                <IconNavbarArrow index={2} hoveredIndex={hoveredIndex} />
+              </div>
+
               <p className="uppercase   cursor-pointer">Cenník</p>
             </div>
             <div className="flex flex-row items-center gap-12">
@@ -80,6 +145,30 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+        {hoveredIndex === 0 && (
+          <div className="h-[100px] navbar_roller_color  flex justify-center w-full">
+            <div className="flex flex-row max-w-[1100px] justify-between m-auto w-full">
+              <p>O nás</p>
+              <p>Viac o Timbermaxe</p>
+              <p>Showroom</p>
+              <p>Referencie</p>
+              <p>Záruka</p>
+              <p>Blog</p>
+            </div>
+          </div>
+        )}
+        {hoveredIndex === 1 && (
+          <div className="h-[150px] navbar_roller_color  flex justify-center w-full">
+            <div className="flex flex-row max-w-[1300px] justify-between m-auto w-full">
+              {services.map((one_service, index) => (
+                <div className="flex items-center flex-col gap-4" key={index}>
+                  <div className="w-24 h-24">{one_service.icon}</div>
+                  <p>{one_service.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       {closeClicked && <div className="behind_card_background"></div>}
       <div
