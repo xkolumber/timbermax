@@ -4,6 +4,7 @@ import HomePagePriceOffer from "./components/HomePageComponents/HomePagePriceOff
 import HomePageTimbermaxLike from "./components/HomePageComponents/HomePageTimbermaxLike";
 import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
 import HomePageReferencies from "./components/HomePageComponents/HomePageReferencies";
+import HomePageShowRoom from "./components/HomePageComponents/HomePageShowRoom";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <HomePageTimbermaxLike />
       <HomePageAboutUs />
       <HomePageReferencies />
+      <HomePageShowRoom />
     </main>
   );
 }

@@ -1,0 +1,19 @@
+import React from "react";
+import Image from "next/image";
+
+const HomePageShowRoom = () => {
+  return (
+    <div>
+      <Image
+        src="/showroom.svg"
+        className="w-full h-full object-cover "
+        alt="referencie"
+        width={1000}
+        height={1000}
+        quality={100}
+      />
+    </div>
+  );
+};
+
+export default HomePageShowRoom;
