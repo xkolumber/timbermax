@@ -29,9 +29,9 @@ const HomePageReferencies = () => {
     <div>
       <div className="w-full bg-secondary z-20">
         <div className="navbar_section">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col md:flex-row justify-between">
             {pictures_object.map((one_button, index) => (
-              <div className="flex flex-row items-center gap-8" key={index}>
+              <div className="flex lex-row items-center gap-8" key={index}>
                 <div className="w-16 h-12">{one_button.icon}</div>
                 <p className="max-w-[210px] z-50 text-[#1F2820]">
                   {one_button.title}

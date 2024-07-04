@@ -40,12 +40,28 @@ p {
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  z-index: 100;
-  position: absolute;
+  z-index: 1000;
+  position: fixed;
   top: 0;
 }
 .navbar_roller_color {
-  background-color: rgba(53, 64, 28, 0.64);
+  background-color: rgba(97, 104, 63, 0.64);
+}
+.navbar_roller_collor_full {
+  background-color: rgba(97, 104, 63, 1);
+}
+
+.navbar-part {
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.navbar-part.show {
+  max-height: 100px;
+}
+
+.navbar-part.hide {
+  max-height: 0;
 }
 
 /*main section */
@@ -59,6 +75,8 @@ p {
   padding: 1.6rem;
   max-width: 1140px;
   margin: auto;
+  z-index: 100;
+  position: relative;
 }
 
 .nav__close-button {
@@ -70,26 +88,28 @@ p {
   width: 30px;
   height: 30px;
 }
+.nav__item {
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  font-weight: 200;
+}
 
 .collapsible--expanded {
-  max-height: 100vh;
-  opacity: 100;
+  top: -100%;
+  opacity: 0;
   position: fixed;
-  top: 0;
-  right: -76%;
-  width: 76%;
-  height: 100%;
-  background-color: var(--color-secondary);
-  transition: right 0.3s ease-in;
-  z-index: 9999;
+  width: 100%;
+  background-color: rgba(31, 40, 32, 0.85);
+  transition: top 0.4s ease-in, opacity 0.4s ease-in;
+  z-index: 99;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
 }
 
 .collapsible--collapsed {
-  right: 0%;
+  top: 0%;
+  opacity: 1;
 }
 
 @media screen and (min-width: 768px) {

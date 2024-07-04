@@ -51,7 +51,7 @@ const HomePageAboutUs = () => {
 
       <div className="w-full border-t border-white z-20">
         <div className="navbar_section">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col md:flex-row justify-between">
             {buttons.map((one_button, index) => (
               <div className="flex flex-col items-center" key={index}>
                 <button className="btn btn--tertiary">
