@@ -1,7 +1,8 @@
 import Image from "next/image";
-import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
+import HomePageOurServices from "./components/HomePageComponents/HomePageOurServices";
 import HomePagePriceOffer from "./components/HomePageComponents/HomePagePriceOffer";
 import HomePageTimbermaxLike from "./components/HomePageComponents/HomePageTimbermaxLike";
+import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
 
 export default function Home() {
   return (
@@ -15,9 +16,10 @@ export default function Home() {
         priority={true}
         className="w-full h-full max-h-[1200px] object-cover"
       />
-      <HomePageAboutUs />
+      <HomePageOurServices />
       <HomePagePriceOffer />
       <HomePageTimbermaxLike />
+      <HomePageAboutUs />
     </main>
   );
 }

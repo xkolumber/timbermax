@@ -33,7 +33,7 @@ const HomePageTimbermaxLike = () => {
     <div className="bg-secondary">
       <div className="main_section">
         {data.map((object, index) => (
-          <div className="flex flex-col mb-8 relative">
+          <div className="flex flex-col mb-8 relative" key={index}>
             <h3 className="mb-4">{object.title}</h3>
             <p className="text-tertiary">{object.description}</p>
             <Link

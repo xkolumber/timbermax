@@ -158,3 +158,13 @@ p {
 .btn--secondary:hover {
   color: var(--color-primary);
 }
+
+.btn--tertiary {
+  /* background: var(--color-secondary); */
+  color: white;
+  border: 1px solid white;
+}
+.btn--tertiary:hover {
+  background-color: white;
+  color: var(--color-primary);
+}
