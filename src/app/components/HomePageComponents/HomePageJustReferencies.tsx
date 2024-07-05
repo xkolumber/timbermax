@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -14,6 +14,7 @@ const referencies = [
 ];
 
 const HomePageJustReferencies = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="">
       <div className="relative mt-16">
@@ -37,6 +38,7 @@ const HomePageJustReferencies = () => {
           modules={[Autoplay]}
           speed={1000}
           className="h-[200px]"
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
           {referencies.map((item, index) => (
             <SwiperSlide key={index}>
@@ -56,7 +58,9 @@ const HomePageJustReferencies = () => {
           {referencies.map((item, index) => (
             <div
               key={index}
-              className="circle"
+              className={`circle ${
+                index === activeIndex ? "active_circle" : ""
+              }`}
               style={{
                 left: `${(index + 1) * (100 / (referencies.length + 1))}%`,
               }}

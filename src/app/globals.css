@@ -229,3 +229,8 @@ p {
   background-color: var(--color-primary);
   border-radius: 50%;
 }
+
+.active_circle {
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-primary);
+}
