@@ -105,6 +105,7 @@ const Navbar = () => {
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [closeClicked, setCloseClicked] = useState(false);
   const [showNavbarPart, setShowNavbarPart] = useState(true);
+  const [clickedIndexMobile, setClickedIndexMobile] = useState(-1);
 
   const clickedButtonClose = () => {
     setCloseClicked(!closeClicked);
@@ -136,6 +137,14 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleClickedItemMobile = (item_number: number) => {
+    if (item_number != clickedIndexMobile) {
+      setClickedIndexMobile(item_number);
+    } else {
+      setClickedIndexMobile(-1);
+    }
+  };
 
   return (
     <nav className="w-full relative  flex flex-col navbar ">
@@ -184,7 +193,7 @@ const Navbar = () => {
                 src={"/logo.svg"}
                 alt="logo"
                 width={100}
-                height={100}
+                height={0}
                 className="w-[130px] md:w-[150px]   object-contain"
               />
             </Link>
@@ -245,12 +254,18 @@ const Navbar = () => {
                 <IconNavbarArrow index={2} hoveredIndex={clickedIndex} />
               </div>
 
-              <p className="uppercase   cursor-pointer hover: font-normal">
+              <p
+                className="uppercase   cursor-pointer hover: font-normal"
+                onMouseEnter={() => setClickedIndex(-1)}
+              >
                 Cenník
               </p>
               <div className="flex flex-row items-center gap-12">
                 {" "}
-                <p className="uppercase   cursor-pointer hover:font-normal">
+                <p
+                  className="uppercase   cursor-pointer hover:font-normal"
+                  onMouseEnter={() => setClickedIndex(-1)}
+                >
                   Kontakt
                 </p>
                 <IconCalculate />
@@ -259,6 +274,7 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/*Mobile */}
         <div
           className={`collapsible--expanded ${
             closeClicked ? "collapsible--collapsed" : ""
@@ -269,8 +285,8 @@ const Navbar = () => {
               <Image
                 src={"/logo.svg"}
                 alt="logo"
-                width={1000}
-                height={1000}
+                width={100}
+                height={100}
                 className="w-[130px] md:w-[150px]   object-contain"
               />
             </Link>
@@ -291,35 +307,82 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex flex-col gap-4 pt-4 pb-4">
-            <p
-              className={`nav__item  ${
-                expandedItem === "o_nas" ? "!underline !font-semibold" : ""
-              }`}
-              onClick={() => handleItemClick("o_nas")}
+            <div
+              className="flex flex-row items-center gap-2 justify-center"
+              onClick={() => handleClickedItemMobile(0)}
             >
-              Firma
-            </p>
+              <p
+                className={`nav__item uppercase  cursor-pointer ${
+                  clickedIndexMobile === 0 && "!font-normal"
+                }`}
+              >
+                Firma
+              </p>
+              <IconNavbarArrow index={0} hoveredIndex={clickedIndexMobile} />
+            </div>
+            {clickedIndexMobile === 0 && (
+              <div className="flex flex-col max-w-[1100px] justify-between m-auto w-full navbar_roller_color gap-2">
+                {company.map((object, index) => (
+                  <p
+                    className="uppercase hover:underline  duration-300 cursor-pointer text-center font-extralight"
+                    key={index}
+                  >
+                    {object.title}
+                  </p>
+                ))}
+              </div>
+            )}
 
-            <p
-              className={`nav__item  ${
-                expandedItem === "elektroinstalacie"
-                  ? "!underline !font-semibold"
-                  : ""
-              }`}
-              onClick={() => handleItemClick("elektroinstalacie")}
+            <div
+              className="flex flex-row items-center gap-2 justify-center"
+              onClick={() => handleClickedItemMobile(1)}
             >
-              Služby
-            </p>
-            <p
-              className={`nav__item  ${
-                expandedItem === "elektroinstalacie"
-                  ? "!underline !font-semibold"
-                  : ""
-              }`}
-              onClick={() => handleItemClick("elektroinstalacie")}
+              <p
+                className={`nav__item uppercase  cursor-pointer ${
+                  clickedIndexMobile === 1 && "!font-normal"
+                }`}
+              >
+                Služby
+              </p>
+              <IconNavbarArrow index={1} hoveredIndex={clickedIndexMobile} />
+            </div>
+            {clickedIndexMobile === 1 && (
+              <div className="flex flex-col max-w-[1100px] justify-between m-auto w-full navbar_roller_color gap-2">
+                {services.map((object, index) => (
+                  <p
+                    className="uppercase hover:underline  duration-300 cursor-pointer text-center font-extralight"
+                    key={index}
+                  >
+                    {object.title}
+                  </p>
+                ))}
+              </div>
+            )}
+            <div
+              className="flex flex-row items-center gap-2 justify-center"
+              onClick={() => handleClickedItemMobile(2)}
             >
-              Produkty
-            </p>
+              <p
+                className={`nav__item uppercase  cursor-pointer ${
+                  clickedIndexMobile === 2 && "!font-normal"
+                }`}
+              >
+                Produkty
+              </p>
+              <IconNavbarArrow index={2} hoveredIndex={clickedIndexMobile} />
+            </div>
+            {clickedIndexMobile === 2 && (
+              <div className="flex flex-col max-w-[1100px] justify-between m-auto w-full navbar_roller_color gap-2">
+                {products.map((object, index) => (
+                  <p
+                    className="uppercase hover:underline  duration-300 cursor-pointer text-center font-extralight"
+                    key={index}
+                  >
+                    {object.title}
+                  </p>
+                ))}
+              </div>
+            )}
 
             <Link className="nav__item" href={"/"}>
               Cenník
@@ -358,6 +421,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+        {/*Clicked items */}
         {clickedIndex === 0 && (
           <div
             className={`h-[100px]  navbar_roller_color  flex justify-center w-full`}

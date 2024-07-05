@@ -16,7 +16,7 @@ export default function Home() {
         width={1000}
         quality={100}
         priority={true}
-        className="w-full h-full max-h-[1200px] object-cover"
+        className="w-full h-[600px] md:h-full max-h-[1200px] object-cover"
       />
       <HomePageOurServices />
       <HomePagePriceOffer />

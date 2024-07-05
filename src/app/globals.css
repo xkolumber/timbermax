@@ -47,6 +47,12 @@ p {
 .navbar_roller_color {
   background-color: rgba(97, 104, 63, 0.64);
 }
+
+.navbar_roller_color.visible {
+  max-height: 500px; /* Adjust this value to the maximum height of your content */
+  opacity: 1;
+}
+
 .navbar_roller_collor_full {
   background-color: rgba(97, 104, 63, 1);
 }
@@ -96,7 +102,7 @@ p {
 }
 
 .collapsible--expanded {
-  top: -100%;
+  top: -60%;
   opacity: 0;
   position: fixed;
   width: 100%;
