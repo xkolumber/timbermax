@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import IconHamburger from "./Icons/IconHamburger";
 import IconTelephone from "./Icons/IconTelephone";
@@ -50,7 +50,7 @@ const services = [
 const company = [
   {
     title: "O nás",
-    link: "/",
+    link: "/o-nas",
   },
   {
     title: "Viac o Timbermaxe",
@@ -106,16 +106,16 @@ const Navbar = () => {
   const [closeClicked, setCloseClicked] = useState(false);
   const [showNavbarPart, setShowNavbarPart] = useState(true);
   const [clickedIndexMobile, setClickedIndexMobile] = useState(-1);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const clickedButtonClose = () => {
     setCloseClicked(!closeClicked);
   };
 
-  const handleItemClick = (item: string) => {
-    setExpandedItem(expandedItem === item ? null : item);
-  };
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [clickedIndex, setClickedIndex] = useState(hoveredIndex);
+  const [hoveredItemTerasa, setHoveredItemTerasa] = useState(-1);
 
   useEffect(() => {
     if (hoveredIndex != -1) {
@@ -143,6 +143,13 @@ const Navbar = () => {
       setClickedIndexMobile(item_number);
     } else {
       setClickedIndexMobile(-1);
+    }
+  };
+
+  const handleClickedCompanyObject = (link_: string) => {
+    console.log(link_);
+    if (link_ === "/o-nas") {
+      router.push("/o-nas");
     }
   };
 
@@ -227,15 +234,16 @@ const Navbar = () => {
                 <IconNavbarArrow index={0} hoveredIndex={clickedIndex} />
               </div>
               <div className="flex flex-row items-center gap-2">
-                <p
-                  className={`uppercase  cursor-pointer ${
+                <Link
+                  className={`uppercase  cursor-pointer text-white font-light ${
                     clickedIndex === 1 && "font-normal"
                   }`}
                   onMouseEnter={() => setHoveredIndex(1)}
                   onMouseLeave={() => setHoveredIndex(-1)}
+                  href={"/sluzby"}
                 >
                   Služby
-                </p>
+                </Link>
                 <IconNavbarArrow index={1} hoveredIndex={clickedIndex} />
               </div>
               <div
@@ -326,6 +334,7 @@ const Navbar = () => {
                   <p
                     className="uppercase hover:underline  duration-300 cursor-pointer text-center font-extralight"
                     key={index}
+                    onClick={() => handleClickedCompanyObject(object.link)}
                   >
                     {object.title}
                   </p>
@@ -424,7 +433,11 @@ const Navbar = () => {
         {/*Clicked items */}
         {clickedIndex === 0 && (
           <div
-            className={`h-[100px]  navbar_roller_color  flex justify-center w-full`}
+            className={`h-[100px]  ${
+              pathname === "/sluzby"
+                ? "navbar_roller_color_full"
+                : "navbar_roller_color"
+            }  flex justify-center w-full`}
             onMouseLeave={() => setClickedIndex(-1)}
           >
             <div className="flex flex-row max-w-[1100px] justify-between m-auto w-full">
@@ -432,6 +445,7 @@ const Navbar = () => {
                 <p
                   className="uppercase hover:underline  duration-300 cursor-pointer"
                   key={index}
+                  onClick={() => handleClickedCompanyObject(object.link)}
                 >
                   {object.title}
                 </p>
@@ -441,14 +455,37 @@ const Navbar = () => {
         )}
         {clickedIndex === 1 && (
           <div
-            className="h-[150px] navbar_roller_color  flex justify-center w-full"
+            className={`h-[150px] ${
+              pathname === "/sluzby"
+                ? "navbar_roller_color_full"
+                : "navbar_roller_color"
+            }  flex justify-center w-full`}
             onMouseLeave={() => setClickedIndex(-1)}
           >
-            <div className="flex flex-row max-w-[1300px] justify-between m-auto w-full">
+            <div className="grid grid-cols-6 max-w-[1300px] justify-between m-auto w-full h-full ">
               {services.map((one_service, index) => (
-                <div className="flex items-center flex-col gap-4" key={index}>
-                  <div className="w-24 h-24">{one_service.icon}</div>
-                  <p>{one_service.title}</p>
+                <div
+                  className={`flex items-center flex-col justify-center  gap-4 ${
+                    pathname === "/sluzby" ? "hover:bg-[#576137]" : ""
+                  }`}
+                  key={index}
+                  onMouseEnter={() => setHoveredItemTerasa(index)}
+                  onMouseLeave={() => setHoveredItemTerasa(-1)}
+                >
+                  <div
+                    className={`w-24 h-24 ${
+                      hoveredItemTerasa === index ? "opacity-100" : "opacity-80"
+                    }`}
+                  >
+                    {one_service.icon}
+                  </div>
+                  <p
+                    className={`${
+                      hoveredItemTerasa === index && "font-medium"
+                    }  duration-150`}
+                  >
+                    {one_service.title}
+                  </p>
                 </div>
               ))}
             </div>

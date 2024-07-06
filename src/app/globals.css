@@ -48,6 +48,9 @@ p {
 .navbar_roller_color {
   background-color: rgba(97, 104, 63, 0.64);
 }
+.navbar_roller_color_full {
+  background-color: #63683e;
+}
 
 .navbar_roller_color.visible {
   max-height: 500px; /* Adjust this value to the maximum height of your content */
@@ -234,4 +237,18 @@ p {
 .active_circle {
   background-color: var(--color-secondary);
   border: 1px solid var(--color-primary);
+}
+
+.additional_padding {
+  padding-top: 10rem !important;
+}
+@media screen and (min-width: 1024px) {
+  .additional_padding {
+    padding-top: 15rem !important;
+  }
+}
+@media screen and (min-width: 1836px) {
+  .additional_padding {
+    padding-top: 19rem !important;
+  }
 }
