@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import IconCalculatePriceOffer from "../icons/IconCalculatePriceOffer";
+import IconCalculatePriceOffer from "../Icons/IconCalculatePriceOffer";
 
 const HomePagePriceOffer = () => {
   return (

@@ -6,13 +6,13 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import IconHamburger from "./icons/IconHamburger";
-import IconTelephone from "./icons/IconTelephone";
-import IconEmail from "./icons/IconEmail";
-import IconFacebook from "./icons/IconFacebook";
-import IconInstagram from "./icons/IconInstagram";
-import IconNavbarArrow from "./icons/IconNavbarArrow";
-import IconCalculate from "./icons/IconCalculate";
+import IconHamburger from "./Icons/IconHamburger";
+import IconTelephone from "./Icons/IconTelephone";
+import IconEmail from "./Icons/IconEmail";
+import IconFacebook from "./Icons/IconFacebook";
+import IconInstagram from "./Icons/IconInstagram";
+import IconNavbarArrow from "./Icons/IconNavbarArrow";
+import IconCalculate from "./Icons/IconCalculate";
 
 const Footer = () => {
   const router = useRouter();

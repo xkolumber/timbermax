@@ -1,7 +1,7 @@
 import React from "react";
-import IconQuoteUpper from "../icons/IconQuoteUpper";
-import IconQueoteDown from "../icons/IconQuoteDown";
-import IconQuoteDown from "../icons/IconQuoteDown";
+import IconQuoteUpper from "../Icons/IconQuoteUpper";
+import IconQueoteDown from "../Icons/IconQuoteDown";
+import IconQuoteDown from "../Icons/IconQuoteDown";
 
 const AboutUsPhilosophy = () => {
   return (

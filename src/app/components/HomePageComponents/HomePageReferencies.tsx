@@ -1,8 +1,8 @@
 import React from "react";
-import IconRefCalculate from "../icons/IconRefCalculate";
-import IconRefHome from "../icons/IconRefHome";
-import IconRefQuality from "../icons/IconRefQuality";
-import IconRefEurope from "../icons/IconRefEurope";
+import IconRefCalculate from "../Icons/IconRefCalculate";
+import IconRefHome from "../Icons/IconRefHome";
+import IconRefQuality from "../Icons/IconRefQuality";
+import IconRefEurope from "../Icons/IconRefEurope";
 import HomePageJustReferencies from "./HomePageJustReferencies";
 
 const pictures_object = [

@@ -1,7 +1,7 @@
 import React from "react";
-import IconRecycle from "../icons/IconRecycle";
-import IconTime from "../icons/IconTime";
-import IconUv from "../icons/IconUv";
+import IconRecycle from "../Icons/IconRecycle";
+import IconTime from "../Icons/IconTime";
+import IconUv from "../Icons/IconUv";
 
 const data = [
   {

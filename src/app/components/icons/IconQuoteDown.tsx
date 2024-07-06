@@ -13,7 +13,7 @@ const IconQuoteDown = () => {
       <defs>
         <style>
           {`
-                .cls-1 {
+                .cls-quote {
                   fill: #e7e4e1;
                   font-family: Inter-Regular, Inter;
                   font-size: 75px;
@@ -25,7 +25,7 @@ const IconQuoteDown = () => {
       </defs>
       <g id="_1_ONas" data-name="1_ONas">
         <g id="Text_FilozofiaPoslanie">
-          <text className="cls-1" transform="translate(0 64.77)">
+          <text className="cls-quote" transform="translate(0 64.77)">
             <tspan x="0" y="0">
               „
             </tspan>
