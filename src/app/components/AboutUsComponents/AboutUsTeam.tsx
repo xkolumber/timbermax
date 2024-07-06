@@ -58,11 +58,15 @@ const AboutUsTeam = () => {
           priority={true}
           className="w-full h-full max-h-[1200px] object-cover absolute"
         />
-        <div className="">
+        <div className="flex flex-row h-full">
           <div className="w-1/2"></div>
-          <div className="w-1/2">
-            <h6>Peter Barták | CEO</h6>
-            <p></p>
+          <div className="w-1/2 z-10 relative flex flex-col justify-center">
+            <h6 className="text-[#1D281F]">
+              {selectedHuman.meno} | {selectedHuman.job}
+            </h6>
+            <p className="text-[#1D281F] md:max-w-[80%]">
+              {selectedHuman.text}
+            </p>
           </div>
         </div>
       </div>
