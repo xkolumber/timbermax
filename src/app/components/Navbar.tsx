@@ -54,7 +54,7 @@ const company = [
   },
   {
     title: "Viac o Timbermaxe",
-    link: "/",
+    link: "/viac-o-timbermaxe",
   },
   {
     title: "Showroom",
@@ -150,6 +150,9 @@ const Navbar = () => {
     console.log(link_);
     if (link_ === "/o-nas") {
       router.push("/o-nas");
+    }
+    if (link_ === "/viac-o-timbermaxe") {
+      router.push("/viac-o-timbermaxe");
     }
   };
 
@@ -434,7 +437,7 @@ const Navbar = () => {
         {clickedIndex === 0 && (
           <div
             className={`h-[100px]  ${
-              pathname === "/sluzby"
+              pathname != "/"
                 ? "navbar_roller_color_full"
                 : "navbar_roller_color"
             }  flex justify-center w-full`}
@@ -456,7 +459,7 @@ const Navbar = () => {
         {clickedIndex === 1 && (
           <div
             className={`h-[150px] ${
-              pathname === "/sluzby"
+              pathname != "/"
                 ? "navbar_roller_color_full"
                 : "navbar_roller_color"
             }  flex justify-center w-full`}
@@ -466,7 +469,7 @@ const Navbar = () => {
               {services.map((one_service, index) => (
                 <div
                   className={`flex items-center flex-col justify-center  gap-4 ${
-                    pathname === "/sluzby" ? "hover:bg-[#576137]" : ""
+                    pathname != "/" ? "hover:bg-[#576137]" : ""
                   }`}
                   key={index}
                   onMouseEnter={() => setHoveredItemTerasa(index)}

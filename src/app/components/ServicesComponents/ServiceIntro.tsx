@@ -96,6 +96,10 @@ const ServiceIntro = () => {
               onMouseEnter={() => setIsHovered(index)}
               onMouseLeave={() => setIsHovered(-1)}
             >
+              {isHovered === index && (
+                <div className="absolute w-full h-full bg-[#363128] opacity-70 rounded-[8px] transition-opacity duration-300"></div>
+              )}
+
               <Image
                 src={item.photo}
                 alt="hlavna_fotka"
@@ -110,12 +114,17 @@ const ServiceIntro = () => {
                 {item.title}
               </h6>
               <div
-                className={`absolute bottom-0 !mb-24 left-1/2 transform -translate-x-1/2 -translate-y-1/2   ${
-                  isHovered === index ? "ml-8" : ""
-                }  duration-300`}
+                className={`absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-[15%] scale-[150%] ${
+                  isHovered === index ? "left-3/4" : "left-1/2"
+                } duration-300`}
               >
                 <IconArrowCart />
               </div>
+              {isHovered === index && (
+                <button className="btn btn--secondary absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  galéria
+                </button>
+              )}
             </div>
           </SwiperSlide>
         ))}

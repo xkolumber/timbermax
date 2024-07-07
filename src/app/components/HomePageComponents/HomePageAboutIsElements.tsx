@@ -96,10 +96,11 @@ const HomePageAboutIsElements = () => {
             </h5>
 
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
+
             <div
-              className={`absolute bottom-0 !mb-24    ${
-                isHovered === index ? "right-24 opacity-50" : "right-[50%]"
-              }  duration-300`}
+              className={`absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-[15%]  ${
+                isHovered === index ? "left-3/4" : "left-1/2"
+              } duration-300`}
             >
               <IconArrowCart />
             </div>
@@ -109,7 +110,7 @@ const HomePageAboutIsElements = () => {
                   {object.description}
                 </p>
               </div>
-              <div className="btn btn--secondary absolute bottom-0 !mb-[4.5rem]">
+              <div className="btn btn--secondary absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 Čítať viac
               </div>
             </div>
