@@ -6,19 +6,19 @@ import Image from "next/image";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import IconHamburger from "./icons/IconHamburger";
-import IconTelephone from "./icons/IconTelephone";
-import IconEmail from "./icons/IconEmail";
-import IconFacebook from "./icons/IconFacebook";
-import IconInstagram from "./icons/IconInstagram";
-import IconNavbarArrow from "./icons/IconNavbarArrow";
-import IconCalculate from "./icons/IconCalculate";
-import IconTerasa from "./icons/IconTerasa";
-import IconFasady from "./icons/IconFasady";
-import IconBazeny from "./icons/IconBazeny";
-import IconSlnolamy from "./icons/IconSlnolamy";
-import IconPloty from "./icons/IconPloty";
-import IconOstatne from "./icons/IconOstatne";
+import IconHamburger from "./Icons/IconHamburger";
+import IconTelephone from "./Icons/IconTelephone";
+import IconEmail from "./Icons/IconEmail";
+import IconFacebook from "./Icons/IconFacebook";
+import IconInstagram from "./Icons/IconInstagram";
+import IconNavbarArrow from "./Icons/IconNavbarArrow";
+import IconCalculate from "./Icons/IconCalculate";
+import IconTerasa from "./Icons/IconTerasa";
+import IconFasady from "./Icons/IconFasady";
+import IconBazeny from "./Icons/IconBazeny";
+import IconSlnolamy from "./Icons/IconSlnolamy";
+import IconPloty from "./Icons/IconPloty";
+import IconOstatne from "./Icons/IconOstatne";
 
 const services = [
   {
