@@ -1,9 +1,9 @@
 import React from "react";
-import IconServiceVariants from "../Icons/IconServiceVariants";
-import IconServiceFeatures from "../Icons/IconServiceFeatures";
-import IconServiceInstallation from "../Icons/IconServiceInstallation";
-import IconServiceProfile from "../Icons/IconServiceProfile";
-import IconServiceOrder from "../Icons/IconServiceOrder";
+import IconServiceVariants from "../icons/IconServiceVariants";
+import IconServiceFeatures from "../icons/IconServiceFeatures";
+import IconServiceInstallation from "../icons/IconServiceInstallation";
+import IconServiceProfile from "../icons/IconServiceProfile";
+import IconServiceOrder from "../icons/IconServiceOrder";
 
 const icon_text = [
   {

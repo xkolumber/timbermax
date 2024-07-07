@@ -6,8 +6,8 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import IconFacebook from "./Icons/IconFacebook";
-import IconInstagram from "./Icons/IconInstagram";
+import IconFacebook from "./icons/IconFacebook";
+import IconInstagram from "./icons/IconInstagram";
 
 const Footer = () => {
   const router = useRouter();

@@ -6,7 +6,7 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import IconArrowCart from "../Icons/IconArrowCart";
+import IconArrowCart from "../icons/IconArrowCart";
 
 const projects = [
   {

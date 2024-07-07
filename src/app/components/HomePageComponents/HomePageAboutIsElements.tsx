@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import IconTerasa from "../Icons/IconTerasa";
-import IconFasady from "../Icons/IconFasady";
-import IconBazeny from "../Icons/IconBazeny";
-import IconPloty from "../Icons/IconPloty";
-import IconSlnolamy from "../Icons/IconSlnolamy";
-import IconOstatne from "../Icons/IconOstatne";
+import IconTerasa from "../icons/IconTerasa";
+import IconFasady from "../icons/IconFasady";
+import IconBazeny from "../icons/IconBazeny";
+import IconPloty from "../icons/IconPloty";
+import IconSlnolamy from "../icons/IconSlnolamy";
+import IconOstatne from "../icons/IconOstatne";
 import Image from "next/image";
-import IconCart from "../Icons/IconArrowCart";
-import IconArrowCart from "../Icons/IconArrowCart";
+import IconCart from "../icons/IconArrowCart";
+import IconArrowCart from "../icons/IconArrowCart";
 
 const data = [
   {
