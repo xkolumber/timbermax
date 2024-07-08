@@ -1,8 +1,7 @@
 "use client";
 
-import getBase64 from "@/app/lib/functions";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import IconDoubleArrow from "../Icons/IconDoubleArrow";
 
 interface Props {
@@ -33,7 +32,7 @@ const HomePageLoop = ({ blurUrl }: Props) => {
   }, [images.length]);
 
   return (
-    <div className="relative !pt-40 xl:min-h-screen md:justify-start md:flex items-center  hidden overflow-hidden">
+    <div className="relative !pt-40 min-h-[700px] xl:min-h-screen md:justify-start flex items-center   overflow-hidden">
       {images.map((image, index) => (
         <div
           key={index}

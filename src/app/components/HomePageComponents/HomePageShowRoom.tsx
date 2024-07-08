@@ -6,7 +6,7 @@ const HomePageShowRoom = () => {
     <div>
       <Image
         src="/showroom.svg"
-        className="w-full h-full object-cover "
+        className="w-full h-full object-cover min-h-[200px] "
         alt="referencie"
         width={1000}
         height={1000}
