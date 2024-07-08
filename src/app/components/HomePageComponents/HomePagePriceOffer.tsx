@@ -20,7 +20,7 @@ const HomePagePriceOffer = () => {
       </button>
 
       <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
-      <div className="absolute inset-0 flex flex-col justify-center  text-white z-10 p-4  md:pl-40 max-w-[630px]">
+      <div className="absolute inset-0 flex flex-col justify-center  text-white z-10 p-4   main_section">
         <h5 className="text-2xl font-bold mb-4">Cenová ponuka</h5>
         <p className="mb-4">
           Vypracovali sme pre Vás jednoduchý naceňovací systém fungujúci na

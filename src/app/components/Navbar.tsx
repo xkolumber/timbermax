@@ -265,12 +265,13 @@ const Navbar = () => {
                 <IconNavbarArrow index={2} hoveredIndex={clickedIndex} />
               </div>
 
-              <p
-                className="uppercase   cursor-pointer hover: font-normal"
+              <Link
+                className="uppercase text-white  cursor-pointer hover:font-normal"
                 onMouseEnter={() => setClickedIndex(-1)}
+                href={"/cennik"}
               >
                 Cenník
-              </p>
+              </Link>
               <div className="flex flex-row items-center gap-12">
                 {" "}
                 <p

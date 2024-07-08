@@ -31,7 +31,8 @@ body {
 b {
   font-weight: 600;
 }
-p {
+p,
+a {
   color: white;
   font-weight: 300;
 }
