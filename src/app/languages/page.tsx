@@ -6,9 +6,11 @@ export default async function Page() {
   const latestInvoices = await GetLanguages();
   return (
     <div className="main_section additional_padding">
-      {latestInvoices.map((lang, index) => (
-        <p key={index}>{lang.jazyk}</p>
-      ))}
+      <div className="flex flex-col mt-16">
+        {latestInvoices.map((lang, index) => (
+          <p key={index}>{lang.jazyk}</p>
+        ))}
+      </div>
       <CreateForm />
     </div>
   );

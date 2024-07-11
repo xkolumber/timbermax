@@ -1,11 +1,11 @@
 "use server";
 
 import { getFirestore } from "firebase-admin/firestore";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 import { redirect } from "next/navigation";
-import { Jazyk } from "./interface";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
+import { Jazyk } from "./interface";
 
 const FormSchema = z.object({
   jazyk: z.string(),
@@ -32,6 +32,7 @@ export async function addLanguage(formData: FormData) {
 }
 
 export async function GetLanguages(): Promise<Jazyk[]> {
+  unstable_noStore();
   const produktyCollectionRef = firestore.collection("jazyky");
 
   try {
