@@ -18,22 +18,27 @@ const data = [
   },
 ];
 
-const HomePageIcons = () => {
+interface Props {
+  svg_titles: string[];
+}
+
+const HomePageIcons = ({ svg_titles }: Props) => {
   return (
     <div className="w-full flex justify-center">
-      <div className="flex  flex-col  md:flex-row justify-between w-full max-w-[800px] mt-16 mb-16 gap-8">
+      <div className="flex flex-col md:flex-row justify-between w-full max-w-[800px] mt-16 mb-16 gap-8">
         {data.map((object, index) => (
           <div
-            className="flex flex-col justify-center items-center "
+            className="flex flex-col justify-center items-center"
             key={index}
           >
             <div className="w-[10rem] h-[10rem] mb-4">{object.icon}</div>
-            <p className="text-[#2c2f30]">{object.title}</p>
+            <p className="text-[#2c2f30]">
+              {svg_titles[index] || object.title}
+            </p>
           </div>
         ))}
       </div>
     </div>
   );
 };
-
 export default HomePageIcons;

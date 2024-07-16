@@ -50,3 +50,7 @@ export async function GetLanguages(): Promise<Jazyk[]> {
     throw new Error("Database Error: Failed to fetch languages.");
   }
 }
+
+export async function doRevalidate(pathname: string) {
+  revalidatePath(pathname);
+}

@@ -24,7 +24,11 @@ const pictures_object = [
   },
 ];
 
-const HomePageReferencies = () => {
+interface Props {
+  ref_elements: string[];
+}
+
+const HomePageReferencies = ({ ref_elements }: Props) => {
   return (
     <div>
       <div className="w-full bg-secondary z-20">
@@ -34,7 +38,9 @@ const HomePageReferencies = () => {
               <div className="flex lex-row items-center gap-8" key={index}>
                 <div className="w-16 h-12">{one_button.icon}</div>
                 <p className="max-w-[210px] z-50 text-[#1F2820]">
-                  {one_button.title}
+                  {ref_elements[index] != ""
+                    ? ref_elements[index]
+                    : one_button.title}
                 </p>
               </div>
             ))}

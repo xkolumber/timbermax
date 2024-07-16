@@ -1,26 +1,33 @@
+import { cookies } from "next/headers";
 import HomePageAboutIsElements from "./HomePageAboutIsElements";
 import HomePageIcons from "./HomePageIcons";
+import { HomePageElements } from "@/app/lib/interface";
 
-const HomePageOurServices = () => {
+interface Props {
+  data: HomePageElements | undefined;
+}
+
+const HomePageOurServices = ({ data }: Props) => {
   return (
     <div className="bg-secondary">
       <div className="main_section">
-        <h2 className="uppercase">Naše služby</h2>
-        <p className="text-black">
-          Timbermax® je dominantnou značkou dizajnových kompozitných materiálov.{" "}
-        </p>
-        <p className="text-black mt-16">
-          Už 20 rokov ponúkame realizácie dieľ na klúč po celom Slovensku a
-          strednej Európe. Kvalitný materiál si vyžaduje odbornú montáž, ktorú
-          od našej firmy obdržíte s 5 ročnou zárukou. Nižšie nájdete všetky
-          možnosti využitia a aplikácie profilov z našej ponuky. Zmluvne
-          garantujeme sumu realizácie na meter štvorcový podľa schválenej
-          cenovej ponuky. Profily Timbermax Exotic ponúkame s 25 ročnou zárukou
-          na farebnú stálosť, odolnosť voči škvrnám a fľakom. NAŠE SLUŽBY
-        </p>
+        {data && data.nase_sluzby_nadpis && (
+          <h2 className="uppercase">{data.nase_sluzby_nadpis}</h2>
+        )}
+        {data && data.nase_sluzby_veta && (
+          <p className="text-black">{data.nase_sluzby_veta}</p>
+        )}
+        {data && data.nase_sluzby_popis && (
+          <p className="text-black mt-16">{data.nase_sluzby_popis}</p>
+        )}
       </div>
-      <HomePageAboutIsElements />
-      <HomePageIcons />
+      <HomePageAboutIsElements
+        services={data?.sluzby ? data.sluzby : []}
+        button_citat_viac={
+          data?.button_citat_viac ? data.button_citat_viac : ""
+        }
+      />
+      <HomePageIcons svg_titles={data?.svg_titles ? data.svg_titles : []} />
     </div>
   );
 };

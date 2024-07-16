@@ -6,8 +6,9 @@ import IconDoubleArrow from "../Icons/IconDoubleArrow";
 
 interface Props {
   blurUrl: string | undefined;
+  button: string | undefined;
 }
-const HomePageLoop = ({ blurUrl }: Props) => {
+const HomePageLoop = ({ blurUrl, button }: Props) => {
   const images = [
     "/main1.jpg",
     "/main2.jpg",
@@ -60,7 +61,7 @@ const HomePageLoop = ({ blurUrl }: Props) => {
       ))}
 
       <button className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase">
-        Výpočet ceny ihneď
+        {button}
       </button>
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2">
         <IconDoubleArrow />

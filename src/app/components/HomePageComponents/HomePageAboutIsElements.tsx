@@ -8,6 +8,7 @@ import IconOstatne from "../Icons/IconOstatne";
 import Image from "next/image";
 import IconSlnolamy from "../Icons/IconSlnolamy";
 import IconArrowCart from "../Icons/IconArrowCart";
+import { Sluzby } from "@/app/lib/interface";
 
 const data = [
   {
@@ -54,7 +55,11 @@ const data = [
   },
 ];
 
-const HomePageAboutIsElements = () => {
+interface Props {
+  services: Sluzby[];
+  button_citat_viac: string;
+}
+const HomePageAboutIsElements = ({ services, button_citat_viac }: Props) => {
   const [isHovered, setIsHovered] = useState(-1);
 
   return (
@@ -92,7 +97,8 @@ const HomePageAboutIsElements = () => {
                   : " top-[40%] scale-[1]"
               }  duration-300 z-10`}
             >
-              {object.title}
+              {services.length > 0 ? services[index].nadpis : object.title}
+              {/* {object.title} */}
             </h5>
 
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
@@ -107,11 +113,13 @@ const HomePageAboutIsElements = () => {
             <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
               <div className="text-center text-white mt-24 p-4 w-full flex justify-center">
                 <p className="text-white text-[14px] max-w-[80%]">
-                  {object.description}
+                  {services.length > 0
+                    ? services[index].popis
+                    : object.description}
                 </p>
               </div>
               <div className="btn btn--secondary absolute top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                Čítať viac
+                {button_citat_viac}
               </div>
             </div>
           </div>

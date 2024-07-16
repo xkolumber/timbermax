@@ -19,6 +19,8 @@ import IconBazeny from "./Icons/IconBazeny";
 import IconSlnolamy from "./Icons/IconSlnolamy";
 import IconPloty from "./Icons/IconPloty";
 import IconOstatne from "./Icons/IconOstatne";
+import useLanguageStore from "../zustand/store";
+import { doRevalidate } from "../lib/actions";
 
 const services = [
   {
@@ -102,6 +104,7 @@ const products = [
 ];
 
 const Navbar = () => {
+  const { language, setLanguage } = useLanguageStore();
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [closeClicked, setCloseClicked] = useState(false);
   const [showNavbarPart, setShowNavbarPart] = useState(true);
@@ -111,6 +114,13 @@ const Navbar = () => {
 
   const clickedButtonClose = () => {
     setCloseClicked(!closeClicked);
+  };
+
+  const handleLanguageChange = async (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setLanguage(event.target.value);
+    await doRevalidate(pathname);
   };
 
   const [hoveredIndex, setHoveredIndex] = useState(-1);
@@ -185,8 +195,18 @@ const Navbar = () => {
                 onMouseEnter={() => setHoveredIndex(3)}
                 onMouseLeave={() => setHoveredIndex(-1)}
               >
-                <p className="pl-12">SK</p>
-                <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} />
+                {/* <p className="pl-12">SK</p> */}
+                <select
+                  name="languages"
+                  id="languages"
+                  value={language}
+                  onChange={handleLanguageChange}
+                >
+                  <option value="sk">SK</option>
+                  <option value="cz">CZ</option>
+                  <option value="en">EN</option>
+                </select>
+                {/* <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} /> */}
               </div>
             </div>
           </div>
@@ -429,7 +449,13 @@ const Navbar = () => {
               onMouseEnter={() => setHoveredIndex(3)}
               onMouseLeave={() => setHoveredIndex(-1)}
             >
-              <p className="pl-12 font-extralight">SK</p>
+              <p className="pl-12 font-extralight"></p>
+              {/* <label id="cars">Choose a car:</label> */}
+              <select name="cars" id="cars">
+                <option value="sk">SK</option>
+                <option value="cz">CZ</option>
+                <option value="en">EN</option>
+              </select>
               <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} />
             </div>
           </div>
