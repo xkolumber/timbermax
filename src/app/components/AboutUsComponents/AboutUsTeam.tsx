@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { Team } from "@/app/lib/interface";
 
 interface TeamMember {
   job: string;
@@ -41,12 +42,17 @@ const people = [
   },
 ];
 
-const AboutUsTeam = () => {
+interface Props {
+  tim: Team[];
+  spoznajte_tim: string;
+}
+
+const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
   const [selectedHuman, setSelectedHuman] = useState<TeamMember>(people[0]);
   const [isHovered, setIsHovered] = useState<TeamMember>();
   return (
     <div className="bg-secondary">
-      <h2 className="pt-16 pb-16 text-center">Zoznámte sa s naším tímom</h2>
+      <h2 className="pt-16 pb-16 text-center">{spoznajte_tim}</h2>
 
       <div className="relative h-[600px]">
         <Image
@@ -92,8 +98,16 @@ const AboutUsTeam = () => {
                 />
                 {isHovered === object && (
                   <div className="absolute bottom-0 left-0 pb-16 pl-8">
-                    <p>{object.meno}</p>
-                    <p>| {object.job}</p>
+                    <p>
+                      {" "}
+                      {tim[index].meno != "" ? tim[index].meno : object.meno}
+                    </p>
+                    <p>
+                      | {""}
+                      {tim[index].funkcia != ""
+                        ? tim[index].funkcia
+                        : object.job}
+                    </p>
                   </div>
                 )}
               </div>

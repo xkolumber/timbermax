@@ -116,6 +116,7 @@ export async function AdminactualizeHomePage(
 }
 
 export async function AdminActualizeAboutUsPage(
+  citat: string,
   history_nadpis: string,
   history_popis: string,
   filozofia_nadpis: string,
@@ -124,6 +125,7 @@ export async function AdminActualizeAboutUsPage(
   filozofia_popis3: string,
   jazyk: string,
   spoznajte_tim: string,
+  staviame_znacka: string,
   tim: Team[]
 ) {
   const db = getFirestore();
@@ -136,6 +138,7 @@ export async function AdminActualizeAboutUsPage(
     console.error("Document does not exist for uid:");
 
     await podstrankaCollectionRef.add({
+      citat: citat,
       history_nadpis: history_nadpis,
       history_popis: history_popis,
       filozofia_nadpis: filozofia_nadpis,
@@ -144,6 +147,7 @@ export async function AdminActualizeAboutUsPage(
       filozofia_popis3: filozofia_popis3,
       jazyk: jazyk,
       spoznajte_tim: spoznajte_tim,
+      staviame_znacka: staviame_znacka,
       tim: tim,
     });
     return "success";
@@ -153,15 +157,17 @@ export async function AdminActualizeAboutUsPage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    history_nadpis,
-    history_popis,
-    filozofia_nadpis,
-    filozofia_popis1,
-    filozofia_popis2,
-    filozofia_popis3,
-    jazyk,
-    spoznajte_tim,
-    tim,
+    citat: citat,
+    history_nadpis: history_nadpis,
+    history_popis: history_popis,
+    filozofia_nadpis: filozofia_nadpis,
+    filozofia_popis1: filozofia_popis1,
+    filozofia_popis2: filozofia_popis2,
+    filozofia_popis3: filozofia_popis3,
+    jazyk: jazyk,
+    spoznajte_tim: spoznajte_tim,
+    staviame_znacka: staviame_znacka,
+    tim: tim,
   });
   revalidatePath(`/admin/o-nas/[${jazyk}]/page`, "page");
   return "success";

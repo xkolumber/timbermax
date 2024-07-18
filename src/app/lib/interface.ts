@@ -22,6 +22,7 @@ export interface HomePageElements {
 }
 
 export interface AboutUsElements {
+  citat: string;
   history_nadpis: string;
   history_popis: string;
   filozofia_nadpis: string;
@@ -30,6 +31,7 @@ export interface AboutUsElements {
   filozofia_popis3: string;
   jazyk: string;
   spoznajte_tim: string;
+  staviame_znacka: string;
   tim: Team[];
 }
 

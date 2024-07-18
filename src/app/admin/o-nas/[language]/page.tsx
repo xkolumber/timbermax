@@ -1,16 +1,11 @@
+import AdminAboutUsPage from "@/app/components/AdminComponents/AdminAboutUsPage";
 import AdminFinalNotAuthorized from "@/app/components/AdminComponents/AdminFinalNotAuthorized";
 import AdminNotAuthorized from "@/app/components/AdminComponents/AdminNotAuthorized";
-import AdminPage from "@/app/components/AdminComponents/AdminPage";
 import AdminPageSkeleton from "@/app/components/AdminComponents/AdminPageSkeleton";
 import { GetLanguages, getToken } from "@/app/lib/actions";
-import { Suspense } from "react";
+import { GetAdminAboutUsPage } from "@/app/lib/functionsServer";
 import jwt from "jsonwebtoken";
-import {
-  GetAdminAboutUsPage,
-  GetAdminHomePage,
-} from "@/app/lib/functionsServer";
-import AdminHomePage from "@/app/components/AdminComponents/AdminHomePage";
-import AdminAboutUsPage from "@/app/components/AdminComponents/AdminAboutUsPage";
+import { Suspense } from "react";
 
 async function Validate(language: string) {
   const authToken = await getToken();

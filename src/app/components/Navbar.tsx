@@ -157,7 +157,6 @@ const Navbar = () => {
   };
 
   const handleClickedCompanyObject = (link_: string) => {
-    console.log(link_);
     if (link_ === "/o-nas") {
       router.push("/o-nas");
     }

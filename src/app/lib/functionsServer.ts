@@ -43,6 +43,7 @@ export async function GetAdminAboutUsPage(language: string) {
     }
     const doc = querySnapshot.docs[0];
     const orderData = doc.data() as AboutUsElements;
+
     return orderData;
   } catch (error) {
     return null;

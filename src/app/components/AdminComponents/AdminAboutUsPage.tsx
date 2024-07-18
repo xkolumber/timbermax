@@ -23,6 +23,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
   const pathname = usePathname();
 
   const [actualizeData, setActualizeData] = useState<AboutUsElements>({
+    citat: "",
     history_nadpis: "",
     history_popis: "",
     filozofia_nadpis: "",
@@ -31,6 +32,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
     filozofia_popis3: "",
     jazyk: "",
     spoznajte_tim: "",
+    staviame_znacka: "",
     tim: [],
   });
 
@@ -51,14 +53,16 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
     if (data) {
       setActualizeData((prevData) => ({
         ...prevData,
+        citat: data.citat ? data.citat : "",
         history_nadpis: data.history_nadpis ? data.history_nadpis : "",
-        history_popis: data.history_popis ? data.history_nadpis : "",
+        history_popis: data.history_popis ? data.history_popis : "",
         filozofia_nadpis: data.filozofia_nadpis ? data.filozofia_nadpis : "",
         filozofia_popis1: data.filozofia_popis1 ? data.filozofia_popis1 : "",
         filozofia_popis2: data.filozofia_popis2 ? data.filozofia_popis2 : "",
         filozofia_popis3: data.filozofia_popis3 ? data.filozofia_popis3 : "",
-        jazyk: data.jazyk ? data.jazyk : "",
+        jazyk: language,
         spoznajte_tim: data.spoznajte_tim ? data.spoznajte_tim : "",
+        staviame_znacka: data.staviame_znacka ? data.staviame_znacka : "",
         tim: data.tim.length > 0 ? data.tim : TeamValues,
       }));
     }
@@ -87,13 +91,12 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
     },
   ];
 
-  console.log(actualizeData);
-
   const handleSaveProduct = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
 
     const response = await AdminActualizeAboutUsPage(
+      actualizeData.citat,
       actualizeData.history_nadpis,
       actualizeData.history_popis,
       actualizeData.filozofia_nadpis,
@@ -102,6 +105,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
       actualizeData.filozofia_popis3,
       language,
       actualizeData.spoznajte_tim,
+      actualizeData.staviame_znacka,
       actualizeData.tim
     );
     setIsLoading(false);
@@ -186,6 +190,16 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
           />
         </div>
         <div className="product_admin_row">
+          <p>staviame_znacka:</p>
+          <input
+            type="text"
+            name="staviame_znacka"
+            value={actualizeData.staviame_znacka}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
           <p>filozofia_popis1:</p>
           <input
             type="text"
@@ -211,6 +225,16 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
             type="text"
             name="filozofia_popis3"
             value={actualizeData.filozofia_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>citat:</p>
+          <input
+            type="text"
+            name="citat"
+            value={actualizeData.citat}
             onChange={handleChange}
             className="w-[400px]"
           />
