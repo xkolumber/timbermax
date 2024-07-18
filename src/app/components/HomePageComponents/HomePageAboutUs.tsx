@@ -1,8 +1,4 @@
-import React from "react";
 import Image from "next/image";
-import useLanguageStore from "@/app/zustand/store";
-import { cookies } from "next/headers";
-import ClientComponent from "../ClientComponent";
 
 const buttons = [
   {

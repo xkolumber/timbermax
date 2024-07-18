@@ -269,3 +269,24 @@ a {
   z-index: -1;
   object-fit: cover;
 }
+
+.products_admin p {
+  color: black;
+}
+
+.products_admin input[type="text"],
+.products_admin input[type="number"] {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid black;
+  height: 4.5rem;
+  font-size: 1.4rem;
+  width: 100%;
+  border-radius: 0px;
+}

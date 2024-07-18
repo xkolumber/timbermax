@@ -8,7 +8,7 @@ const page = () => {
   return (
     <div>
       <Image
-        src={"/main_picture.png"}
+        src={"/loop/main1.jpg"}
         alt="hlavna_fotka"
         height={1000}
         width={1000}

@@ -21,6 +21,13 @@ export interface HomePageElements {
   timbermax_ako: TimbermaxLike[];
 }
 
+export interface AboutUsElements {
+  history_title: string;
+  history_text: string;
+  philosophy_title: string;
+  philosophy_text: string;
+}
+
 export interface Sluzby {
   nadpis: string;
   popis: string;

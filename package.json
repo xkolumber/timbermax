@@ -9,13 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/js-cookie": "^3.0.6",
     "firebase": "^10.12.3",
     "firebase-admin": "^12.2.0",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.4",
     "nookies": "^2.5.2",
     "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "react-loading-skeleton": "^3.4.0",
     "react-spinners": "^0.14.1",
     "sharp": "^0.33.4",
