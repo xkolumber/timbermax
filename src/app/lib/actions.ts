@@ -5,7 +5,7 @@ import { revalidatePath, unstable_noStore } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
-import { Jazyk, Sluzby, TimbermaxLike } from "./interface";
+import { Jazyk, Sluzby, Team, TimbermaxLike } from "./interface";
 import { cookies } from "next/headers";
 
 const FormSchema = z.object({
@@ -112,5 +112,57 @@ export async function AdminactualizeHomePage(
     timbermax_ako,
   });
   revalidatePath(`/admin/domov/[${jazyk}]/page`, "page");
+  return "success";
+}
+
+export async function AdminActualizeAboutUsPage(
+  history_nadpis: string,
+  history_popis: string,
+  filozofia_nadpis: string,
+  filozofia_popis1: string,
+  filozofia_popis2: string,
+  filozofia_popis3: string,
+  jazyk: string,
+  spoznajte_tim: string,
+  tim: Team[]
+) {
+  const db = getFirestore();
+  const podstrankaCollectionRef = db.collection("about-us");
+  const querySnapshot = await podstrankaCollectionRef
+    .where("jazyk", "==", jazyk)
+    .get();
+
+  if (querySnapshot.empty) {
+    console.error("Document does not exist for uid:");
+
+    await podstrankaCollectionRef.add({
+      history_nadpis: history_nadpis,
+      history_popis: history_popis,
+      filozofia_nadpis: filozofia_nadpis,
+      filozofia_popis1: filozofia_popis1,
+      filozofia_popis2: filozofia_popis2,
+      filozofia_popis3: filozofia_popis3,
+      jazyk: jazyk,
+      spoznajte_tim: spoznajte_tim,
+      tim: tim,
+    });
+    return "success";
+  }
+
+  const doc = querySnapshot.docs[0];
+  const docId = doc.id;
+
+  await podstrankaCollectionRef.doc(docId).update({
+    history_nadpis,
+    history_popis,
+    filozofia_nadpis,
+    filozofia_popis1,
+    filozofia_popis2,
+    filozofia_popis3,
+    jazyk,
+    spoznajte_tim,
+    tim,
+  });
+  revalidatePath(`/admin/o-nas/[${jazyk}]/page`, "page");
   return "success";
 }

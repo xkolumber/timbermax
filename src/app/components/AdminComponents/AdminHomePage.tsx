@@ -1,7 +1,9 @@
 "use client";
 import { AdminactualizeHomePage } from "@/app/lib/actions";
+import { getSecondPathValue } from "@/app/lib/functionsClient";
 import { HomePageElements, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -14,7 +16,8 @@ interface Props {
 
 const AdminHomePage = ({ language, data, languages }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  console.log(data);
+  const [randomArray, setRandomArray] = useState<string[]>([""]);
+  const pathname = usePathname();
 
   const [actualizeData, setActualizeData] = useState<HomePageElements>({
     button_citat_viac: "",
@@ -82,7 +85,7 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
       actualizeData.cenova_p_nadpis,
       actualizeData.cenova_p_popis1,
       actualizeData.cenova_p_popis2,
-      actualizeData.jazyk,
+      language,
       actualizeData.nase_sluzby_nadpis,
       actualizeData.nase_sluzby_veta,
       actualizeData.nase_sluzby_popis,
@@ -96,10 +99,48 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
     );
     setIsLoading(false);
     if (response === "success") {
-      toast.success("Produkt bol aktualizovaný");
+      toast.success("Sekcia bola aktualizovaná");
     } else {
       toast.error("Niekde nastala chyba");
     }
+  };
+
+  const handleChangeItemArray = (
+    title: string,
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setActualizeData((prevData) => {
+      const updatedArray = [
+        ...(prevData[title as keyof HomePageElements] as string[]),
+      ];
+      updatedArray[index] = event.target.value;
+      return {
+        ...prevData,
+        [title]: updatedArray,
+      };
+    });
+  };
+
+  const handleChangeItemTwoArray = (
+    title: string,
+    index: number,
+    field: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setActualizeData((prevData) => {
+      const updatedArray = [
+        ...(prevData[title as keyof HomePageElements] as any[]),
+      ];
+      updatedArray[index] = {
+        ...updatedArray[index],
+        [field]: event.target.value,
+      };
+      return {
+        ...prevData,
+        [title]: updatedArray,
+      };
+    });
   };
 
   return (
@@ -115,7 +156,8 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
           {languages.map((one_lang, index) => (
             <Link
               className="btn btn--primary"
-              href={`/admin/domov/${one_lang.jazyk}`}
+              href={`/admin/${getSecondPathValue(pathname)}/${one_lang.jazyk}`}
+              key={index}
             >
               {one_lang.jazyk}
             </Link>
@@ -221,17 +263,126 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
             className=""
           />
         </div>
-        {/* <div className="product_admin_row">
-          <p>o_nas_nadpis:</p>
-          <input
-            type="text"
-            name="o_nas_nadpis"
-            value={actualizeData.o_nas_nadpis}
-            onChange={handleChange}
-            className="w-[400px]"
-          />
-        </div> */}
+        <div className="product_admin_row">
+          <p>o_nas_elements:</p>
+          <div className="flex flex-col">
+            {actualizeData.o_nas_elements.map((size, index) => (
+              <input
+                key={index}
+                type="text"
+                name={`o_nas_elements${index}`}
+                value={size}
+                onChange={(e) =>
+                  handleChangeItemArray("o_nas_elements", index, e)
+                }
+                className="md:!w-[450px] mt-2"
+              />
+            ))}
+          </div>
+        </div>
+        <div className="product_admin_row">
+          <p>ref_elements:</p>
+          <div className="flex flex-col">
+            {actualizeData.ref_elements.map((size, index) => (
+              <input
+                key={index}
+                type="text"
+                name={`ref_elements${index}`}
+                value={size}
+                onChange={(e) =>
+                  handleChangeItemArray("ref_elements", index, e)
+                }
+                className="md:!w-[450px] mt-2"
+              />
+            ))}
+          </div>
+        </div>
+        <div className="product_admin_row">
+          <p>sluzby:</p>
+          <div className="flex flex-col">
+            {actualizeData.sluzby.map((element, index) => (
+              <div key={index} className="flex flex-row gap-4">
+                <input
+                  type="text"
+                  name={`sluzby-nadpis-${index}`}
+                  value={element.nadpis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray("sluzby", index, "nadpis", e)
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+                <input
+                  type="text"
+                  name={`sluzby-popis-${index}`}
+                  value={element.popis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray("sluzby", index, "popis", e)
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="product_admin_row">
+          <p>timbermax_ako:</p>
+          <div className="flex flex-col">
+            {actualizeData.timbermax_ako.map((element, index) => (
+              <div key={index} className="flex flex-row gap-4">
+                <input
+                  type="text"
+                  name={`timbermax_ako-nadpis-${index}`}
+                  value={element.nadpis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "timbermax_ako",
+                      index,
+                      "nadpis",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+                <input
+                  type="text"
+                  name={`timbermax_ako-popis-${index}`}
+                  value={element.popis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray("timbermax_ako", index, "popis", e)
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+                <input
+                  type="text"
+                  name={`timbermax_ako-link-${index}`}
+                  value={element.link}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray("timbermax_ako", index, "link", e)
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
+        <div className="product_admin_row">
+          <p>svg_titles:</p>
+          <div className="flex flex-col">
+            {actualizeData.svg_titles.map((size, index) => (
+              <input
+                key={index}
+                type="text"
+                name={`sluzby${index}`}
+                value={size}
+                onChange={(e) =>
+                  handleChangeItemArray("ref_elements", index, e)
+                }
+                className="md:!w-[450px] mt-2"
+              />
+            ))}
+          </div>
+        </div>
         <button
           className="btn btn--primary !bg-red-700"
           type="submit"
@@ -242,10 +393,10 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
               size={20}
               color={"#00000"}
               loading={true}
-              className="ml-36 mr-36"
+              className="ml-24 mr-24"
             />
           ) : (
-            "Aktualizovať produkt"
+            "Aktualizovať sekciu"
           )}
         </button>
       </form>

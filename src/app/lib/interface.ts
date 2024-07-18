@@ -22,10 +22,21 @@ export interface HomePageElements {
 }
 
 export interface AboutUsElements {
-  history_title: string;
-  history_text: string;
-  philosophy_title: string;
-  philosophy_text: string;
+  history_nadpis: string;
+  history_popis: string;
+  filozofia_nadpis: string;
+  filozofia_popis1: string;
+  filozofia_popis2: string;
+  filozofia_popis3: string;
+  jazyk: string;
+  spoznajte_tim: string;
+  tim: Team[];
+}
+
+export interface Team {
+  meno: string;
+  funkcia: string;
+  popis: string;
 }
 
 export interface Sluzby {
