@@ -55,6 +55,44 @@ export interface MoreAboutTimElements {
   lahko_popis: string;
 }
 
+export interface PriceOffer {
+  cennik_stiahnutie: string;
+  ceny_sposob_nadpis: string;
+  ceny_sposob_popis: string;
+  popis_nad_fotkou: string;
+  profil_nadpis: string;
+  profil_popis1: string;
+  profil_popis2: string;
+  profil_popis3: string;
+  profil_popis4: string;
+  profil_popis5: string;
+  profil_popis6: string;
+  dielo_nadpis: string;
+  dielo_popis: string;
+  relacia_nadpis: string;
+  relacia_popis1: string;
+  relacia_popis2: string;
+  relacia_lista1: string;
+  relacia_lista2: string;
+  relacie: Sluzby[];
+  jazyk: string;
+  cenova_ponuka_nadpis: string;
+  cenova_ponuka_popis: string;
+  nacenovac: string;
+  nacenovac_sekcie: Nacenovac[];
+  posl_popis1: string;
+  posl_popis2: string;
+  posl_popis3: string;
+  posl_popis4: string;
+}
+
+export interface Nacenovac {
+  nadpis: string;
+  popis: string;
+  button: string;
+  link: string;
+}
+
 export interface Team {
   meno: string;
   funkcia: string;

@@ -7,6 +7,7 @@ import {
   AboutUsElements,
   HomePageElements,
   MoreAboutTimElements,
+  PriceOffer,
 } from "./interface";
 
 export async function GetAdminHomePage(language: string) {
@@ -70,6 +71,29 @@ export async function GetAdminMoreAbout(language: string) {
     }
     const doc = querySnapshot.docs[0];
     const orderData = doc.data() as MoreAboutTimElements;
+
+    return orderData;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function GetAdminPriceOffer(language: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore();
+    const podstrankaCollectionRef = db.collection("price-offer");
+    const querySnapshot = await podstrankaCollectionRef
+      .where("jazyk", "==", language)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error("Document does not exist for uid:", language);
+      return null;
+    }
+    const doc = querySnapshot.docs[0];
+    const orderData = doc.data() as PriceOffer;
 
     return orderData;
   } catch (error) {

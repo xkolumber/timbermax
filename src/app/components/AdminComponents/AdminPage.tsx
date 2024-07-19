@@ -11,10 +11,11 @@ const AdminPage = ({ languages }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isClicked2, setIsClicked2] = useState(false);
   const [isClicked3, setIsClicked3] = useState(false);
+  const [isClicked4, setIsClicked4] = useState(false);
   return (
     <div className="min-h-screen main_section additional_padding">
       <h2>Admin Zóna</h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap gap-4">
         <div className="flex flex-col">
           <button
             className=" btn btn--primary"
@@ -69,6 +70,26 @@ const AdminPage = ({ languages }: Props) => {
                   className="index p-4 bg-white text-black cursor-pointer hover:bg-gray-500 duration-200"
                   key={index}
                   href={`/admin/viac-o-timbermaxe/${language.jazyk}`}
+                >
+                  {language.jazyk}
+                </Link>
+              ))}
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <button
+            className=" btn btn--primary"
+            onClick={() => setIsClicked4((prevState) => !prevState)}
+          >
+            Cennik
+          </button>
+          <div className="flex flex-col w-[150px]">
+            {isClicked4 &&
+              languages.map((language, index) => (
+                <Link
+                  className="index p-4 bg-white text-black cursor-pointer hover:bg-gray-500 duration-200"
+                  key={index}
+                  href={`/admin/cennik/${language.jazyk}`}
                 >
                   {language.jazyk}
                 </Link>

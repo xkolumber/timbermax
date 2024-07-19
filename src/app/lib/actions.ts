@@ -5,7 +5,7 @@ import { revalidatePath, unstable_noStore } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
-import { Jazyk, Sluzby, Team, TimbermaxLike } from "./interface";
+import { Jazyk, Nacenovac, Sluzby, Team, TimbermaxLike } from "./interface";
 import { cookies } from "next/headers";
 
 const FormSchema = z.object({
@@ -247,5 +247,114 @@ export async function AdminActualizeMoreAboutPage(
     lahko_popis: lahko_popis,
   });
   revalidatePath(`/admin/viac-o-timbermaxe/[${jazyk}]/page`, "page");
+  return "success";
+}
+
+export async function AdminActualizePriceOffer(
+  cennik_stiahnutie: string,
+  ceny_sposob_nadpis: string,
+  ceny_sposob_popis: string,
+  popis_nad_fotkou: string,
+  profil_nadpis: string,
+  profil_popis1: string,
+  profil_popis2: string,
+  profil_popis3: string,
+  profil_popis4: string,
+  profil_popis5: string,
+  profil_popis6: string,
+  dielo_nadpis: string,
+  dielo_popis: string,
+  relacia_nadpis: string,
+  relacia_popis1: string,
+  relacia_popis2: string,
+  relacia_lista1: string,
+  relacia_lista2: string,
+  relacie: Sluzby[],
+  jazyk: string,
+  cenova_ponuka_nadpis: string,
+  cenova_ponuka_popis: string,
+  nacenovac: string,
+  nacenovac_sekcie: Nacenovac[],
+  posl_popis1: string,
+  posl_popis2: string,
+  posl_popis3: string,
+  posl_popis4: string
+) {
+  const db = getFirestore();
+  const podstrankaCollectionRef = db.collection("price-offer");
+  const querySnapshot = await podstrankaCollectionRef
+    .where("jazyk", "==", jazyk)
+    .get();
+
+  if (querySnapshot.empty) {
+    console.error("Document does not exist for uid:");
+
+    await podstrankaCollectionRef.add({
+      cennik_stiahnutie: cennik_stiahnutie,
+      ceny_sposob_nadpis: ceny_sposob_nadpis,
+      ceny_sposob_popis: ceny_sposob_popis,
+      popis_nad_fotkou: popis_nad_fotkou,
+      profil_nadpis: profil_nadpis,
+      profil_popis1: profil_popis1,
+      profil_popis2: profil_popis2,
+      profil_popis3: profil_popis3,
+      profil_popis4: profil_popis4,
+      profil_popis5: profil_popis5,
+      profil_popis6: profil_popis6,
+      dielo_nadpis: dielo_nadpis,
+      dielo_popis: dielo_popis,
+      relacia_nadpis: relacia_nadpis,
+      relacia_popis1: relacia_popis1,
+      relacia_popis2: relacia_popis2,
+      relacia_lista1: relacia_lista1,
+      relacia_lista2: relacia_lista2,
+      relacie: relacie,
+      jazyk: jazyk,
+      cenova_ponuka_nadpis: cenova_ponuka_nadpis,
+      cenova_ponuka_popis: cenova_ponuka_popis,
+      nacenovac: nacenovac,
+      nacenovac_sekcie: nacenovac_sekcie,
+      posl_popis1: posl_popis1,
+      posl_popis2: posl_popis2,
+      posl_popis3: posl_popis3,
+      posl_popis4: posl_popis4,
+    });
+    return "success";
+  }
+
+  const doc = querySnapshot.docs[0];
+  const docId = doc.id;
+
+  await podstrankaCollectionRef.doc(docId).update({
+    cennik_stiahnutie: cennik_stiahnutie,
+    ceny_sposob_nadpis: ceny_sposob_nadpis,
+    ceny_sposob_popis: ceny_sposob_popis,
+    popis_nad_fotkou: popis_nad_fotkou,
+    profil_nadpis: profil_nadpis,
+    profil_popis1: profil_popis1,
+    profil_popis2: profil_popis2,
+    profil_popis3: profil_popis3,
+    profil_popis4: profil_popis4,
+    profil_popis5: profil_popis5,
+    profil_popis6: profil_popis6,
+    dielo_nadpis: dielo_nadpis,
+    dielo_popis: dielo_popis,
+    relacia_nadpis: relacia_nadpis,
+    relacia_popis1: relacia_popis1,
+    relacia_popis2: relacia_popis2,
+    relacia_lista1: relacia_lista1,
+    relacia_lista2: relacia_lista2,
+    relacie: relacie,
+    jazyk: jazyk,
+    cenova_ponuka_nadpis: cenova_ponuka_nadpis,
+    cenova_ponuka_popis: cenova_ponuka_popis,
+    nacenovac: nacenovac,
+    nacenovac_sekcie: nacenovac_sekcie,
+    posl_popis1: posl_popis1,
+    posl_popis2: posl_popis2,
+    posl_popis3: posl_popis3,
+    posl_popis4: posl_popis4,
+  });
+  revalidatePath(`/admin/cennik/[${jazyk}]/page`, "page");
   return "success";
 }
