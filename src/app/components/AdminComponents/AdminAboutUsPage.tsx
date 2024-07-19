@@ -1,10 +1,7 @@
 "use client";
-import {
-  AdminActualizeAboutUsPage,
-  AdminactualizeHomePage,
-} from "@/app/lib/actions";
+import { AdminActualizeAboutUsPage } from "@/app/lib/actions";
 import { getSecondPathValue } from "@/app/lib/functionsClient";
-import { AboutUsElements, HomePageElements, Jazyk } from "@/app/lib/interface";
+import { AboutUsElements, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";

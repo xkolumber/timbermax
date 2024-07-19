@@ -172,3 +172,80 @@ export async function AdminActualizeAboutUsPage(
   revalidatePath(`/admin/o-nas/[${jazyk}]/page`, "page");
   return "success";
 }
+
+export async function AdminActualizeMoreAboutPage(
+  nadpis: string,
+  popis1: string,
+  popis2: string,
+  popis_porovnanie: string,
+  tim_vs_konk: string,
+  next_popis1: string,
+  next_popis2: string,
+  next_popis3: string,
+  next_popis4: string,
+  btn_exotic: string,
+  btn_rustic: string,
+  pod_btn: string,
+  jazyk: string,
+  another_popis1: string,
+  another_popis2: string,
+  lahko_nadpis: string,
+  lahko_popis: string
+) {
+  console.log(jazyk);
+  const db = getFirestore();
+  const podstrankaCollectionRef = db.collection("more-about");
+  const querySnapshot = await podstrankaCollectionRef
+    .where("jazyk", "==", jazyk)
+    .get();
+
+  if (querySnapshot.empty) {
+    console.error("Document does not exist for uid:");
+
+    await podstrankaCollectionRef.add({
+      nadpis: nadpis,
+      popis1: popis1,
+      popis2: popis2,
+      popis_porovnanie: popis_porovnanie,
+      tim_vs_konk: tim_vs_konk,
+      next_popis1: next_popis1,
+      next_popis2: next_popis2,
+      next_popis3: next_popis3,
+      next_popis4: next_popis4,
+      btn_exotic: btn_exotic,
+      btn_rustic: btn_rustic,
+      pod_btn: pod_btn,
+      jazyk: jazyk,
+      another_popis1: another_popis1,
+      another_popis2: another_popis2,
+      lahko_nadpis: lahko_nadpis,
+      lahko_popis: lahko_popis,
+    });
+    return "success";
+  }
+
+  const doc = querySnapshot.docs[0];
+  const docId = doc.id;
+
+  await podstrankaCollectionRef.doc(docId).update({
+    nadpis: nadpis,
+    popis1: popis1,
+    popis2: popis2,
+    popis_porovnanie: popis_porovnanie,
+    tim_vs_konk: tim_vs_konk,
+    next_popis1: next_popis1,
+    next_popis2: next_popis2,
+    next_popis3: next_popis3,
+    next_popis4: next_popis4,
+    btn_exotic: btn_exotic,
+    btn_rustic: btn_rustic,
+    pod_btn: pod_btn,
+    jazyk: jazyk,
+    another_popis1: another_popis1,
+    another_popis2: another_popis2,
+    lahko_nadpis: lahko_nadpis,
+    lahko_popis: lahko_popis,
+  });
+  revalidatePath(`/admin/viac-o-timbermaxe/[${jazyk}]/page`, "page");
+  return "success";
+}

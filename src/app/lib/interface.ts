@@ -35,6 +35,26 @@ export interface AboutUsElements {
   tim: Team[];
 }
 
+export interface MoreAboutTimElements {
+  nadpis: string;
+  popis1: string;
+  popis2: string;
+  popis_porovnanie: string;
+  tim_vs_konk: string;
+  next_popis1: string;
+  next_popis2: string;
+  next_popis3: string;
+  next_popis4: string;
+  btn_exotic: string;
+  btn_rustic: string;
+  jazyk: string;
+  pod_btn: string;
+  another_popis1: string;
+  another_popis2: string;
+  lahko_nadpis: string;
+  lahko_popis: string;
+}
+
 export interface Team {
   meno: string;
   funkcia: string;
