@@ -5,6 +5,7 @@ import IconFasady from "../Icons/IconFasady";
 import IconPloty from "../Icons/IconPloty";
 import Image from "next/image";
 import IconArrowCart from "../Icons/IconArrowCart";
+import { Sluzby } from "@/app/lib/interface";
 
 const data = [
   {
@@ -30,7 +31,11 @@ const data = [
   },
 ];
 
-const PricesElements = () => {
+interface Props {
+  relacie: Sluzby[];
+}
+
+const PricesElements = ({ relacie }: Props) => {
   return (
     <div className="navbar_section">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -56,13 +61,19 @@ const PricesElements = () => {
             <h5
               className={`absolute text-white top-[43%] scale-[1]  duration-300 z-10`}
             >
-              {object.title}
+              {relacie[index].nadpis != ""
+                ? relacie[index].nadpis
+                : object.title}
             </h5>
 
             <div className="absolute inset-0 bg-black opacity-30   transition-opacity duration-300 z-6"></div>
 
             <div className="bg-[#363F1E] opacity-[64%] absolute top-[60%] bottom-0 flex justify-center items-center">
-              <p className="text-center">{object.description}</p>
+              <p className="text-center">
+                {relacie[index].popis != ""
+                  ? relacie[index].popis
+                  : object.description}
+              </p>
             </div>
           </div>
         ))}

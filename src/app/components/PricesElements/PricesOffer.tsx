@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import getBase64 from "@/app/lib/functions";
 import IconCalculateGreen from "../Icons/IconCalculateGreen";
+import { PriceOffer } from "@/app/lib/interface";
+import Link from "next/link";
 
 const three_text = [
   {
@@ -24,23 +26,16 @@ const three_text = [
   },
 ];
 
-const PricesOffer = async () => {
-  const myBlurDataUrl = await getBase64(`${process.env.URL}/cennik2.jpg`);
+interface Props {
+  data: PriceOffer | undefined;
+}
+
+const PricesOffer = ({ data }: Props) => {
   return (
     <>
       <div className="main_section">
-        <h2>Cenová ponuka</h2>
-        <p className="text-primary">
-          Vypracovali sme pre Vás jednoduchý naceňovací systém fungujúci na
-          princípe konfigurátora automobilov. Naceňovač Vám vie vypočítať
-          celkovú hodnotu diela na klúč s rozdelením sumy na materiál, montáž a
-          vedľajšie rozpočtové náklady. Pri procese nacenenia terasy či fasády
-          Vás sprevádzajú vysvetlenia jednotlivých krokov procesu montáže spolu
-          s grafickými vizualizáciami pre čo možno najlepšiu predstavu finálneho
-          diela. Naceňovač ponúka možnosť nákupu samostatného materiálu aj
-          formou e-shopu pre klientov či firmy, ktorí majú záujem o presný počet
-          kusov jednotlivých položiek z našej ponuky.
-        </p>
+        <h2>{data?.cenova_ponuka_nadpis}</h2>
+        <p className="text-primary">{data?.cenova_ponuka_popis}</p>
       </div>
       <div className="relative">
         <Image
@@ -52,21 +47,34 @@ const PricesOffer = async () => {
           priority={true}
           className="w-full  md:h-full max-h-[600px] object-cover "
           placeholder="blur"
-          blurDataURL={myBlurDataUrl}
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
         />
         <div className="absolute z-[100] bottom-0 left-1/2 transform -translate-x-1/2  bg-secondary rounded-[8px] w-48 h-48 p-8 -mb-20">
           <IconCalculateGreen />
         </div>
       </div>
       <div className="main_section">
-        <p className="text-primary text-center mb-8">
-          Naceňovač ponúka 3 možnosti nákupu:
-        </p>
+        <p className="text-primary text-center mb-8">{data?.nacenovac}</p>
         {three_text.map((object, index) => (
           <div className="flex flex-col mb-16" key={index}>
-            <h6>{object.title}</h6>
-            <p className="pt-8 text-primary">{object.description}</p>
-            <button className="btn btn--primary">{object.button}</button>
+            <h6>
+              {data?.nacenovac_sekcie[index].nadpis != ""
+                ? data?.nacenovac_sekcie[index].nadpis
+                : object.title}
+            </h6>
+            <p className="pt-8 text-primary">
+              {data?.nacenovac_sekcie[index].popis != ""
+                ? data?.nacenovac_sekcie[index].popis
+                : object.description}
+            </p>
+            <Link
+              className="btn btn--primary"
+              href={`${data?.nacenovac_sekcie[index].link}`}
+            >
+              {data?.nacenovac_sekcie[index].button != ""
+                ? data?.nacenovac_sekcie[index].button
+                : object.button}
+            </Link>
           </div>
         ))}
       </div>
@@ -79,47 +87,13 @@ const PricesOffer = async () => {
         priority={true}
         className="w-full  md:h-full max-h-[600px] object-cover "
         placeholder="blur"
-        blurDataURL={myBlurDataUrl}
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
       />
       <div className="main_section">
-        <p className="text-primary">
-          V cenovej ponuke bez obhliadky nedokážeme obsiahnuť každý požadovaný
-          detail vyhotovenia podľa predstavy klienta. V prípade, že sa pred
-          realizáciou ponuka neupresní obhliadkou stavby, máme zaužívaný
-          montážny postup pri ktorom si klient s montážnou skupinou počas prvého
-          dňa realizácie prejde jednotlivé možnosti vypracovania detailov ako sú
-          lištovania či špaletovania okenných rámov a podobne. Pokiaľ klient
-          všetky detaily neupresní v naceňovači budú zadefinované v preambule
-          zmluvy cenou na bm (bežný meter) a po ukončení realizácie a odovzdaní
-          diela sa detaily doplatia podľa skutočnej spotreby.
-        </p>
-        <p className="text-primary mt-8">
-          Termín realizácie sa upresňuje až po zaplatení zálohy 60% z celkovej
-          sumy zákazky. Pokiaľ je odstup od podpisu zmluvy do realizácie dlhší
-          ako 3 mesiace, zálohu môže klient zaplatiť na dva krát.
-        </p>
-        <p className="text-primary mt-8">
-          Zmluva o dielo garantuje cenu za m2 obloženej plochy, podľa schválenej
-          cenovej ponuky, kde klient uvádza predpokladanú plochu realizácie.
-          Zákazník zaplatí doplatkovú sumu 40% na základe zamerania celkovej
-          obloženej plochy po dokončení diela. Celková obložená plocha sa
-          vypočíta po záverečnom zmeraní a zrátaní všetkých plôch vynásobením
-          garantovanou jednotkovou cenou za m2.
-        </p>
-        <p className="text-primary mt-8">
-          Garanciou ceny realizácie diela na m2 obloženej plochy je krytý nielen
-          klient ale aj realizátor. Počas dlhoročných skúseností sa nám neraz
-          stalo, že plocha v cenovej ponuke nezodpovedala reálne obkladanej
-          ploche zákazky. V prípade, ak má klient v schválenej a zazmluvnenej
-          cenovej ponuke celkovú sumu na obklad 100m2 a obloží sa len 90m2,
-          zaplatí len za obložených 90m2. Zvyškový materiál odvezieme spolu s
-          odpadom stavby. Na druhej strane, pokiaľ na príklad klient v
-          naceňovači milne uvedie obkladanú plochu 90m2, a po zazmluvnení
-          zákazky sa pri realizácii obloží až 100m2, klient je povinný zaplatiť
-          za reálnu obloženú plochu 100m2. Počas realizácie sa s klientom
-          potreba dodatočného obkladu odkomunikuje a s obkladaním výrazne väčšej
-          plochy sa pokračuje až po súhlase klienta.{" "}
-        </p>
+        <p className="text-primary">{data?.posl_popis1}</p>
+        <p className="text-primary mt-8">{data?.posl_popis2}</p>
+        <p className="text-primary mt-8">{data?.posl_popis3}</p>
+        <p className="text-primary mt-8">{data?.posl_popis4}</p>
       </div>
     </>
   );
