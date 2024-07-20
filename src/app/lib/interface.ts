@@ -126,3 +126,16 @@ export interface NavbarItem {
 export interface Navbars {
   [key: string]: NavbarItem[];
 }
+
+export interface FooterItem {
+  sidlo: string;
+  sklad: string;
+  vzorkova_predajna: string;
+  kontakt: string;
+  social: string;
+  ochrana: string;
+}
+
+export interface Footers {
+  [key: string]: FooterItem[];
+}
