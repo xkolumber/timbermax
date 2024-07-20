@@ -109,3 +109,20 @@ export interface TimbermaxLike {
   popis: string;
   link: string;
 }
+
+export interface NavbarSection {
+  nazov: string;
+  link: string;
+  icon?: any;
+}
+
+export interface NavbarItem {
+  id: string;
+  nazov: string;
+  sekcie: NavbarSection[];
+  link?: string;
+}
+
+export interface Navbars {
+  [key: string]: NavbarItem[];
+}

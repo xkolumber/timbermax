@@ -31,7 +31,7 @@ interface Props {
 const HomePageReferencies = ({ ref_elements }: Props) => {
   return (
     <div>
-      <div className="w-full bg-secondary z-20">
+      <div className="w-full bg-secondary z-20" id="referencie">
         <div className="navbar_section">
           <div className="flex flex-col md:flex-row justify-between">
             {pictures_object.map((one_button, index) => (

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const HomePageShowRoom = () => {
   return (
-    <div>
+    <div id="showroom">
       <Image
         src="/showroom.svg"
         className="w-full h-full object-cover min-h-[200px] "
