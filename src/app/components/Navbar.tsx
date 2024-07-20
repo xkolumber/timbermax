@@ -124,21 +124,23 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`bg-[#233027] duration-300  ${
+          className={`bg-[#233027] duration-300 ${
             showNavbarPart ? "opacity-95" : "opacity-100"
           } ${clickedIndex != -1 && "!opacity-95"} `}
         >
-          <div className={` flex flex-row  justify-between navbar_section`}>
+          <div
+            className={` flex flex-row  justify-between navbar_section  2xl:h-[100px]`}
+          >
             <Link href="/" className="w-[130px] md:w-[150px]">
               <Image
                 src={"/logo.svg"}
                 alt="logo"
                 width={100}
                 height={0}
-                className="w-[130px] md:w-[150px]   object-contain"
+                className="w-[130px] md:w-[150px] 2xl:w-[300px]   object-contain"
               />
             </Link>
-            <div className="flex flex-row gap-6">
+            <div className="flex flex-row gap-6 ">
               {" "}
               <div
                 className={` xl:hidden cursor-pointer`}
@@ -154,7 +156,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="hidden xl:flex flex-row gap-12 items-center">
+            <div className="hidden xl:flex flex-row gap-12 2xl:gap-24 items-center">
               {navbarData.map((object, index) => (
                 <div className="flex flex-row items-center gap-2" key={index}>
                   <Link

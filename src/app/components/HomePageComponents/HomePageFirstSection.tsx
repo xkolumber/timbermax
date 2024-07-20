@@ -6,8 +6,7 @@ interface Props {
   button: string | undefined;
 }
 
-const HomePageFirstSection = async ({ button }: Props) => {
-  // const url = await getBase64(`${process.env.URL}/loop/main1.jpg`);
+const HomePageFirstSection = ({ button }: Props) => {
   const url =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGPoyAnauXnji/+fbVNdGZqyAqe1FtlEajHIMzD42mhFBFjwaAgw8DEAAEdSDLK7z3GTAAAAAElFTkSuQmCC";
 

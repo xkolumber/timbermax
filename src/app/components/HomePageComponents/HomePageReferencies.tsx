@@ -32,12 +32,15 @@ const HomePageReferencies = ({ ref_elements }: Props) => {
   return (
     <div>
       <div className="w-full bg-secondary z-20" id="referencie">
-        <div className="navbar_section">
-          <div className="flex flex-col md:flex-row justify-between">
+        <div className="navbar_section ">
+          <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-16 mt-8 mb-8">
             {pictures_object.map((one_button, index) => (
-              <div className="flex lex-row items-center gap-8" key={index}>
-                <div className="w-16 h-12">{one_button.icon}</div>
-                <p className="max-w-[210px] z-50 text-[#1F2820]">
+              <div
+                className="flex flex-col xl:flex-row items-center gap-4 md:gap-8"
+                key={index}
+              >
+                <div className="w-24 h-20">{one_button.icon}</div>
+                <p className=" z-50 text-primary font-normal text-center max-w-[200px]">
                   {ref_elements[index] != ""
                     ? ref_elements[index]
                     : one_button.title}
@@ -45,7 +48,13 @@ const HomePageReferencies = ({ ref_elements }: Props) => {
               </div>
             ))}
           </div>
-          <HomePageJustReferencies />
+          <div className="flex justify-center">
+            {" "}
+            <h3 className="custom-underline  mt-16">Vaše Referencie</h3>
+          </div>
+          <div className="mb-16">
+            <HomePageJustReferencies />
+          </div>
         </div>
       </div>
     </div>

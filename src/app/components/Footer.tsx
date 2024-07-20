@@ -37,7 +37,9 @@ const Footer = () => {
     <footer className="w-full relative  flex flex-col footer ">
       <div className=" w-full ">
         <div className="bg-primary ">
-          <div className={` flex flex-row  justify-between navbar_section`}>
+          <div
+            className={` flex flex-col md:flex-row  justify-between navbar_section !pt-8 !pb-8 md:!pt-16 md:!pb-16`}
+          >
             <Link href="/" className="w-[130px] md:w-[150px]">
               <Image
                 src={"/logo.svg"}
@@ -47,7 +49,7 @@ const Footer = () => {
                 className="w-[130px] md:w-[150px]   object-contain"
               />
             </Link>
-            <div className="hidden xl:flex flex-row gap-12 items-center">
+            <div className="flex flex-col md:flex-row gap-12  mt-8">
               <div className="flex flex-col">
                 <p className="uppercase  cursor-pointer">
                   {footerData[0].sidlo}
@@ -87,7 +89,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-primary opacity-95">
-          <div className="navbar_section w-full flex flex-row justify-between">
+          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4">
             <p>Copyright © 2023 - Newface, s.r.o, All Right Reserved</p>
             <p>Designed by RoyalBuild</p>
             <a href="tel:+421918654146">

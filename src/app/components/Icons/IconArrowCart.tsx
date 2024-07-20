@@ -7,7 +7,7 @@ const IconArrowCart = () => {
       data-name="Isolation Mode"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 18.03 38.13"
-      className="w-8 h-8"
+      className="w-8 h-8 2xl:w-16 2xl:h-16"
     >
       <polyline
         className="cls-1"

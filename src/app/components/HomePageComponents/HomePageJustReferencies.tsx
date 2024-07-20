@@ -16,8 +16,8 @@ const referencies = [
 const HomePageJustReferencies = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="">
-      <div className="relative mt-16">
+    <div className="main_section !pt-0 !pb-0">
+      <div className="relative mt-16 ">
         <Image
           src="/referencie.jpg"
           className="w-full h-full object-cover absolute rounded-[8px]"
@@ -44,7 +44,7 @@ const HomePageJustReferencies = () => {
             <SwiperSlide key={index}>
               <div className="relative w-full h-full">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="text-white  text-center font-light   animate-fade-in max-w-[80%]">
+                  <p className="text-white  text-center font-light   animate-fade-in max-w-[80%] line-clamp-5">
                     {item}
                   </p>
                 </div>

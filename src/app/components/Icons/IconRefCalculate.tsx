@@ -7,6 +7,7 @@ const IconRefCalculate = () => {
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 66.4 66.4"
+      className="w-20 h-20"
     >
       <g id="MainScroll">
         <g id="_6_Icons02" data-name="6_Icons02">

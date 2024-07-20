@@ -16,26 +16,28 @@ const HomePagePriceOffer = ({
   button_vypocet,
 }: Props) => {
   return (
-    <div className="relative h-[600px] w-full">
+    <div className="relative h-[600px] 3xl:h-[900px] w-full">
       <Image
         src="/cenova_ponuka.jpg"
         alt="Obrazok"
         layout="fill"
-        objectFit="cover"
+        objectFit="cover absolute"
         quality={100}
         className="z-0"
       />
 
       <IconCalculatePriceOffer />
-      <button className="btn btn--secondary absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20">
-        {button_vypocet}
-      </button>
 
       <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
-      <div className="absolute inset-0 flex flex-col justify-center  text-white z-10 p-4   main_section">
-        <h5 className="text-2xl font-bold mb-4">{nadpis}</h5>
-        <p className="mb-4">{popis1}</p>
-        <p>{popis2}</p>
+      <div className="relative inset-0 flex flex-col justify-center  text-white z-10 p-4   main_section">
+        <h3 className="uppercase  custom-underline mb-[46px] text-white">
+          {nadpis}
+        </h3>
+        <p className="mb-4 md:max-w-[50%]">{popis1}</p>
+        <p className="md:max-w-[50%]">{popis2}</p>
+        <button className="btn btn--secondary relative z-20 uppercase">
+          {button_vypocet}
+        </button>
       </div>
     </div>
   );
