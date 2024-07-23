@@ -139,3 +139,22 @@ export interface FooterItem {
 export interface Footers {
   [key: string]: FooterItem[];
 }
+
+export interface Slnolamy {
+  nadpis: string;
+  popis1: string;
+  popis2: string;
+  vlastnosti: string[];
+  nadpis_galeria: string;
+  nadpis_informacie: string;
+  popis_informacie_1: string;
+  info_variants: string[];
+  jazyk: string;
+  popis_informacie_2: string;
+  popis_informacie_3: string;
+  nadpis_vizualizacia: string;
+  popis_viz_1: string;
+  farba: string;
+  btn_ceny: string;
+  btn_kalukator: string;
+}
