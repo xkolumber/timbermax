@@ -6,7 +6,14 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
-import { Jazyk, Nacenovac, Sluzby, Team, TimbermaxLike } from "./interface";
+import {
+  Gallery,
+  Jazyk,
+  Nacenovac,
+  Sluzby,
+  Team,
+  TimbermaxLike,
+} from "./interface";
 
 const FormSchema = z.object({
   jazyk: z.string(),
@@ -815,6 +822,97 @@ export async function AdminAddPhotoGallery(
     return "success";
   } catch (error) {
     console.log(error);
+    return "false";
+  }
+}
+
+export async function AdminDeleteAlbum(id: string) {
+  try {
+    const db = getFirestore();
+    await db.collection("galeria").doc(id).delete();
+    revalidatePath(`/admin/galeria`);
+
+    return "success";
+  } catch (error) {
+    console.error("Database Error: Failed", error);
+    return "false";
+  }
+}
+
+export async function AdminDeleteImageFromAlbum(
+  id: string,
+  indexPhoto: number
+) {
+  try {
+    const docRef = firestore.collection("galeria").doc(id);
+    const docSnapshot = await docRef.get();
+
+    if (!docSnapshot.exists) {
+      console.error("Document not found.");
+      return "false";
+    }
+
+    const docData = docSnapshot.data();
+    const fotky = docData!.fotky as string[];
+
+    if (indexPhoto < 0 || indexPhoto >= fotky.length) {
+      console.error("Invalid photo index.");
+      return "false";
+    }
+    const new_fotky = fotky.filter((_, index) => index !== indexPhoto);
+
+    await docRef.update({
+      fotky: new_fotky,
+    });
+
+    revalidatePath("/admin/galeria");
+
+    return "success";
+  } catch (error) {
+    console.error("Database Error: Failed", error);
+    return "false";
+  }
+}
+
+export async function AdminActualizeAlbumGallery(
+  id: string,
+  photoUrls: string[],
+  fotky: string[],
+  kategorie: string[],
+  nazov: string
+) {
+  try {
+    const docRef = firestore.collection("galeria").doc(id);
+
+    const docSnapshot = await docRef.get();
+
+    if (!docSnapshot.exists) {
+      console.error("Document not found.");
+      return "false";
+    }
+
+    // const docData = docSnapshot.data();
+    // const fotky = docData!.fotky as string[];
+
+    const new_fotky: string[] = fotky;
+
+    if (photoUrls.length > 0) {
+      photoUrls.map((photo) => {
+        new_fotky.push(photo);
+      });
+    }
+
+    await docRef.update({
+      photoUrls: photoUrls,
+      fotky: new_fotky,
+      kategorie: kategorie,
+      nazov: nazov,
+    });
+
+    revalidatePath("/admin/galeria");
+    return "success";
+  } catch (error) {
+    console.error("Database Error: Failed", error);
     return "false";
   }
 }

@@ -1,14 +1,15 @@
 "use client";
 import { AdminAddPhotoGallery } from "@/app/lib/actions";
-import { CompressImages } from "@/app/lib/functionsClient";
+import { categories, CompressImages } from "@/app/lib/functionsClient";
 import { Gallery } from "@/app/lib/interface";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
-const page = () => {
+const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -106,16 +107,6 @@ const page = () => {
     });
   };
 
-  const categories = [
-    "terasy",
-    "fasady",
-    "bazeny",
-    "slnolamy",
-    "ploty",
-    "ostatne",
-  ];
-
-  console.log(actualizeGallery);
   return (
     <div className="main_section additional_padding min-h-screen">
       <Toaster />
@@ -180,4 +171,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -28,3 +28,12 @@ export async function CompressImages(files: FileList) {
     return null;
   }
 }
+
+export const categories = [
+  "terasy",
+  "fasady",
+  "bazeny",
+  "slnolamy",
+  "ploty",
+  "ostatne",
+];

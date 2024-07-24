@@ -165,3 +165,7 @@ export interface Gallery {
   nazov: string;
   id: string;
 }
+
+export interface IsLoadingMap {
+  [key: string]: boolean;
+}
