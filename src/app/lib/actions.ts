@@ -504,3 +504,76 @@ export async function AdminActualizePlotyPage(
   revalidatePath(`/admin/plory/[${jazyk}]/page`, "page");
   return "success";
 }
+
+export async function AdminActualizeOstatnePage(
+  nadpis: string,
+  popis1: string,
+  popis2: string,
+  vlastnosti: string[],
+  nadpis_galeria: string,
+  nadpis_informacie: string,
+  popis_informacie_1: string,
+  info_variants: string[],
+  jazyk: string,
+  popis_informacie_2: string,
+  popis_informacie_3: string,
+  nadpis_vizualizacia: string,
+  popis_viz_1: string,
+  farba: string,
+  btn_ceny: string,
+  btn_kalukator: string
+) {
+  const db = getFirestore();
+  const podstrankaCollectionRef = db.collection("ostatne");
+  const querySnapshot = await podstrankaCollectionRef
+    .where("jazyk", "==", jazyk)
+    .get();
+
+  if (querySnapshot.empty) {
+    console.error("Document does not exist for uid:");
+
+    await podstrankaCollectionRef.add({
+      nadpis: nadpis,
+      popis1: popis1,
+      popis2: popis2,
+      vlastnosti: vlastnosti,
+      nadpis_galeria: nadpis_galeria,
+      nadpis_informacie: nadpis_informacie,
+      popis_informacie_1: popis_informacie_1,
+      info_variants: info_variants,
+      jazyk: jazyk,
+      popis_informacie_2: popis_informacie_2,
+      popis_informacie_3: popis_informacie_3,
+      nadpis_vizualizacia: nadpis_vizualizacia,
+      popis_viz_1: popis_viz_1,
+      farba: farba,
+      btn_ceny: btn_ceny,
+      btn_kalukator: btn_kalukator,
+    });
+    return "success";
+  }
+
+  const doc = querySnapshot.docs[0];
+  const docId = doc.id;
+
+  await podstrankaCollectionRef.doc(docId).update({
+    nadpis: nadpis,
+    popis1: popis1,
+    popis2: popis2,
+    vlastnosti: vlastnosti,
+    nadpis_galeria: nadpis_galeria,
+    nadpis_informacie: nadpis_informacie,
+    popis_informacie_1: popis_informacie_1,
+    info_variants: info_variants,
+    jazyk: jazyk,
+    popis_informacie_2: popis_informacie_2,
+    popis_informacie_3: popis_informacie_3,
+    nadpis_vizualizacia: nadpis_vizualizacia,
+    popis_viz_1: popis_viz_1,
+    farba: farba,
+    btn_ceny: btn_ceny,
+    btn_kalukator: btn_kalukator,
+  });
+  revalidatePath(`/admin/plory/[${jazyk}]/page`, "page");
+  return "success";
+}
