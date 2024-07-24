@@ -21,19 +21,23 @@ const Page = () => {
     id: "",
   });
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [photoLoading, setPhotoLoading] = useState(false);
 
   const handlePhotosLoad = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const files = event.target.files;
+    setPhotoLoading(true);
 
     if (files && files.length > 0) {
       const compressedFiles = await CompressImages(files);
 
       if (compressedFiles === null) {
         toast.error("Pri načítaní obrázku nastala chyba. Kontaktujte nás.");
+        setPhotoLoading(false);
       } else {
         setProjectPhotos(compressedFiles);
+        setPhotoLoading(false);
       }
     }
   };
@@ -154,7 +158,16 @@ const Page = () => {
           onChange={(event) => handlePhotosLoad(event)}
           required
         />
-        <button className="btn btn--primary" type="submit" disabled={isLoading}>
+        {photoLoading && (
+          <ClipLoader size={20} color={"#32a8a0"} loading={true} className="" />
+        )}
+        <button
+          className={`btn btn--primary ${
+            (photoLoading || isLoading) && "disabledBtn"
+          }`}
+          type="submit"
+          disabled={photoLoading || isLoading}
+        >
           {isLoading ? (
             <ClipLoader
               size={20}

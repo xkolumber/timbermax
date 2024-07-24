@@ -363,7 +363,7 @@ const AdminGallery = ({ data }: Props) => {
               )}
             </div>
             <button
-              className={`btn btn--primary ${photoLoading && "disabledBtn"}`}
+              className={`btn btn--primary `}
               onClick={() => handleEditAlbumFirebase()}
               disabled={isLoadingMap[`actualize_album`] || photoLoading}
             >
