@@ -49,32 +49,32 @@ export const navbar_sk: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Terasy",
-        link: "sluzby/terasy",
+        link: "/sluzby/terasy",
         icon: <IconTerasa />,
       },
       {
         nazov: "Fasády",
-        link: "sluzby/fasady",
+        link: "/sluzby/fasady",
         icon: <IconFasady />,
       },
       {
         nazov: "Bazény",
-        link: "sluzby/bazeny",
+        link: "/sluzby/bazeny",
         icon: <IconBazeny />,
       },
       {
         nazov: "Slnolamy",
-        link: "sluzby/slnolamy",
+        link: "/sluzby/slnolamy",
         icon: <IconSlnolamy />,
       },
       {
         nazov: "Ploty",
-        link: "sluzby/ploty",
+        link: "/sluzby/ploty",
         icon: <IconPloty />,
       },
       {
         nazov: "Ostatné",
-        link: "sluzby/ostatne",
+        link: "/sluzby/ostatne",
         icon: <IconOstatne />,
       },
     ],
