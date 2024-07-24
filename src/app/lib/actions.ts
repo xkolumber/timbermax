@@ -2,11 +2,11 @@
 
 import { getFirestore } from "firebase-admin/firestore";
 import { revalidatePath, unstable_noStore } from "next/cache";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
 import { Jazyk, Nacenovac, Sluzby, Team, TimbermaxLike } from "./interface";
-import { cookies } from "next/headers";
 
 const FormSchema = z.object({
   jazyk: z.string(),
@@ -742,7 +742,6 @@ export async function AdminActualizeFasadyPage(
   btn_ceny: string,
   btn_kalukator: string
 ) {
-  console.log(jazyk);
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("fasady");
   const querySnapshot = await podstrankaCollectionRef
@@ -796,4 +795,26 @@ export async function AdminActualizeFasadyPage(
   });
   revalidatePath(`/admin/fasady/[${jazyk}]/page`, "page");
   return "success";
+}
+
+export async function AdminAddPhotoGallery(
+  fotky: string[],
+  kategorie: string[],
+  nazov: string
+) {
+  const db = getFirestore();
+  const couponCollectionRef = db.collection("galeria");
+
+  try {
+    await couponCollectionRef.add({
+      fotky: fotky,
+      nazov: nazov,
+      kategorie: kategorie,
+    });
+    revalidatePath(`/admin/galeria/novy-album`);
+    return "success";
+  } catch (error) {
+    console.log(error);
+    return "false";
+  }
 }

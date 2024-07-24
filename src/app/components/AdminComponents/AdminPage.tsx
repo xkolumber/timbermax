@@ -176,6 +176,9 @@ const AdminPage = ({ languages }: Props) => {
               ))}
           </div>
         </div>
+        <Link className=" btn btn--primary" href="/admin/galeria">
+          Galéria
+        </Link>
       </div>
     </div>
   );

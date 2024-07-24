@@ -158,3 +158,9 @@ export interface Slnolamy {
   btn_ceny: string;
   btn_kalukator: string;
 }
+
+export interface Gallery {
+  fotky: string[];
+  kategorie: string[];
+  nazov: string;
+}
