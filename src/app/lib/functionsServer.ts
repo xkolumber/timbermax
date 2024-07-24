@@ -5,6 +5,7 @@ import { firestore } from "./firebaseServer";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import {
   AboutUsElements,
+  Gallery,
   HomePageElements,
   MoreAboutTimElements,
   PriceOffer,
@@ -235,5 +236,32 @@ export async function GetAdminPriceOffer(language: string) {
     return orderData;
   } catch (error) {
     return null;
+  }
+}
+
+export async function GetAdminGallery() {
+  unstable_noStore();
+  const galleryCollectionRef = firestore.collection("galeria");
+
+  try {
+    const querySnapshot = await galleryCollectionRef.get();
+
+    if (querySnapshot.empty) {
+      return [];
+    }
+    const dataGallery: Gallery[] = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        fotky: data.fotky,
+        kategorie: data.kategorie,
+        nazov: data.nazov,
+        id: doc.id,
+      } as Gallery;
+    });
+
+    return dataGallery;
+  } catch (error) {
+    console.error("Database Error: Failed to fetch orders.", error);
+    throw new Error("Database Error: Failed to fetch orders.");
   }
 }

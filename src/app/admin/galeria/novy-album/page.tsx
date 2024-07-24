@@ -3,6 +3,7 @@ import { AdminAddPhotoGallery } from "@/app/lib/actions";
 import { CompressImages } from "@/app/lib/functionsClient";
 import { Gallery } from "@/app/lib/interface";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import Link from "next/link";
 import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -16,6 +17,7 @@ const page = () => {
     fotky: [],
     kategorie: [],
     nazov: "",
+    id: "",
   });
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
@@ -117,6 +119,9 @@ const page = () => {
   return (
     <div className="main_section additional_padding min-h-screen">
       <Toaster />
+      <Link href={"/admin/galeria"}>
+        <p className="hover:underline ease-in text-black">Späť</p>
+      </Link>
       <form onSubmit={handleAddGalleryFirebase}>
         <h3>Pridanie nového albumu</h3>
 

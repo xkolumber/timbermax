@@ -163,4 +163,5 @@ export interface Gallery {
   fotky: string[];
   kategorie: string[];
   nazov: string;
+  id: string;
 }
