@@ -1,9 +1,10 @@
+import AdminBazeny from "@/app/components/AdminComponents/AdminBazeny";
 import AdminFinalNotAuthorized from "@/app/components/AdminComponents/AdminFinalNotAuthorized";
 import AdminNotAuthorized from "@/app/components/AdminComponents/AdminNotAuthorized";
 import AdminOstatne from "@/app/components/AdminComponents/AdminOstatne";
 import AdminPageSkeleton from "@/app/components/AdminComponents/AdminPageSkeleton";
 import { GetLanguages, getToken } from "@/app/lib/actions";
-import { GetAdminOstatne } from "@/app/lib/functionsServer";
+import { GetAdminBazeny, GetAdminOstatne } from "@/app/lib/functionsServer";
 import jwt from "jsonwebtoken";
 import { Suspense } from "react";
 
@@ -23,19 +24,15 @@ async function Validate(language: string) {
   if (browser_uid === process.env.ADMIN_UID) {
     const languages = await GetLanguages();
 
-    const data = await GetAdminOstatne(language);
+    const data = await GetAdminBazeny(language);
     if (data) {
       return (
-        <AdminOstatne language={language} data={data} languages={languages} />
+        <AdminBazeny language={language} data={data} languages={languages} />
       );
     }
 
     return (
-      <AdminOstatne
-        language={language}
-        data={undefined}
-        languages={languages}
-      />
+      <AdminBazeny language={language} data={undefined} languages={languages} />
     );
   } else {
     return <AdminFinalNotAuthorized />;

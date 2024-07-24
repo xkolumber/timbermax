@@ -1,5 +1,8 @@
 "use client";
-import { AdminActualizeOstatnePage } from "@/app/lib/actions";
+import {
+  AdminActualizeBazenyPage,
+  AdminActualizeOstatnePage,
+} from "@/app/lib/actions";
 import {
   empty_five_values,
   empty_three_values,
@@ -18,9 +21,8 @@ interface Props {
   languages: Jazyk[];
 }
 
-const AdminOstatne = ({ language, data, languages }: Props) => {
+const AdminBazeny = ({ language, data, languages }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [randomArray, setRandomArray] = useState<string[]>([""]);
   const pathname = usePathname();
 
   const [actualizeData, setActualizeData] = useState<Slnolamy>({
@@ -112,7 +114,7 @@ const AdminOstatne = ({ language, data, languages }: Props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await AdminActualizeOstatnePage(
+    const response = await AdminActualizeBazenyPage(
       actualizeData.nadpis,
       actualizeData.popis1,
       actualizeData.popis2,
@@ -146,7 +148,7 @@ const AdminOstatne = ({ language, data, languages }: Props) => {
       </Link>
 
       <form className="products_admin" onSubmit={handleSaveProduct}>
-        <h4>Sekcia Ostatné</h4>
+        <h4>Sekcia Bazény</h4>
         <div className="flex flex-row gap-4">
           {languages.map((one_lang, index) => (
             <Link
@@ -349,4 +351,4 @@ const AdminOstatne = ({ language, data, languages }: Props) => {
   );
 };
 
-export default AdminOstatne;
+export default AdminBazeny;
