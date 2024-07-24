@@ -11,6 +11,7 @@ import {
   PriceOffer,
   Slnolamy,
 } from "./interface";
+import getBase64 from "./functions";
 
 export async function GetAdminHomePage(language: string) {
   unstable_noStore();
@@ -240,6 +241,8 @@ export async function GetAdminPriceOffer(language: string) {
 }
 
 export async function GetAdminGallery() {
+  // const myBlurDataUrl = await getBase64(`${process.env.URL}/blur.png`);
+  // console.log(myBlurDataUrl);
   unstable_noStore();
   const galleryCollectionRef = firestore.collection("galeria");
 

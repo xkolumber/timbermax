@@ -891,9 +891,6 @@ export async function AdminActualizeAlbumGallery(
       return "false";
     }
 
-    // const docData = docSnapshot.data();
-    // const fotky = docData!.fotky as string[];
-
     const new_fotky: string[] = fotky;
 
     if (photoUrls.length > 0) {

@@ -30,6 +30,7 @@ const AdminGallery = ({ data }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [photoLoading, setPhotoLoading] = useState(false);
 
   const handleDeleteWindow = (id: string, title: string) => {
     setIdAlbum(id);
@@ -184,14 +185,17 @@ const AdminGallery = ({ data }: Props) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const files = event.target.files;
+    setPhotoLoading(true);
 
     if (files && files.length > 0) {
       const compressedFiles = await CompressImages(files);
 
       if (compressedFiles === null) {
         toast.error("Pri načítaní obrázku nastala chyba. Kontaktujte nás.");
+        setPhotoLoading(false);
       } else {
         setProjectPhotos(compressedFiles);
+        setPhotoLoading(false);
       }
     }
   };
@@ -274,7 +278,7 @@ const AdminGallery = ({ data }: Props) => {
         <>
           {" "}
           <div className="behind_card_background"></div>
-          <div className="popup_message  overflow-x-auto">
+          <div className="popup_message  !max-w-none overflow-x-auto">
             <div className="" onClick={() => setEditAlbum(false)}>
               <IconCloseButton />
             </div>{" "}
@@ -292,7 +296,7 @@ const AdminGallery = ({ data }: Props) => {
                 required
               />
             </div>
-            <div className="flex flex-row gap-4 justify-center mt-4">
+            <div className="flex flex-wrap gap-4 mt-4">
               {actualizeGallery.fotky.map((foto, index_foto) => (
                 <div
                   className="flex flex-col justify-center items-center"
@@ -349,11 +353,19 @@ const AdminGallery = ({ data }: Props) => {
                 onChange={(event) => handlePhotosLoad(event)}
                 required
               />
+              {photoLoading && (
+                <ClipLoader
+                  size={20}
+                  color={"#32a8a0"}
+                  loading={true}
+                  className=""
+                />
+              )}
             </div>
             <button
-              className="btn btn--primary"
+              className={`btn btn--primary ${photoLoading && "disabledBtn"}`}
               onClick={() => handleEditAlbumFirebase()}
-              disabled={isLoadingMap[`actualize_album`]}
+              disabled={isLoadingMap[`actualize_album`] || photoLoading}
             >
               {isLoadingMap[`actualize_album`] ? (
                 <ClipLoader

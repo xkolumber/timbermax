@@ -1,6 +1,4 @@
-import React from "react";
 import HomePageLoop from "./HomePageLoop";
-import getBase64 from "@/app/lib/functions";
 
 interface Props {
   button: string | undefined;
