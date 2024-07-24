@@ -2,8 +2,9 @@ import AdminFinalNotAuthorized from "@/app/components/AdminComponents/AdminFinal
 import AdminNotAuthorized from "@/app/components/AdminComponents/AdminNotAuthorized";
 import AdminPageSkeleton from "@/app/components/AdminComponents/AdminPageSkeleton";
 import AdminSlnolamy from "@/app/components/AdminComponents/AdminSlnolamy";
+import AdminTerasy from "@/app/components/AdminComponents/AdminTerasy";
 import { GetLanguages, getToken } from "@/app/lib/actions";
-import { GetAdminSlnolamy } from "@/app/lib/functionsServer";
+import { GetAdminSlnolamy, GetAdminTerasy } from "@/app/lib/functionsServer";
 import jwt from "jsonwebtoken";
 import { Suspense } from "react";
 
@@ -23,20 +24,16 @@ async function Validate(language: string) {
   if (browser_uid === process.env.ADMIN_UID) {
     const languages = await GetLanguages();
 
-    const data = await GetAdminSlnolamy(language);
+    const data = await GetAdminTerasy(language);
     if (data) {
       return (
-        <AdminSlnolamy language={language} data={data} languages={languages} />
+        <AdminTerasy language={language} data={data} languages={languages} />
       );
     }
     //opravit na tersay
 
     return (
-      <AdminSlnolamy
-        language={language}
-        data={undefined}
-        languages={languages}
-      />
+      <AdminTerasy language={language} data={undefined} languages={languages} />
     );
   } else {
     return <AdminFinalNotAuthorized />;
