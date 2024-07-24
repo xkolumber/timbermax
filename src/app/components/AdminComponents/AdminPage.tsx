@@ -7,12 +7,48 @@ interface Props {
   languages: Jazyk[];
 }
 
+const services_elements = [
+  {
+    nazov: "Terasy",
+    slug: "terasy",
+  },
+  {
+    nazov: "Fasády",
+    slug: "fasady",
+  },
+  {
+    nazov: "Bazény",
+    slug: "bazeny",
+  },
+  {
+    nazov: "Slnolamy",
+    slug: "slnolamy",
+  },
+  {
+    nazov: "Ploty",
+    slug: "ploty",
+  },
+  {
+    nazov: "Ostatné",
+    slug: "ostatne",
+  },
+];
+
 const AdminPage = ({ languages }: Props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isClicked2, setIsClicked2] = useState(false);
   const [isClicked3, setIsClicked3] = useState(false);
   const [isClicked4, setIsClicked4] = useState(false);
   const [isClicked5, setIsClicked5] = useState(false);
+  const [servicesClicked, setServicesClicked] = useState(false);
+  const [certainServiceClicked, setCertainServiceClicked] = useState(-1);
+  const [certainServiceSlug, setCertainServiceSlug] = useState("");
+
+  const handleServiceClicked = (index: number, slug: string) => {
+    setCertainServiceClicked(index);
+    setCertainServiceSlug(slug);
+  };
+
   return (
     <div className="min-h-screen main_section additional_padding">
       <h2>Admin Zóna</h2>
@@ -100,20 +136,43 @@ const AdminPage = ({ languages }: Props) => {
         <div className="flex flex-col">
           <button
             className=" btn btn--primary"
-            onClick={() => setIsClicked5((prevState) => !prevState)}
+            onClick={() => setServicesClicked((prevState) => !prevState)}
           >
-            Slnolamy
+            Služby
           </button>
           <div className="flex flex-col w-[150px]">
-            {isClicked5 &&
-              languages.map((language, index) => (
-                <Link
-                  className="index p-4 bg-white text-black cursor-pointer hover:bg-gray-500 duration-200"
-                  key={index}
-                  href={`/admin/slnolamy/${language.jazyk}`}
+            {servicesClicked &&
+              services_elements.map((service, serviceIndex) => (
+                <div
+                  className="relative flex flex-row w-full"
+                  key={serviceIndex}
                 >
-                  {language.jazyk}
-                </Link>
+                  <div
+                    className={`p-4  text-black cursor-pointer hover:bg-gray-300 duration-200 w-[600px] ${
+                      service.slug === certainServiceSlug
+                        ? "bg-gray-200"
+                        : "bg-white"
+                    }`}
+                    onClick={() =>
+                      handleServiceClicked(serviceIndex, service.slug)
+                    }
+                  >
+                    {service.nazov}
+                  </div>
+                  {certainServiceClicked === serviceIndex && (
+                    <div className="flex flex-col absolute left-[160px]">
+                      {languages.map((language, languageIndex) => (
+                        <Link
+                          className="p-4 bg-white text-black cursor-pointer hover:bg-gray-300 duration-200"
+                          key={languageIndex}
+                          href={`/admin/${certainServiceSlug}/${language.jazyk}`}
+                        >
+                          {language.jazyk}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
           </div>
         </div>

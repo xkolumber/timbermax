@@ -429,9 +429,14 @@ a {
 .additional_padding {
   padding-top: 10rem !important;
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .additional_padding {
     padding-top: 15rem !important;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .additional_padding {
+    padding-top: 19rem !important;
   }
 }
 @media screen and (min-width: 1836px) {

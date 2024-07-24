@@ -102,6 +102,29 @@ export async function GetAdminSlnolamy(language: string) {
   }
 }
 
+export async function GetAdminPloty(language: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore();
+    const podstrankaCollectionRef = db.collection("ploty");
+    const querySnapshot = await podstrankaCollectionRef
+      .where("jazyk", "==", language)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error("Document does not exist for uid:", language);
+      return null;
+    }
+    const doc = querySnapshot.docs[0];
+    const orderData = doc.data() as Slnolamy;
+
+    return orderData;
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function GetAdminPriceOffer(language: string) {
   unstable_noStore();
 
