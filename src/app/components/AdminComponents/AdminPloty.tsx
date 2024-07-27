@@ -1,15 +1,11 @@
 "use client";
-import {
-  AdminActualizeAboutUsPage,
-  AdminActualizePlotyPage,
-  AdminActualizeSlnolamyPage,
-} from "@/app/lib/actions";
+import { AdminActualizePlotyPage } from "@/app/lib/actions";
 import {
   empty_five_values,
   empty_three_values,
   getSecondPathValue,
 } from "@/app/lib/functionsClient";
-import { AboutUsElements, Jazyk, Slnolamy } from "@/app/lib/interface";
+import { Jazyk, Ploty } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -18,7 +14,7 @@ import { ClipLoader } from "react-spinners";
 
 interface Props {
   language: string;
-  data: Slnolamy | undefined;
+  data: Ploty | undefined;
   languages: Jazyk[];
 }
 
@@ -27,7 +23,7 @@ const AdminPloty = ({ language, data, languages }: Props) => {
   const [randomArray, setRandomArray] = useState<string[]>([""]);
   const pathname = usePathname();
 
-  const [actualizeData, setActualizeData] = useState<Slnolamy>({
+  const [actualizeData, setActualizeData] = useState<Ploty>({
     nadpis: "",
     popis1: "",
     popis2: "",
@@ -37,13 +33,56 @@ const AdminPloty = ({ language, data, languages }: Props) => {
     popis_informacie_1: "",
     info_variants: empty_five_values,
     jazyk: language,
-    popis_informacie_2: "",
-    popis_informacie_3: "",
+    fareb_var_popis1: "",
+    fareb_var_popis2: "",
+    vlastnosti_popis1: "",
+    vlastnosti_popis2: "",
+    vlastnosti_popis3: "",
+    vlastnosti_popis4: "",
+    vlastnosti_nadpis_: "",
+    vlastnosti_popis5: "",
+    vlastnosti_popis6: "",
+    vlastnosti_popis7: "",
+    vlastnosti_popis8: "",
+    vlastnosti_btn_viac: "",
+    vlastnosti_btn_konkurencia: "",
+    montaz_nadpis: "",
+    montaz_popis1: "",
+    montaz_popis2: "",
+    montaz_popis3: "",
+    montaz_popis4: "",
+    montaz_nadpis_2: "",
+    montaz_nadpis_2_category: "",
+    montaz_nadpis_2_category_popis1: "",
+    montaz_nadpis_2_category_popis2: "",
+    montaz_nadpis_2_category_popis3: "",
+    montaz_nadpis_2_category2: "",
+    montaz_nadpis_2_category2_popis1: "",
+    montaz_nadpis_2_category2_popis2: "",
+    montaz_nadpis_2_category2_popis3: "",
+    montaz_nadpis_2_category2_popis4: "",
+    montaz_nadpis_2_category3: "",
+    montaz_nadpis_2_category3_popis1: "",
+    montaz_nadpis_2_category3_popis2: "",
+    montaz_nadpis_2_category3_popis3: "",
+    montaz_nadpis_2_category3_popis4: "",
+    montaz_nadpis_2_category4: "",
+    montaz_nadpis_2_category4_popis1: "",
+    montaz_nadpis_2_category4_popis2: "",
+    montaz_nadpis_2_category4_popis3: "",
+    profil_orientacia: "",
+    profil_popis1: "",
+    profil_popis2: "",
+    profil_popis3: "",
+    profil_popis4: "",
+    postup_popis: "",
+    postup_nacenovac: "",
+    nacenovac_sekcie: [],
     nadpis_vizualizacia: "",
     popis_viz_1: "",
     farba: "",
     btn_ceny: "",
-    btn_kalukator: "",
+    btn_kalkulator: "",
   });
 
   const handleChange = (
@@ -78,24 +117,126 @@ const AdminPloty = ({ language, data, languages }: Props) => {
             ? data.info_variants
             : empty_five_values,
         jazyk: language,
-        popis_informacie_2: data.popis_informacie_2
-          ? data.popis_informacie_2
+        fareb_var_popis1: data.fareb_var_popis1 ? data.fareb_var_popis1 : "",
+        fareb_var_popis2: data.fareb_var_popis2 ? data.fareb_var_popis2 : "",
+        vlastnosti_popis1: data.vlastnosti_popis1 ? data.vlastnosti_popis1 : "",
+        vlastnosti_popis2: data.vlastnosti_popis2 ? data.vlastnosti_popis2 : "",
+        vlastnosti_popis3: data.vlastnosti_popis3 ? data.vlastnosti_popis3 : "",
+        vlastnosti_popis4: data.vlastnosti_popis4 ? data.vlastnosti_popis4 : "",
+        vlastnosti_nadpis_: data.vlastnosti_nadpis_
+          ? data.vlastnosti_nadpis_
           : "",
-        popis_informacie_3: data.popis_informacie_3
-          ? data.popis_informacie_3
+        vlastnosti_popis5: data.vlastnosti_popis5 ? data.vlastnosti_popis5 : "",
+        vlastnosti_popis6: data.vlastnosti_popis6 ? data.vlastnosti_popis6 : "",
+        vlastnosti_popis7: data.vlastnosti_popis7 ? data.vlastnosti_popis7 : "",
+        vlastnosti_popis8: data.vlastnosti_popis8 ? data.vlastnosti_popis8 : "",
+        vlastnosti_btn_viac: data.vlastnosti_btn_viac
+          ? data.vlastnosti_btn_viac
           : "",
+        vlastnosti_btn_konkurencia: data.vlastnosti_btn_konkurencia
+          ? data.vlastnosti_btn_konkurencia
+          : "",
+        montaz_nadpis: data.montaz_nadpis ? data.montaz_nadpis : "",
+        montaz_popis1: data.montaz_popis1 ? data.montaz_popis1 : "",
+        montaz_popis2: data.montaz_popis2 ? data.montaz_popis2 : "",
+        montaz_popis3: data.montaz_popis3 ? data.montaz_popis3 : "",
+        montaz_popis4: data.montaz_popis4 ? data.montaz_popis4 : "",
+        montaz_nadpis_2: data.montaz_nadpis_2 ? data.montaz_nadpis_2 : "",
+        montaz_nadpis_2_category: data.montaz_nadpis_2_category
+          ? data.montaz_nadpis_2_category
+          : "",
+        montaz_nadpis_2_category_popis1: data.montaz_nadpis_2_category_popis1
+          ? data.montaz_nadpis_2_category_popis1
+          : "",
+        montaz_nadpis_2_category_popis2: data.montaz_nadpis_2_category_popis2
+          ? data.montaz_nadpis_2_category_popis2
+          : "",
+        montaz_nadpis_2_category_popis3: data.montaz_nadpis_2_category_popis3
+          ? data.montaz_nadpis_2_category_popis3
+          : "",
+        montaz_nadpis_2_category2: data.montaz_nadpis_2_category2
+          ? data.montaz_nadpis_2_category2
+          : "",
+        montaz_nadpis_2_category2_popis1: data.montaz_nadpis_2_category2_popis1
+          ? data.montaz_nadpis_2_category2_popis1
+          : "",
+        montaz_nadpis_2_category2_popis2: data.montaz_nadpis_2_category2_popis2
+          ? data.montaz_nadpis_2_category2_popis2
+          : "",
+        montaz_nadpis_2_category2_popis3: data.montaz_nadpis_2_category2_popis3
+          ? data.montaz_nadpis_2_category2_popis3
+          : "",
+        montaz_nadpis_2_category2_popis4: data.montaz_nadpis_2_category2_popis4
+          ? data.montaz_nadpis_2_category2_popis4
+          : "",
+        montaz_nadpis_2_category3: data.montaz_nadpis_2_category3
+          ? data.montaz_nadpis_2_category3
+          : "",
+        montaz_nadpis_2_category3_popis1: data.montaz_nadpis_2_category3_popis1
+          ? data.montaz_nadpis_2_category3_popis1
+          : "",
+        montaz_nadpis_2_category3_popis2: data.montaz_nadpis_2_category3_popis2
+          ? data.montaz_nadpis_2_category3_popis2
+          : "",
+        montaz_nadpis_2_category3_popis3: data.montaz_nadpis_2_category3_popis3
+          ? data.montaz_nadpis_2_category3_popis3
+          : "",
+        montaz_nadpis_2_category3_popis4: data.montaz_nadpis_2_category3_popis4
+          ? data.montaz_nadpis_2_category3_popis4
+          : "",
+        montaz_nadpis_2_category4: data.montaz_nadpis_2_category4
+          ? data.montaz_nadpis_2_category4
+          : "",
+        montaz_nadpis_2_category4_popis1: data.montaz_nadpis_2_category4_popis1
+          ? data.montaz_nadpis_2_category4_popis1
+          : "",
+        montaz_nadpis_2_category4_popis2: data.montaz_nadpis_2_category4_popis2
+          ? data.montaz_nadpis_2_category4_popis2
+          : "",
+        montaz_nadpis_2_category4_popis3: data.montaz_nadpis_2_category4_popis3
+          ? data.montaz_nadpis_2_category4_popis3
+          : "",
+        profil_orientacia: data.profil_orientacia ? data.profil_orientacia : "",
+        profil_popis1: data.profil_popis1 ? data.profil_popis1 : "",
+        profil_popis2: data.profil_popis2 ? data.profil_popis2 : "",
+        profil_popis3: data.profil_popis3 ? data.profil_popis3 : "",
+        profil_popis4: data.profil_popis4 ? data.profil_popis4 : "",
+        postup_popis: data.postup_popis ? data.postup_popis : "",
+        postup_nacenovac: data.postup_nacenovac ? data.postup_nacenovac : "",
+        nacenovac_sekcie: data.nacenovac_sekcie
+          ? data.nacenovac_sekcie
+          : Nacenovac,
         nadpis_vizualizacia: data.nadpis_vizualizacia
           ? data.nadpis_vizualizacia
           : "",
         popis_viz_1: data.popis_viz_1 ? data.popis_viz_1 : "",
         farba: data.farba ? data.farba : "",
         btn_ceny: data.btn_ceny ? data.btn_ceny : "",
-        btn_kalukator: data.btn_kalukator ? data.btn_kalukator : "",
+        btn_kalkulator: data.btn_kalkulator ? data.btn_kalkulator : "",
       }));
     }
   }, [data]);
 
-  console.log(data?.vlastnosti);
+  const Nacenovac = [
+    {
+      nadpis: "",
+      popis: "",
+      button: "",
+      link: "",
+    },
+    {
+      nadpis: "",
+      popis: "",
+      button: "",
+      link: "",
+    },
+    {
+      nadpis: "",
+      popis: "",
+      button: "",
+      link: "",
+    },
+  ];
 
   const handleChangeItemArray = (
     title: string,
@@ -103,8 +244,27 @@ const AdminPloty = ({ language, data, languages }: Props) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setActualizeData((prevData) => {
-      const updatedArray = [...(prevData[title as keyof Slnolamy] as string[])];
+      const updatedArray = [...(prevData[title as keyof Ploty] as string[])];
       updatedArray[index] = event.target.value;
+      return {
+        ...prevData,
+        [title]: updatedArray,
+      };
+    });
+  };
+
+  const handleChangeItemTwoArray = (
+    title: string,
+    index: number,
+    field: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setActualizeData((prevData) => {
+      const updatedArray = [...(prevData[title as keyof Ploty] as any[])];
+      updatedArray[index] = {
+        ...updatedArray[index],
+        [field]: event.target.value,
+      };
       return {
         ...prevData,
         [title]: updatedArray,
@@ -116,24 +276,7 @@ const AdminPloty = ({ language, data, languages }: Props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await AdminActualizePlotyPage(
-      actualizeData.nadpis,
-      actualizeData.popis1,
-      actualizeData.popis2,
-      actualizeData.vlastnosti,
-      actualizeData.nadpis_galeria,
-      actualizeData.nadpis_informacie,
-      actualizeData.popis_informacie_1,
-      actualizeData.info_variants,
-      language,
-      actualizeData.popis_informacie_2,
-      actualizeData.popis_informacie_3,
-      actualizeData.nadpis_vizualizacia,
-      actualizeData.popis_viz_1,
-      actualizeData.farba,
-      actualizeData.btn_ceny,
-      actualizeData.btn_kalukator
-    );
+    const response = await AdminActualizePlotyPage(actualizeData, language);
     setIsLoading(false);
     if (response === "success") {
       toast.success("Sekcia bola aktualizovaná");
@@ -261,24 +404,513 @@ const AdminPloty = ({ language, data, languages }: Props) => {
           </div>
         </div>
         <div className="product_admin_row">
-          <p>popis_informacie_2:</p>
+          <p>fareb_var_popis1:</p>
           <input
             type="text"
-            name="popis_informacie_2"
-            value={actualizeData.popis_informacie_2}
+            name="fareb_var_popis1"
+            value={actualizeData.fareb_var_popis1}
             onChange={handleChange}
             className="w-[400px]"
           />
         </div>
         <div className="product_admin_row">
-          <p>popis_informacie_3:</p>
+          <p>fareb_var_popis2:</p>
           <input
             type="text"
-            name="popis_informacie_3"
-            value={actualizeData.popis_informacie_3}
+            name="fareb_var_popis2"
+            value={actualizeData.fareb_var_popis2}
             onChange={handleChange}
             className="w-[400px]"
           />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis1:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis1"
+            value={actualizeData.vlastnosti_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis2:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis2"
+            value={actualizeData.vlastnosti_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis3:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis3"
+            value={actualizeData.vlastnosti_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis4:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis4"
+            value={actualizeData.vlastnosti_popis4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_nadpis_:</p>
+          <input
+            type="text"
+            name="vlastnosti_nadpis_"
+            value={actualizeData.vlastnosti_nadpis_}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis5:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis5"
+            value={actualizeData.vlastnosti_popis5}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis6:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis6"
+            value={actualizeData.vlastnosti_popis6}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis7:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis7"
+            value={actualizeData.vlastnosti_popis7}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_popis8:</p>
+          <input
+            type="text"
+            name="vlastnosti_popis8"
+            value={actualizeData.vlastnosti_popis8}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+
+        <div className="product_admin_row">
+          <p>vlastnosti_btn_viac:</p>
+          <input
+            type="text"
+            name="vlastnosti_btn_viac"
+            value={actualizeData.vlastnosti_btn_viac}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>vlastnosti_btn_konkurencia:</p>
+          <input
+            type="text"
+            name="vlastnosti_btn_konkurencia"
+            value={actualizeData.vlastnosti_btn_konkurencia}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+
+        <div className="product_admin_row">
+          <p>montaz_nadpis:</p>
+          <input
+            type="text"
+            name="montaz_nadpis"
+            value={actualizeData.montaz_nadpis}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_popis1:</p>
+          <input
+            type="text"
+            name="montaz_popis1"
+            value={actualizeData.montaz_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_popis2:</p>
+          <input
+            type="text"
+            name="montaz_popis2"
+            value={actualizeData.montaz_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_popis3:</p>
+          <input
+            type="text"
+            name="montaz_popis3"
+            value={actualizeData.montaz_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_popis4:</p>
+          <input
+            type="text"
+            name="montaz_popis4"
+            value={actualizeData.montaz_popis4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2"
+            value={actualizeData.montaz_nadpis_2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category"
+            value={actualizeData.montaz_nadpis_2_category}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category_popis1:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category_popis1"
+            value={actualizeData.montaz_nadpis_2_category_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category_popis2:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category_popis2"
+            value={actualizeData.montaz_nadpis_2_category_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category_popis3:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category_popis3"
+            value={actualizeData.montaz_nadpis_2_category_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category2:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category2"
+            value={actualizeData.montaz_nadpis_2_category2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category2_popis1:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category2_popis1"
+            value={actualizeData.montaz_nadpis_2_category2_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category2_popis2:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category2_popis2"
+            value={actualizeData.montaz_nadpis_2_category2_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category2_popis3:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category2_popis3"
+            value={actualizeData.montaz_nadpis_2_category2_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category2_popis4:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category2_popis4"
+            value={actualizeData.montaz_nadpis_2_category2_popis4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category3:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category3"
+            value={actualizeData.montaz_nadpis_2_category3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category3_popis1:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category3_popis1"
+            value={actualizeData.montaz_nadpis_2_category3_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category3_popis2:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category3_popis2"
+            value={actualizeData.montaz_nadpis_2_category3_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category3_popis3:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category3_popis3"
+            value={actualizeData.montaz_nadpis_2_category3_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category3_popis4:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category3_popis4"
+            value={actualizeData.montaz_nadpis_2_category3_popis4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category4:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category4"
+            value={actualizeData.montaz_nadpis_2_category4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category4_popis1:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category4_popis1"
+            value={actualizeData.montaz_nadpis_2_category4_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category4_popis2:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category4_popis2"
+            value={actualizeData.montaz_nadpis_2_category4_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>montaz_nadpis_2_category4_popis3:</p>
+          <input
+            type="text"
+            name="montaz_nadpis_2_category4_popis3"
+            value={actualizeData.montaz_nadpis_2_category4_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>profil_orientacia:</p>
+          <input
+            type="text"
+            name="profil_orientacia"
+            value={actualizeData.profil_orientacia}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>profil_popis1:</p>
+          <input
+            type="text"
+            name="profil_popis1"
+            value={actualizeData.profil_popis1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>profil_popis2:</p>
+          <input
+            type="text"
+            name="profil_popis2"
+            value={actualizeData.profil_popis2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>profil_popis3:</p>
+          <input
+            type="text"
+            name="profil_popis3"
+            value={actualizeData.profil_popis3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>profil_popis4:</p>
+          <input
+            type="text"
+            name="profil_popis4"
+            value={actualizeData.profil_popis4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>postup_popis:</p>
+          <input
+            type="text"
+            name="postup_popis"
+            value={actualizeData.postup_popis}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>postup_nacenovac:</p>
+          <input
+            type="text"
+            name="postup_nacenovac"
+            value={actualizeData.postup_nacenovac}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+
+        {/*nacenovac_sekcie */}
+        <div className="product_admin_row">
+          <p>nacenovac_sekcie:</p>
+          <div className="flex flex-col">
+            {actualizeData.nacenovac_sekcie.map((element, index) => (
+              <div key={index} className="flex flex-row gap-4">
+                <input
+                  type="text"
+                  name={`nacenovac_sekcie-${index}`}
+                  value={element.nadpis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "nacenovac_sekcie",
+                      index,
+                      "nadpis",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+                <input
+                  type="text"
+                  name={`nacenovac_sekcie-${index}`}
+                  value={element.popis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "nacenovac_sekcie",
+                      index,
+                      "popis",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+                <input
+                  type="text"
+                  name={`nacenovac_sekcie-${index}`}
+                  value={element.button}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "nacenovac_sekcie",
+                      index,
+                      "button",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+                <input
+                  type="text"
+                  name={`nacenovac_sekcie-${index}`}
+                  value={element.link}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "nacenovac_sekcie",
+                      index,
+                      "link",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="product_admin_row">
@@ -322,11 +954,11 @@ const AdminPloty = ({ language, data, languages }: Props) => {
           />
         </div>
         <div className="product_admin_row">
-          <p>btn_kalukator:</p>
+          <p>btn_kalkulator:</p>
           <input
             type="text"
-            name="btn_kalukator"
-            value={actualizeData.btn_kalukator}
+            name="btn_kalkulator"
+            value={actualizeData.btn_kalkulator}
             onChange={handleChange}
             className="w-[400px]"
           />

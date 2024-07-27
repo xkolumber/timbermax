@@ -8,6 +8,7 @@ import {
   Gallery,
   HomePageElements,
   MoreAboutTimElements,
+  Ploty,
   PriceOffer,
   Slnolamy,
 } from "./interface";
@@ -119,7 +120,7 @@ export async function GetAdminPloty(language: string) {
       return null;
     }
     const doc = querySnapshot.docs[0];
-    const orderData = doc.data() as Slnolamy;
+    const orderData = doc.data() as Ploty;
 
     return orderData;
   } catch (error) {

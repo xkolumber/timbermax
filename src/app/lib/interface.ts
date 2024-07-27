@@ -159,6 +159,68 @@ export interface Slnolamy {
   btn_kalukator: string;
 }
 
+export interface Ploty {
+  nadpis: string;
+  popis1: string;
+  popis2: string;
+  vlastnosti: string[];
+  nadpis_galeria: string;
+  nadpis_informacie: string;
+  popis_informacie_1: string;
+  info_variants: string[];
+  jazyk: string;
+  fareb_var_popis1: string;
+  fareb_var_popis2: string;
+  vlastnosti_popis1: string;
+  vlastnosti_popis2: string;
+  vlastnosti_popis3: string;
+  vlastnosti_popis4: string;
+  vlastnosti_nadpis_: string;
+  vlastnosti_popis5: string;
+  vlastnosti_popis6: string;
+  vlastnosti_popis7: string;
+  vlastnosti_popis8: string;
+  vlastnosti_btn_viac: string;
+  vlastnosti_btn_konkurencia: string;
+  montaz_nadpis: string;
+  montaz_popis1: string;
+  montaz_popis2: string;
+  montaz_popis3: string;
+  montaz_popis4: string;
+  montaz_nadpis_2: string;
+  montaz_nadpis_2_category: string;
+  montaz_nadpis_2_category_popis1: string;
+  montaz_nadpis_2_category_popis2: string;
+  montaz_nadpis_2_category_popis3: string;
+  montaz_nadpis_2_category2: string;
+  montaz_nadpis_2_category2_popis1: string;
+  montaz_nadpis_2_category2_popis2: string;
+  montaz_nadpis_2_category2_popis3: string;
+  montaz_nadpis_2_category2_popis4: string;
+  montaz_nadpis_2_category3: string;
+  montaz_nadpis_2_category3_popis1: string;
+  montaz_nadpis_2_category3_popis2: string;
+  montaz_nadpis_2_category3_popis3: string;
+  montaz_nadpis_2_category3_popis4: string;
+  montaz_nadpis_2_category4: string;
+  montaz_nadpis_2_category4_popis1: string;
+  montaz_nadpis_2_category4_popis2: string;
+  montaz_nadpis_2_category4_popis3: string;
+  profil_orientacia: string;
+  profil_popis1: string;
+  profil_popis2: string;
+  profil_popis3: string;
+  profil_popis4: string;
+  postup_popis: string;
+  postup_nacenovac: string;
+  nacenovac_sekcie: Nacenovac[];
+  nadpis_vizualizacia: string;
+  popis_viz_1: string;
+  farba: string;
+  btn_ceny: string;
+  btn_kalkulator: string;
+}
+
 export interface Gallery {
   fotky: string[];
   kategorie: string[];
