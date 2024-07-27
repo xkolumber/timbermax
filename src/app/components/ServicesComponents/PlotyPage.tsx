@@ -1,5 +1,5 @@
 "use client";
-import { Slnolamy } from "@/app/lib/interface";
+import { Ploty, Slnolamy } from "@/app/lib/interface";
 
 import Image from "next/image";
 
@@ -53,7 +53,7 @@ const icon_text = [
 ];
 
 interface Props {
-  data: Slnolamy | undefined;
+  data: Ploty | undefined;
 }
 
 const PlotyPage = ({ data }: Props) => {
@@ -125,10 +125,10 @@ const PlotyPage = ({ data }: Props) => {
             ))}
           </div>
         </div>
-        <div className="main_section">
+        {/* <div className="main_section">
           <p className="text-tertiary">{data?.popis_informacie_2}</p>
           <p className="text-tertiary">{data?.popis_informacie_3}</p>
-        </div>
+        </div> */}
       </div>
 
       <Image

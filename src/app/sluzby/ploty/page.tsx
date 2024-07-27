@@ -1,6 +1,6 @@
 import PlotyPage from "@/app/components/ServicesComponents/PlotyPage";
 import { GetAdminPloty } from "@/app/lib/functionsServer";
-import { Slnolamy } from "@/app/lib/interface";
+import { Ploty, Slnolamy } from "@/app/lib/interface";
 import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -28,7 +28,7 @@ async function GetData() {
 }
 
 export default async function Page() {
-  const data: Slnolamy | undefined = await GetData();
+  const data: Ploty | undefined = await GetData();
   return (
     <main>
       <PlotyPage data={data} />
