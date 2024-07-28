@@ -7,12 +7,16 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
 import {
+  Bazeny,
   Gallery,
   Jazyk,
   Nacenovac,
+  Ostatne,
   Ploty,
+  Slnolamy,
   Sluzby,
   Team,
+  Terasy,
   TimbermaxLike,
 } from "./interface";
 
@@ -368,22 +372,8 @@ export async function AdminActualizePriceOffer(
 }
 
 export async function AdminActualizeSlnolamyPage(
-  nadpis: string,
-  popis1: string,
-  popis2: string,
-  vlastnosti: string[],
-  nadpis_galeria: string,
-  nadpis_informacie: string,
-  popis_informacie_1: string,
-  info_variants: string[],
-  jazyk: string,
-  popis_informacie_2: string,
-  popis_informacie_3: string,
-  nadpis_vizualizacia: string,
-  popis_viz_1: string,
-  farba: string,
-  btn_ceny: string,
-  btn_kalukator: string
+  actualizeData: Slnolamy,
+  jazyk: string
 ) {
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("slnolamy");
@@ -395,22 +385,79 @@ export async function AdminActualizeSlnolamyPage(
     console.error("Document does not exist for uid:");
 
     await podstrankaCollectionRef.add({
-      nadpis: nadpis,
-      popis1: popis1,
-      popis2: popis2,
-      vlastnosti: vlastnosti,
-      nadpis_galeria: nadpis_galeria,
-      nadpis_informacie: nadpis_informacie,
-      popis_informacie_1: popis_informacie_1,
-      info_variants: info_variants,
+      nadpis: actualizeData.nadpis,
+      popis1: actualizeData.popis1,
+      popis2: actualizeData.popis2,
+      vlastnosti: actualizeData.vlastnosti,
+      nadpis_galeria: actualizeData.nadpis_galeria,
+      nadpis_informacie: actualizeData.nadpis_informacie,
+      popis_informacie_1: actualizeData.popis_informacie_1,
+      info_variants: actualizeData.info_variants,
       jazyk: jazyk,
-      popis_informacie_2: popis_informacie_2,
-      popis_informacie_3: popis_informacie_3,
-      nadpis_vizualizacia: nadpis_vizualizacia,
-      popis_viz_1: popis_viz_1,
-      farba: farba,
-      btn_ceny: btn_ceny,
-      btn_kalukator: btn_kalukator,
+      fareb_var_popis1: actualizeData.fareb_var_popis1,
+      fareb_var_popis2: actualizeData.fareb_var_popis2,
+      vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+      vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+      vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+      vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+      vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+      vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+      vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+      vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+      vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+      vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+      vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+      montaz_nadpis: actualizeData.montaz_nadpis,
+      montaz_popis1: actualizeData.montaz_popis1,
+      montaz_popis2: actualizeData.montaz_popis2,
+      montaz_popis3: actualizeData.montaz_popis3,
+      montaz_popis4: actualizeData.montaz_popis4,
+      montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+      montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+      montaz_nadpis_2_category_popis1:
+        actualizeData.montaz_nadpis_2_category_popis1,
+      montaz_nadpis_2_category_popis2:
+        actualizeData.montaz_nadpis_2_category_popis2,
+      montaz_nadpis_2_category_popis3:
+        actualizeData.montaz_nadpis_2_category_popis3,
+      montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+      montaz_nadpis_2_category2_popis1:
+        actualizeData.montaz_nadpis_2_category2_popis1,
+      montaz_nadpis_2_category2_popis2:
+        actualizeData.montaz_nadpis_2_category2_popis2,
+      montaz_nadpis_2_category2_popis3:
+        actualizeData.montaz_nadpis_2_category2_popis3,
+      montaz_nadpis_2_category2_popis4:
+        actualizeData.montaz_nadpis_2_category2_popis4,
+      montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+      montaz_nadpis_2_category3_popis1:
+        actualizeData.montaz_nadpis_2_category3_popis1,
+      montaz_nadpis_2_category3_popis2:
+        actualizeData.montaz_nadpis_2_category3_popis2,
+      montaz_nadpis_2_category3_popis3:
+        actualizeData.montaz_nadpis_2_category3_popis3,
+      montaz_nadpis_2_category3_popis4:
+        actualizeData.montaz_nadpis_2_category3_popis4,
+      montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+      montaz_nadpis_2_category4_popis1:
+        actualizeData.montaz_nadpis_2_category4_popis1,
+      montaz_nadpis_2_category4_popis2:
+        actualizeData.montaz_nadpis_2_category4_popis2,
+      montaz_nadpis_2_category4_popis3:
+        actualizeData.montaz_nadpis_2_category4_popis3,
+      profil_orientacia: actualizeData.profil_orientacia,
+      profil_popis1: actualizeData.profil_popis1,
+      profil_popis2: actualizeData.profil_popis2,
+      profil_popis3: actualizeData.profil_popis3,
+      profil_popis4: actualizeData.profil_popis4,
+      postup_popis: actualizeData.postup_popis,
+      postup_nacenovac: actualizeData.postup_nacenovac,
+      nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+      nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+      popis_viz_1: actualizeData.popis_viz_1,
+      farba: actualizeData.farba,
+      btn_ceny: actualizeData.btn_ceny,
+      btn_kalkulator: actualizeData.btn_kalkulator,
     });
     return "success";
   }
@@ -419,22 +466,79 @@ export async function AdminActualizeSlnolamyPage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    nadpis: nadpis,
-    popis1: popis1,
-    popis2: popis2,
-    vlastnosti: vlastnosti,
-    nadpis_galeria: nadpis_galeria,
-    nadpis_informacie: nadpis_informacie,
-    popis_informacie_1: popis_informacie_1,
-    info_variants: info_variants,
+    nadpis: actualizeData.nadpis,
+    popis1: actualizeData.popis1,
+    popis2: actualizeData.popis2,
+    vlastnosti: actualizeData.vlastnosti,
+    nadpis_galeria: actualizeData.nadpis_galeria,
+    nadpis_informacie: actualizeData.nadpis_informacie,
+    popis_informacie_1: actualizeData.popis_informacie_1,
+    info_variants: actualizeData.info_variants,
     jazyk: jazyk,
-    popis_informacie_2: popis_informacie_2,
-    popis_informacie_3: popis_informacie_3,
-    nadpis_vizualizacia: nadpis_vizualizacia,
-    popis_viz_1: popis_viz_1,
-    farba: farba,
-    btn_ceny: btn_ceny,
-    btn_kalukator: btn_kalukator,
+    fareb_var_popis1: actualizeData.fareb_var_popis1,
+    fareb_var_popis2: actualizeData.fareb_var_popis2,
+    vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+    vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+    vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+    vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+    vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+    vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+    vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+    vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+    vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+    vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+    vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+    montaz_nadpis: actualizeData.montaz_nadpis,
+    montaz_popis1: actualizeData.montaz_popis1,
+    montaz_popis2: actualizeData.montaz_popis2,
+    montaz_popis3: actualizeData.montaz_popis3,
+    montaz_popis4: actualizeData.montaz_popis4,
+    montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+    montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+    montaz_nadpis_2_category_popis1:
+      actualizeData.montaz_nadpis_2_category_popis1,
+    montaz_nadpis_2_category_popis2:
+      actualizeData.montaz_nadpis_2_category_popis2,
+    montaz_nadpis_2_category_popis3:
+      actualizeData.montaz_nadpis_2_category_popis3,
+    montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+    montaz_nadpis_2_category2_popis1:
+      actualizeData.montaz_nadpis_2_category2_popis1,
+    montaz_nadpis_2_category2_popis2:
+      actualizeData.montaz_nadpis_2_category2_popis2,
+    montaz_nadpis_2_category2_popis3:
+      actualizeData.montaz_nadpis_2_category2_popis3,
+    montaz_nadpis_2_category2_popis4:
+      actualizeData.montaz_nadpis_2_category2_popis4,
+    montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+    montaz_nadpis_2_category3_popis1:
+      actualizeData.montaz_nadpis_2_category3_popis1,
+    montaz_nadpis_2_category3_popis2:
+      actualizeData.montaz_nadpis_2_category3_popis2,
+    montaz_nadpis_2_category3_popis3:
+      actualizeData.montaz_nadpis_2_category3_popis3,
+    montaz_nadpis_2_category3_popis4:
+      actualizeData.montaz_nadpis_2_category3_popis4,
+    montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+    montaz_nadpis_2_category4_popis1:
+      actualizeData.montaz_nadpis_2_category4_popis1,
+    montaz_nadpis_2_category4_popis2:
+      actualizeData.montaz_nadpis_2_category4_popis2,
+    montaz_nadpis_2_category4_popis3:
+      actualizeData.montaz_nadpis_2_category4_popis3,
+    profil_orientacia: actualizeData.profil_orientacia,
+    profil_popis1: actualizeData.profil_popis1,
+    profil_popis2: actualizeData.profil_popis2,
+    profil_popis3: actualizeData.profil_popis3,
+    profil_popis4: actualizeData.profil_popis4,
+    postup_popis: actualizeData.postup_popis,
+    postup_nacenovac: actualizeData.postup_nacenovac,
+    nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+    nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+    popis_viz_1: actualizeData.popis_viz_1,
+    farba: actualizeData.farba,
+    btn_ceny: actualizeData.btn_ceny,
+    btn_kalkulator: actualizeData.btn_kalkulator,
   });
   revalidatePath(`/admin/slnolamy/[${jazyk}]/page`, "page");
   return "success";
@@ -614,22 +718,8 @@ export async function AdminActualizePlotyPage(
 }
 
 export async function AdminActualizeOstatnePage(
-  nadpis: string,
-  popis1: string,
-  popis2: string,
-  vlastnosti: string[],
-  nadpis_galeria: string,
-  nadpis_informacie: string,
-  popis_informacie_1: string,
-  info_variants: string[],
-  jazyk: string,
-  popis_informacie_2: string,
-  popis_informacie_3: string,
-  nadpis_vizualizacia: string,
-  popis_viz_1: string,
-  farba: string,
-  btn_ceny: string,
-  btn_kalukator: string
+  actualizeData: Ostatne,
+  jazyk: string
 ) {
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("ostatne");
@@ -641,22 +731,79 @@ export async function AdminActualizeOstatnePage(
     console.error("Document does not exist for uid:");
 
     await podstrankaCollectionRef.add({
-      nadpis: nadpis,
-      popis1: popis1,
-      popis2: popis2,
-      vlastnosti: vlastnosti,
-      nadpis_galeria: nadpis_galeria,
-      nadpis_informacie: nadpis_informacie,
-      popis_informacie_1: popis_informacie_1,
-      info_variants: info_variants,
+      nadpis: actualizeData.nadpis,
+      popis1: actualizeData.popis1,
+      popis2: actualizeData.popis2,
+      vlastnosti: actualizeData.vlastnosti,
+      nadpis_galeria: actualizeData.nadpis_galeria,
+      nadpis_informacie: actualizeData.nadpis_informacie,
+      popis_informacie_1: actualizeData.popis_informacie_1,
+      info_variants: actualizeData.info_variants,
       jazyk: jazyk,
-      popis_informacie_2: popis_informacie_2,
-      popis_informacie_3: popis_informacie_3,
-      nadpis_vizualizacia: nadpis_vizualizacia,
-      popis_viz_1: popis_viz_1,
-      farba: farba,
-      btn_ceny: btn_ceny,
-      btn_kalukator: btn_kalukator,
+      fareb_var_popis1: actualizeData.fareb_var_popis1,
+      fareb_var_popis2: actualizeData.fareb_var_popis2,
+      vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+      vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+      vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+      vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+      vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+      vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+      vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+      vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+      vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+      vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+      vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+      montaz_nadpis: actualizeData.montaz_nadpis,
+      montaz_popis1: actualizeData.montaz_popis1,
+      montaz_popis2: actualizeData.montaz_popis2,
+      montaz_popis3: actualizeData.montaz_popis3,
+      montaz_popis4: actualizeData.montaz_popis4,
+      montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+      montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+      montaz_nadpis_2_category_popis1:
+        actualizeData.montaz_nadpis_2_category_popis1,
+      montaz_nadpis_2_category_popis2:
+        actualizeData.montaz_nadpis_2_category_popis2,
+      montaz_nadpis_2_category_popis3:
+        actualizeData.montaz_nadpis_2_category_popis3,
+      montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+      montaz_nadpis_2_category2_popis1:
+        actualizeData.montaz_nadpis_2_category2_popis1,
+      montaz_nadpis_2_category2_popis2:
+        actualizeData.montaz_nadpis_2_category2_popis2,
+      montaz_nadpis_2_category2_popis3:
+        actualizeData.montaz_nadpis_2_category2_popis3,
+      montaz_nadpis_2_category2_popis4:
+        actualizeData.montaz_nadpis_2_category2_popis4,
+      montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+      montaz_nadpis_2_category3_popis1:
+        actualizeData.montaz_nadpis_2_category3_popis1,
+      montaz_nadpis_2_category3_popis2:
+        actualizeData.montaz_nadpis_2_category3_popis2,
+      montaz_nadpis_2_category3_popis3:
+        actualizeData.montaz_nadpis_2_category3_popis3,
+      montaz_nadpis_2_category3_popis4:
+        actualizeData.montaz_nadpis_2_category3_popis4,
+      montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+      montaz_nadpis_2_category4_popis1:
+        actualizeData.montaz_nadpis_2_category4_popis1,
+      montaz_nadpis_2_category4_popis2:
+        actualizeData.montaz_nadpis_2_category4_popis2,
+      montaz_nadpis_2_category4_popis3:
+        actualizeData.montaz_nadpis_2_category4_popis3,
+      profil_orientacia: actualizeData.profil_orientacia,
+      profil_popis1: actualizeData.profil_popis1,
+      profil_popis2: actualizeData.profil_popis2,
+      profil_popis3: actualizeData.profil_popis3,
+      profil_popis4: actualizeData.profil_popis4,
+      postup_popis: actualizeData.postup_popis,
+      postup_nacenovac: actualizeData.postup_nacenovac,
+      nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+      nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+      popis_viz_1: actualizeData.popis_viz_1,
+      farba: actualizeData.farba,
+      btn_ceny: actualizeData.btn_ceny,
+      btn_kalkulator: actualizeData.btn_kalkulator,
     });
     return "success";
   }
@@ -665,44 +812,87 @@ export async function AdminActualizeOstatnePage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    nadpis: nadpis,
-    popis1: popis1,
-    popis2: popis2,
-    vlastnosti: vlastnosti,
-    nadpis_galeria: nadpis_galeria,
-    nadpis_informacie: nadpis_informacie,
-    popis_informacie_1: popis_informacie_1,
-    info_variants: info_variants,
+    nadpis: actualizeData.nadpis,
+    popis1: actualizeData.popis1,
+    popis2: actualizeData.popis2,
+    vlastnosti: actualizeData.vlastnosti,
+    nadpis_galeria: actualizeData.nadpis_galeria,
+    nadpis_informacie: actualizeData.nadpis_informacie,
+    popis_informacie_1: actualizeData.popis_informacie_1,
+    info_variants: actualizeData.info_variants,
     jazyk: jazyk,
-    popis_informacie_2: popis_informacie_2,
-    popis_informacie_3: popis_informacie_3,
-    nadpis_vizualizacia: nadpis_vizualizacia,
-    popis_viz_1: popis_viz_1,
-    farba: farba,
-    btn_ceny: btn_ceny,
-    btn_kalukator: btn_kalukator,
+    fareb_var_popis1: actualizeData.fareb_var_popis1,
+    fareb_var_popis2: actualizeData.fareb_var_popis2,
+    vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+    vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+    vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+    vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+    vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+    vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+    vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+    vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+    vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+    vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+    vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+    montaz_nadpis: actualizeData.montaz_nadpis,
+    montaz_popis1: actualizeData.montaz_popis1,
+    montaz_popis2: actualizeData.montaz_popis2,
+    montaz_popis3: actualizeData.montaz_popis3,
+    montaz_popis4: actualizeData.montaz_popis4,
+    montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+    montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+    montaz_nadpis_2_category_popis1:
+      actualizeData.montaz_nadpis_2_category_popis1,
+    montaz_nadpis_2_category_popis2:
+      actualizeData.montaz_nadpis_2_category_popis2,
+    montaz_nadpis_2_category_popis3:
+      actualizeData.montaz_nadpis_2_category_popis3,
+    montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+    montaz_nadpis_2_category2_popis1:
+      actualizeData.montaz_nadpis_2_category2_popis1,
+    montaz_nadpis_2_category2_popis2:
+      actualizeData.montaz_nadpis_2_category2_popis2,
+    montaz_nadpis_2_category2_popis3:
+      actualizeData.montaz_nadpis_2_category2_popis3,
+    montaz_nadpis_2_category2_popis4:
+      actualizeData.montaz_nadpis_2_category2_popis4,
+    montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+    montaz_nadpis_2_category3_popis1:
+      actualizeData.montaz_nadpis_2_category3_popis1,
+    montaz_nadpis_2_category3_popis2:
+      actualizeData.montaz_nadpis_2_category3_popis2,
+    montaz_nadpis_2_category3_popis3:
+      actualizeData.montaz_nadpis_2_category3_popis3,
+    montaz_nadpis_2_category3_popis4:
+      actualizeData.montaz_nadpis_2_category3_popis4,
+    montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+    montaz_nadpis_2_category4_popis1:
+      actualizeData.montaz_nadpis_2_category4_popis1,
+    montaz_nadpis_2_category4_popis2:
+      actualizeData.montaz_nadpis_2_category4_popis2,
+    montaz_nadpis_2_category4_popis3:
+      actualizeData.montaz_nadpis_2_category4_popis3,
+    profil_orientacia: actualizeData.profil_orientacia,
+    profil_popis1: actualizeData.profil_popis1,
+    profil_popis2: actualizeData.profil_popis2,
+    profil_popis3: actualizeData.profil_popis3,
+    profil_popis4: actualizeData.profil_popis4,
+    postup_popis: actualizeData.postup_popis,
+    postup_nacenovac: actualizeData.postup_nacenovac,
+    nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+    nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+    popis_viz_1: actualizeData.popis_viz_1,
+    farba: actualizeData.farba,
+    btn_ceny: actualizeData.btn_ceny,
+    btn_kalkulator: actualizeData.btn_kalkulator,
   });
   revalidatePath(`/admin/ostatne/[${jazyk}]/page`, "page");
   return "success";
 }
 
 export async function AdminActualizeBazenyPage(
-  nadpis: string,
-  popis1: string,
-  popis2: string,
-  vlastnosti: string[],
-  nadpis_galeria: string,
-  nadpis_informacie: string,
-  popis_informacie_1: string,
-  info_variants: string[],
-  jazyk: string,
-  popis_informacie_2: string,
-  popis_informacie_3: string,
-  nadpis_vizualizacia: string,
-  popis_viz_1: string,
-  farba: string,
-  btn_ceny: string,
-  btn_kalukator: string
+  actualizeData: Bazeny,
+  jazyk: string
 ) {
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("bazeny");
@@ -714,22 +904,78 @@ export async function AdminActualizeBazenyPage(
     console.error("Document does not exist for uid:");
 
     await podstrankaCollectionRef.add({
-      nadpis: nadpis,
-      popis1: popis1,
-      popis2: popis2,
-      vlastnosti: vlastnosti,
-      nadpis_galeria: nadpis_galeria,
-      nadpis_informacie: nadpis_informacie,
-      popis_informacie_1: popis_informacie_1,
-      info_variants: info_variants,
+      nadpis: actualizeData.nadpis,
+      popis1: actualizeData.popis1,
+      popis2: actualizeData.popis2,
+      nadpis_galeria: actualizeData.nadpis_galeria,
+      nadpis_informacie: actualizeData.nadpis_informacie,
+      popis_informacie_1: actualizeData.popis_informacie_1,
+      info_variants: actualizeData.info_variants,
       jazyk: jazyk,
-      popis_informacie_2: popis_informacie_2,
-      popis_informacie_3: popis_informacie_3,
-      nadpis_vizualizacia: nadpis_vizualizacia,
-      popis_viz_1: popis_viz_1,
-      farba: farba,
-      btn_ceny: btn_ceny,
-      btn_kalukator: btn_kalukator,
+      fareb_var_popis1: actualizeData.fareb_var_popis1,
+      fareb_var_popis2: actualizeData.fareb_var_popis2,
+      vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+      vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+      vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+      vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+      vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+      vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+      vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+      vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+      vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+      vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+      vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+      montaz_nadpis: actualizeData.montaz_nadpis,
+      montaz_popis1: actualizeData.montaz_popis1,
+      montaz_popis2: actualizeData.montaz_popis2,
+      montaz_popis3: actualizeData.montaz_popis3,
+      montaz_popis4: actualizeData.montaz_popis4,
+      montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+      montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+      montaz_nadpis_2_category_popis1:
+        actualizeData.montaz_nadpis_2_category_popis1,
+      montaz_nadpis_2_category_popis2:
+        actualizeData.montaz_nadpis_2_category_popis2,
+      montaz_nadpis_2_category_popis3:
+        actualizeData.montaz_nadpis_2_category_popis3,
+      montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+      montaz_nadpis_2_category2_popis1:
+        actualizeData.montaz_nadpis_2_category2_popis1,
+      montaz_nadpis_2_category2_popis2:
+        actualizeData.montaz_nadpis_2_category2_popis2,
+      montaz_nadpis_2_category2_popis3:
+        actualizeData.montaz_nadpis_2_category2_popis3,
+      montaz_nadpis_2_category2_popis4:
+        actualizeData.montaz_nadpis_2_category2_popis4,
+      montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+      montaz_nadpis_2_category3_popis1:
+        actualizeData.montaz_nadpis_2_category3_popis1,
+      montaz_nadpis_2_category3_popis2:
+        actualizeData.montaz_nadpis_2_category3_popis2,
+      montaz_nadpis_2_category3_popis3:
+        actualizeData.montaz_nadpis_2_category3_popis3,
+      montaz_nadpis_2_category3_popis4:
+        actualizeData.montaz_nadpis_2_category3_popis4,
+      montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+      montaz_nadpis_2_category4_popis1:
+        actualizeData.montaz_nadpis_2_category4_popis1,
+      montaz_nadpis_2_category4_popis2:
+        actualizeData.montaz_nadpis_2_category4_popis2,
+      montaz_nadpis_2_category4_popis3:
+        actualizeData.montaz_nadpis_2_category4_popis3,
+      profil_orientacia: actualizeData.profil_orientacia,
+      profil_popis1: actualizeData.profil_popis1,
+      profil_popis2: actualizeData.profil_popis2,
+      profil_popis3: actualizeData.profil_popis3,
+      profil_popis4: actualizeData.profil_popis4,
+      postup_popis: actualizeData.postup_popis,
+      postup_nacenovac: actualizeData.postup_nacenovac,
+      nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+      nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+      popis_viz_1: actualizeData.popis_viz_1,
+      farba: actualizeData.farba,
+      btn_ceny: actualizeData.btn_ceny,
+      btn_kalkulator: actualizeData.btn_kalkulator,
     });
     return "success";
   }
@@ -738,44 +984,86 @@ export async function AdminActualizeBazenyPage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    nadpis: nadpis,
-    popis1: popis1,
-    popis2: popis2,
-    vlastnosti: vlastnosti,
-    nadpis_galeria: nadpis_galeria,
-    nadpis_informacie: nadpis_informacie,
-    popis_informacie_1: popis_informacie_1,
-    info_variants: info_variants,
+    nadpis: actualizeData.nadpis,
+    popis1: actualizeData.popis1,
+    popis2: actualizeData.popis2,
+    nadpis_galeria: actualizeData.nadpis_galeria,
+    nadpis_informacie: actualizeData.nadpis_informacie,
+    popis_informacie_1: actualizeData.popis_informacie_1,
+    info_variants: actualizeData.info_variants,
     jazyk: jazyk,
-    popis_informacie_2: popis_informacie_2,
-    popis_informacie_3: popis_informacie_3,
-    nadpis_vizualizacia: nadpis_vizualizacia,
-    popis_viz_1: popis_viz_1,
-    farba: farba,
-    btn_ceny: btn_ceny,
-    btn_kalukator: btn_kalukator,
+    fareb_var_popis1: actualizeData.fareb_var_popis1,
+    fareb_var_popis2: actualizeData.fareb_var_popis2,
+    vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+    vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+    vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+    vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+    vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+    vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+    vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+    vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+    vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+    vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+    vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+    montaz_nadpis: actualizeData.montaz_nadpis,
+    montaz_popis1: actualizeData.montaz_popis1,
+    montaz_popis2: actualizeData.montaz_popis2,
+    montaz_popis3: actualizeData.montaz_popis3,
+    montaz_popis4: actualizeData.montaz_popis4,
+    montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+    montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+    montaz_nadpis_2_category_popis1:
+      actualizeData.montaz_nadpis_2_category_popis1,
+    montaz_nadpis_2_category_popis2:
+      actualizeData.montaz_nadpis_2_category_popis2,
+    montaz_nadpis_2_category_popis3:
+      actualizeData.montaz_nadpis_2_category_popis3,
+    montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+    montaz_nadpis_2_category2_popis1:
+      actualizeData.montaz_nadpis_2_category2_popis1,
+    montaz_nadpis_2_category2_popis2:
+      actualizeData.montaz_nadpis_2_category2_popis2,
+    montaz_nadpis_2_category2_popis3:
+      actualizeData.montaz_nadpis_2_category2_popis3,
+    montaz_nadpis_2_category2_popis4:
+      actualizeData.montaz_nadpis_2_category2_popis4,
+    montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+    montaz_nadpis_2_category3_popis1:
+      actualizeData.montaz_nadpis_2_category3_popis1,
+    montaz_nadpis_2_category3_popis2:
+      actualizeData.montaz_nadpis_2_category3_popis2,
+    montaz_nadpis_2_category3_popis3:
+      actualizeData.montaz_nadpis_2_category3_popis3,
+    montaz_nadpis_2_category3_popis4:
+      actualizeData.montaz_nadpis_2_category3_popis4,
+    montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+    montaz_nadpis_2_category4_popis1:
+      actualizeData.montaz_nadpis_2_category4_popis1,
+    montaz_nadpis_2_category4_popis2:
+      actualizeData.montaz_nadpis_2_category4_popis2,
+    montaz_nadpis_2_category4_popis3:
+      actualizeData.montaz_nadpis_2_category4_popis3,
+    profil_orientacia: actualizeData.profil_orientacia,
+    profil_popis1: actualizeData.profil_popis1,
+    profil_popis2: actualizeData.profil_popis2,
+    profil_popis3: actualizeData.profil_popis3,
+    profil_popis4: actualizeData.profil_popis4,
+    postup_popis: actualizeData.postup_popis,
+    postup_nacenovac: actualizeData.postup_nacenovac,
+    nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+    nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+    popis_viz_1: actualizeData.popis_viz_1,
+    farba: actualizeData.farba,
+    btn_ceny: actualizeData.btn_ceny,
+    btn_kalkulator: actualizeData.btn_kalkulator,
   });
   revalidatePath(`/admin/bazeny/[${jazyk}]/page`, "page");
   return "success";
 }
 
 export async function AdminActualizeTerasyPage(
-  nadpis: string,
-  popis1: string,
-  popis2: string,
-  vlastnosti: string[],
-  nadpis_galeria: string,
-  nadpis_informacie: string,
-  popis_informacie_1: string,
-  info_variants: string[],
-  jazyk: string,
-  popis_informacie_2: string,
-  popis_informacie_3: string,
-  nadpis_vizualizacia: string,
-  popis_viz_1: string,
-  farba: string,
-  btn_ceny: string,
-  btn_kalukator: string
+  actualizeData: Terasy,
+  jazyk: string
 ) {
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("terasy");
@@ -787,22 +1075,79 @@ export async function AdminActualizeTerasyPage(
     console.error("Document does not exist for uid:");
 
     await podstrankaCollectionRef.add({
-      nadpis: nadpis,
-      popis1: popis1,
-      popis2: popis2,
-      vlastnosti: vlastnosti,
-      nadpis_galeria: nadpis_galeria,
-      nadpis_informacie: nadpis_informacie,
-      popis_informacie_1: popis_informacie_1,
-      info_variants: info_variants,
+      nadpis: actualizeData.nadpis,
+      popis1: actualizeData.popis1,
+      popis2: actualizeData.popis2,
+      vlastnosti: actualizeData.vlastnosti,
+      nadpis_galeria: actualizeData.nadpis_galeria,
+      nadpis_informacie: actualizeData.nadpis_informacie,
+      popis_informacie_1: actualizeData.popis_informacie_1,
+      info_variants: actualizeData.info_variants,
       jazyk: jazyk,
-      popis_informacie_2: popis_informacie_2,
-      popis_informacie_3: popis_informacie_3,
-      nadpis_vizualizacia: nadpis_vizualizacia,
-      popis_viz_1: popis_viz_1,
-      farba: farba,
-      btn_ceny: btn_ceny,
-      btn_kalukator: btn_kalukator,
+      fareb_var_popis1: actualizeData.fareb_var_popis1,
+      fareb_var_popis2: actualizeData.fareb_var_popis2,
+      vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+      vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+      vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+      vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+      vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+      vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+      vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+      vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+      vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+      vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+      vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+      montaz_nadpis: actualizeData.montaz_nadpis,
+      montaz_popis1: actualizeData.montaz_popis1,
+      montaz_popis2: actualizeData.montaz_popis2,
+      montaz_popis3: actualizeData.montaz_popis3,
+      montaz_popis4: actualizeData.montaz_popis4,
+      montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+      montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+      montaz_nadpis_2_category_popis1:
+        actualizeData.montaz_nadpis_2_category_popis1,
+      montaz_nadpis_2_category_popis2:
+        actualizeData.montaz_nadpis_2_category_popis2,
+      montaz_nadpis_2_category_popis3:
+        actualizeData.montaz_nadpis_2_category_popis3,
+      montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+      montaz_nadpis_2_category2_popis1:
+        actualizeData.montaz_nadpis_2_category2_popis1,
+      montaz_nadpis_2_category2_popis2:
+        actualizeData.montaz_nadpis_2_category2_popis2,
+      montaz_nadpis_2_category2_popis3:
+        actualizeData.montaz_nadpis_2_category2_popis3,
+      montaz_nadpis_2_category2_popis4:
+        actualizeData.montaz_nadpis_2_category2_popis4,
+      montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+      montaz_nadpis_2_category3_popis1:
+        actualizeData.montaz_nadpis_2_category3_popis1,
+      montaz_nadpis_2_category3_popis2:
+        actualizeData.montaz_nadpis_2_category3_popis2,
+      montaz_nadpis_2_category3_popis3:
+        actualizeData.montaz_nadpis_2_category3_popis3,
+      montaz_nadpis_2_category3_popis4:
+        actualizeData.montaz_nadpis_2_category3_popis4,
+      montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+      montaz_nadpis_2_category4_popis1:
+        actualizeData.montaz_nadpis_2_category4_popis1,
+      montaz_nadpis_2_category4_popis2:
+        actualizeData.montaz_nadpis_2_category4_popis2,
+      montaz_nadpis_2_category4_popis3:
+        actualizeData.montaz_nadpis_2_category4_popis3,
+      profil_orientacia: actualizeData.profil_orientacia,
+      profil_popis1: actualizeData.profil_popis1,
+      profil_popis2: actualizeData.profil_popis2,
+      profil_popis3: actualizeData.profil_popis3,
+      profil_popis4: actualizeData.profil_popis4,
+      postup_popis: actualizeData.postup_popis,
+      postup_nacenovac: actualizeData.postup_nacenovac,
+      nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+      nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+      popis_viz_1: actualizeData.popis_viz_1,
+      farba: actualizeData.farba,
+      btn_ceny: actualizeData.btn_ceny,
+      btn_kalkulator: actualizeData.btn_kalkulator,
     });
     return "success";
   }
@@ -811,22 +1156,79 @@ export async function AdminActualizeTerasyPage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    nadpis: nadpis,
-    popis1: popis1,
-    popis2: popis2,
-    vlastnosti: vlastnosti,
-    nadpis_galeria: nadpis_galeria,
-    nadpis_informacie: nadpis_informacie,
-    popis_informacie_1: popis_informacie_1,
-    info_variants: info_variants,
+    nadpis: actualizeData.nadpis,
+    popis1: actualizeData.popis1,
+    popis2: actualizeData.popis2,
+    vlastnosti: actualizeData.vlastnosti,
+    nadpis_galeria: actualizeData.nadpis_galeria,
+    nadpis_informacie: actualizeData.nadpis_informacie,
+    popis_informacie_1: actualizeData.popis_informacie_1,
+    info_variants: actualizeData.info_variants,
     jazyk: jazyk,
-    popis_informacie_2: popis_informacie_2,
-    popis_informacie_3: popis_informacie_3,
-    nadpis_vizualizacia: nadpis_vizualizacia,
-    popis_viz_1: popis_viz_1,
-    farba: farba,
-    btn_ceny: btn_ceny,
-    btn_kalukator: btn_kalukator,
+    fareb_var_popis1: actualizeData.fareb_var_popis1,
+    fareb_var_popis2: actualizeData.fareb_var_popis2,
+    vlastnosti_popis1: actualizeData.vlastnosti_popis1,
+    vlastnosti_popis2: actualizeData.vlastnosti_popis2,
+    vlastnosti_popis3: actualizeData.vlastnosti_popis3,
+    vlastnosti_popis4: actualizeData.vlastnosti_popis4,
+    vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
+    vlastnosti_popis5: actualizeData.vlastnosti_popis5,
+    vlastnosti_popis6: actualizeData.vlastnosti_popis6,
+    vlastnosti_popis7: actualizeData.vlastnosti_popis7,
+    vlastnosti_popis8: actualizeData.vlastnosti_popis8,
+    vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
+    vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
+    montaz_nadpis: actualizeData.montaz_nadpis,
+    montaz_popis1: actualizeData.montaz_popis1,
+    montaz_popis2: actualizeData.montaz_popis2,
+    montaz_popis3: actualizeData.montaz_popis3,
+    montaz_popis4: actualizeData.montaz_popis4,
+    montaz_nadpis_2: actualizeData.montaz_nadpis_2,
+    montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
+    montaz_nadpis_2_category_popis1:
+      actualizeData.montaz_nadpis_2_category_popis1,
+    montaz_nadpis_2_category_popis2:
+      actualizeData.montaz_nadpis_2_category_popis2,
+    montaz_nadpis_2_category_popis3:
+      actualizeData.montaz_nadpis_2_category_popis3,
+    montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
+    montaz_nadpis_2_category2_popis1:
+      actualizeData.montaz_nadpis_2_category2_popis1,
+    montaz_nadpis_2_category2_popis2:
+      actualizeData.montaz_nadpis_2_category2_popis2,
+    montaz_nadpis_2_category2_popis3:
+      actualizeData.montaz_nadpis_2_category2_popis3,
+    montaz_nadpis_2_category2_popis4:
+      actualizeData.montaz_nadpis_2_category2_popis4,
+    montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
+    montaz_nadpis_2_category3_popis1:
+      actualizeData.montaz_nadpis_2_category3_popis1,
+    montaz_nadpis_2_category3_popis2:
+      actualizeData.montaz_nadpis_2_category3_popis2,
+    montaz_nadpis_2_category3_popis3:
+      actualizeData.montaz_nadpis_2_category3_popis3,
+    montaz_nadpis_2_category3_popis4:
+      actualizeData.montaz_nadpis_2_category3_popis4,
+    montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
+    montaz_nadpis_2_category4_popis1:
+      actualizeData.montaz_nadpis_2_category4_popis1,
+    montaz_nadpis_2_category4_popis2:
+      actualizeData.montaz_nadpis_2_category4_popis2,
+    montaz_nadpis_2_category4_popis3:
+      actualizeData.montaz_nadpis_2_category4_popis3,
+    profil_orientacia: actualizeData.profil_orientacia,
+    profil_popis1: actualizeData.profil_popis1,
+    profil_popis2: actualizeData.profil_popis2,
+    profil_popis3: actualizeData.profil_popis3,
+    profil_popis4: actualizeData.profil_popis4,
+    postup_popis: actualizeData.postup_popis,
+    postup_nacenovac: actualizeData.postup_nacenovac,
+    nacenovac_sekcie: actualizeData.nacenovac_sekcie,
+    nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+    popis_viz_1: actualizeData.popis_viz_1,
+    farba: actualizeData.farba,
+    btn_ceny: actualizeData.btn_ceny,
+    btn_kalkulator: actualizeData.btn_kalkulator,
   });
   revalidatePath(`/admin/terasy/[${jazyk}]/page`, "page");
   return "success";

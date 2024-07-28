@@ -5,9 +5,11 @@ import { firestore } from "./firebaseServer";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import {
   AboutUsElements,
+  Bazeny,
   Gallery,
   HomePageElements,
   MoreAboutTimElements,
+  Ostatne,
   Ploty,
   PriceOffer,
   Slnolamy,
@@ -142,7 +144,7 @@ export async function GetAdminOstatne(language: string) {
       return null;
     }
     const doc = querySnapshot.docs[0];
-    const orderData = doc.data() as Slnolamy;
+    const orderData = doc.data() as Ostatne;
 
     return orderData;
   } catch (error) {
@@ -164,7 +166,7 @@ export async function GetAdminBazeny(language: string) {
       return null;
     }
     const doc = querySnapshot.docs[0];
-    const orderData = doc.data() as Slnolamy;
+    const orderData = doc.data() as Bazeny;
 
     return orderData;
   } catch (error) {
