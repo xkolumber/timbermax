@@ -1,8 +1,10 @@
 import AdminFasady from "@/app/components/AdminComponents/AdminFasady";
+import AdminFasadyPredsadena from "@/app/components/AdminComponents/AdminFasadyPredsadena";
 import AdminFinalNotAuthorized from "@/app/components/AdminComponents/AdminFinalNotAuthorized";
 import AdminNotAuthorized from "@/app/components/AdminComponents/AdminNotAuthorized";
 import AdminOstatne from "@/app/components/AdminComponents/AdminOstatne";
 import AdminPageSkeleton from "@/app/components/AdminComponents/AdminPageSkeleton";
+import AdminWholeFasady from "@/app/components/AdminComponents/AdminWholeFasady";
 import { GetLanguages, getToken } from "@/app/lib/actions";
 import { GetAdminFasady, GetAdminOstatne } from "@/app/lib/functionsServer";
 import jwt from "jsonwebtoken";
@@ -24,15 +26,23 @@ async function Validate(language: string) {
   if (browser_uid === process.env.ADMIN_UID) {
     const languages = await GetLanguages();
 
-    const data = await GetAdminFasady(language);
+    const data = await GetAdminFasady(language, "predsadena");
     if (data) {
       return (
-        <AdminFasady language={language} data={data} languages={languages} />
+        <AdminFasadyPredsadena
+          language={language}
+          data={data}
+          languages={languages}
+        />
       );
     }
 
     return (
-      <AdminFasady language={language} data={undefined} languages={languages} />
+      <AdminFasadyPredsadena
+        language={language}
+        data={undefined}
+        languages={languages}
+      />
     );
   } else {
     return <AdminFinalNotAuthorized />;

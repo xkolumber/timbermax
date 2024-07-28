@@ -5,7 +5,7 @@ import {
   GetAdminFasady,
   GetAdminTerasy,
 } from "@/app/lib/functionsServer";
-import { Slnolamy } from "@/app/lib/interface";
+import { Bazeny, Slnolamy } from "@/app/lib/interface";
 import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -33,7 +33,7 @@ async function GetData() {
 }
 
 export default async function Page() {
-  const data: Slnolamy | undefined = await GetData();
+  const data: Bazeny | undefined = await GetData();
   return (
     <main>
       <BazenyPage data={data} />

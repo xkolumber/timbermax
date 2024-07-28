@@ -159,24 +159,36 @@ const AdminPage = ({ languages }: Props) => {
                   >
                     {service.nazov}
                   </div>
-                  {certainServiceClicked === serviceIndex && (
+                  {certainServiceClicked === serviceIndex &&
+                    certainServiceSlug != "fasady" && (
+                      <div className="flex flex-col absolute left-[160px]">
+                        {languages.map((language, languageIndex) => (
+                          <Link
+                            className="p-4 bg-white text-black cursor-pointer hover:bg-gray-300 duration-200"
+                            key={languageIndex}
+                            href={`/admin/${certainServiceSlug}/${language.jazyk}`}
+                          >
+                            {language.jazyk}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+
+                  {certainServiceSlug === "fasady" && (
                     <div className="flex flex-col absolute left-[160px]">
-                      {languages.map((language, languageIndex) => (
-                        <Link
-                          className="p-4 bg-white text-black cursor-pointer hover:bg-gray-300 duration-200"
-                          key={languageIndex}
-                          href={`/admin/${certainServiceSlug}/${language.jazyk}`}
-                        >
-                          {language.jazyk}
-                        </Link>
-                      ))}
+                      <Link
+                        className="p-4 bg-white text-black cursor-pointer hover:bg-gray-300 duration-200"
+                        href={`/admin/fasady`}
+                      >
+                        Fasady
+                      </Link>
                     </div>
                   )}
                 </div>
               ))}
           </div>
         </div>
-        <Link className=" btn btn--primary" href="/admin/galeria">
+        <Link className=" btn btn--primary max-h-[50px]" href="/admin/galeria">
           Galéria
         </Link>
       </div>

@@ -6,6 +6,7 @@ import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import {
   AboutUsElements,
   Bazeny,
+  Fasady,
   Gallery,
   HomePageElements,
   MoreAboutTimElements,
@@ -197,12 +198,12 @@ export async function GetAdminTerasy(language: string) {
   }
 }
 
-export async function GetAdminFasady(language: string) {
+export async function GetAdminFasady(language: string, name_database: string) {
   unstable_noStore();
 
   try {
     const db = getFirestore();
-    const podstrankaCollectionRef = db.collection("fasady");
+    const podstrankaCollectionRef = db.collection(`fasady-${name_database}`);
     const querySnapshot = await podstrankaCollectionRef
       .where("jazyk", "==", language)
       .get();
@@ -212,7 +213,52 @@ export async function GetAdminFasady(language: string) {
       return null;
     }
     const doc = querySnapshot.docs[0];
-    const orderData = doc.data() as Slnolamy;
+    const orderData = doc.data() as Fasady;
+
+    return orderData;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function GetAdminFasadyOdvetrana(language: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore();
+    const podstrankaCollectionRef = db.collection("fasady-odvetrana");
+    const querySnapshot = await podstrankaCollectionRef
+      .where("jazyk", "==", language)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error("Document does not exist for uid:", language);
+      return null;
+    }
+    const doc = querySnapshot.docs[0];
+    const orderData = doc.data() as Fasady;
+
+    return orderData;
+  } catch (error) {
+    return null;
+  }
+}
+export async function GetAdminFasadyPredsadena(language: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore();
+    const podstrankaCollectionRef = db.collection("fasady-predsadena");
+    const querySnapshot = await podstrankaCollectionRef
+      .where("jazyk", "==", language)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error("Document does not exist for uid:", language);
+      return null;
+    }
+    const doc = querySnapshot.docs[0];
+    const orderData = doc.data() as Fasady;
 
     return orderData;
   } catch (error) {

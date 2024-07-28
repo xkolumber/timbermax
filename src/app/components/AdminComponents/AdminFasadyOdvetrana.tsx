@@ -1,11 +1,10 @@
 "use client";
-import { AdminActualizeSlnolamyPage } from "@/app/lib/actions";
+import { AdminActualizeFasadyPage } from "@/app/lib/actions";
 import {
   empty_five_values,
-  empty_three_values,
   getSecondPathValue,
 } from "@/app/lib/functionsClient";
-import { Jazyk, Ploty, Slnolamy } from "@/app/lib/interface";
+import { Fasady, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -14,20 +13,21 @@ import { ClipLoader } from "react-spinners";
 
 interface Props {
   language: string;
-  data: Slnolamy | undefined;
+  data: Fasady | undefined;
   languages: Jazyk[];
 }
 
-const AdminSlnolamy = ({ language, data, languages }: Props) => {
+const AdminFasadyOdvetrana = ({ language, data, languages }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [randomArray, setRandomArray] = useState<string[]>([""]);
   const pathname = usePathname();
 
-  const [actualizeData, setActualizeData] = useState<Ploty>({
+  const [actualizeData, setActualizeData] = useState<Fasady>({
     nadpis: "",
     popis1: "",
     popis2: "",
-    vlastnosti: empty_three_values,
+    btn_odvetrana: "",
+    btn_predsadena: "",
     nadpis_galeria: "",
     nadpis_informacie: "",
     popis_informacie_1: "",
@@ -105,8 +105,8 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
         nadpis: data.nadpis ? data.nadpis : "",
         popis1: data.popis1 ? data.popis1 : "",
         popis2: data.popis2 ? data.popis2 : "",
-        vlastnosti:
-          data.vlastnosti?.length > 0 ? data.vlastnosti : empty_three_values,
+        btn_odvetrana: data.btn_odvetrana ? data.btn_odvetrana : "",
+        btn_predsadena: data.btn_predsadena ? data.btn_predsadena : "",
         nadpis_galeria: data.nadpis_galeria ? data.nadpis_galeria : "",
         nadpis_informacie: data.nadpis_informacie ? data.nadpis_informacie : "",
         popis_informacie_1: data.popis_informacie_1
@@ -203,9 +203,8 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
         profil_popis4: data.profil_popis4 ? data.profil_popis4 : "",
         postup_popis: data.postup_popis ? data.postup_popis : "",
         postup_nacenovac: data.postup_nacenovac ? data.postup_nacenovac : "",
-        nacenovac_sekcie: data.nacenovac_sekcie
-          ? data.nacenovac_sekcie
-          : Nacenovac,
+        nacenovac_sekcie:
+          data.nacenovac_sekcie.length > 0 ? data.nacenovac_sekcie : Nacenovac,
         nadpis_vizualizacia: data.nadpis_vizualizacia
           ? data.nadpis_vizualizacia
           : "",
@@ -213,6 +212,11 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
         farba: data.farba ? data.farba : "",
         btn_ceny: data.btn_ceny ? data.btn_ceny : "",
         btn_kalkulator: data.btn_kalkulator ? data.btn_kalkulator : "",
+      }));
+    } else {
+      setActualizeData((prevData) => ({
+        ...prevData,
+        nacenovac_sekcie: Nacenovac,
       }));
     }
   }, [data]);
@@ -244,7 +248,7 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setActualizeData((prevData) => {
-      const updatedArray = [...(prevData[title as keyof Ploty] as string[])];
+      const updatedArray = [...(prevData[title as keyof Fasady] as string[])];
       updatedArray[index] = event.target.value;
       return {
         ...prevData,
@@ -260,7 +264,7 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setActualizeData((prevData) => {
-      const updatedArray = [...(prevData[title as keyof Ploty] as any[])];
+      const updatedArray = [...(prevData[title as keyof Fasady] as any[])];
       updatedArray[index] = {
         ...updatedArray[index],
         [field]: event.target.value,
@@ -276,7 +280,11 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await AdminActualizeSlnolamyPage(actualizeData, language);
+    const response = await AdminActualizeFasadyPage(
+      actualizeData,
+      language,
+      "odvetrana"
+    );
     setIsLoading(false);
     if (response === "success") {
       toast.success("Sekcia bola aktualizovaná");
@@ -288,19 +296,21 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
   return (
     <div className="main_section additional_padding">
       <Toaster />
-      <Link href={"/admin"}>
+      <Link href={"/admin/fasady"}>
         <p className="hover:underline ease-in text-black">Späť</p>
       </Link>
 
       <form className="products_admin" onSubmit={handleSaveProduct}>
-        <h4>Sekcia Slnolamy</h4>
+        <h4>Sekcia Fasady - odvetrana</h4>
         <div className="flex flex-row gap-4">
           {languages.map((one_lang, index) => (
             <Link
               className={`btn btn--primary ${
                 language === one_lang.jazyk && "!bg-green-800"
               }`}
-              href={`/admin/${getSecondPathValue(pathname)}/${one_lang.jazyk}`}
+              href={`/admin/${getSecondPathValue(pathname)}/odvetrana/${
+                one_lang.jazyk
+              }`}
               key={index}
             >
               {one_lang.jazyk}
@@ -338,19 +348,24 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
           />
         </div>
         <div className="product_admin_row">
-          <p>vlastnosti:</p>
-          <div className="flex flex-col">
-            {actualizeData.vlastnosti.map((size, index) => (
-              <input
-                key={index}
-                type="text"
-                name={`vlastnosti${index}`}
-                value={size}
-                onChange={(e) => handleChangeItemArray("vlastnosti", index, e)}
-                className="md:!w-[450px] mt-2"
-              />
-            ))}
-          </div>
+          <p>btn_odvetrana:</p>
+          <input
+            type="text"
+            name="btn_odvetrana"
+            value={actualizeData.btn_odvetrana}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>btn_predsadena:</p>
+          <input
+            type="text"
+            name="btn_predsadena"
+            value={actualizeData.btn_predsadena}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
         </div>
 
         <div className="product_admin_row">
@@ -865,6 +880,7 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
                     )
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Nadpis"
                 />
                 <input
                   type="text"
@@ -879,6 +895,7 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
                     )
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Popis"
                 />
                 <input
                   type="text"
@@ -893,6 +910,7 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
                     )
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Tlačidlo"
                 />
                 <input
                   type="text"
@@ -907,6 +925,7 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
                     )
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Link"
                 />
               </div>
             ))}
@@ -985,4 +1004,4 @@ const AdminSlnolamy = ({ language, data, languages }: Props) => {
   );
 };
 
-export default AdminSlnolamy;
+export default AdminFasadyOdvetrana;

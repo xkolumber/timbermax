@@ -1,5 +1,5 @@
 "use client";
-import { Slnolamy } from "@/app/lib/interface";
+import { Bazeny, Slnolamy } from "@/app/lib/interface";
 
 import Image from "next/image";
 
@@ -53,7 +53,7 @@ const icon_text = [
 ];
 
 interface Props {
-  data: Slnolamy | undefined;
+  data: Bazeny | undefined;
 }
 
 const BazenyPage = ({ data }: Props) => {
@@ -76,13 +76,13 @@ const BazenyPage = ({ data }: Props) => {
 
         <div className="main_section ">
           <p className="text-primary">{data?.popis2}</p>
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             {data?.vlastnosti.map((object, index) => (
               <p className="text-primary" key={index}>
                 {object}
               </p>
             ))}
-          </div>
+          </div> */}
 
           <h4 className="text-tertiary">{data?.nadpis_galeria}</h4>
         </div>
@@ -125,10 +125,10 @@ const BazenyPage = ({ data }: Props) => {
             ))}
           </div>
         </div>
-        <div className="main_section">
+        {/* <div className="main_section">
           <p className="text-tertiary">{data?.popis_informacie_2}</p>
           <p className="text-tertiary">{data?.popis_informacie_3}</p>
-        </div>
+        </div> */}
       </div>
 
       <Image
