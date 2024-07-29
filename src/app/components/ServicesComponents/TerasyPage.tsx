@@ -3,63 +3,14 @@ import { Terasy } from "@/app/lib/interface";
 
 import Image from "next/image";
 
-import IconServiceFeatures from "../Icons/IconServiceFeatures";
-import IconServiceInstallation from "../Icons/IconServiceInstallation";
-import IconServiceOrder from "../Icons/IconServiceOrder";
-import IconServiceProfile from "../Icons/IconServiceProfile";
-import IconServiceVariants from "../Icons/IconServiceVariants";
-import ServiceGallery from "./ServiceGallery";
+import { icon_text } from "@/app/lib/data";
 import { useState } from "react";
-import { colors } from "@/app/lib/functionsClient";
-import Link from "next/link";
-import IconCalculateGreen from "../Icons/IconCalculateGreen";
 import ColorVariants from "./ColorVariants";
-import Properties from "./Properties";
 import Installation from "./Installation";
-import Profiles from "./Profiles";
 import OrderProcedure from "./OrderProcedure";
-
-const projects = [
-  {
-    title: "Projekt Brno",
-    photo: "/main_picture.png",
-  },
-  {
-    title: "Projekt Krahulčia",
-    photo: "/main_picture.png",
-  },
-  {
-    title: "Projekt Bodnár",
-    photo: "/main_picture.png",
-  },
-  {
-    title: "Projekt SkyPark",
-    photo: "/main_picture.png",
-  },
-];
-
-const icon_text = [
-  {
-    icon: <IconServiceVariants />,
-    text: "Farebné varianty",
-  },
-  {
-    icon: <IconServiceFeatures />,
-    text: "Vlastnosti",
-  },
-  {
-    icon: <IconServiceInstallation />,
-    text: "Montáž",
-  },
-  {
-    icon: <IconServiceProfile />,
-    text: "Profily",
-  },
-  {
-    icon: <IconServiceOrder />,
-    text: "Postup objednania",
-  },
-];
+import Profiles from "./Profiles";
+import Properties from "./Properties";
+import ServiceGallery from "./ServiceGallery";
 
 interface Props {
   data: Terasy | undefined;
@@ -72,7 +23,9 @@ const TerasyPage = ({ data }: Props) => {
     <main>
       <div className="bg-secondary">
         <div className="main_section additional_padding">
-          <h4 className="text-tertiary">{data?.nadpis}</h4>
+          <h4 className="uppercase  custom-underline mb-16 2xl:mb-[76px]">
+            {data?.nadpis}
+          </h4>
           <p className="text-tertiary">{data?.popis1}</p>
         </div>
         <Image

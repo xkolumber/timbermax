@@ -14,13 +14,13 @@ async function GetData() {
     language?.value === "cz" ||
     language?.value === "en"
   ) {
-    const data = await GetAdminFasady(language.value, "odvetrana");
+    const data = await GetAdminFasady(language.value, "predsadena");
     if (data) {
       return data;
     }
     return undefined;
   }
-  const data = await GetAdminFasady("sk", "odvetrana");
+  const data = await GetAdminFasady("sk", "predsadena");
   if (data) {
     return data;
   }
