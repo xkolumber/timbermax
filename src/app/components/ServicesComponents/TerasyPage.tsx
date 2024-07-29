@@ -12,6 +12,12 @@ import ServiceGallery from "./ServiceGallery";
 import { useState } from "react";
 import { colors } from "@/app/lib/functionsClient";
 import Link from "next/link";
+import IconCalculateGreen from "../Icons/IconCalculateGreen";
+import ColorVariants from "./ColorVariants";
+import Properties from "./Properties";
+import Installation from "./Installation";
+import Profiles from "./Profiles";
+import OrderProcedure from "./OrderProcedure";
 
 const projects = [
   {
@@ -61,7 +67,7 @@ interface Props {
 
 const TerasyPage = ({ data }: Props) => {
   const [variantClicked, setVariantClicked] = useState(0);
-  const [hoveredImage, setHoveredImage] = useState(-1);
+
   return (
     <main>
       <div className="bg-secondary">
@@ -121,136 +127,12 @@ const TerasyPage = ({ data }: Props) => {
           </div>
         </div>
 
-        {variantClicked === 0 && (
-          <div className="">
-            <div className="main_section">
-              <p className="text-tertiary">{data?.fareb_var_popis1}</p>
-            </div>
-            <div className="flex flex-wrap gap-6 color_section">
-              {colors.map((color, index) => (
-                <div
-                  className="relative cursor-pointer"
-                  key={index}
-                  onMouseEnter={() => setHoveredImage(index)}
-                  onMouseLeave={() => setHoveredImage(-1)}
-                >
-                  <Image
-                    src={color.farba}
-                    alt="hlavna_fotka"
-                    height={300}
-                    width={160}
-                    quality={100}
-                    priority={true}
-                    className="w-[160px] h-[300px] object-cover"
-                  />
-                  <p
-                    className={`uppercase absolute top-3/4 left-1/2 transform -translate-x-1/2 bottom-0 duration-300 ${
-                      hoveredImage === index ? "block" : "hidden"
-                    }`}
-                  >
-                    {color.text}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="main_section">
-              {" "}
-              <p className="text-tertiary">{data?.fareb_var_popis2}</p>
-            </div>
-          </div>
-        )}
-
-        {variantClicked === 1 && (
-          <div className="">
-            <div className="main_section">
-              <p className="text-tertiary">{data?.vlastnosti_popis1}</p>
-              <p className="text-tertiary mt-8">{data?.vlastnosti_popis2}</p>
-            </div>
-            <Image
-              src={"/terasa.jpg"}
-              alt="hlavna_fotka"
-              height={1000}
-              width={1000}
-              quality={100}
-              priority={true}
-              className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
-            />
-            <div className="main_section">
-              <p className="text-tertiary">{data?.vlastnosti_popis3}</p>
-              <p className="text-tertiary mt-8">{data?.vlastnosti_popis4}</p>
-            </div>
-            <Image
-              src={"/terasa.jpg"}
-              alt="hlavna_fotka"
-              height={300}
-              width={1000}
-              quality={100}
-              priority={true}
-              className="w-full h-[300px] md:h-full max-h-[400px] object-cover"
-            />
-            <div className="main_section">
-              <h5 className="text-tertiary">{data?.vlastnosti_nadpis_}</h5>
-              <p className="text-tertiary mt-8">{data?.vlastnosti_popis5}</p>
-              <p className="text-tertiary mt-8">{data?.vlastnosti_popis6}</p>
-              <p className="text-tertiary mt-8">{data?.vlastnosti_popis7}</p>
-            </div>
-            <Image
-              src={"/terasa.jpg"}
-              alt="hlavna_fotka"
-              height={1000}
-              width={1000}
-              quality={100}
-              priority={true}
-              className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
-            />
-            <div className="main_section">
-              <p className="text-tertiary mt-8">{data?.vlastnosti_popis8}</p>
-              <div className="flex justify-between">
-                <Link className="btn btn--primary" href={`/viac-o-timbermaxe`}>
-                  {data?.vlastnosti_btn_viac}
-                </Link>
-                <Link className="btn btn--primary" href={`/viac-o-timbermaxe`}>
-                  {data?.vlastnosti_btn_konkurencia}
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
+        {variantClicked === 0 && <ColorVariants data={data} />}
+        {variantClicked === 1 && <Properties data={data} />}
       </div>
-      {variantClicked === 2 && (
-        <div className="">
-          <div className="main_section">
-            <h5 className="text-tertiary">{data?.montaz_nadpis}</h5>
-            <p className="text-tertiary mt-8">{data?.montaz_popis1}</p>
-            <p className="text-tertiary mt-8">{data?.montaz_popis2}</p>
-            <p className="text-tertiary mt-8">{data?.montaz_popis3}</p>
-          </div>
-          <Image
-            src={"/terasa.jpg"}
-            alt="hlavna_fotka"
-            height={300}
-            width={1000}
-            quality={100}
-            priority={true}
-            className="w-full h-[300px] md:h-full max-h-[400px] object-cover"
-          />
-          <div className="main_section">
-            <p className="text-tertiary mt-8">{data?.montaz_popis4}</p>
-          </div>
-          <Image
-            src={"/terasa.jpg"}
-            alt="hlavna_fotka"
-            height={300}
-            width={1000}
-            quality={100}
-            priority={true}
-            className="w-full h-[300px] md:h-full max-h-[400px] object-cover"
-          />
-          <div className="main_section">
-            <p className="text-tertiary mt-8">{data?.montaz_nadpis_2}</p>
-          </div>
-        </div>
-      )}
+      {variantClicked === 2 && <Installation data={data} />}
+      {variantClicked === 3 && <Profiles data={data} />}
+      {variantClicked === 4 && <OrderProcedure data={data} />}
 
       <div className="bg-secondary">
         <main className="main_section">
