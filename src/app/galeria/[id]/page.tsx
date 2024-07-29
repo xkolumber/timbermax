@@ -1,8 +1,8 @@
+import GalleryPageId from "@/app/components/GalleryPageId";
+import { GetAdminGalleryId } from "@/app/lib/functionsServer";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { ClipLoader } from "react-spinners";
-import GalleryPage from "../components/GalleryPage";
-import { GetAdminGallery } from "../lib/functionsServer";
 
 export const metadata: Metadata = {
   title: "Galéria fotiek",
@@ -15,19 +15,22 @@ export const metadata: Metadata = {
   },
 };
 
-async function GetGalleryPhotos() {
-  const data = await GetAdminGallery();
+async function GetGalleryPhotosId(id: string) {
+  const data = await GetAdminGalleryId(id);
 
   if (data) {
-    return <GalleryPage data={data} />;
+    return <GalleryPageId data={data} />;
   }
-  return <GalleryPage data={[]} />;
+  return <GalleryPageId data={undefined} />;
 }
 
-const Page = () => (
-  <>
-    <div className=" relative main_section overflow-hidden additional_padding">
-      <h1 className="text-primary mb-4">Galéria</h1>
+type Props = {
+  params: { id: string };
+};
+
+const Page = ({ params }: Props) => {
+  return (
+    <div className=" main_section  additional_padding">
       <Suspense
         fallback={
           <div className="mt-4 min-h-screen">
@@ -35,10 +38,10 @@ const Page = () => (
           </div>
         }
       >
-        {GetGalleryPhotos()}
+        {GetGalleryPhotosId(params.id)}
       </Suspense>
     </div>
-  </>
-);
+  );
+};
 
 export default Page;

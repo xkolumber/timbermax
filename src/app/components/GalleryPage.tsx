@@ -1,11 +1,10 @@
 "use client";
-import React, { useState } from "react";
-import { Gallery } from "../lib/interface";
 import Image from "next/image";
-import IconArrowCart from "./Icons/IconArrowCart";
-import Lightbox, { SlideImage } from "yet-another-react-lightbox";
+import Link from "next/link";
+import { useState } from "react";
 import "yet-another-react-lightbox/styles.css";
-import NextJsImage from "./NextImage";
+import { Gallery } from "../lib/interface";
+import IconArrowCart from "./Icons/IconArrowCart";
 
 interface Props {
   data: Gallery[] | [];
@@ -13,25 +12,17 @@ interface Props {
 
 const GalleryPage = ({ data }: Props) => {
   const [isHovered, setIsHovered] = useState(-1);
-  const [choosenAlbum, setChoosenAlbum] = useState<SlideImage[]>([]);
-  const [open, setOpen] = useState(false);
-
-  const handleOpenGallery = (object: Gallery) => {
-    const transformedAlbum = object.fotky.map((url) => ({ src: url }));
-    setChoosenAlbum(transformedAlbum);
-    setOpen(true);
-  };
 
   return (
     <>
       <div className="flex flex-wrap gap-6">
         {data.map((item, index) => (
-          <div
+          <Link
             className="relative w-full  rounded-[8px] cursor-pointer max-w-[400px] h-[400px]"
             onMouseEnter={() => setIsHovered(index)}
             onMouseLeave={() => setIsHovered(-1)}
-            onClick={() => handleOpenGallery(item)}
             key={index}
+            href={`/galeria/${item.id}`}
           >
             {isHovered === index && (
               <div className="absolute w-full h-full bg-[#363128] opacity-70 rounded-[8px] transition-opacity duration-300"></div>
@@ -65,18 +56,9 @@ const GalleryPage = ({ data }: Props) => {
                 galéria
               </button>
             )}
-          </div>
+          </Link>
         ))}
       </div>
-
-      {open && (
-        <Lightbox
-          open={open}
-          close={() => setOpen(false)}
-          slides={choosenAlbum}
-          render={{ slide: NextJsImage }}
-        />
-      )}
     </>
   );
 };

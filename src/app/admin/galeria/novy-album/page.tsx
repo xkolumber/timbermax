@@ -19,6 +19,11 @@ const Page = () => {
     kategorie: [],
     nazov: "",
     id: "",
+    profil: "",
+    farba: "",
+    popis1: "",
+    popis2: "",
+    popis3: "",
   });
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [photoLoading, setPhotoLoading] = useState(false);
@@ -126,6 +131,61 @@ const Page = () => {
             type="text"
             name="nazov"
             value={actualizeGallery.nazov}
+            onChange={handleChangeMain}
+            className="w-full border border-solid border-black h-[5rem] mt-4"
+            required
+          />
+        </div>
+        <div className="flex flex-row justify-between items-center gap-4 mt-8">
+          <h6>profil galérie:</h6>
+          <input
+            type="text"
+            name="profil"
+            value={actualizeGallery.profil}
+            onChange={handleChangeMain}
+            className="w-full border border-solid border-black h-[5rem] mt-4"
+            required
+          />
+        </div>
+        <div className="flex flex-row justify-between items-center gap-4 mt-8">
+          <h6>farba:</h6>
+          <input
+            type="text"
+            name="farba"
+            value={actualizeGallery.farba}
+            onChange={handleChangeMain}
+            className="w-full border border-solid border-black h-[5rem] mt-4"
+            required
+          />
+        </div>
+        <div className="flex flex-row justify-between items-center gap-4 mt-8">
+          <h6>popis1:</h6>
+          <input
+            type="text"
+            name="popis1"
+            value={actualizeGallery.popis1}
+            onChange={handleChangeMain}
+            className="w-full border border-solid border-black h-[5rem] mt-4"
+            required
+          />
+        </div>
+        <div className="flex flex-row justify-between items-center gap-4 mt-8">
+          <h6>popis2:</h6>
+          <input
+            type="text"
+            name="popis2"
+            value={actualizeGallery.popis2}
+            onChange={handleChangeMain}
+            className="w-full border border-solid border-black h-[5rem] mt-4"
+            required
+          />
+        </div>
+        <div className="flex flex-row justify-between items-center gap-4 mt-8">
+          <h6>popis3:</h6>
+          <input
+            type="text"
+            name="popis3"
+            value={actualizeGallery.popis3}
             onChange={handleChangeMain}
             className="w-full border border-solid border-black h-[5rem] mt-4"
             required
