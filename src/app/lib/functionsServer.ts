@@ -291,8 +291,6 @@ export async function GetAdminPriceOffer(language: string) {
 }
 
 export async function GetAdminGallery() {
-  // const myBlurDataUrl = await getBase64(`${process.env.URL}/blur.png`);
-  // console.log(myBlurDataUrl);
   unstable_noStore();
   const galleryCollectionRef = firestore.collection("galeria");
 
@@ -311,6 +309,36 @@ export async function GetAdminGallery() {
         id: doc.id,
       } as Gallery;
     });
+
+    return dataGallery;
+  } catch (error) {
+    console.error("Database Error: Failed to fetch orders.", error);
+    throw new Error("Database Error: Failed to fetch orders.");
+  }
+}
+
+export async function GetAdminGalleryId(id: string) {
+  unstable_noStore();
+
+  try {
+    const docRef = firestore.collection("galeria").doc(id);
+    const docSnapshot = await docRef.get();
+
+    if (!docSnapshot.exists) {
+      console.error("Document not found.");
+      return null;
+    }
+    const data = docSnapshot.data();
+
+    if (!data) {
+      console.error("Document data is undefined.");
+      return null;
+    }
+
+    const dataGallery: Gallery = {
+      ...data,
+      id: docSnapshot.id,
+    } as Gallery;
 
     return dataGallery;
   } catch (error) {

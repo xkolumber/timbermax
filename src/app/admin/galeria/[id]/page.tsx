@@ -1,13 +1,15 @@
 import AdminFinalNotAuthorized from "@/app/components/AdminComponents/AdminFinalNotAuthorized";
-import AdminHomePage from "@/app/components/AdminComponents/AdminHomePage";
 import AdminNotAuthorized from "@/app/components/AdminComponents/AdminNotAuthorized";
+import AdminPage from "@/app/components/AdminComponents/AdminPage";
 import AdminPageSkeleton from "@/app/components/AdminComponents/AdminPageSkeleton";
 import { GetLanguages, getToken } from "@/app/lib/actions";
-import { GetAdminHomePage } from "@/app/lib/functionsServer";
-import jwt from "jsonwebtoken";
 import { Suspense } from "react";
+import jwt from "jsonwebtoken";
+import { GetAdminGalleryId, GetAdminHomePage } from "@/app/lib/functionsServer";
+import AdminHomePage from "@/app/components/AdminComponents/AdminHomePage";
+import AdminGalleryCertainAlbum from "@/app/components/AdminComponents/AdminGalleryCertainAlbum";
 
-async function Validate(language: string) {
+async function Validate(id: string) {
   const authToken = await getToken();
 
   if (!authToken) {
@@ -21,36 +23,24 @@ async function Validate(language: string) {
   const browser_uid = decodedToken.user_id;
 
   if (browser_uid === process.env.ADMIN_UID) {
-    const languages = await GetLanguages();
-
-    const data = await GetAdminHomePage(language);
+    const data = await GetAdminGalleryId(id);
     if (data) {
-      return (
-        <AdminHomePage language={language} data={data} languages={languages} />
-      );
+      return <AdminGalleryCertainAlbum data={data} />;
     }
 
-    return (
-      <AdminHomePage
-        language={language}
-        data={undefined}
-        languages={languages}
-      />
-    );
+    return <AdminGalleryCertainAlbum data={undefined} />;
   } else {
     return <AdminFinalNotAuthorized />;
   }
 }
 
 type Props = {
-  params: { language: string };
+  params: { id: string };
 };
 
 const Page = ({ params }: Props) => {
   return (
-    <Suspense fallback={<AdminPageSkeleton />}>
-      {Validate(params.language)}
-    </Suspense>
+    <Suspense fallback={<AdminPageSkeleton />}>{Validate(params.id)}</Suspense>
   );
 };
 

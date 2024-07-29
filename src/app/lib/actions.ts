@@ -1472,7 +1472,7 @@ export async function AdminDeleteImageFromAlbum(
       fotky: new_fotky,
     });
 
-    revalidatePath("/admin/galeria");
+    revalidatePath(`/admin/galeria/[${id}]/page`, "page");
 
     return "success";
   } catch (error) {
@@ -1484,9 +1484,7 @@ export async function AdminDeleteImageFromAlbum(
 export async function AdminActualizeAlbumGallery(
   id: string,
   photoUrls: string[],
-  fotky: string[],
-  kategorie: string[],
-  nazov: string
+  actualizeGallery: Gallery
 ) {
   try {
     const docRef = firestore.collection("galeria").doc(id);
@@ -1498,7 +1496,7 @@ export async function AdminActualizeAlbumGallery(
       return "false";
     }
 
-    const new_fotky: string[] = fotky;
+    const new_fotky: string[] = actualizeGallery.fotky;
 
     if (photoUrls.length > 0) {
       photoUrls.map((photo) => {
@@ -1506,14 +1504,19 @@ export async function AdminActualizeAlbumGallery(
       });
     }
 
-    await docRef.update({
-      photoUrls: photoUrls,
-      fotky: new_fotky,
-      kategorie: kategorie,
-      nazov: nazov,
-    });
+    console.log(new_fotky);
 
-    revalidatePath("/admin/galeria");
+    await docRef.update({
+      fotky: new_fotky,
+      kategorie: actualizeGallery.kategorie,
+      nazov: actualizeGallery.nazov,
+      profil: actualizeGallery.profil,
+      farba: actualizeGallery.farba,
+      popis1: actualizeGallery.popis1,
+      popis2: actualizeGallery.popis2,
+      popis3: actualizeGallery.popis3,
+    });
+    revalidatePath(`/admin/galeria/[${id}]/page`, "page");
     return "success";
   } catch (error) {
     console.error("Database Error: Failed", error);

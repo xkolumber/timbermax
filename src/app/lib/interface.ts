@@ -517,7 +517,12 @@ export interface Gallery {
   fotky: string[];
   kategorie: string[];
   nazov: string;
+  profil: string;
+  farba: string;
   id: string;
+  popis1: string;
+  popis2: string;
+  popis3: string;
 }
 
 export interface IsLoadingMap {
