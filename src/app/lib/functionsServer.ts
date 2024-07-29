@@ -14,6 +14,7 @@ import {
   Ploty,
   PriceOffer,
   Slnolamy,
+  Terasy,
 } from "./interface";
 import getBase64 from "./functions";
 
@@ -190,7 +191,7 @@ export async function GetAdminTerasy(language: string) {
       return null;
     }
     const doc = querySnapshot.docs[0];
-    const orderData = doc.data() as Slnolamy;
+    const orderData = doc.data() as Terasy;
 
     return orderData;
   } catch (error) {

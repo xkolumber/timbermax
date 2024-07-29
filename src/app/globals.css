@@ -243,6 +243,11 @@ a {
   z-index: 100;
   position: relative;
 }
+.color_section {
+  max-width: 1863px;
+  margin: auto;
+  justify-content: center;
+}
 
 .nav__close-button {
   fill: white;
