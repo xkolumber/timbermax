@@ -1,13 +1,12 @@
+import { MoreAboutTimElements } from "@/app/lib/interface";
 import React from "react";
 import Image from "next/image";
-import getBase64 from "@/app/lib/functions";
-import { MoreAboutTimElements } from "@/app/lib/interface";
 
 interface Props {
   data: MoreAboutTimElements | undefined;
 }
 
-const MoreAboutInfo = ({ data }: Props) => {
+const MoreAboutWholePage = ({ data }: Props) => {
   return (
     <div className=" ">
       <div className="main_section additional_padding w-full justify-center items-center">
@@ -95,4 +94,4 @@ const MoreAboutInfo = ({ data }: Props) => {
   );
 };
 
-export default MoreAboutInfo;
+export default MoreAboutWholePage;

@@ -1,4 +1,3 @@
-import MoreAboutInfo from "../components/MoreAboutTimberComponents.tsx/MoreAboutInfo";
 import {
   collection,
   getDocs,
@@ -10,6 +9,10 @@ import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 import { MoreAboutTimElements } from "../lib/interface";
 import { app } from "../lib/firebaseClient";
+import { Suspense } from "react";
+import HomePageSkeleton from "../components/HomePageComponents/HomePageSkeleton";
+import MoreAboutWholePage from "../components/MoreAboutTimberComponents.tsx/MoreAboutWholePage";
+import MoreAboutSkeleton from "../components/MoreAboutTimberComponents.tsx/MoreAboutSkeleton";
 
 async function GetData() {
   unstable_noStore();
@@ -30,9 +33,9 @@ async function GetData() {
     if (!querySnapshot.empty) {
       const docSnap = querySnapshot.docs[0];
       const data = docSnap.data() as MoreAboutTimElements;
-      return data;
+      return <MoreAboutWholePage data={data} />;
     } else {
-      return undefined;
+      return <MoreAboutWholePage data={undefined} />;
     }
   }
   const db = getFirestore(app);
@@ -41,17 +44,16 @@ async function GetData() {
   if (!querySnapshot.empty) {
     const docSnap = querySnapshot.docs[0];
     const data = docSnap.data() as MoreAboutTimElements;
-    return data;
+    return <MoreAboutWholePage data={data} />;
   } else {
-    return undefined;
+    return <MoreAboutWholePage data={undefined} />;
   }
 }
 
-export default async function Page() {
-  const data: MoreAboutTimElements | undefined = await GetData();
+export default function Page() {
   return (
-    <main>
-      <MoreAboutInfo data={data} />
-    </main>
+    <Suspense fallback={<MoreAboutSkeleton />}>
+      <GetData />
+    </Suspense>
   );
 }

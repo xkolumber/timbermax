@@ -38,7 +38,7 @@ export const navbar_sk: NavbarItem[] = [
       },
       {
         nazov: "Blog",
-        link: "/blog",
+        link: "/",
         icon: "",
       },
     ],
@@ -167,7 +167,7 @@ export const navbar_en: NavbarItem[] = [
       },
       {
         nazov: "Blog",
-        link: "/blog",
+        link: "/",
         icon: "",
       },
     ],
@@ -296,7 +296,7 @@ export const navbar_cz: NavbarItem[] = [
       },
       {
         nazov: "Blog",
-        link: "/blog",
+        link: "/",
         icon: "",
       },
     ],
