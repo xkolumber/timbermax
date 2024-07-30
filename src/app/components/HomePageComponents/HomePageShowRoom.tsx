@@ -1,11 +1,18 @@
 import React from "react";
 import Image from "next/image";
 
-const HomePageShowRoom = () => {
+interface Props {
+  mapa_showroomov: string;
+}
+
+const HomePageShowRoom = ({ mapa_showroomov }: Props) => {
   return (
-    <div id="showroom">
+    <div id="showroom " className="relative">
+      <button className="btn btn--secondary absolute top-12 left-56 z-10 uppercase">
+        {mapa_showroomov}
+      </button>
       <Image
-        src="/showroom.svg"
+        src="/showroom_new.svg"
         className="w-full h-full object-cover min-h-[200px] "
         alt="referencie"
         width={1000}

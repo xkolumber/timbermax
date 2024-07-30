@@ -3,21 +3,46 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import IconDoubleArrow from "../Icons/IconDoubleArrow";
+import { HomePageElements } from "@/app/lib/interface";
 
 interface Props {
   blurUrl: string | undefined;
-  button: string | undefined;
+  data: HomePageElements | undefined;
 }
-const HomePageLoop = ({ blurUrl, button }: Props) => {
+const HomePageLoop = ({ blurUrl, data }: Props) => {
   const images = [
-    "/main1.jpg",
-    "/main2.jpg",
-    "/main3.jpg",
-    "/main4.jpg",
-    "/main5.jpg",
-    "/main6.jpg",
-    "/main7.jpg",
-    "/main8.jpg",
+    {
+      src: "/main1_new.jpg",
+      text: data?.text_photo1 ? data?.text_photo1 : "",
+    },
+    {
+      src: "/main2_new.jpg",
+      text: data?.text_photo2 ? data?.text_photo2 : "",
+    },
+    {
+      src: "/main3_new.jpg",
+      text: data?.text_photo3 ? data?.text_photo3 : "",
+    },
+    {
+      src: "/main4_new.jpg",
+      text: data?.text_photo4 ? data?.text_photo4 : "",
+    },
+    {
+      src: "/main5_new.jpg",
+      text: data?.text_photo5 ? data?.text_photo5 : "",
+    },
+    {
+      src: "/main6_new.jpg",
+      text: data?.text_photo6 ? data?.text_photo6 : "",
+    },
+    {
+      src: "/main7_new.jpg",
+      text: data?.text_photo7 ? data?.text_photo7 : "",
+    },
+    {
+      src: "/main8_new.jpg",
+      text: data?.text_photo8 ? data?.text_photo8 : "",
+    },
   ];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [scale, setScale] = useState(1);
@@ -27,7 +52,7 @@ const HomePageLoop = ({ blurUrl, button }: Props) => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       setScale(1);
       setTimeout(() => setScale(1.05), 100);
-    }, 5000);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -49,7 +74,7 @@ const HomePageLoop = ({ blurUrl, button }: Props) => {
           }}
         >
           <Image
-            src={`/loop${image}`}
+            src={`/loop${image.src}`}
             alt={`Image ${index + 1}`}
             className="h-full w-full  object-cover"
             width={5000}
@@ -57,11 +82,14 @@ const HomePageLoop = ({ blurUrl, button }: Props) => {
             placeholder="blur"
             blurDataURL={blurUrl}
           />
+          <h4 className="absolute bottom-0 right-0 mb-48 mr-48 text-white uppercase">
+            {image.text}
+          </h4>
         </div>
       ))}
 
       <button className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase">
-        {button}
+        {data ? data?.button_vypocet : ""}
       </button>
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2">
         <IconDoubleArrow />

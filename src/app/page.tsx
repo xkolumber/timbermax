@@ -58,7 +58,7 @@ export default async function Home() {
 
   return (
     <main className="">
-      <HomePageFirstSection button={data ? data.button_vypocet : ""} />
+      <HomePageFirstSection data={data} />
       <HomePageOurServices data={data} />
       <HomePagePriceOffer
         nadpis={data?.cenova_p_nadpis}
@@ -79,12 +79,17 @@ export default async function Home() {
           data?.button_citat_viac ? data.button_citat_viac : ""
         }
         o_nas_elements={data?.o_nas_elements ? data.o_nas_elements : []}
+        rokov_skusenosti={data?.rokov_skusenosti ? data.rokov_skusenosti : ""}
       />
       <HomePageReferencies
         ref_elements={data?.ref_elements ? data.ref_elements : []}
+        references_title={data?.references_title ? data.references_title : ""}
+        references={data?.references ? data.references : []}
       />
 
-      <HomePageShowRoom />
+      <HomePageShowRoom
+        mapa_showroomov={data?.mapa_showroomov ? data.mapa_showroomov : ""}
+      />
     </main>
   );
 }

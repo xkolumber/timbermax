@@ -26,9 +26,15 @@ const pictures_object = [
 
 interface Props {
   ref_elements: string[];
+  references_title: string;
+  references: string[];
 }
 
-const HomePageReferencies = ({ ref_elements }: Props) => {
+const HomePageReferencies = ({
+  ref_elements,
+  references_title,
+  references,
+}: Props) => {
   return (
     <div>
       <div className="w-full bg-secondary z-20" id="referencie">
@@ -50,10 +56,12 @@ const HomePageReferencies = ({ ref_elements }: Props) => {
           </div>
           <div className="flex justify-center">
             {" "}
-            <h3 className="custom-underline  mt-16">Vaše Referencie</h3>
+            <h3 className="custom-underline  mt-16 uppercase">
+              {references_title}
+            </h3>
           </div>
           <div className="mb-16">
-            <HomePageJustReferencies />
+            <HomePageJustReferencies references={references} />
           </div>
         </div>
       </div>
