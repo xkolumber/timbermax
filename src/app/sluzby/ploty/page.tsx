@@ -1,11 +1,10 @@
 import PlotyPage from "@/app/components/ServicesComponents/PlotyPage";
+import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
 import { GetAdminPloty } from "@/app/lib/functionsServer";
-import { Ploty, Slnolamy } from "@/app/lib/interface";
-import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 async function GetData() {
-  unstable_noStore();
   const cookieStore = cookies();
   const language = cookieStore.get("language");
 
@@ -16,22 +15,21 @@ async function GetData() {
   ) {
     const data = await GetAdminPloty(language.value);
     if (data) {
-      return data;
+      return <PlotyPage data={data} />;
     }
-    return undefined;
+    <PlotyPage data={undefined} />;
   }
   const data = await GetAdminPloty("sk");
   if (data) {
-    return data;
+    return <PlotyPage data={data} />;
   }
-  return undefined;
+  <PlotyPage data={undefined} />;
 }
 
-export default async function Page() {
-  const data: Ploty | undefined = await GetData();
+export default function Page() {
   return (
-    <main>
-      <PlotyPage data={data} />
-    </main>
+    <Suspense fallback={<ServiceSkeleton />}>
+      <GetData />
+    </Suspense>
   );
 }

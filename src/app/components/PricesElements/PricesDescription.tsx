@@ -1,7 +1,6 @@
-import getBase64 from "@/app/lib/functions";
+import { PriceOffer } from "@/app/lib/interface";
 import Image from "next/image";
 import PricesElements from "./PricesElements";
-import { PriceOffer } from "@/app/lib/interface";
 
 interface Props {
   data: PriceOffer | undefined;

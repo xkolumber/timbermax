@@ -7,12 +7,11 @@ import {
 } from "firebase/firestore";
 import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
-import { MoreAboutTimElements } from "../lib/interface";
-import { app } from "../lib/firebaseClient";
 import { Suspense } from "react";
-import HomePageSkeleton from "../components/HomePageComponents/HomePageSkeleton";
-import MoreAboutWholePage from "../components/MoreAboutTimberComponents.tsx/MoreAboutWholePage";
 import MoreAboutSkeleton from "../components/MoreAboutTimberComponents.tsx/MoreAboutSkeleton";
+import MoreAboutWholePage from "../components/MoreAboutTimberComponents.tsx/MoreAboutWholePage";
+import { app } from "../lib/firebaseClient";
+import { MoreAboutTimElements } from "../lib/interface";
 
 async function GetData() {
   unstable_noStore();

@@ -1,16 +1,10 @@
 import BazenyPage from "@/app/components/ServicesComponents/BazenyPage";
-import FasadyPage from "@/app/components/ServicesComponents/FasadyPage";
-import {
-  GetAdminBazeny,
-  GetAdminFasady,
-  GetAdminTerasy,
-} from "@/app/lib/functionsServer";
-import { Bazeny, Slnolamy } from "@/app/lib/interface";
-import { unstable_noStore } from "next/cache";
+import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
+import { GetAdminBazeny } from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 async function GetData() {
-  unstable_noStore();
   const cookieStore = cookies();
   const language = cookieStore.get("language");
 
@@ -21,22 +15,21 @@ async function GetData() {
   ) {
     const data = await GetAdminBazeny(language.value);
     if (data) {
-      return data;
+      return <BazenyPage data={data} />;
     }
-    return undefined;
+    <BazenyPage data={undefined} />;
   }
   const data = await GetAdminBazeny("sk");
   if (data) {
-    return data;
+    return <BazenyPage data={data} />;
   }
-  return undefined;
+  <BazenyPage data={undefined} />;
 }
 
-export default async function Page() {
-  const data: Bazeny | undefined = await GetData();
+export default function Page() {
   return (
-    <main>
-      <BazenyPage data={data} />
-    </main>
+    <Suspense fallback={<ServiceSkeleton />}>
+      <GetData />
+    </Suspense>
   );
 }

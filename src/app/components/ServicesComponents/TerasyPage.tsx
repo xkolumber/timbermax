@@ -36,6 +36,8 @@ const TerasyPage = ({ data }: Props) => {
           quality={100}
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGPw0OAy5WbQYWBg6GnM9DDht1BmY0iJ96rOi28qSGb49e3L6f27/v/+BgC/aQ8LE9jBAQAAAABJRU5ErkJggg=="
         />
 
         <div className="main_section ">

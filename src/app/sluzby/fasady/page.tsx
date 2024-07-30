@@ -1,11 +1,10 @@
 import FasadyPage from "@/app/components/ServicesComponents/FasadyPage";
-import { GetAdminFasady, GetAdminTerasy } from "@/app/lib/functionsServer";
-import { Fasady, Slnolamy, Terasy } from "@/app/lib/interface";
-import { unstable_noStore } from "next/cache";
+import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
+import { GetAdminFasady } from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 async function GetData() {
-  unstable_noStore();
   const cookieStore = cookies();
   const language = cookieStore.get("language");
 
@@ -16,22 +15,21 @@ async function GetData() {
   ) {
     const data = await GetAdminFasady(language.value, "odvetrana");
     if (data) {
-      return data;
+      return <FasadyPage data={data} />;
     }
-    return undefined;
+    <FasadyPage data={undefined} />;
   }
   const data = await GetAdminFasady("sk", "odvetrana");
   if (data) {
-    return data;
+    return <FasadyPage data={data} />;
   }
-  return undefined;
+  <FasadyPage data={undefined} />;
 }
 
-export default async function Page() {
-  const data: Fasady | undefined = await GetData();
+export default function Page() {
   return (
-    <main>
-      <FasadyPage data={data} />
-    </main>
+    <Suspense fallback={<ServiceSkeleton />}>
+      <GetData />
+    </Suspense>
   );
 }

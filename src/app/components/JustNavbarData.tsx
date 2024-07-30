@@ -183,27 +183,27 @@ export const navbar_en: NavbarItem[] = [
       },
       {
         nazov: "Facades",
-        link: "sluzby/fasady",
+        link: "/sluzby/fasady",
         icon: <IconFasady />,
       },
       {
         nazov: "Swimming pools",
-        link: "sluzby/bazeny",
+        link: "/sluzby/bazeny",
         icon: <IconBazeny />,
       },
       {
         nazov: "Slnolams",
-        link: "sluzby/slnolamy",
+        link: "/sluzby/slnolamy",
         icon: <IconSlnolamy />,
       },
       {
         nazov: "Fences",
-        link: "sluzby/ploty",
+        link: "/sluzby/ploty",
         icon: <IconPloty />,
       },
       {
         nazov: "Other",
-        link: "sluzby/ostatne",
+        link: "/sluzby/ostatne",
         icon: <IconOstatne />,
       },
     ],
@@ -307,32 +307,32 @@ export const navbar_cz: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Terasy",
-        link: "sluzby/terasy",
+        link: "/sluzby/terasy",
         icon: <IconTerasa />,
       },
       {
         nazov: "Fasády",
-        link: "sluzby/fasady",
+        link: "/sluzby/fasady",
         icon: <IconFasady />,
       },
       {
         nazov: "Bazény",
-        link: "sluzby/bazeny",
+        link: "/sluzby/bazeny",
         icon: <IconBazeny />,
       },
       {
         nazov: "Slnolamy",
-        link: "sluzby/slnolamy",
+        link: "/sluzby/slnolamy",
         icon: <IconSlnolamy />,
       },
       {
         nazov: "Ploty",
-        link: "sluzby/ploty",
+        link: "/sluzby/ploty",
         icon: <IconPloty />,
       },
       {
         nazov: "Ostatní",
-        link: "sluzby/ostatne",
+        link: "/sluzby/ostatne",
         icon: <IconOstatne />,
       },
     ],

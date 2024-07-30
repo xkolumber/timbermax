@@ -1,11 +1,10 @@
+import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
 import SlnolamyPage from "@/app/components/ServicesComponents/SlnolamyPage";
-import { GetAdminSlnolamy, GetAdminTerasy } from "@/app/lib/functionsServer";
-import { Slnolamy } from "@/app/lib/interface";
-import { unstable_noStore } from "next/cache";
+import { GetAdminSlnolamy } from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 async function GetData() {
-  unstable_noStore();
   const cookieStore = cookies();
   const language = cookieStore.get("language");
 
@@ -16,22 +15,21 @@ async function GetData() {
   ) {
     const data = await GetAdminSlnolamy(language.value);
     if (data) {
-      return data;
+      return <SlnolamyPage data={data} />;
     }
-    return undefined;
+    <SlnolamyPage data={undefined} />;
   }
-  const data = await GetAdminTerasy("sk");
+  const data = await GetAdminSlnolamy("sk");
   if (data) {
-    return data;
+    return <SlnolamyPage data={data} />;
   }
-  return undefined;
+  <SlnolamyPage data={undefined} />;
 }
 
-export default async function Page() {
-  const data: Slnolamy | undefined = await GetData();
+export default function Page() {
   return (
-    <main>
-      <SlnolamyPage data={data} />
-    </main>
+    <Suspense fallback={<ServiceSkeleton />}>
+      <GetData />
+    </Suspense>
   );
 }
