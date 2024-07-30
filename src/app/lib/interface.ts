@@ -9,16 +9,29 @@ export interface HomePageElements {
   cenova_p_popis1: string;
   cenova_p_popis2: string;
   jazyk: string;
+  mapa_showroomov: string;
   nase_sluzby_nadpis: string;
   nase_sluzby_veta: string;
   nase_sluzby_popis: string;
   o_nas_nadpis: string;
   o_nas_popis: string;
   o_nas_elements: string[];
+
   ref_elements: string[];
+  rokov_skusenosti: string;
   sluzby: Sluzby[];
   svg_titles: string[];
   timbermax_ako: TimbermaxLike[];
+  text_photo1: string;
+  text_photo2: string;
+  text_photo3: string;
+  text_photo4: string;
+  text_photo5: string;
+  text_photo6: string;
+  text_photo7: string;
+  text_photo8: string;
+  references_title: string;
+  references: string[];
 }
 
 export interface AboutUsElements {

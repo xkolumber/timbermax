@@ -10,6 +10,7 @@ import {
   Bazeny,
   Fasady,
   Gallery,
+  HomePageElements,
   Jazyk,
   Nacenovac,
   Ostatne,
@@ -75,22 +76,8 @@ export const getToken = async () => {
 };
 
 export async function AdminactualizeHomePage(
-  button_citat_viac: string,
-  button_vypocet: string,
-  cenova_p_nadpis: string,
-  cenova_p_popis1: string,
-  cenova_p_popis2: string,
-  jazyk: string,
-  nase_sluzby_nadpis: string,
-  nase_sluzby_veta: string,
-  nase_sluzby_popis: string,
-  o_nas_nadpis: string,
-  o_nas_popis: string,
-  o_nas_elements: string[],
-  ref_elements: string[],
-  sluzby: Sluzby[],
-  svg_titles: string[],
-  timbermax_ako: TimbermaxLike[]
+  actualizeData: HomePageElements,
+  jazyk: string
 ) {
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("homepage");
@@ -107,22 +94,34 @@ export async function AdminactualizeHomePage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    button_citat_viac,
-    button_vypocet,
-    cenova_p_nadpis,
-    cenova_p_popis1,
-    cenova_p_popis2,
-    jazyk,
-    nase_sluzby_nadpis,
-    nase_sluzby_veta,
-    nase_sluzby_popis,
-    o_nas_nadpis,
-    o_nas_popis,
-    o_nas_elements,
-    ref_elements,
-    sluzby,
-    svg_titles,
-    timbermax_ako,
+    button_citat_viac: actualizeData.button_citat_viac,
+    button_vypocet: actualizeData.button_vypocet,
+    cenova_p_nadpis: actualizeData.cenova_p_nadpis,
+    cenova_p_popis1: actualizeData.cenova_p_popis1,
+    cenova_p_popis2: actualizeData.cenova_p_popis2,
+    jazyk: jazyk,
+    mapa_showroomov: actualizeData.mapa_showroomov,
+    nase_sluzby_nadpis: actualizeData.nase_sluzby_nadpis,
+    nase_sluzby_veta: actualizeData.nase_sluzby_veta,
+    nase_sluzby_popis: actualizeData.nase_sluzby_popis,
+    o_nas_nadpis: actualizeData.o_nas_nadpis,
+    o_nas_popis: actualizeData.o_nas_popis,
+    o_nas_elements: actualizeData.o_nas_elements,
+    ref_elements: actualizeData.ref_elements,
+    rokov_skusenosti: actualizeData.rokov_skusenosti,
+    sluzby: actualizeData.sluzby,
+    svg_titles: actualizeData.svg_titles,
+    timbermax_ako: actualizeData.timbermax_ako,
+    text_photo1: actualizeData.text_photo1,
+    text_photo2: actualizeData.text_photo2,
+    text_photo3: actualizeData.text_photo3,
+    text_photo4: actualizeData.text_photo4,
+    text_photo5: actualizeData.text_photo5,
+    text_photo6: actualizeData.text_photo6,
+    text_photo7: actualizeData.text_photo7,
+    text_photo8: actualizeData.text_photo8,
+    references_title: actualizeData.references_title,
+    references: actualizeData.references,
   });
   revalidatePath(`/admin/domov/[${jazyk}]/page`, "page");
   return "success";

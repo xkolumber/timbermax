@@ -1,6 +1,9 @@
 "use client";
 import { AdminactualizeHomePage } from "@/app/lib/actions";
-import { getSecondPathValue } from "@/app/lib/functionsClient";
+import {
+  empty_five_values,
+  getSecondPathValue,
+} from "@/app/lib/functionsClient";
 import { HomePageElements, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,6 +29,7 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
     cenova_p_popis1: "",
     cenova_p_popis2: "",
     jazyk: "",
+    mapa_showroomov: "",
     nase_sluzby_nadpis: "",
     nase_sluzby_veta: "",
     nase_sluzby_popis: "",
@@ -33,9 +37,20 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
     o_nas_popis: "",
     o_nas_elements: [],
     ref_elements: [],
+    rokov_skusenosti: "",
     sluzby: [],
     svg_titles: [],
     timbermax_ako: [],
+    text_photo1: "",
+    text_photo2: "",
+    text_photo3: "",
+    text_photo4: "",
+    text_photo5: "",
+    text_photo6: "",
+    text_photo7: "",
+    text_photo8: "",
+    references_title: "",
+    references: [],
   });
 
   const handleChange = (
@@ -55,22 +70,36 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
     if (data) {
       setActualizeData((prevData) => ({
         ...prevData,
-        button_citat_viac: data.button_citat_viac,
-        button_vypocet: data.button_vypocet,
-        cenova_p_nadpis: data.cenova_p_nadpis,
-        cenova_p_popis1: data.cenova_p_popis1,
-        cenova_p_popis2: data.cenova_p_popis2,
+        button_citat_viac: data.button_citat_viac ? data.button_citat_viac : "",
+        button_vypocet: data.button_vypocet ? data.button_vypocet : "",
+        cenova_p_nadpis: data.cenova_p_nadpis ? data.cenova_p_nadpis : "",
+        cenova_p_popis1: data.cenova_p_popis1 ? data.cenova_p_popis1 : "",
+        cenova_p_popis2: data.cenova_p_popis2 ? data.cenova_p_popis2 : "",
         jazyk: data.jazyk,
-        nase_sluzby_nadpis: data.nase_sluzby_nadpis,
-        nase_sluzby_veta: data.nase_sluzby_veta,
-        nase_sluzby_popis: data.nase_sluzby_popis,
-        o_nas_nadpis: data.o_nas_nadpis,
-        o_nas_popis: data.o_nas_popis,
+        mapa_showroomov: data.mapa_showroomov ? data.mapa_showroomov : "",
+        nase_sluzby_nadpis: data.nase_sluzby_nadpis
+          ? data.nase_sluzby_nadpis
+          : "",
+        nase_sluzby_veta: data.nase_sluzby_veta ? data.nase_sluzby_veta : "",
+        nase_sluzby_popis: data.nase_sluzby_popis ? data.nase_sluzby_popis : "",
+        o_nas_nadpis: data.o_nas_nadpis ? data.o_nas_nadpis : "",
+        o_nas_popis: data.o_nas_popis ? data.o_nas_popis : "",
         o_nas_elements: data.o_nas_elements,
         ref_elements: data.ref_elements,
+        rokov_skusenosti: data.rokov_skusenosti ? data.rokov_skusenosti : "",
         sluzby: data.sluzby,
         svg_titles: data.svg_titles,
         timbermax_ako: data.timbermax_ako,
+        text_photo1: data.text_photo1 ? data.text_photo1 : "",
+        text_photo2: data.text_photo2 ? data.text_photo2 : "",
+        text_photo3: data.text_photo3 ? data.text_photo3 : "",
+        text_photo4: data.text_photo4 ? data.text_photo4 : "",
+        text_photo5: data.text_photo5 ? data.text_photo5 : "",
+        text_photo6: data.text_photo6 ? data.text_photo6 : "",
+        text_photo7: data.text_photo7 ? data.text_photo7 : "",
+        text_photo8: data.text_photo8 ? data.text_photo8 : "",
+        references_title: data.references_title ? data.references_title : "",
+        references: data.references ? data.references : empty_five_values,
       }));
     }
   }, [data]);
@@ -79,24 +108,7 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await AdminactualizeHomePage(
-      actualizeData.button_citat_viac,
-      actualizeData.button_vypocet,
-      actualizeData.cenova_p_nadpis,
-      actualizeData.cenova_p_popis1,
-      actualizeData.cenova_p_popis2,
-      language,
-      actualizeData.nase_sluzby_nadpis,
-      actualizeData.nase_sluzby_veta,
-      actualizeData.nase_sluzby_popis,
-      actualizeData.o_nas_nadpis,
-      actualizeData.o_nas_popis,
-      actualizeData.o_nas_elements,
-      actualizeData.ref_elements,
-      actualizeData.sluzby,
-      actualizeData.svg_titles,
-      actualizeData.timbermax_ako
-    );
+    const response = await AdminactualizeHomePage(actualizeData, language);
     setIsLoading(false);
     if (response === "success") {
       toast.success("Sekcia bola aktualizovaná");
@@ -155,13 +167,95 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
         <div className="flex flex-row gap-4">
           {languages.map((one_lang, index) => (
             <Link
-              className="btn btn--primary"
+              className={`btn btn--primary ${
+                language === one_lang.jazyk && "!bg-green-800"
+              }`}
               href={`/admin/${getSecondPathValue(pathname)}/${one_lang.jazyk}`}
               key={index}
             >
               {one_lang.jazyk}
             </Link>
           ))}
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo1:</p>
+          <input
+            type="text"
+            name="text_photo1"
+            value={actualizeData.text_photo1}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo2:</p>
+          <input
+            type="text"
+            name="text_photo2"
+            value={actualizeData.text_photo2}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo3:</p>
+          <input
+            type="text"
+            name="text_photo3"
+            value={actualizeData.text_photo3}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo4:</p>
+          <input
+            type="text"
+            name="text_photo4"
+            value={actualizeData.text_photo4}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo5:</p>
+          <input
+            type="text"
+            name="text_photo5"
+            value={actualizeData.text_photo5}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo6:</p>
+          <input
+            type="text"
+            name="text_photo6"
+            value={actualizeData.text_photo6}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo7:</p>
+          <input
+            type="text"
+            name="text_photo7"
+            value={actualizeData.text_photo7}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>text_photo8:</p>
+          <input
+            type="text"
+            name="text_photo8"
+            value={actualizeData.text_photo8}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
         </div>
         <div className="product_admin_row">
           <p>button_citat_viac:</p>
@@ -259,6 +353,16 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
             type="text"
             name="o_nas_popis"
             value={actualizeData.o_nas_popis}
+            onChange={handleChange}
+            className=""
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>rokov_skusenosti:</p>
+          <input
+            type="text"
+            name="rokov_skusenosti"
+            value={actualizeData.rokov_skusenosti}
             onChange={handleChange}
             className=""
           />
@@ -382,6 +486,41 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
               />
             ))}
           </div>
+        </div>
+        <div className="product_admin_row">
+          <p>references_title:</p>
+          <input
+            type="text"
+            name="references_title"
+            value={actualizeData.references_title}
+            onChange={handleChange}
+            className=""
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>references:</p>
+          <div className="flex flex-col">
+            {actualizeData.references.map((size, index) => (
+              <input
+                key={index}
+                type="text"
+                name={`references${index}`}
+                value={size}
+                onChange={(e) => handleChangeItemArray("references", index, e)}
+                className="md:!w-[450px] mt-2"
+              />
+            ))}
+          </div>
+        </div>
+        <div className="product_admin_row">
+          <p>mapa_showroomov:</p>
+          <input
+            type="text"
+            name="mapa_showroomov"
+            value={actualizeData.mapa_showroomov}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
         </div>
         <button
           className="btn btn--primary !bg-red-700"
