@@ -1,11 +1,3 @@
-import { unstable_noStore } from "next/cache";
-import HomePageAboutUs from "./components/HomePageComponents/HomePageAboutUs";
-import HomePageFirstSection from "./components/HomePageComponents/HomePageFirstSection";
-import HomePageOurServices from "./components/HomePageComponents/HomePageOurServices";
-import HomePagePriceOffer from "./components/HomePageComponents/HomePagePriceOffer";
-import HomePageReferencies from "./components/HomePageComponents/HomePageReferencies";
-import HomePageShowRoom from "./components/HomePageComponents/HomePageShowRoom";
-import HomePageTimbermaxLike from "./components/HomePageComponents/HomePageTimbermaxLike";
 import {
   collection,
   getDocs,
@@ -13,8 +5,12 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { app } from "./lib/firebaseClient";
+import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
+import HomePageSkeleton from "./components/HomePageComponents/HomePageSkeleton";
+import HomePageWholePage from "./components/HomePageComponents/HomePageWholePage";
+import { app } from "./lib/firebaseClient";
 import { HomePageElements } from "./lib/interface";
 
 async function GetHomePageData() {
@@ -36,9 +32,9 @@ async function GetHomePageData() {
     if (!querySnapshot.empty) {
       const docSnap = querySnapshot.docs[0];
       const data = docSnap.data() as HomePageElements;
-      return data;
+      return <HomePageWholePage data={data} />;
     } else {
-      return undefined;
+      return <HomePageWholePage data={undefined} />;
     }
   }
   const db = getFirestore(app);
@@ -47,49 +43,16 @@ async function GetHomePageData() {
   if (!querySnapshot.empty) {
     const docSnap = querySnapshot.docs[0];
     const data = docSnap.data() as HomePageElements;
-    return data;
+    return <HomePageWholePage data={data} />;
   } else {
-    return undefined;
+    return <HomePageWholePage data={undefined} />;
   }
 }
 
-export default async function Home() {
-  const data: HomePageElements | undefined = await GetHomePageData();
-
+export default function Home() {
   return (
-    <main className="">
-      <HomePageFirstSection data={data} />
-      <HomePageOurServices data={data} />
-      <HomePagePriceOffer
-        nadpis={data?.cenova_p_nadpis}
-        popis1={data?.cenova_p_popis1}
-        popis2={data?.cenova_p_popis2}
-        button_vypocet={data?.button_vypocet}
-      />
-      <HomePageTimbermaxLike
-        timbermax_ako={data?.timbermax_ako ? data.timbermax_ako : []}
-        button_citat_viac={
-          data?.button_citat_viac ? data.button_citat_viac : ""
-        }
-      />
-      <HomePageAboutUs
-        o_nas_nadpis={data?.o_nas_nadpis ? data.o_nas_nadpis : ""}
-        o_nas_popis={data?.o_nas_popis ? data.o_nas_popis : ""}
-        button_citat_viac={
-          data?.button_citat_viac ? data.button_citat_viac : ""
-        }
-        o_nas_elements={data?.o_nas_elements ? data.o_nas_elements : []}
-        rokov_skusenosti={data?.rokov_skusenosti ? data.rokov_skusenosti : ""}
-      />
-      <HomePageReferencies
-        ref_elements={data?.ref_elements ? data.ref_elements : []}
-        references_title={data?.references_title ? data.references_title : ""}
-        references={data?.references ? data.references : []}
-      />
-
-      <HomePageShowRoom
-        mapa_showroomov={data?.mapa_showroomov ? data.mapa_showroomov : ""}
-      />
-    </main>
+    <Suspense fallback={<HomePageSkeleton />}>
+      <GetHomePageData />
+    </Suspense>
   );
 }

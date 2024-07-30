@@ -56,7 +56,7 @@ const HomePageAboutUs = ({
           <button className="btn btn--secondary">{button_citat_viac}</button>
         </div>
       </div>
-      <div className="bg-[#D9D5CF] absolute right-0 top-1/2 transform -translate-y-1/2 z-[10000] rounded-l-[8px] p-16 hidden xl:block">
+      <div className="bg-[#D9D5CF] absolute right-0 top-1/2 transform -translate-y-1/2 z-[10] rounded-l-[8px] p-16 hidden xl:block">
         <h4>20+</h4>
         <h6>{rokov_skusenosti}</h6>
       </div>
