@@ -1,4 +1,3 @@
-import MoreAboutInfo from "../components/MoreAboutTimberComponents.tsx/MoreAboutInfo";
 import {
   collection,
   getDocs,
@@ -8,11 +7,13 @@ import {
 } from "firebase/firestore";
 import { unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
-import { MoreAboutTimElements, PriceOffer } from "../lib/interface";
-import { app } from "../lib/firebaseClient";
+import { Suspense } from "react";
+import PriceOfferSkeleton from "../components/PricesElements/PriceOfferSkeleton";
 import PriceWholeObject from "../components/PricesElements/PriceWholeObject";
+import { app } from "../lib/firebaseClient";
+import { PriceOffer } from "../lib/interface";
 
-async function GetData() {
+async function GetPriceOffer() {
   unstable_noStore();
   const cookieStore = cookies();
   const language = cookieStore.get("language");
@@ -31,9 +32,9 @@ async function GetData() {
     if (!querySnapshot.empty) {
       const docSnap = querySnapshot.docs[0];
       const data = docSnap.data() as PriceOffer;
-      return data;
+      return <PriceWholeObject data={data} />;
     } else {
-      return undefined;
+      return <PriceWholeObject data={undefined} />;
     }
   }
   const db = getFirestore(app);
@@ -42,17 +43,16 @@ async function GetData() {
   if (!querySnapshot.empty) {
     const docSnap = querySnapshot.docs[0];
     const data = docSnap.data() as PriceOffer;
-    return data;
+    return <PriceWholeObject data={data} />;
   } else {
-    return undefined;
+    return <PriceWholeObject data={undefined} />;
   }
 }
 
-export default async function Page() {
-  const data: PriceOffer | undefined = await GetData();
+export default function Page() {
   return (
-    <main>
-      <PriceWholeObject data={data} />
-    </main>
+    <Suspense fallback={<PriceOfferSkeleton />}>
+      <GetPriceOffer />
+    </Suspense>
   );
 }

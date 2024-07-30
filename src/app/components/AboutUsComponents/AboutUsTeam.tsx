@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Team } from "@/app/lib/interface";
 
@@ -11,7 +11,7 @@ interface TeamMember {
   text: string;
 }
 
-const people = [
+const localPeople = [
   {
     job: "CEO",
     meno: "Peter Barták",
@@ -48,8 +48,23 @@ interface Props {
 }
 
 const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
-  const [selectedHuman, setSelectedHuman] = useState<TeamMember>(people[0]);
-  const [isHovered, setIsHovered] = useState<TeamMember>();
+  const [selectedHuman, setSelectedHuman] = useState<TeamMember | null>(null);
+  const [isHovered, setIsHovered] = useState<TeamMember | null>(null);
+
+  const people = localPeople.map((localPerson, index) => ({
+    ...localPerson,
+    text: tim[index]?.popis || "",
+    job: tim[index]?.funkcia || localPerson.job,
+    meno: tim[index]?.meno || localPerson.meno,
+  }));
+
+  useEffect(() => {
+    if (people.length > 0) {
+      setSelectedHuman(people[0]);
+    }
+  }, [tim]);
+  if (!selectedHuman) return null;
+
   return (
     <div className="bg-secondary">
       <h2 className="pt-16 pb-16 text-center">{spoznajte_tim}</h2>
@@ -79,15 +94,15 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
       <div className="grid grid-cols-4 overflow-hidden">
         {people.map(
           (object, index) =>
-            object != selectedHuman && (
+            object.meno !== selectedHuman.meno && (
               <div
                 className="relative"
                 onMouseEnter={() => setIsHovered(object)}
-                onMouseLeave={() => setIsHovered(undefined)}
+                onMouseLeave={() => setIsHovered(null)}
                 key={index}
               >
                 <Image
-                  src={`/team${object.image}`}
+                  src={`/team${object.image} `}
                   alt="hlavna_fotka"
                   height={1000}
                   width={1000}
@@ -98,16 +113,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                 />
                 {isHovered === object && (
                   <div className="absolute bottom-0 left-0 pb-16 pl-8">
-                    <p>
-                      {" "}
-                      {tim[index].meno != "" ? tim[index].meno : object.meno}
-                    </p>
-                    <p>
-                      | {""}
-                      {tim[index].funkcia != ""
-                        ? tim[index].funkcia
-                        : object.job}
-                    </p>
+                    <p>{object.meno}</p>
+                    <p>| {object.job}</p>
                   </div>
                 )}
               </div>
@@ -119,11 +126,3 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
 };
 
 export default AboutUsTeam;
-
-/*
-Dalibor Lenárt | 
-          
-            
-            
-          
-            */

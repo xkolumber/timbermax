@@ -10,7 +10,7 @@ interface Props {
 
 const PriceWholeObject = ({ data }: Props) => {
   return (
-    <div className="relative">
+    <main className="relative">
       <PricesIntro
         cennik_stiahnutie={
           data?.cennik_stiahnutie ? data?.cennik_stiahnutie : ""
@@ -34,7 +34,7 @@ const PriceWholeObject = ({ data }: Props) => {
       </div>
       <PricesDescription data={data} />
       <PricesOffer data={data} />
-    </div>
+    </main>
   );
 };
 

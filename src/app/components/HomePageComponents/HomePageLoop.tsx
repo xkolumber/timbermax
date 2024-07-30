@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import IconDoubleArrow from "../Icons/IconDoubleArrow";
 import { HomePageElements } from "@/app/lib/interface";
+import Link from "next/link";
 
 interface Props {
   blurUrl: string | undefined;
@@ -88,9 +89,12 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
         </div>
       ))}
 
-      <button className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase">
+      <Link
+        href={"/cennik"}
+        className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase"
+      >
         {data ? data?.button_vypocet : ""}
-      </button>
+      </Link>
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2">
         <IconDoubleArrow />
       </div>
