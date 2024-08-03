@@ -16,26 +16,28 @@ const HomePagePriceOffer = ({
   button_vypocet,
 }: Props) => {
   return (
-    <div className="relative h-[600px] 3xl:h-[900px] w-full">
+    <div className="relative w-full">
       <Image
-        src="/cenova_ponuka.jpg"
+        src="/price_offer.jpg"
         alt="Obrazok"
         layout="fill"
         objectFit="cover absolute"
         quality={100}
-        className="z-0"
+        className="z-0 md:min-h-[600px] 3xl:h-[750px]"
       />
 
       <IconCalculatePriceOffer />
 
-      <div className="absolute inset-0 bg-black opacity-50 z-5"></div>
-      <div className="relative inset-0 flex flex-col justify-center  text-white z-10 p-4   main_section">
-        <h3 className="uppercase  custom-underline mb-[46px] text-white">
-          {nadpis}
-        </h3>
-        <p className="mb-4 md:max-w-[50%]">{popis1}</p>
-        <p className="md:max-w-[50%]">{popis2}</p>
-        <button className="btn btn--secondary relative z-20 uppercase">
+      <div className="relative inset-0 flex flex-col   text-white z-10 p-4   main_section md:min-h-[600px] 3xl:h-[750px] ">
+        <h3 className="uppercase  custom-underline  text-white">{nadpis}</h3>
+        <p className="mb-8 3xl:mb-20 md:max-w-[50%] 2xl:max-w-[639px]">
+          {popis1}
+        </p>
+        <p className="md:max-w-[50%] 2xl:max-w-[639px]">{popis2}</p>
+        <button className="btn btn--secondary relative z-20 uppercase md:hidden !mt-8 !mb-16">
+          {button_vypocet}
+        </button>
+        <button className="btn btn--secondary  z-20 uppercase absolute md:bottom-6 xl:bottom-10 3xl:bottom-24 left-1/2 transform -translate-x-1/2  -translate-y-1/2 !hidden md:!block">
           {button_vypocet}
         </button>
       </div>

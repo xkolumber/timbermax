@@ -52,21 +52,21 @@ const HomePageAboutUs = ({
           {o_nas_nadpis}
         </h3>
         <p className="mb-4 md:max-w-[70%]">{o_nas_popis}</p>
-        <div className="flex max-w-[70%] md:justify-end">
+        <div className="flex max-w-[70%] lg:justify-end">
           <button className="btn btn--secondary">{button_citat_viac}</button>
         </div>
       </div>
-      <div className="bg-[#D9D5CF] absolute right-0 top-1/2 transform -translate-y-1/2 z-[10] rounded-l-[8px] p-16 hidden xl:block">
-        <h4>20+</h4>
-        <h6>{rokov_skusenosti}</h6>
+      <div className="bg-[#D9D5CF] absolute right-0 top-[40%] transform -translate-y-1/2 z-[10] rounded-l-[8px] p-24 hidden xl:block">
+        <h4 className="pl-16 font-medium">20+</h4>
+        <p className="uppercase text-primary font-normal">{rokov_skusenosti}</p>
       </div>
 
-      <div className="w-full border-t border-white z-20">
+      <div className="w-full border-t border-white z-20 md:!-mt-16 md:pb-16">
         <div className="navbar_section">
-          <div className="flex flex-col md:flex-row justify-between ">
+          <div className="flex flex-col md:flex-row justify-between gap-4 ">
             {buttons.map((one_button, index) => (
               <div className="flex flex-col items-center" key={index}>
-                <button className="btn btn--tertiary !max-w-none !w-[150px] !text-[24px]">
+                <button className="btn btn--tertiary !max-w-none !w-[150px] !text-[24px] !font-normal ">
                   {one_button.nunber}
                 </button>
                 <p className="uppercase text-center max-w-[180px] z-50">

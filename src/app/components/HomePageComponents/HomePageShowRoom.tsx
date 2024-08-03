@@ -8,7 +8,7 @@ interface Props {
 const HomePageShowRoom = ({ mapa_showroomov }: Props) => {
   return (
     <div id="showroom" className="relative">
-      <button className="btn btn--secondary absolute top-12 left-56 z-10 uppercase">
+      <button className="btn btn--secondary absolute top-12 left-56 z-10 uppercase !hidden md:!block">
         {mapa_showroomov}
       </button>
       <Image

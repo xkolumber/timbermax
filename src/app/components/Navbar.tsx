@@ -17,6 +17,7 @@ import useLanguageStore from "../zustand/store";
 import { doRevalidate } from "../lib/actions";
 import { navbar_sk, navbars } from "./JustNavbarData";
 import { NavbarItem } from "../lib/interface";
+import { createSlug } from "../lib/functionsClient";
 
 const Navbar = () => {
   const { language, setLanguage } = useLanguageStore();
@@ -48,7 +49,12 @@ const Navbar = () => {
     if (hoveredIndex != -1) {
       setClickedIndex(hoveredIndex);
     }
-  }, [hoveredIndex]);
+    if (clickedIndex > 2 && hoveredIndex == -1) {
+      console.log("neklikatelne");
+      console.log(hoveredIndex);
+      setClickedIndex(-1);
+    }
+  }, [hoveredIndex, clickedIndex]);
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -160,9 +166,9 @@ const Navbar = () => {
               {navbarData.map((object, index) => (
                 <div className="flex flex-row items-center gap-2" key={index}>
                   <Link
-                    className={`uppercase  cursor-pointer ${
-                      clickedIndex === index && "font-normal"
-                    }`}
+                    className={`uppercase  cursor-pointer  duration-200  ${
+                      pathname === object.link && "!font-semibold"
+                    } ${index === clickedIndex && "!font-semibold"}`}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(-1)}
                     href={object.link ? object.link : ""}

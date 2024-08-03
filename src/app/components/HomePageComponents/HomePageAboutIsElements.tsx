@@ -64,7 +64,7 @@ const HomePageAboutIsElements = ({ services, button_citat_viac }: Props) => {
 
   return (
     <div className="navbar_section m-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-16 2xl:gap-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-16 2xl:gap-24 md:-mt-4 lg:-mt-16">
         {data.map((object, index) => (
           <div
             className="h-[500px] 2xl:h-[800px] relative rounded-[8px] flex justify-center items-center flex-col cursor-pointer overflow-hidden group"
@@ -104,8 +104,8 @@ const HomePageAboutIsElements = ({ services, button_citat_viac }: Props) => {
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
 
             <div
-              className={`absolute top-[85%] left-1/2 transform -translate-x-1/2 -translate-y-[15%]  ${
-                isHovered === index ? "left-3/4" : "left-1/2"
+              className={`absolute top-[85.5%] md:top-[84.6%] left-1/2 transform -translate-x-1/2 -translate-y-[15%]  ${
+                isHovered === index ? "left-[80%] md:left-3/4" : "left-1/2"
               } duration-300`}
             >
               <IconArrowCart />

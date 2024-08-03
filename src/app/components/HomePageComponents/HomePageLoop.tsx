@@ -59,7 +59,7 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
   }, [images.length]);
 
   return (
-    <div className="relative !pt-40 min-h-[700px] xl:min-h-screen md:justify-start flex items-center   overflow-hidden">
+    <div className="relative !pt-40 min-h-[700px] md:min-h-[800px] xl:min-h-screen md:justify-start flex items-center   overflow-hidden">
       {images.map((image, index) => (
         <div
           key={index}
@@ -83,9 +83,15 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
             placeholder="blur"
             blurDataURL={blurUrl}
           />
-          <h4 className="absolute bottom-0 right-0 mb-48 mr-48 text-white uppercase">
+          <h4 className="absolute bottom-0 right-0 mb-48 mr-48 text-white uppercase hidden lg:block">
             {image.text}
           </h4>
+          <Image
+            src={`/podklad.png`}
+            alt={`Image`}
+            className="absolute w-full h-[50%] object-cover"
+            fill
+          />
         </div>
       ))}
 
@@ -95,7 +101,7 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
       >
         {data ? data?.button_vypocet : ""}
       </Link>
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2">
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2xl:scale-150">
         <IconDoubleArrow />
       </div>
     </div>

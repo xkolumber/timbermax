@@ -12,7 +12,7 @@ const HomePageOurServices = ({ data }: Props) => {
     <div className="bg-secondary">
       <div className="main_section">
         {data && data.nase_sluzby_nadpis && (
-          <h3 className="uppercase  custom-underline mb-16 2xl:mb-[76px]">
+          <h3 className="uppercase  custom-underline mb-16 2xl:mb-[66px]">
             {data.nase_sluzby_nadpis}
           </h3>
         )}

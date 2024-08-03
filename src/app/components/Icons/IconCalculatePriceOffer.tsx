@@ -8,7 +8,7 @@ const IconCalculatePriceOffer = () => {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 580 915"
-      className="absolute right-0 top-0 h-[90%] z-[15]"
+      className="absolute right-0 top-0 h-[90%] z-[15] 3xl:top-10 3xl:right-10 3xl:scale-110 hidden md:block"
     >
       <defs>
         <style>
