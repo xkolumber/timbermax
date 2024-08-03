@@ -9,6 +9,11 @@ import Image from "next/image";
 import IconSlnolamy from "../Icons/IconSlnolamy";
 import IconArrowCart from "../Icons/IconArrowCart";
 import { Sluzby } from "@/app/lib/interface";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const data = [
   {
@@ -61,10 +66,11 @@ interface Props {
 }
 const HomePageAboutIsElements = ({ services, button_citat_viac }: Props) => {
   const [isHovered, setIsHovered] = useState(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="navbar_section m-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-16 2xl:gap-24 md:-mt-4 lg:-mt-16">
+      <div className="grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-16 2xl:gap-24 md:-mt-4 lg:-mt-16 hidden md:grid">
         {data.map((object, index) => (
           <div
             className="h-[500px] 2xl:h-[800px] relative rounded-[8px] flex justify-center items-center flex-col cursor-pointer overflow-hidden group"
@@ -75,9 +81,10 @@ const HomePageAboutIsElements = ({ services, button_citat_viac }: Props) => {
             <Image
               src={object.image}
               alt="Obrazok"
-              width={1000}
-              height={1000}
+              width={300}
+              height={700}
               quality={100}
+              priority={true}
               className="absolute h-full w-full z-5 rounded-[8px] object-cover"
             />
             <div
@@ -124,6 +131,97 @@ const HomePageAboutIsElements = ({ services, button_citat_viac }: Props) => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="relative -mt-8 md:hidden ">
+        <Swiper
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 30,
+            },
+          }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true}
+          modules={[Autoplay]}
+          speed={1000}
+          className="h-[500px]"
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        >
+          {data.map((object, index) => (
+            <SwiperSlide key={index}>
+              <div
+                className="h-[500px] 2xl:h-[800px] relative rounded-[16px] flex justify-center items-center flex-col cursor-pointer overflow-hidden"
+                key={index}
+                onMouseEnter={() => setIsHovered(index)}
+                onMouseLeave={() => setIsHovered(-1)}
+              >
+                <Image
+                  src={object.image}
+                  alt="Obrazok"
+                  width={300}
+                  height={700}
+                  quality={100}
+                  priority={true}
+                  className="absolute h-full w-full z-5 rounded-[8px] object-cover"
+                />
+                <Image
+                  src={"/services_bg.png"}
+                  alt="Obrazok"
+                  width={300}
+                  height={700}
+                  quality={100}
+                  priority={true}
+                  className="absolute h-full w-full z-5 rounded-[8px] object-cover opacity-80"
+                />
+                <div className={`w-36 h-36  absolute z-10 top-[10%] scale-[1]`}>
+                  {" "}
+                  {object.svg_icon}
+                </div>
+                <h4
+                  className={`absolute uppercase text-white text-[20px] font-light top-[32%] scale-[1]  duration-300 z-10`}
+                >
+                  {services.length > 0 ? services[index].nadpis : object.title}
+                </h4>
+
+                <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
+
+                <div
+                  className={`absolute top-[85.5%] md:top-[84.6%]  transform -translate-x-1/2 -translate-y-[15%]  left-[80%] md:left-3/4`}
+                >
+                  <IconArrowCart />
+                </div>
+
+                <div className="absolute inset-0 flex justify-center items-center opacity-100 transition-opacity duration-300 z-10">
+                  <div className="text-center text-white mt-24 p-4 w-full flex justify-center">
+                    <p className="text-white description_section line-clamp-5 max-w-[85%] font-light">
+                      {services.length > 0
+                        ? services[index].popis
+                        : object.description}
+                    </p>
+                  </div>
+                  <div className="btn btn--secondary absolute top-[85%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    {button_citat_viac}
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div className="line-container mt-8 md:hidden">
+        <div className="line">
+          {services.map((item, index) => (
+            <div
+              key={index}
+              className={`circle ${
+                index === activeIndex ? "active_circle" : ""
+              }`}
+              style={{
+                left: `${(index + 1) * (100 / (services.length + 1))}%`,
+              }}
+            ></div>
+          ))}
+        </div>
       </div>
     </div>
   );

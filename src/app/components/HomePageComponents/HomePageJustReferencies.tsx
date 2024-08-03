@@ -14,8 +14,8 @@ interface Props {
 const HomePageJustReferencies = ({ references }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="main_section !pt-0 !pb-0">
-      <div className="relative mt-16 ">
+    <div className="md:main_section !pt-0 !pb-0">
+      <div className="relative ">
         <Image
           src="/referencie.jpg"
           className="w-full h-full object-cover absolute rounded-[8px]"

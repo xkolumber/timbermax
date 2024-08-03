@@ -142,11 +142,13 @@ const Navbar = () => {
                 src={"/logo.svg"}
                 alt="logo"
                 width={100}
-                height={0}
+                height={10}
+                priority={true}
+                quality={100}
                 className="w-[130px] md:w-[150px] 2xl:w-[300px]   object-contain"
               />
             </Link>
-            <div className="flex flex-row gap-6 ">
+            <div className="flex flex-row gap-6 items-center">
               {" "}
               <div
                 className={` xl:hidden cursor-pointer`}
@@ -199,7 +201,9 @@ const Navbar = () => {
                 src={"/logo.svg"}
                 alt="logo"
                 width={100}
-                height={100}
+                height={10}
+                priority={true}
+                quality={100}
                 className="w-[130px] md:w-[150px]   object-contain"
               />
             </Link>

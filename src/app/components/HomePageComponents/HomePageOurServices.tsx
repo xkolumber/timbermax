@@ -12,19 +12,15 @@ const HomePageOurServices = ({ data }: Props) => {
     <div className="bg-secondary">
       <div className="main_section">
         {data && data.nase_sluzby_nadpis && (
-          <h3 className="uppercase  custom-underline mb-16 2xl:mb-[66px]">
+          <h3 className="uppercase  custom-underline mb-16 2xl:mb-[66px] text-center md:text-left">
             {data.nase_sluzby_nadpis}
           </h3>
         )}
         {data && data.nase_sluzby_veta && (
-          <p className="text-primary description_section">
-            {data.nase_sluzby_veta}
-          </p>
+          <p className="text-primary ">{data.nase_sluzby_veta}</p>
         )}
         {data && data.nase_sluzby_popis && (
-          <p className="text-primary mt-8 description_section">
-            {data.nase_sluzby_popis}
-          </p>
+          <p className="text-primary mt-8 ">{data.nase_sluzby_popis}</p>
         )}
       </div>
       <HomePageAboutIsElements

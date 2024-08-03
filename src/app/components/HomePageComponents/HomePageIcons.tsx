@@ -25,7 +25,7 @@ interface Props {
 const HomePageIcons = ({ svg_titles }: Props) => {
   return (
     <div className="w-full flex justify-center">
-      <div className="p-[1.6rem] flex flex-col md:flex-row justify-between w-full max-w-[800px] mt-14 mb-14 3xl:mt-24 3xl:mb-24 gap-8">
+      <div className="p-[1.6rem] flex flex-col md:flex-row justify-between w-full max-w-[800px] md:mt-14 md:mb-14 3xl:mt-24 3xl:mb-24 gap-8">
         {data.map((object, index) => (
           <div
             className="flex flex-col justify-center items-center"

@@ -57,7 +57,7 @@ h2 {
   font-size: 4.6rem;
 }
 h3 {
-  font-size: 3.3rem;
+  font-size: 2.4rem;
 }
 h4 {
   /* font-size: 3.1rem; */
@@ -71,7 +71,7 @@ h6 {
 }
 p,
 a {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   letter-spacing: 2px;
   line-height: 1.6;
 }
@@ -79,15 +79,16 @@ a {
   text-transform: uppercase;
   text-decoration: underline;
   text-decoration-thickness: 1.4px;
-  text-underline-offset: 16px;
+  text-underline-offset: 12px;
   margin-bottom: 32px;
 }
 
 .description_section {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 @media screen and (min-width: 768px) {
   .custom-underline {
+    text-underline-offset: 16px;
     margin-bottom: 46px;
   }
 }
@@ -239,7 +240,7 @@ a {
 /*main section */
 
 .main_section {
-  padding: 1.8rem;
+  padding: 4rem;
   /* padding-left: 3rem; */
 
   max-width: 800px;
@@ -247,6 +248,8 @@ a {
 }
 .navbar_section {
   padding: 1.6rem;
+  padding-right: 4rem;
+  padding-left: 4rem;
   max-width: 860px;
 
   margin: auto;
@@ -302,6 +305,7 @@ a {
 
 @media screen and (min-width: 1024px) {
   .main_section {
+    padding: 1.8rem;
     padding-top: 7rem;
     padding-bottom: 7rem;
     max-width: 1000px;
@@ -361,7 +365,7 @@ a {
   align-items: center;
   font-weight: 500;
   z-index: 10;
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 3px;
 }
 
@@ -372,7 +376,7 @@ a {
 }
 
 .btn--primary {
-  background: var(--color-primary);
+  background: #384239;
   color: white;
 }
 .btn--primary:hover {
@@ -547,4 +551,24 @@ a {
 
 .animate-lines {
   animation: moveUpDown 2s ease-in-out infinite;
+}
+
+.map_round {
+  border-radius: 0px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.footer_elements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer_elements p {
+  font-size: 14px;
+  text-align: center;
 }

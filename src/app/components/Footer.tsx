@@ -21,14 +21,6 @@ const Footer = () => {
 
   const [closeClicked, setCloseClicked] = useState(false);
 
-  const clickedButtonClose = () => {
-    setCloseClicked(!closeClicked);
-  };
-
-  const handleItemClick = (item: string) => {
-    setExpandedItem(expandedItem === item ? null : item);
-  };
-
   useEffect(() => {
     setFooterData(footers[language] || footer_sk);
   }, [language]);
@@ -38,20 +30,23 @@ const Footer = () => {
       <div className=" w-full ">
         <div className="bg-primary ">
           <div
-            className={` flex flex-col md:flex-row  justify-between navbar_section !pt-8 !pb-8 md:!pt-16 md:!pb-16`}
+            className={`  flex flex-col md:flex-row  md:justify-between navbar_section !pt-8 !pb-8 md:!pt-16 md:!pb-16`}
           >
-            <Link href="/" className="w-[130px] md:w-[150px]">
+            <Link
+              href="/"
+              className="flex items-center md:items-start justify-center"
+            >
               <Image
                 src={"/logo.svg"}
                 alt="logo"
-                width={1000}
-                height={1000}
-                className="w-[130px] md:w-[150px]   object-contain"
+                width={500}
+                height={150}
+                className="w-[220px] md:w-[150px]   object-contain"
               />
             </Link>
-            <div className="flex flex-col md:flex-row gap-12  mt-8">
-              <div className="flex flex-col">
-                <p className="uppercase  cursor-pointer">
+            <div className="flex flex-col md:flex-row gap-12 items-center md:items-start  mt-24 md:mt-8">
+              <div className="footer_elements">
+                <p className="uppercase  cursor-pointer pb-2">
                   {footerData[0].sidlo}
                 </p>
                 <p>Newface, s.r.o.</p>
@@ -59,8 +54,8 @@ const Footer = () => {
                 <p>Nové Mesto, Bratislava</p>
               </div>
 
-              <div className="flex flex-col">
-                <p className="uppercase   cursor-pointer">
+              <div className="footer_elements ">
+                <p className="uppercase   cursor-pointer pb-2">
                   {footerData[0].sklad}
                 </p>
                 <p>{footerData[0].vzorkova_predajna}</p>
@@ -68,19 +63,19 @@ const Footer = () => {
                 <p>Šamorín</p>
               </div>
 
-              <div className="flex flex-col">
-                <p className="uppercase   cursor-pointer">
+              <div className="footer_elements">
+                <p className="uppercase   cursor-pointer pb-2">
                   {footerData[0].kontakt}
                 </p>
                 <p>info@timbermax.sk</p>
                 <p>+421 918 475 563</p>
               </div>
 
-              <div className="flex flex-col">
+              <div className="footer_elements pb-16 md:pb-0">
                 <p className="uppercase   cursor-pointer">
                   {footerData[0].social}
                 </p>
-                <div className="flex flex-row gap-4 items-center">
+                <div className="flex flex-row gap-4 items-center pt-4">
                   <IconFacebook />
                   <IconInstagram />
                 </div>
@@ -89,7 +84,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-primary opacity-95">
-          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4">
+          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4 footer_elements">
             <p>Copyright © 2023 - Newface, s.r.o, All Right Reserved</p>
             <p>Designed by RoyalBuild</p>
             <a href="tel:+421918654146">

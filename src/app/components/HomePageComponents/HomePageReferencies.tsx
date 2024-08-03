@@ -39,14 +39,14 @@ const HomePageReferencies = ({
     <div>
       <div className="w-full bg-secondary z-20" id="referencie">
         <div className="navbar_section ">
-          <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-16 mt-8 mb-8">
+          <div className="grid grid-cols-2 xl:grid-cols-4 justify-between gap-8 md:gap-16 mt-8 mb-8">
             {pictures_object.map((one_button, index) => (
               <div
                 className="flex flex-col xl:flex-row items-center gap-4 md:gap-8"
                 key={index}
               >
                 <div className="w-24 h-20">{one_button.icon}</div>
-                <p className=" z-50 text-primary font-normal text-center max-w-[200px]">
+                <p className="text-[12px] font-medium z-50 text-primary  text-center max-w-[200px]">
                   {ref_elements[index] != ""
                     ? ref_elements[index]
                     : one_button.title}
@@ -60,7 +60,7 @@ const HomePageReferencies = ({
               {references_title}
             </h3>
           </div>
-          <div className="mb-16">
+          <div className="md:mb-16">
             <HomePageJustReferencies references={references} />
           </div>
         </div>
