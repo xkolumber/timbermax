@@ -9,7 +9,7 @@ const AboutUsHistory = ({ nadpis, popis }: Props) => {
   return (
     <div className="bg-secondary ">
       <div className="main_section w-full justify-center items-center">
-        <h2 className="text-center">{nadpis}</h2>
+        <h3 className="custom-underline text-center ">{nadpis}</h3>
         <p className="text-primary text-center">{popis}</p>
       </div>
     </div>

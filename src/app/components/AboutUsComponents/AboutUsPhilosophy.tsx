@@ -23,25 +23,33 @@ const AboutUsPhilosophy = ({
   return (
     <div className="bg-fourthtiary">
       <div className="main_section flex flex-col justify-center items-center">
-        <h2 className="text-white">{nadpis}</h2>
-        <h6 className="text-white">{staviame_znacka}</h6>
-        <p className="text-center">{popis1}</p>{" "}
+        <h3 className="custom-underline text-center  text-white">{nadpis}</h3>
+        <h6 className="text-white text-center">{staviame_znacka}</h6>
+        <p className="text-center pt-8">{popis1}</p>{" "}
         <p className="mt-8 text-center">{popis2}</p>{" "}
         <p className="mt-8 text-center">{popis3}</p>
       </div>
 
       {/*Ceo Talk */}
-      <div className="navbar_section bg-[#354435] flex flex-col rounded-[12px] justify-center items-center relative">
-        <div className="absolute bottom-0 right-0">
-          <IconQuoteDown />
-        </div>
-        <div className="absolute top-0 left-0">
-          <IconQuoteUpper />
-        </div>
-        <p className="max-w-[80%] text-center">{citat}</p>
+      <div className="navbar_section">
+        <div className=" bg-[#354435] flex flex-col rounded-[12px] justify-center items-center relative p-[1.6rem] md:!p-16 !pt-16 xl:!pt-28">
+          <div className="md:max-w-[80%] relative">
+            <div className="absolute -top-12 left-0  scale-75 xl:scale-100">
+              <IconQuoteUpper />
+            </div>
+            <div className="absolute -bottom-12 -right-0 scale-75 xl:scale-100">
+              <IconQuoteDown />
+            </div>
+            <p className=" text-center text-white font-light">{citat}</p>
+          </div>
 
-        <p className="font-thin text-[#D9D4CD]">Peter Barták | CEO</p>
+          <p className="font-thin text-[#D9D4CD] pt-8 2xl:pt-16 pb-8">
+            Peter Barták | CEO
+          </p>
+          <div className="bg-[#D7D3CD] opacity-[19%] h-[48px] 2xl:h-[63px] w-[80%] md:w-[30%]"></div>
+        </div>
       </div>
+      <div className="h-16 2xl:h-48"></div>
     </div>
   );
 };
