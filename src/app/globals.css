@@ -48,7 +48,7 @@ h6 {
   /* margin-bottom: 1rem; */
   line-height: 1.15;
   font-weight: 400;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
 }
 h1 {
   font-size: 5.4rem;
@@ -571,4 +571,13 @@ a {
 .footer_elements p {
   font-size: 14px;
   text-align: center;
+}
+.copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.copyright p {
+  font-size: 12px;
 }

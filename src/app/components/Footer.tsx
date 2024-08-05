@@ -41,12 +41,13 @@ const Footer = () => {
                 alt="logo"
                 width={500}
                 height={150}
+                priority={true}
                 className="w-[220px] md:w-[150px]   object-contain"
               />
             </Link>
             <div className="flex flex-col md:flex-row gap-12 items-center md:items-start  mt-24 md:mt-8">
               <div className="footer_elements">
-                <p className="uppercase  cursor-pointer pb-2">
+                <p className="uppercase font-medium  cursor-pointer pb-2">
                   {footerData[0].sidlo}
                 </p>
                 <p>Newface, s.r.o.</p>
@@ -55,7 +56,7 @@ const Footer = () => {
               </div>
 
               <div className="footer_elements ">
-                <p className="uppercase   cursor-pointer pb-2">
+                <p className="uppercase font-medium  cursor-pointer pb-2">
                   {footerData[0].sklad}
                 </p>
                 <p>{footerData[0].vzorkova_predajna}</p>
@@ -64,7 +65,7 @@ const Footer = () => {
               </div>
 
               <div className="footer_elements">
-                <p className="uppercase   cursor-pointer pb-2">
+                <p className="uppercase font-medium   cursor-pointer pb-2">
                   {footerData[0].kontakt}
                 </p>
                 <p>info@timbermax.sk</p>
@@ -84,15 +85,17 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-primary opacity-95">
-          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4 footer_elements">
-            <p>Copyright © 2023 - Newface, s.r.o, All Right Reserved</p>
-            <p>Designed by RoyalBuild</p>
+          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4 copyright">
+            <p className="text-center">
+              Copyright © 2024 - Newface, s.r.o, All Right Reserved
+            </p>
+            <p className="text-center">Designed by RoyalBuild</p>
             <a href="tel:+421918654146">
               {" "}
               <p>Developed by Kolumber</p>
             </a>
 
-            <p>{footerData[0].ochrana}</p>
+            <p className="text-center">{footerData[0].ochrana}</p>
           </div>
         </div>
       </div>

@@ -83,8 +83,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
         <Image
           src={`/team${selectedHuman.main_image}`}
           alt="hlavna_fotka"
-          height={1000}
-          width={1000}
+          height={1080}
+          width={1900}
           quality={100}
           priority={true}
           className="w-full h-full   object-cover absolute"
@@ -120,8 +120,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                 <Image
                   src={`/team${object.image} `}
                   alt="hlavna_fotka"
-                  height={1000}
-                  width={1000}
+                  height={400}
+                  width={200}
                   quality={100}
                   priority={true}
                   className="w-full h-[600px] object-cover cursor-pointer hover:scale-[1.10] duration-300 z-10"
@@ -168,16 +168,16 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                     priority={true}
                     className="w-full  h-[342px] rounded-t-[12px] object-cover"
                   />
-                  <div className="absolute bottom-0  left-1/2 transform -translate-x-1/2  text-white pb-4 w-full">
+                  <div className="absolute bottom-0  left-1/2 transform -translate-x-1/2  text-white pb-4 w-full z-10">
                     <div className="flex flex-col items-center">
                       <p className="font-medium">{item.meno}</p>{" "}
                       <p className="text-center">{item.funkcia}</p>
                     </div>
                   </div>
-                  <div className="arrow-right absolute bottom-0 left-0 scale-75 pb-8 pl-2">
+                  <div className="arrow-right absolute bottom-0 left-0 scale-75 pb-8 pl-2 z-20 cursor-pointer">
                     <IconArrowLoopLeft />
                   </div>
-                  <div className="arrow-left absolute bottom-0 right-0 scale-75 pb-8 pr-2">
+                  <div className="arrow-left absolute bottom-0 right-0 scale-75 pb-8 pr-2  z-20 cursor-pointer">
                     <IconArrowLoopRight />
                   </div>
                 </div>

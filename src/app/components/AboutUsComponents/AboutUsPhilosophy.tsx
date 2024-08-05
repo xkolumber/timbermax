@@ -32,21 +32,28 @@ const AboutUsPhilosophy = ({
 
       {/*Ceo Talk */}
       <div className="navbar_section">
-        <div className=" bg-[#354435] flex flex-col rounded-[12px] justify-center items-center relative p-[1.6rem] md:!p-16 !pt-16 xl:!pt-28">
+        <div className=" bg-[#354435]  flex flex-col rounded-[12px] justify-center items-center relative p-[1.6rem] md:!p-16 pt-8 md:!pt-16 xl:!pt-28">
           <div className="md:max-w-[80%] relative">
-            <div className="absolute -top-12 left-0  scale-75 xl:scale-100">
+            <div className="absolute -top-12 left-0  scale-75 xl:scale-100 hidden md:block">
               <IconQuoteUpper />
             </div>
-            <div className="absolute -bottom-12 -right-0 scale-75 xl:scale-100">
+            <div className="absolute -bottom-12 -right-0 scale-75 xl:scale-100 hidden md:block">
               <IconQuoteDown />
             </div>
-            <p className=" text-center text-white font-light">{citat}</p>
+            <p className=" text-center text-white font-light md:hidden">
+              {" "}
+              „{citat}“
+            </p>
+            <p className=" text-center text-white font-light hidden md:flex text-[18px] 2xl:text-[25px]">
+              {" "}
+              {citat}
+            </p>
           </div>
 
           <p className="font-thin text-[#D9D4CD] pt-8 2xl:pt-16 pb-8">
             Peter Barták | CEO
           </p>
-          <div className="bg-[#D7D3CD] opacity-[19%] h-[48px] 2xl:h-[63px] w-[80%] md:w-[30%]"></div>
+          <div className="bg-[#D7D3CD] opacity-[19%] h-[48px] 2xl:h-[63px] w-[80%] md:w-[30%] mb-8"></div>
         </div>
       </div>
       <div className="h-16 2xl:h-48"></div>
