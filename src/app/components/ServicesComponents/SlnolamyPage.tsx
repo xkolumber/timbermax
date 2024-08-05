@@ -53,7 +53,9 @@ const SlnolamyPage = ({ data }: Props) => {
           <h4 className="text-tertiary">{data?.nadpis_galeria}</h4>
         </div>
       </div>
-      <ServiceGallery />
+      <ServiceGallery
+        nadpis_galeria={data?.nadpis_galeria ? data.nadpis_galeria : ""}
+      />
 
       <div className="bg-secondary">
         <div className="main_section">
