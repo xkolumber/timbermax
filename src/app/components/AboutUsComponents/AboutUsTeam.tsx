@@ -1,13 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { Team } from "@/app/lib/interface";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import IconArrowLoopLeft from "../Icons/IconArrowLoopLeft";
 import IconArrowLoopRight from "../Icons/IconArrowLoopRight";
 
@@ -64,6 +63,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
     text: tim[index]?.popis || "",
     job: tim[index]?.funkcia || localPerson.job,
     meno: tim[index]?.meno || localPerson.meno,
+    main_image: localPerson.main_image,
+    image: localPerson.image,
   }));
 
   useEffect(() => {

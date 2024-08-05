@@ -11,6 +11,8 @@ import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
 import ServiceGallery from "./ServiceGallery";
+import IconGalleryLeft from "../Icons/IconGalleryLeft";
+import IconGalleryRight from "../Icons/IconGalleryRight";
 
 interface Props {
   data: Terasy | undefined;
@@ -29,10 +31,10 @@ const TerasyPage = ({ data }: Props) => {
           <p className="text-tertiary">{data?.popis1}</p>
         </div>
         <Image
-          src={"/terasa.jpg"}
+          src={"/sluzby/terasy/first.jpg"}
           alt="hlavna_fotka"
-          height={1000}
-          width={1000}
+          height={900}
+          width={1920}
           quality={100}
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
@@ -49,11 +51,11 @@ const TerasyPage = ({ data }: Props) => {
               </p>
             ))}
           </div>
-
-          <h4 className="text-tertiary">{data?.nadpis_galeria}</h4>
         </div>
       </div>
-      <ServiceGallery />
+      <ServiceGallery
+        nadpis_galeria={data?.nadpis_galeria ? data.nadpis_galeria : ""}
+      />
 
       <div className="bg-secondary">
         <div className="main_section">
