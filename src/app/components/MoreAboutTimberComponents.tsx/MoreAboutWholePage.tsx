@@ -93,6 +93,77 @@ const MoreAboutWholePage = ({ data }: Props) => {
           {data?.lahko_nadpis}
         </h3>{" "}
         <p className="mt-4 text-primary">{data?.lahko_popis}</p>
+        <h3 className="mt-8 text-primary font-semibold">
+          {data?.fareb_nadpis}
+        </h3>{" "}
+        <p className="mt-4 text-primary">{data?.fareb_popis}</p>
+      </div>
+      <Image
+        src={"/viac-info.jpg"}
+        alt="hlavna_fotka"
+        height={900}
+        width={1920}
+        quality={100}
+        priority
+        className="w-full h-full object-cover max-h-[400px] 2xl:max-h-[600px] "
+      />
+      <div className="main_section">
+        <h3 className="mt-8 text-primary font-semibold">
+          {data?.tepel_nadpis}
+        </h3>{" "}
+        <p className="text-primary">{data?.tepel_popis}</p>
+        <h3 className="mt-8 text-primary font-semibold">
+          {data?.prehrev_nadpis}
+        </h3>{" "}
+        <p className="text-primary">{data?.prehrev_popis1}</p>
+        <p className="text-primary mt-8">{data?.prehrev_popis2}</p>
+        <p className="text-primary mt-8">{data?.prehrev_popis2}</p>
+        <p className="text-primary mt-8">{data?.prehrev_popis3}</p>
+        <p className="text-primary mt-8">{data?.prehrev_popis4}</p>
+        <p className="text-primary mt-8">{data?.prehrev_popis5}</p>
+        <p className="text-primary mt-8">{data?.prehrev_popis6}</p>
+        <h3 className="mt-8 text-primary font-semibold">
+          {data?.mech_nadpis}
+        </h3>{" "}
+        <p className="text-primary">{data?.mech_popis}</p>
+        <h3 className="mt-8 text-primary font-semibold">
+          {data?.tvar_nadpis}
+        </h3>{" "}
+        <p className="text-primary">{data?.tvar_popis1}</p>
+        <p className="text-primary mt-8">{data?.tvar_popis2}</p>
+        <p className="text-primary mt-8">{data?.tvar_popis3}</p>
+        <p className="text-primary mt-8">{data?.tvar_popis4}</p>
+        <p className="text-primary mt-8">{data?.tvar_popis5}</p>
+        <p className="text-primary mt-8">{data?.tvar_popis6}</p>
+        <h3 className="mt-8 text-primary font-semibold">
+          {data?.profil_nadpis}
+        </h3>{" "}
+        <Image
+          src={"/profil.png"}
+          alt="hlavna_fotka"
+          height={900}
+          width={1920}
+          quality={100}
+          priority
+          className="w-full h-full object-cover "
+        />
+        <p className="text-primary mt-8">{data?.profil_popis1}</p>
+        <p className="text-primary mt-8">{data?.profil_popis2}</p>
+        <p className="text-primary mt-8">{data?.profil_popis3}</p>
+        <p className="text-primary mt-8">{data?.profil_popis4}</p>
+        <Image
+          src={"/tabulka.png"}
+          alt="hlavna_fotka"
+          height={900}
+          width={1920}
+          quality={100}
+          priority
+          className="w-full h-full object-cover mt-8 "
+        />
+        <h3 className="mt-8 text-primary custom-underline">
+          {data?.nadpis_vizualizacia}
+        </h3>{" "}
+        <p className="text-primary mt-8">{data?.popis_viz_1}</p>
       </div>
     </div>
   );

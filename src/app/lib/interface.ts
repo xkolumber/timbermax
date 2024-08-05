@@ -66,6 +66,37 @@ export interface MoreAboutTimElements {
   another_popis2: string;
   lahko_nadpis: string;
   lahko_popis: string;
+  fareb_nadpis: string;
+  fareb_popis: string;
+  tepel_nadpis: string;
+  tepel_popis: string;
+  prehrev_nadpis: string;
+  prehrev_popis1: string;
+  prehrev_popis2: string;
+  prehrev_popis3: string;
+  prehrev_popis4: string;
+  prehrev_popis5: string;
+  prehrev_popis6: string;
+  mech_nadpis: string;
+  mech_popis: string;
+  tvar_nadpis: string;
+  tvar_popis1: string;
+  tvar_popis2: string;
+  tvar_popis3: string;
+  tvar_popis4: string;
+  tvar_popis5: string;
+  tvar_popis6: string;
+  tvar_popis7: string;
+  profil_nadpis: string;
+  profil_popis1: string;
+  profil_popis2: string;
+  profil_popis3: string;
+  profil_popis4: string;
+  nadpis_vizualizacia: string;
+  popis_viz_1: string;
+  farba: string;
+  btn_ceny: string;
+  btn_kalkulator: string;
 }
 
 export interface PriceOffer {

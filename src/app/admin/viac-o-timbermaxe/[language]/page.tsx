@@ -1,13 +1,9 @@
 import AdminAboutTimbermax from "@/app/components/AdminComponents/AdminAboutTimbermax";
-import AdminAboutUsPage from "@/app/components/AdminComponents/AdminAboutUsPage";
 import AdminFinalNotAuthorized from "@/app/components/AdminComponents/AdminFinalNotAuthorized";
 import AdminNotAuthorized from "@/app/components/AdminComponents/AdminNotAuthorized";
 import AdminPageSkeleton from "@/app/components/AdminComponents/AdminPageSkeleton";
 import { GetLanguages, getToken } from "@/app/lib/actions";
-import {
-  GetAdminAboutUsPage,
-  GetAdminMoreAbout,
-} from "@/app/lib/functionsServer";
+import { GetAdminMoreAbout } from "@/app/lib/functionsServer";
 import jwt from "jsonwebtoken";
 import { Suspense } from "react";
 
