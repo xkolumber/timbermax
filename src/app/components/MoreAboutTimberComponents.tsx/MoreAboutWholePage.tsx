@@ -20,7 +20,18 @@ const MoreAboutWholePage = ({ data }: Props) => {
           width={1500}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+          className="w-full h-[600px] md:h-full max-h-[800px] object-cover hidden md:block"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAALUlEQVR4nAEiAN3/AObj0Xfy6+G4DwkAuNrTvlkA6ufUeP/677g8NSi4wLmjYGzfFKZNZSBlAAAAAElFTkSuQmCC"
+        />
+        <Image
+          src={"/more_about/first_m.png"}
+          alt="hlavna_fotka"
+          height={900}
+          width={900}
+          quality={100}
+          priority={true}
+          className="w-full object-cover  md:hidden mt-16 mb-16"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAALUlEQVR4nAEiAN3/AObj0Xfy6+G4DwkAuNrTvlkA6ufUeP/677g8NSi4wLmjYGzfFKZNZSBlAAAAAElFTkSuQmCC"
         />
@@ -37,7 +48,7 @@ const MoreAboutWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+          className="w-full h-[400px] md:h-full max-h-[800px] object-cover"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGPw0OAy5WbQYWBg6GnM9DDht1BmY0iJ96rOi28qSGb49e3L6f27/v/+BgC/aQ8LE9jBAQAAAABJRU5ErkJggg=="
         />
@@ -53,10 +64,10 @@ const MoreAboutWholePage = ({ data }: Props) => {
         height={300}
         width={1920}
         quality={100}
-        priority
-        className="w-full h-full object-cover max-h-[400px] 3xl:max-h-[500px]"
+        priority={true}
+        className="w-full md:h-full object-cover h-[450px] max-h-[400px] 3xl:max-h-[500px] object-[65%]"
       />
-      <div className="main_section">
+      <div className="main_section hidden md:block">
         <p className="text-primary">{data?.next_popis4} </p>
         <div className="flex flex-col md:flex-row gap-6 justify-center">
           <button className="btn btn--fourthtiary uppercase">
@@ -68,6 +79,22 @@ const MoreAboutWholePage = ({ data }: Props) => {
         </div>
         <p className="text-primary">{data?.pod_btn}</p>
       </div>
+      <div className="bg-[#C6BFB6] flex flex-col justify-center items-center pt-12 pb-12 md:hidden">
+        <p className="text-primary font-normal">TIMBERMAX</p>
+        <div className="flex flex-row gap-8">
+          <button className="btn btn--fourthtiary uppercase !text-[12px]">
+            Exotic
+          </button>
+          <button className="btn btn--secondary border border-black uppercase !text-[12px]">
+            Rustic
+          </button>
+        </div>
+      </div>
+      <div className="main_section md:hidden">
+        {" "}
+        <p className="text-primary">{data?.pod_btn}</p>
+      </div>
+
       <Image
         src={"/more_about/fourth.jpg"}
         alt="hlavna_fotka"
@@ -75,7 +102,7 @@ const MoreAboutWholePage = ({ data }: Props) => {
         width={1920}
         quality={100}
         priority
-        className="w-full h-full object-cover max-h-[600px] 3xl:max-h-[800px]"
+        className="w-full h-[400px] md:h-full object-cover max-h-[600px] 3xl:max-h-[800px]  object-[65%]"
       />
       <div className="main_section">
         <p className="text-primary">{data?.another_popis1}</p>
@@ -86,7 +113,16 @@ const MoreAboutWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover hidden md:hlock "
+        />
+        <Image
+          src={"/more_about/fifth_m.png"}
+          alt="hlavna_fotka"
+          height={900}
+          width={800}
+          quality={100}
+          priority
+          className="w-full h-full object-cover md:hidden mt-16 mb-16"
         />
         <p className="text-primary">{data?.another_popis2}</p>
         <h3 className="mt-8 text-primary font-semibold">

@@ -240,7 +240,7 @@ a {
 /*main section */
 
 .main_section {
-  padding: 4rem;
+  padding: 2.5rem;
   /* padding-left: 3rem; */
 
   max-width: 800px;
@@ -248,8 +248,8 @@ a {
 }
 .navbar_section {
   padding: 1.6rem;
-  padding-right: 4rem;
-  padding-left: 4rem;
+  padding-right: 2.5rem;
+  padding-left: 2.5rem;
   max-width: 860px;
 
   margin: auto;
