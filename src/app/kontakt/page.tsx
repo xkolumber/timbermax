@@ -1,7 +1,7 @@
 import React from "react";
 
 const page = () => {
-  return <div>Kontakt page</div>;
+  return <div className="main_section additional_padding">Kontakt page</div>;
 };
 
 export default page;
