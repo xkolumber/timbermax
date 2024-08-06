@@ -11,8 +11,6 @@ import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
 import ServiceGallery from "./ServiceGallery";
-import IconGalleryLeft from "../Icons/IconGalleryLeft";
-import IconGalleryRight from "../Icons/IconGalleryRight";
 
 interface Props {
   data: Terasy | undefined;
@@ -64,7 +62,7 @@ const TerasyPage = ({ data }: Props) => {
           <p className="text-tertiary">{data?.popis_informacie_1}</p>
         </div>
         <div className="navbar_section">
-          <div className="grid grid-cols-5">
+          <div className="grid-cols-2 grid md:grid-cols-5">
             {icon_text.map((object, index) => (
               <div
                 className={`flex flex-col hover:border-[1.4px] ${
@@ -74,7 +72,7 @@ const TerasyPage = ({ data }: Props) => {
                 onClick={() => setVariantClicked(index)}
               >
                 <div className="w-32 full pt-8">{object.icon}</div>
-                <p className="uppercase text-[#1D281F]">
+                <p className="uppercase text-[#1D281F] text-center">
                   {data?.info_variants[index] != ""
                     ? data?.info_variants[index]
                     : object.text}

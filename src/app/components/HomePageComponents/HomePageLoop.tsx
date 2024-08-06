@@ -99,6 +99,7 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
             width={1920}
             height={1080}
             placeholder="blur"
+            priority={true}
             blurDataURL={blurUrl}
           />
 
@@ -108,6 +109,7 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
           <Image
             src={`/podklad.png`}
             alt={`Image`}
+            priority={true}
             className="absolute w-full h-[50%] object-cover"
             fill
           />
