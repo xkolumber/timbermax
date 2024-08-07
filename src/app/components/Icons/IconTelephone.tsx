@@ -7,7 +7,7 @@ const IconTelephone = () => {
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16.69 16.78"
-      className="w-4 h-4"
+      className="w-6 h-6"
     >
       <g id="Hlavna_Lista">
         <g id="HlavnaLista">

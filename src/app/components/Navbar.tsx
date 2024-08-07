@@ -6,18 +6,18 @@ import Image from "next/image";
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import IconHamburger from "./Icons/IconHamburger";
-import IconTelephone from "./Icons/IconTelephone";
+import { doRevalidate } from "../lib/actions";
+import { NavbarItem } from "../lib/interface";
+import useLanguageStore from "../zustand/store";
+import IconCalculate from "./Icons/IconCalculate";
 import IconEmail from "./Icons/IconEmail";
 import IconFacebook from "./Icons/IconFacebook";
+import IconHamburger from "./Icons/IconHamburger";
 import IconInstagram from "./Icons/IconInstagram";
 import IconNavbarArrow from "./Icons/IconNavbarArrow";
-import IconCalculate from "./Icons/IconCalculate";
-import useLanguageStore from "../zustand/store";
-import { doRevalidate } from "../lib/actions";
-import { navbar_sk, navbars } from "./JustNavbarData";
-import { NavbarItem } from "../lib/interface";
-import { createSlug } from "../lib/functionsClient";
+import IconNavbarCloseButton from "./Icons/IconNavbarCloseButton";
+import IconTelephone from "./Icons/IconTelephone";
+import { navbar_languages, navbar_sk, navbars } from "./JustNavbarData";
 
 const Navbar = () => {
   const { language, setLanguage } = useLanguageStore();
@@ -28,16 +28,21 @@ const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [navbarData, setNavbarData] = useState<NavbarItem[]>(navbar_sk);
+  const [showLanguages, setShowLanguages] = useState(false);
+  const [showLanguagesMobile, setShowLanguagesMobile] = useState(false);
+
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const triggerRef = useRef<HTMLDivElement | null>(null);
 
   const clickedButtonClose = () => {
     setCloseClicked(!closeClicked);
   };
 
-  const handleLanguageChange = async (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setLanguage(event.target.value);
+  const handleLanguageChange = async (lang: string) => {
+    setLanguage(lang);
     setCloseClicked(false);
+    setShowLanguages(false);
+    setShowLanguagesMobile(false);
     await doRevalidate(pathname);
   };
 
@@ -50,8 +55,6 @@ const Navbar = () => {
       setClickedIndex(hoveredIndex);
     }
     if (clickedIndex > 2 && hoveredIndex == -1) {
-      console.log("neklikatelne");
-      console.log(hoveredIndex);
       setClickedIndex(-1);
     }
   }, [hoveredIndex, clickedIndex]);
@@ -83,16 +86,55 @@ const Navbar = () => {
     setNavbarData(navbars[language] || navbar_sk);
   }, [language]);
 
+  useEffect(() => {
+    if (showLanguages && triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX,
+      });
+    }
+  }, [showLanguages]);
+
+  useEffect(() => {
+    if (closeClicked) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [closeClicked]);
+
   return (
     <nav className="w-full relative  flex flex-col navbar ">
+      {showLanguages && (
+        <div
+          className="absolute z-[2000] bg-primary flex-col w-24 hidden md:flex"
+          style={{
+            top: dropdownPosition.top,
+            left: dropdownPosition.left - 9,
+          }}
+        >
+          {navbar_languages
+            .filter((lang) => language !== lang)
+            .map((lang, index) => (
+              <p
+                className="px-4 py-2 text-white cursor-pointer hover:text-gray-400 duration-200 uppercase"
+                onClick={() => handleLanguageChange(lang)}
+                key={index}
+              >
+                {lang}
+              </p>
+            ))}
+        </div>
+      )}
       <div className=" w-full ">
         <div
           className={`navbar-part ${
             showNavbarPart ? "show" : "hide"
           } bg-primary hidden md:block`}
         >
-          <div className="navbar_section w-full flex flex-row justify-between">
-            <div className="flex flex-row gap-6">
+          <div className="navbar_section w-full flex flex-row justify-between relative">
+            <div className="flex flex-row gap-6 lg:gap-12 2xl:gap-20">
               <div className="flex flex-row gap-4 items-center">
                 {" "}
                 <IconTelephone />
@@ -105,25 +147,25 @@ const Navbar = () => {
               </div>
             </div>
             <div className="flex flex-row gap-4 items-center">
-              <IconFacebook />
-              <IconInstagram />
+              <Link href={"https://www.facebook.com/Timbermax"}>
+                <IconFacebook />
+              </Link>
+              <Link href={"https://www.instagram.com/timbermax_eu/"}>
+                <IconInstagram />
+              </Link>
               <div
-                className="flex flex-row items-center gap-4"
+                className="flex flex-row items-center gap-4 ml-12"
                 onMouseEnter={() => setHoveredIndex(3)}
                 onMouseLeave={() => setHoveredIndex(-1)}
+                ref={triggerRef}
               >
-                {/* <p className="pl-12">SK</p> */}
-                <select
-                  name="languages"
-                  id="languages"
-                  value={language}
-                  onChange={handleLanguageChange}
+                <div
+                  className="flex flex-row items-center gap-4 relative cursor-pointer"
+                  onClick={() => setShowLanguages((prevState) => !prevState)}
                 >
-                  <option value="sk">SK</option>
-                  <option value="cz">CZ</option>
-                  <option value="en">EN</option>
-                </select>
-                {/* <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} /> */}
+                  <p className="leading-none  uppercase">{language}</p>
+                  <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} />
+                </div>
               </div>
             </div>
           </div>
@@ -137,7 +179,7 @@ const Navbar = () => {
           <div
             className={` flex flex-row  justify-between navbar_section  2xl:h-[100px]`}
           >
-            <Link href="/" className="w-[130px] md:w-[150px]">
+            <Link href="/" className="w-[130px] md:w-[150px] 2xl:w-[200px] ">
               <Image
                 src={"/logo.svg"}
                 alt="logo"
@@ -145,7 +187,7 @@ const Navbar = () => {
                 height={10}
                 priority={true}
                 quality={100}
-                className="w-[130px] md:w-[150px] 2xl:w-[300px]   object-contain"
+                className="w-[130px] md:w-[150px] 2xl:w-[200px]   object-contain"
               />
             </Link>
             <div className="flex flex-row gap-6 items-center">
@@ -195,7 +237,7 @@ const Navbar = () => {
             closeClicked ? "collapsible--collapsed" : ""
           }  `}
         >
-          <div className="bg-primary flex flex-row justify-between navbar_section w-full !m-0 opacity-85">
+          <div className="bg-primary flex flex-row justify-between navbar_section w-full !m-0 opacity-85 items-center">
             <Link href="/" className="w-[130px] md:w-[150px]">
               <Image
                 src={"/logo.svg"}
@@ -207,13 +249,13 @@ const Navbar = () => {
                 className="w-[130px] md:w-[150px]   object-contain"
               />
             </Link>
-            <div className="flex flex-row gap-6">
+            <div className="flex flex-row gap-6 items-center">
               {" "}
               <div
                 className={` xl:hidden cursor-pointer`}
                 onClick={() => clickedButtonClose()}
               >
-                <IconHamburger />
+                <IconNavbarCloseButton />
               </div>
               <div
                 className={` xl:hidden cursor-pointer`}
@@ -331,39 +373,58 @@ const Navbar = () => {
             </Link>
 
             <div className="flex flex-col bg-primary w-full justify-center gap-4 pt-4 pb-4">
-              <div className="flex flex-row gap-6 justify-center items-center">
+              <div className="flex flex-row gap-16 justify-center items-center pt-6 pb-6">
                 <div className="flex flex-row gap-4 items-center">
                   {" "}
                   <IconTelephone />
-                  <p className="font-extralight">+421 918 475 563</p>
+                  <p className="font-extralight text-[8px]">+421 918 475 563</p>
                 </div>
                 <div className="flex flex-row gap-4 items-center">
                   {" "}
                   <IconEmail />
-                  <p className="font-extralight">info@timbermax.sk</p>
+                  <p className="font-extralight text-[8px]">
+                    info@timbermax.sk
+                  </p>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 items-center justify-center">
-                <IconFacebook />
-                <IconInstagram />
+              <div className="flex flex-row gap-8 items-center justify-center scale-75">
+                <Link href={"https://www.facebook.com/Timbermax"}>
+                  <IconFacebook />
+                </Link>
+                <Link href={"https://www.instagram.com/timbermax_eu/"}>
+                  <IconInstagram />
+                </Link>
               </div>
               <div
-                className="flex flex-row items-center gap-4 justify-center"
-                onMouseEnter={() => setHoveredIndex(3)}
+                className="flex flex-col items-center gap-4 justify-center relative pt-2"
+                onMouseEnter={() => setHoveredIndex(8)}
                 onMouseLeave={() => setHoveredIndex(-1)}
               >
-                <p className="pl-12 font-extralight"></p>
-                <select
-                  name="languages"
-                  id="languages"
-                  value={language}
-                  onChange={handleLanguageChange}
+                <div
+                  className="flex flex-row items-center gap-4 relative cursor-pointer"
+                  onClick={() =>
+                    setShowLanguagesMobile((prevState) => !prevState)
+                  }
                 >
-                  <option value="sk"> SK</option>
-                  <option value="cz">CZ</option>
-                  <option value="en">EN</option>
-                </select>
-                <IconNavbarArrow index={3} hoveredIndex={hoveredIndex} />
+                  <p className="leading-none  uppercase">{language}</p>
+
+                  <IconNavbarArrow index={8} hoveredIndex={hoveredIndex} />
+                </div>
+                {showLanguagesMobile && (
+                  <div className="z-[2000] bg-primary flex-col w-24 flex bottom-0">
+                    {navbar_languages
+                      .filter((lang) => language !== lang)
+                      .map((lang, index) => (
+                        <p
+                          className="px-4 py-2 text-white cursor-pointer hover:text-gray-400 duration-200 uppercase"
+                          onClick={() => handleLanguageChange(lang)}
+                          key={index}
+                        >
+                          {lang}
+                        </p>
+                      ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -448,7 +509,6 @@ const Navbar = () => {
           </div>
         </div>
       )}
-      {/* {closeClicked && <div className="behind_card_background"></div>} */}
     </nav>
   );
 };

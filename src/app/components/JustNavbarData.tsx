@@ -398,3 +398,5 @@ export const navbars: Navbars = {
   en: navbar_en,
   cz: navbar_cz,
 };
+
+export const navbar_languages = ["sk", "cz", "en"];

@@ -7,7 +7,7 @@ const IconEmail = () => {
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 18.44 14.28"
-      className="w-4 h-4"
+      className="w-6 h-6"
     >
       <g id="Hlavna_Lista">
         <g id="HlavnaLista">
