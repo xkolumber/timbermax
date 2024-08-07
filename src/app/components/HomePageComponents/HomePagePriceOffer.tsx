@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import IconCalculatePriceOffer from "../Icons/IconCalculatePriceOffer";
+import Link from "next/link";
 
 interface Props {
   nadpis: string | undefined;
@@ -51,9 +52,12 @@ const HomePagePriceOffer = ({
           </button>
         </div>
 
-        <button className="btn btn--secondary  z-20 uppercase absolute md:bottom-6 xl:bottom-10 3xl:bottom-24 left-1/2 transform -translate-x-1/2  -translate-y-1/2 !hidden md:!block">
+        <Link
+          className="btn btn--secondary  z-20 uppercase absolute md:bottom-6 xl:bottom-10 3xl:bottom-24 left-1/2 transform -translate-x-1/2  -translate-y-1/2 !hidden md:!block"
+          href={"/cennik"}
+        >
           {button_vypocet}
-        </button>
+        </Link>
       </div>
     </div>
   );

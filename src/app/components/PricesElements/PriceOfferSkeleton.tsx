@@ -6,17 +6,17 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const PriceOfferSkeleton = () => {
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <Image
-        src={"/loop/main4_new.jpg"}
+        src={"/cennik/cennik_material.svg"}
         alt="hlavna_fotka"
         height={1000}
-        width={1000}
+        width={1900}
         quality={100}
         priority={true}
         className="w-full  md:h-full max-h-[600px] object-cover"
         placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALKsmv/06/Ls5P//9QARAQDfyrTAtq7czscAFhQAISAaDxwAFC4A1/wSgqleEjIAAAAASUVORK5CYII="
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGNggIL/3+58ub5vzReGsuLUW0d3L799Ym3n7aubp9wGAO9XEfVObI8ZAAAAAElFTkSuQmCC"
       />
       <div
         className="flex flex-col gap-4 

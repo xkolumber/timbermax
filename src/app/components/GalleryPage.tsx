@@ -26,7 +26,7 @@ const GalleryPage = ({ data }: Props) => {
   return (
     <>
       <h1 className="text-primary mb-4"> {galleryData[0].title}</h1>
-      <div className="flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 2xl:gap-12">
         {data.map((item, index) => (
           <Link
             className="relative w-full  rounded-[8px] cursor-pointer max-w-[400px] h-[400px]"
@@ -46,7 +46,7 @@ const GalleryPage = ({ data }: Props) => {
                 width={500}
                 quality={100}
                 priority={true}
-                className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px]"
+                className="w-full h-[400px] md:h-full max-h-[800px] object-cover rounded-[8px]"
                 placeholder="blur"
                 blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGOY9/D/sf//O/duiWgrY2ia3Nk4vVlYg4GBn4GBQZArsSzIK1ZNzUsQAHlRDqY1UQU5AAAAAElFTkSuQmCC"
               />

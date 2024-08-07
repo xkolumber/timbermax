@@ -50,7 +50,7 @@ const GalleryPageId = ({ data }: Props) => {
           width={1000}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover cursor-pointer mt-8 rounded-[8px]"
+          className="w-full md:h-[500px]  2xl:h-[800px] object-cover cursor-pointer mt-8 rounded-[8px]"
           onClick={() => handleOpenGallery(0)}
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
@@ -66,7 +66,7 @@ const GalleryPageId = ({ data }: Props) => {
             width={500}
             quality={100}
             priority={true}
-            className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px] cursor-pointer"
+            className="w-full md:w-1/2 md:h-[500px]   2xl:h-[800px] object-cover rounded-[8px] cursor-pointer"
             onClick={() => handleOpenGallery(1)}
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
@@ -80,7 +80,7 @@ const GalleryPageId = ({ data }: Props) => {
             width={500}
             quality={100}
             priority={true}
-            className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px]  cursor-pointer"
+            className="w-full md:w-1/2 md:h-[500px]  2xl:h-[800px] object-cover rounded-[8px]  cursor-pointer"
             onClick={() => handleOpenGallery(2)}
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
@@ -96,7 +96,7 @@ const GalleryPageId = ({ data }: Props) => {
           width={1000}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer rounded-[8px]  mt-8"
+          className="w-full h-[600px] md:h-full  2xl:h-[800px] object-cover  cursor-pointer rounded-[8px]  mt-8"
           onClick={() => handleOpenGallery(3)}
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
@@ -111,7 +111,7 @@ const GalleryPageId = ({ data }: Props) => {
           width={1000}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px] cursor-pointer"
+          className="w-full h-[600px] md:h-full 2xl:h-[800px] object-cover rounded-[8px] cursor-pointer"
           onClick={() => handleOpenGallery(4)}
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
