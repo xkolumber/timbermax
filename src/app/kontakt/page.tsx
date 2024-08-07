@@ -5,7 +5,7 @@ const page = () => {
   return (
     <>
       <div className="main_section additional_padding">
-        <h3 className="custom-underline">Kontakt</h3>
+        <h1 className="text-primarz">Kontakt</h1>
         <p className="text-primary">
           Dosky Timbermax máte teraz v blízkosti Vášho domova.
         </p>

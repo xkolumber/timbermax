@@ -6,7 +6,7 @@ interface Props {
   cennik_stiahnutie: string;
 }
 
-const PricesIntro = async ({ cennik_stiahnutie }: Props) => {
+const PricesIntro = ({ cennik_stiahnutie }: Props) => {
   // const myBlurDataUrl = await getBase64(`${process.env.URL}/pic.webp`);
   // console.log(myBlurDataUrl);
 

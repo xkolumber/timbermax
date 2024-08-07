@@ -2,25 +2,49 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Image from "next/image";
 import IconDoubleArrow from "../Icons/IconDoubleArrow";
+import IconArrowLoopLeft from "../Icons/IconArrowLoopLeft";
+import IconArrowLoopRight from "../Icons/IconArrowLoopRight";
+import Link from "next/link";
 
 const HomePageSkeleton = () => {
   return (
     <>
-      <div className="relative !pt-40 min-h-[700px] xl:min-h-screen md:justify-start flex items-center   overflow-hidden">
+      <div className="relative  flex items-center justify-center overflow-hidden">
         <Image
           src={`/loop/main1_new.jpg`}
           alt={`Image`}
-          className="h-full w-full  object-cover "
-          width={5000}
-          height={5000}
+          className="h-full w-full object-cover min-h-[700px] md:min-h-[800px] xl:min-h-screen"
+          width={1920}
+          height={1080}
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGPoyAnauXnji/+fbVNdGZqyAqe1FtlEajHIMzD42mhFBFjwaAgw8DEAAEdSDLK7z3GTAAAAAElFTkSuQmCC"
         />
-        <button className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase">
-          <Skeleton baseColor="#DEDEDE" width={300} />
-        </button>
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2">
+        <Image
+          src={`/podklad.png`}
+          alt={`Image`}
+          priority={true}
+          className="absolute w-full h-[50%] object-cover"
+          fill
+        />
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2xl:scale-150">
           <IconDoubleArrow />
+        </div>
+      </div>
+      <div className="navbar_section min-h-[700px] md:min-h-[800px] xl:min-h-screen  w-full  flex flex-col justify-between p-12">
+        <Link
+          href={"/cennik"}
+          className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase !font-medium"
+        >
+          <Skeleton baseColor="#DEDEDE" width={300} />
+        </Link>
+
+        <div className="flex flex-col  gap-8 md:gap-12 items-end absolute right-0 top-[70%] md:top-[65%] left-1/2 transform -translate-y-1/2 p-[1.6rem]">
+          <div className="cursor-pointer">
+            <IconArrowLoopLeft />
+          </div>
+          <div className="cursor-pointer">
+            <IconArrowLoopRight />
+          </div>
         </div>
       </div>
       <div className="bg-secondary">

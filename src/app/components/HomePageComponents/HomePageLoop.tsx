@@ -103,9 +103,6 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
             blurDataURL={blurUrl}
           />
 
-          <h4 className=" w-full h-full bottom-0 !absolute right-0 text-white uppercase hidden lg:block z-[5000]">
-            {/* {image.text} */}
-          </h4>
           <Image
             src={`/podklad.png`}
             alt={`Image`}
