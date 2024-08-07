@@ -1,6 +1,7 @@
 "use client";
 
 import imageCompression from "browser-image-compression";
+import { Prevadzka } from "./interface";
 
 export function getSecondPathValue(pathname: string) {
   const parts = pathname.split("/").filter(Boolean);
@@ -155,3 +156,118 @@ export function createSlug(title: string): string {
 
   return slug;
 }
+
+export const prevadzky: Prevadzka[] = [
+  {
+    kraj: "Bratislavský kraj",
+    adresa: "Senecká cesta 2, Šamorín",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "7:00-20:00",
+      ut: "7:00-20:00",
+      st: "7:00-20:00",
+      stv: "7:00-20:00",
+      pi: "7:00-20:00",
+      sob: "8:00-20:00",
+      ne: "8:00-20:00",
+    },
+  },
+  {
+    kraj: "Trnavský Kraj",
+    adresa: "Dedinská 102, Trnava-Modranka | Záhradníctvo Dechtický",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "8:00-16:30",
+      ut: "8:00-16:30",
+      st: "8:00-16:30",
+      stv: "8:00-16:30",
+      pi: "8:00-16:30",
+      sob: "8:00-12:00",
+      ne: "-",
+    },
+  },
+  {
+    kraj: "Trenčiansky kraj",
+    adresa: "Pripravujeme",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "-",
+      ut: "-",
+      st: "-",
+      stv: "-",
+      pi: "-",
+      sob: "-",
+      ne: "-",
+    },
+  },
+  {
+    kraj: "Nitriansky kraj",
+    adresa: "Bratislavská 19A, 949 01 Nitra-Mlynárce | Záhradníctvo ProRain",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "7:00-17:30",
+      ut: "7:00-17:30",
+      st: "7:00-17:30",
+      stv: "7:00-17:30",
+      pi: "7:00-17:30",
+      sob: "8:00-12:00",
+      ne: "-",
+    },
+  },
+  {
+    kraj: "Žilinský kraj",
+    adresa: "Ovčiarsko 185, 010 04 Ovčiarsko - Žilina | Lány záhradné centrum",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "9:00-17:00",
+      ut: "9:00-17:00",
+      st: "9:00-17:00",
+      stv: "9:00-17:00",
+      pi: "9:00-17:00",
+      sob: "8:00-12:00",
+      ne: "-",
+    },
+  },
+  {
+    kraj: "Banskobystrický kraj",
+    adresa: "Klinovisko, 962 33 Budča | Ovocná škôlka BOBA",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "9:00-17:00",
+      ut: "9:00-17:00",
+      st: "9:00-15:30",
+      stv: "9:00-17:00",
+      pi: "9:00-15:30",
+      sob: "8:00-13:00",
+      ne: "-",
+    },
+  },
+  {
+    kraj: "Prešovský kraj",
+    adresa: "Hlavná 6/21, 059 21 Svit | Kvety Tatry",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "8:00-16:00",
+      ut: "8:00-16:00",
+      st: "8:00-16:00",
+      stv: "8:00-16:00",
+      pi: "8:00-16:00",
+      sob: "8:00-13:00",
+      ne: "-",
+    },
+  },
+  {
+    kraj: "Košický kraj",
+    adresa: "Školská 2, 044 42 Rozhanovce | Zahradníctvo KaK",
+    photo: "/o_nas.jpg",
+    hodiny: {
+      pon: "8:00-17:00",
+      ut: "8:00-17:00",
+      st: "8:00-17:00",
+      stv: "8:00-17:00",
+      pi: "8:00-17:00",
+      sob: "8:00-16:00",
+      ne: "-",
+    },
+  },
+];

@@ -23,7 +23,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full relative  flex flex-col footer">
-      <div className="absolute right-12 md:right-24 top-0 cursor-pointer">
+      <div className="absolute right-12 md:right-24 top-0 cursor-pointer z-[300]">
         <IconScrollButton />
       </div>
       <div className=" w-full ">

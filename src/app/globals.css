@@ -605,3 +605,7 @@ a {
 .copyright p {
   font-size: 12px;
 }
+
+.showrooms p {
+  color: var(--color-primary);
+}

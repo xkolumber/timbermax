@@ -579,3 +579,20 @@ export interface Gallery {
 export interface IsLoadingMap {
   [key: string]: boolean;
 }
+
+export interface Prevadzka {
+  kraj: string;
+  adresa: string;
+  photo: string;
+  hodiny: OpeningHours;
+}
+
+export interface OpeningHours {
+  pon: string;
+  ut: string;
+  st: string;
+  stv: string;
+  pi: string;
+  sob: string;
+  ne: string;
+}
