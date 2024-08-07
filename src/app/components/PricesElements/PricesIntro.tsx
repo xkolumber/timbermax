@@ -7,23 +7,28 @@ interface Props {
 }
 
 const PricesIntro = ({ cennik_stiahnutie }: Props) => {
-  // const myBlurDataUrl = await getBase64(
-  //   `${process.env.URL}/loop/main4_new.jpg`
-  // );
+  // const myBlurDataUrl = await getBase64(`${process.env.URL}/cennik.jpg`);
   // console.log(myBlurDataUrl);
 
   return (
-    <div className="relative">
+    <div className="relative h-[600px] md:h-[800px] max-h-[900px]">
       <Image
-        src={"/loop/main4_new.jpg"}
+        src={`/podklad.png`}
+        alt={`Image`}
+        priority={true}
+        className="absolute w-full h-[50%] object-cover"
+        fill
+      />
+      <Image
+        src={"/cennik/cennik.jpg"}
         alt="hlavna_fotka"
         height={1000}
         width={1000}
         quality={100}
         priority={true}
-        className="w-full  md:h-full max-h-[600px] object-cover"
+        className="w-full h-full object-cover object-right"
         placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/ALKsmv/06/Ls5P//9QARAQDfyrTAtq7czscAFhQAISAaDxwAFC4A1/wSgqleEjIAAAAASUVORK5CYII="
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGP48v+2R5QhAx+DhAIDw8vH11/fPbZxQfPmBfUAmBcMvwxWR4cAAAAASUVORK5CYII="
       />
       <PriceIconText cennik_stiahnutie={cennik_stiahnutie} />
     </div>

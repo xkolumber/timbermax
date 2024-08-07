@@ -17,13 +17,16 @@ const PriceWholeObject = ({ data }: Props) => {
         }
       />
       <div className="main_section">
-        <h2>{data?.ceny_sposob_nadpis}</h2>
+        <h3 className="custom-underline !normal-case ">
+          {data?.ceny_sposob_nadpis}
+        </h3>
+
         <p className="text-primary">{data?.ceny_sposob_popis}</p>
-        <p className="text-center text-primary mt-8">
+        <p className="text-center text-primary mt-24 text-3xl mb-8">
           {data?.popis_nad_fotkou}
         </p>
         <Image
-          src={"/cennik_material.svg"}
+          src={"/cennik/cennik_material.svg"}
           alt="hlavna_fotka"
           height={1000}
           width={1000}

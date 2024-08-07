@@ -34,18 +34,20 @@ const PricesOffer = ({ data }: Props) => {
   return (
     <>
       <div className="main_section">
-        <h2>{data?.cenova_ponuka_nadpis}</h2>
+        <h3 className="custom-underline !normal-case">
+          {data?.cenova_ponuka_nadpis}
+        </h3>
         <p className="text-primary">{data?.cenova_ponuka_popis}</p>
       </div>
       <div className="relative">
         <Image
-          src={"/cennik2.jpg"}
+          src={"/cennik/nacenovac.png"}
           alt="hlavna_fotka"
           height={1000}
           width={1000}
           quality={100}
           priority={true}
-          className="w-full  md:h-full max-h-[600px] object-cover "
+          className="w-full  md:h-full h-[250px] max-h-[600px] object-cover "
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
         />
@@ -53,39 +55,43 @@ const PricesOffer = ({ data }: Props) => {
           <IconCalculateGreen />
         </div>
       </div>
-      <div className="main_section">
-        <p className="text-primary text-center mb-8">{data?.nacenovac}</p>
+      <div className="main_section 3xl:-mt-16">
+        <p className="text-primary text-center mb-8 mt-8 md:mt-0 font-semibold text-[22px]">
+          {data?.nacenovac}
+        </p>
         {three_text.map((object, index) => (
           <div className="flex flex-col mb-16" key={index}>
-            <h6>
+            <p className="underline text-primary">
               {data?.nacenovac_sekcie[index].nadpis != ""
                 ? data?.nacenovac_sekcie[index].nadpis
                 : object.title}
-            </h6>
-            <p className="pt-8 text-primary">
+            </p>
+            <p className="pt-4 md:pt-8 text-primary">
               {data?.nacenovac_sekcie[index].popis != ""
                 ? data?.nacenovac_sekcie[index].popis
                 : object.description}
             </p>
-            <Link
-              className="btn btn--primary"
-              href={`${data?.nacenovac_sekcie[index].link}`}
-            >
-              {data?.nacenovac_sekcie[index].button != ""
-                ? data?.nacenovac_sekcie[index].button
-                : object.button}
-            </Link>
+            <div className="flex md:justify-end">
+              <Link
+                className="btn btn--primary"
+                href={`${data?.nacenovac_sekcie[index].link}`}
+              >
+                {data?.nacenovac_sekcie[index].button != ""
+                  ? data?.nacenovac_sekcie[index].button
+                  : object.button}
+              </Link>
+            </div>
           </div>
         ))}
       </div>
       <Image
-        src={"/cennik2.jpg"}
+        src={"/cennik/cennik3.jpg"}
         alt="hlavna_fotka"
         height={1000}
         width={1000}
         quality={100}
         priority={true}
-        className="w-full  md:h-full max-h-[600px] object-cover "
+        className="w-full  md:h-[350px] h-[250px] lg:h-full  max-h-[600px] object-cover object-top"
         placeholder="blur"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
       />

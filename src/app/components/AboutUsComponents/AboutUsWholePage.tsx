@@ -14,7 +14,7 @@ interface Props {
 const AboutUsWholePage = ({ data }: Props) => {
   return (
     <>
-      <div className="relative">
+      <div className="relative h-[600px] md:h-[800px] max-h-[900px]">
         <Image
           src={"/o_nas_main.jpg"}
           alt="hlavna_fotka"
@@ -22,7 +22,7 @@ const AboutUsWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-[800px] max-h-[900px] object-cover"
+          className="w-full h-full  object-cover"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNoyUl4f/vi/x/v7l08wOBvqTulvsjHzYiNjQEAx5wMSqMbGz4AAAAASUVORK5CYII="
         />
@@ -30,6 +30,7 @@ const AboutUsWholePage = ({ data }: Props) => {
           src={`/podklad.png`}
           alt={`Image`}
           className="absolute w-full h-[50%] object-cover"
+          priority
           fill
         />
         <h3 className="custom-underline text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase  ">

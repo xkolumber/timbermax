@@ -92,6 +92,11 @@ a {
     margin-bottom: 46px;
   }
 }
+@media screen and (min-width: 1800px) {
+  .custom-underline {
+    font-size: 34px;
+  }
+}
 
 /* @media screen and (min-width: 768px) {
   h1 {
@@ -365,13 +370,18 @@ a {
   align-items: center;
   font-weight: 500;
   z-index: 10;
-  font-size: 16px;
-  letter-spacing: 3px;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 1024px) {
+  .btn {
+    font-size: 1.6rem;
+  }
 }
 
 @media screen and (min-width: 1836px) {
   .btn {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 

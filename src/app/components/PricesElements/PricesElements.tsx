@@ -1,11 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import IconTerasa from "../Icons/IconTerasa";
+import { Sluzby } from "@/app/lib/interface";
+import Image from "next/image";
 import IconFasady from "../Icons/IconFasady";
 import IconPloty from "../Icons/IconPloty";
-import Image from "next/image";
-import IconArrowCart from "../Icons/IconArrowCart";
-import { Sluzby } from "@/app/lib/interface";
+import IconTerasa from "../Icons/IconTerasa";
 
 const data = [
   {
@@ -38,28 +36,29 @@ interface Props {
 const PricesElements = ({ relacie }: Props) => {
   return (
     <div className="navbar_section">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 2xl:gap-24">
         {data.map((object, index) => (
           <div
-            className="h-[450px] relative rounded-[8px] flex justify-center items-center flex-col cursor-pointer overflow-hidden group"
+            className="h-[450px] xl:h-[550px] 2xl:h-[700px] relative rounded-[12px] flex justify-center items-center flex-col cursor-pointer overflow-hidden group"
             key={index}
           >
             <Image
               src={object.image}
               alt="Obrazok"
-              width={1000}
-              height={1000}
+              width={300}
+              height={700}
               quality={100}
+              priority={true}
               className="absolute h-full w-full z-5 rounded-[8px] object-cover"
             />
             <div
-              className={`w-24 h-24 absolute z-10 top-[25%] scale-[1.5]   duration-300`}
+              className={`w-24 h-24 absolute z-10 top-[25%] scale-[1.5] 2xl:scale-[2]  duration-300`}
             >
               {" "}
               {object.svg_icon}
             </div>
             <h5
-              className={`absolute text-white top-[43%] scale-[1]  duration-300 z-10`}
+              className={`absolute text-white top-[43%] 2xl:top-[41%] scale-[1]  duration-300 z-10 uppercase`}
             >
               {relacie[index].nadpis != ""
                 ? relacie[index].nadpis
@@ -68,8 +67,8 @@ const PricesElements = ({ relacie }: Props) => {
 
             <div className="absolute inset-0 bg-black opacity-30   transition-opacity duration-300 z-6"></div>
 
-            <div className="bg-[#363F1E] opacity-[64%] absolute top-[60%] bottom-0 flex justify-center items-center">
-              <p className="text-center">
+            <div className="bg-[#363F1E] bg-opacity-[64%] absolute top-[60%] bottom-0 flex justify-center items-center z-10">
+              <p className="text-center z-20 max-w-[80%] text-xl xl:text-2xl 3xl:text-[18px] 3xl:!leading-[3rem]">
                 {relacie[index].popis != ""
                   ? relacie[index].popis
                   : object.description}
