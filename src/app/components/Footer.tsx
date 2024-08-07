@@ -11,6 +11,7 @@ import IconInstagram from "./Icons/IconInstagram";
 import { FooterItem } from "../lib/interface";
 import useLanguageStore from "../zustand/store";
 import { footer_sk, footers } from "./JustFooderData";
+import IconScrollButton from "./Icons/IconScrollButton";
 
 const Footer = () => {
   const { language } = useLanguageStore();
@@ -21,7 +22,10 @@ const Footer = () => {
   }, [language]);
 
   return (
-    <footer className="w-full relative  flex flex-col footer ">
+    <footer className="w-full relative  flex flex-col footer">
+      <div className="absolute right-12 md:right-24 top-0 cursor-pointer">
+        <IconScrollButton />
+      </div>
       <div className=" w-full ">
         <div className="bg-primary ">
           <div
@@ -40,7 +44,7 @@ const Footer = () => {
                 className="w-[220px] md:w-[150px]   object-contain"
               />
             </Link>
-            <div className="flex flex-col md:flex-row gap-12 items-center md:items-start  mt-24 md:mt-8">
+            <div className="flex flex-col md:flex-row gap-12 items-center md:items-start  mt-24 md:mt-8 md:w-[80%] xl:w-[70%] 2xl:w-[60%] justify-between">
               <div className="footer_elements">
                 <p className="uppercase font-medium  cursor-pointer pb-2">
                   {footerData[0].sidlo}
@@ -80,7 +84,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="bg-primary opacity-95">
-          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4 copyright">
+          <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4 copyright !pt-8 !pb-8">
             <p className="text-center">
               Copyright © 2024 - Newface, s.r.o, All Right Reserved
             </p>

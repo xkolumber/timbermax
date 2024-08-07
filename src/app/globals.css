@@ -587,6 +587,15 @@ a {
   font-size: 14px;
   text-align: center;
 }
+@media screen and (min-width: 768px) {
+  .footer_elements p {
+    text-align: left;
+  }
+  .footer_elements {
+    align-items: start;
+  }
+}
+
 .copyright {
   display: flex;
   flex-direction: column;
