@@ -180,8 +180,15 @@ export interface FooterItem {
   ochrana: string;
 }
 
+export interface GalleryObject {
+  title: string;
+}
+
 export interface Footers {
   [key: string]: FooterItem[];
+}
+export interface GalleryObjects {
+  [key: string]: GalleryObject[];
 }
 
 export interface Slnolamy {

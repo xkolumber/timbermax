@@ -14,12 +14,7 @@ import { footer_sk, footers } from "./JustFooderData";
 
 const Footer = () => {
   const { language } = useLanguageStore();
-
-  const router = useRouter();
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [footerData, setFooterData] = useState<FooterItem[]>(footer_sk);
-
-  const [closeClicked, setCloseClicked] = useState(false);
 
   useEffect(() => {
     setFooterData(footers[language] || footer_sk);

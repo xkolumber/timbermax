@@ -77,7 +77,7 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
   };
 
   return (
-    <div className="relative min-h-[700px] md:min-h-[800px] xl:min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative  flex items-center justify-center overflow-hidden">
       {images.map((image, index) => (
         <div
           key={index}
@@ -95,7 +95,7 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
           <Image
             src={`/loop${image.src}`}
             alt={`Image ${index + 1}`}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover min-h-[700px] md:min-h-[800px] xl:min-h-screen"
             width={1920}
             height={1080}
             placeholder="blur"

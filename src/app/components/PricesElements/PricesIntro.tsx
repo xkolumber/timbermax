@@ -6,12 +6,12 @@ interface Props {
   cennik_stiahnutie: string;
 }
 
-const PricesIntro = ({ cennik_stiahnutie }: Props) => {
-  // const myBlurDataUrl = await getBase64(`${process.env.URL}/cennik.jpg`);
+const PricesIntro = async ({ cennik_stiahnutie }: Props) => {
+  // const myBlurDataUrl = await getBase64(`${process.env.URL}/pic.webp`);
   // console.log(myBlurDataUrl);
 
   return (
-    <div className="relative h-[600px] md:h-[800px] max-h-[900px]">
+    <div className="relative h-[600px] md:h-[800px] lg:min-h-[900px]">
       <Image
         src={`/podklad.png`}
         alt={`Image`}
@@ -26,7 +26,7 @@ const PricesIntro = ({ cennik_stiahnutie }: Props) => {
         width={1000}
         quality={100}
         priority={true}
-        className="w-full h-full object-cover object-right"
+        className="w-full  object-cover object-right h-[600px] md:h-[800px] lg:min-h-[900px]"
         placeholder="blur"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGP48v+2R5QhAx+DhAIDw8vH11/fPbZxQfPmBfUAmBcMvwxWR4cAAAAASUVORK5CYII="
       />

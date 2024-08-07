@@ -14,7 +14,7 @@ interface Props {
 const AboutUsWholePage = ({ data }: Props) => {
   return (
     <>
-      <div className="relative h-[600px] md:h-[800px] max-h-[900px]">
+      <div className="relative h-[600px] md:h-[800px] lg:min-h-[900px]">
         <Image
           src={"/o_nas_main.jpg"}
           alt="hlavna_fotka"
@@ -22,7 +22,7 @@ const AboutUsWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority={true}
-          className="w-full h-full  object-cover"
+          className="w-full  object-cover h-[600px] md:h-[800px] lg:min-h-[900px]"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGNoyUl4f/vi/x/v7l08wOBvqTulvsjHzYiNjQEAx5wMSqMbGz4AAAAASUVORK5CYII="
         />

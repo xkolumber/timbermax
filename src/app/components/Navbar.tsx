@@ -96,14 +96,6 @@ const Navbar = () => {
     }
   }, [showLanguages]);
 
-  useEffect(() => {
-    if (closeClicked) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [closeClicked]);
-
   return (
     <nav className="w-full relative  flex flex-col navbar ">
       {showLanguages && (
@@ -193,7 +185,9 @@ const Navbar = () => {
             <div className="flex flex-row gap-6 items-center">
               {" "}
               <div
-                className={` xl:hidden cursor-pointer`}
+                className={` xl:hidden cursor-pointer ${
+                  closeClicked && "!hidden"
+                }`}
                 onClick={() => clickedButtonClose()}
               >
                 <IconHamburger />

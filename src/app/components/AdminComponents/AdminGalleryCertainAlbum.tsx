@@ -11,6 +11,7 @@ import {
   AdminDeleteImageFromAlbum,
 } from "@/app/lib/actions";
 import IconCloseButton from "../Icons/IconCloseButton";
+import Link from "next/link";
 
 interface Props {
   data: Gallery | undefined;
@@ -174,6 +175,9 @@ const AdminGalleryCertainAlbum = ({ data }: Props) => {
     <div>
       <div className="main_section additional_padding">
         <Toaster />
+        <Link href={"/admin/galeria"}>
+          <p className="hover:underline ease-in text-black">Späť</p>
+        </Link>
         <h5 className="text-center">Úprava albumu - {data?.nazov}</h5>
         <div className="flex flex-row justify-between items-center gap-4 mt-8">
           <h6>Názov galérie:</h6>

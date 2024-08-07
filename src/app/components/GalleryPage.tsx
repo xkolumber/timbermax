@@ -1,20 +1,31 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "yet-another-react-lightbox/styles.css";
-import { Gallery } from "../lib/interface";
+import { Gallery, GalleryObject } from "../lib/interface";
 import IconArrowCart from "./Icons/IconArrowCart";
+import useLanguageStore from "../zustand/store";
+import { footer_sk } from "./JustFooderData";
+import { galleries, gallery_sk } from "./JustGalleryData";
 
 interface Props {
   data: Gallery[] | [];
 }
 
 const GalleryPage = ({ data }: Props) => {
+  const { language } = useLanguageStore();
   const [isHovered, setIsHovered] = useState(-1);
+
+  const [galleryData, setGalleryData] = useState<GalleryObject[]>(gallery_sk);
+
+  useEffect(() => {
+    setGalleryData(galleries[language] || gallery_sk);
+  }, [language]);
 
   return (
     <>
+      <h1 className="text-primary mb-4"> {galleryData[0].title}</h1>
       <div className="flex flex-wrap gap-6">
         {data.map((item, index) => (
           <Link
@@ -53,7 +64,7 @@ const GalleryPage = ({ data }: Props) => {
             </div>
             {isHovered === index && (
               <button className="btn btn--secondary absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                galéria
+                {galleryData[0].title}
               </button>
             )}
           </Link>

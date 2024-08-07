@@ -5,6 +5,7 @@ import Lightbox, { SlideImage } from "yet-another-react-lightbox";
 import NextJsImage from "./NextImage";
 import Image from "next/image";
 import "yet-another-react-lightbox/styles.css";
+import Link from "next/link";
 
 interface Props {
   data: Gallery | undefined;
@@ -28,12 +29,19 @@ const GalleryPageId = ({ data }: Props) => {
 
   return (
     <div className="">
-      <h2 className="text-primary">{data?.nazov}</h2>
-      <div className="flex flex-row">
-        <h3>PROFIL: {data?.profil}</h3>
-        <h3>VO FARBE: {data?.farba}</h3>
+      <Link href={"/galeria"}>
+        <p className="hover:underline ease-in text-black">Späť</p>
+      </Link>
+      <h2 className="text-primary">Projekt {data?.nazov}</h2>
+      <div className="flex flex-col md:flex-row md:gap-6 pt-4">
+        <h5>
+          PROFIL: <span className="font-semibold">{data?.profil}</span>
+        </h5>
+        <h5>
+          VO FARBE: <span className="font-semibold">{data?.farba} </span>
+        </h5>
       </div>
-      {data?.popis1 && <p className="text-primary">{data?.popis1}</p>}
+      {data?.popis1 && <p className="text-primary pt-8">{data?.popis1}</p>}
       {data?.fotky[0] && (
         <Image
           src={data.fotky[0]}
@@ -42,12 +50,14 @@ const GalleryPageId = ({ data }: Props) => {
           width={1000}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover cursor-pointer"
+          className="w-full h-[600px] md:h-full max-h-[800px] object-cover cursor-pointer mt-8 rounded-[8px]"
           onClick={() => handleOpenGallery(0)}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
         />
       )}
-      {data?.popis2 && <p className="text-primary">{data?.popis2}</p>}
-      <div className="flex flex-col md:flex-row gap-6">
+      {data?.popis2 && <p className="text-primary pt-8">{data?.popis2}</p>}
+      <div className="flex flex-col md:flex-row gap-6  pt-8">
         {data?.fotky[1] && (
           <Image
             src={data.fotky[1]}
@@ -56,8 +66,10 @@ const GalleryPageId = ({ data }: Props) => {
             width={500}
             quality={100}
             priority={true}
-            className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer"
+            className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px] cursor-pointer"
             onClick={() => handleOpenGallery(1)}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
           />
         )}
         {data?.fotky[2] && (
@@ -68,12 +80,14 @@ const GalleryPageId = ({ data }: Props) => {
             width={500}
             quality={100}
             priority={true}
-            className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer"
+            className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px]  cursor-pointer"
             onClick={() => handleOpenGallery(2)}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
           />
         )}
       </div>
-      {data?.popis3 && <p className="text-primary">{data?.popis3}</p>}
+      {data?.popis3 && <p className="text-primary  pt-8">{data?.popis3}</p>}
       {data?.fotky[3] && (
         <Image
           src={data.fotky[3]}
@@ -82,8 +96,10 @@ const GalleryPageId = ({ data }: Props) => {
           width={1000}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer"
+          className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer rounded-[8px]  mt-8"
           onClick={() => handleOpenGallery(3)}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
         />
       )}
 
@@ -95,8 +111,10 @@ const GalleryPageId = ({ data }: Props) => {
           width={1000}
           quality={100}
           priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer"
+          className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px] cursor-pointer"
           onClick={() => handleOpenGallery(4)}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
         />
       )}
       {data?.fotky[5] && (
@@ -109,6 +127,8 @@ const GalleryPageId = ({ data }: Props) => {
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover  cursor-pointer"
           onClick={() => handleOpenGallery(5)}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
         />
       )}
 
