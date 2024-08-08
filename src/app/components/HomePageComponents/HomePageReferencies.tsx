@@ -46,7 +46,7 @@ const HomePageReferencies = ({
                 key={index}
               >
                 <div className="w-24 h-20">{one_button.icon}</div>
-                <p className="text-[12px] font-medium z-50 text-primary  text-center max-w-[200px]">
+                <p className="text-[12px] font-medium z-50 text-primary 2xl:text-[14px] text-center md:text-left max-w-[200px]">
                   {ref_elements[index] != ""
                     ? ref_elements[index]
                     : one_button.title}

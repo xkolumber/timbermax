@@ -32,7 +32,7 @@ const PriceWholeObject = ({ data }: Props) => {
           width={1900}
           quality={100}
           priority={true}
-          className="w-full  md:h-full max-h-[600px] object-cover"
+          className="w-full  md:h-full max-h-[600px] object-cover md:max-w-[90%] m-auto"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGNggIL/3+58ub5vzReGsuLUW0d3L799Ym3n7aubp9wGAO9XEfVObI8ZAAAAAElFTkSuQmCC"
         />

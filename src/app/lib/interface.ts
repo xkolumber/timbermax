@@ -22,6 +22,8 @@ export interface HomePageElements {
   sluzby: Sluzby[];
   svg_titles: string[];
   timbermax_ako: TimbermaxLike[];
+  timbermax_ako_mobile_nadpis: string;
+  timbermax_ako_mobile_popisy: TimbermaxLike[];
   text_photo1: string;
   text_photo2: string;
   text_photo3: string;

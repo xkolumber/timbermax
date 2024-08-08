@@ -1,10 +1,3 @@
-import React, { Suspense } from "react";
-import Image from "next/image";
-import AboutUsHistory from "../components/AboutUsComponents/AboutUsHistory";
-import AboutUsPhilosophy from "../components/AboutUsComponents/AboutUsPhilosophy";
-import AboutUsTeam from "../components/AboutUsComponents/AboutUsTeam";
-import { unstable_noStore } from "next/cache";
-import { cookies } from "next/headers";
 import {
   collection,
   getDocs,
@@ -12,10 +5,13 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { unstable_noStore } from "next/cache";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
+import AboutUsSkeleton from "../components/AboutUsComponents/AboutUsSkeleton";
+import AboutUsWholePage from "../components/AboutUsComponents/AboutUsWholePage";
 import { app } from "../lib/firebaseClient";
 import { AboutUsElements } from "../lib/interface";
-import HomePageSkeleton from "../components/HomePageComponents/HomePageSkeleton";
-import AboutUsWholePage from "../components/AboutUsComponents/AboutUsWholePage";
 
 async function GetAboutUsData() {
   unstable_noStore();
@@ -55,7 +51,7 @@ async function GetAboutUsData() {
 
 export default async function AboutUs() {
   return (
-    <Suspense fallback={<HomePageSkeleton />}>
+    <Suspense fallback={<AboutUsSkeleton />}>
       <GetAboutUsData />
     </Suspense>
   );

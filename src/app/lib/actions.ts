@@ -113,6 +113,8 @@ export async function AdminactualizeHomePage(
     sluzby: actualizeData.sluzby,
     svg_titles: actualizeData.svg_titles,
     timbermax_ako: actualizeData.timbermax_ako,
+    timbermax_ako_mobile_nadpis: actualizeData.timbermax_ako_mobile_nadpis,
+    timbermax_ako_mobile_popisy: actualizeData.timbermax_ako_mobile_popisy,
     text_photo1: actualizeData.text_photo1,
     text_photo2: actualizeData.text_photo2,
     text_photo3: actualizeData.text_photo3,

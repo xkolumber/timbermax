@@ -26,7 +26,7 @@ const PriceOfferSkeleton = () => {
         placeholder="blur"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAIAAADwyuo0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAI0lEQVR4nGP48v+2R5QhAx+DhAIDw8vH11/fPbZxQfPmBfUAmBcMvwxWR4cAAAAASUVORK5CYII="
       />
-      <PriceIconText cennik_stiahnutie={"Cenník na stiahnutie"} />
+      <PriceIconText cennik_stiahnutie={""} />
     </div>
   );
 };

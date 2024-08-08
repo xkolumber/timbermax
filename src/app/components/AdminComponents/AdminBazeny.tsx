@@ -1,15 +1,11 @@
 "use client";
-import {
-  AdminActualizeBazenyPage,
-  AdminActualizePlotyPage,
-  AdminActualizeSlnolamyPage,
-} from "@/app/lib/actions";
+import { AdminActualizeBazenyPage } from "@/app/lib/actions";
 import {
   empty_five_values,
-  empty_three_values,
+  EmptyNacenovac,
   getSecondPathValue,
 } from "@/app/lib/functionsClient";
-import { Bazeny, Jazyk, Ploty, Slnolamy } from "@/app/lib/interface";
+import { Bazeny, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -209,7 +205,7 @@ const AdminBazeny = ({ language, data, languages }: Props) => {
         postup_nacenovac: data.postup_nacenovac ? data.postup_nacenovac : "",
         nacenovac_sekcie: data.nacenovac_sekcie
           ? data.nacenovac_sekcie
-          : Nacenovac,
+          : EmptyNacenovac,
         nadpis_vizualizacia: data.nadpis_vizualizacia
           ? data.nadpis_vizualizacia
           : "",
@@ -220,27 +216,6 @@ const AdminBazeny = ({ language, data, languages }: Props) => {
       }));
     }
   }, [data]);
-
-  const Nacenovac = [
-    {
-      nadpis: "",
-      popis: "",
-      button: "",
-      link: "",
-    },
-    {
-      nadpis: "",
-      popis: "",
-      button: "",
-      link: "",
-    },
-    {
-      nadpis: "",
-      popis: "",
-      button: "",
-      link: "",
-    },
-  ];
 
   const handleChangeItemArray = (
     title: string,

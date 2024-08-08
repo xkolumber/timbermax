@@ -11,9 +11,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 interface Props {
   timbermax_ako: TimbermaxLike[] | [];
   button_citat_viac: string;
+  timbermax_ako_mobile_nadpis: string;
+  timbermax_ako_mobile_popisy: TimbermaxLike[] | [];
 }
 
-const HomePageTimbermaxLike = ({ timbermax_ako, button_citat_viac }: Props) => {
+const HomePageTimbermaxLike = ({
+  timbermax_ako,
+  button_citat_viac,
+  timbermax_ako_mobile_nadpis,
+  timbermax_ako_mobile_popisy,
+}: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
     <div className="bg-secondary">
@@ -35,6 +42,9 @@ const HomePageTimbermaxLike = ({ timbermax_ako, button_citat_viac }: Props) => {
         ))}
       </div>
       <div className="main_section md:hidden">
+        <p className="uppercase text-center text-primary pb-4 font-medium">
+          {timbermax_ako_mobile_nadpis}:
+        </p>
         <div className="relative ">
           {timbermax_ako.length > 2 && (
             <Swiper
@@ -51,7 +61,7 @@ const HomePageTimbermaxLike = ({ timbermax_ako, button_citat_viac }: Props) => {
               className="h-[264px]"
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
             >
-              {timbermax_ako.map((item, index) => (
+              {timbermax_ako_mobile_popisy.map((item, index) => (
                 <SwiperSlide key={index}>
                   <div className="relative w-full rounded-[16px] h-full bg-[#C6BFB6] p-8 flex flex-col items-center">
                     <h6 className="text-center font-semibold uppercase">

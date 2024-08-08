@@ -79,7 +79,7 @@ a {
   text-transform: uppercase;
   text-decoration: underline;
   text-decoration-thickness: 1.4px;
-  text-underline-offset: 12px;
+
   margin-bottom: 32px;
 }
 
@@ -451,12 +451,13 @@ a {
   transform: translateY(-50%);
   width: 10px;
   height: 10px;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-primary);
   border-radius: 50%;
 }
 
 .active_circle {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   border: 1px solid var(--color-primary);
 }
 
@@ -465,7 +466,7 @@ a {
 }
 @media screen and (min-width: 768px) {
   .additional_padding {
-    padding-top: 15rem !important;
+    padding-top: 18rem !important;
   }
 }
 @media screen and (min-width: 1024px) {
@@ -473,9 +474,14 @@ a {
     padding-top: 19rem !important;
   }
 }
+@media screen and (min-width: 1556px) {
+  .additional_padding {
+    padding-top: 22rem !important;
+  }
+}
 @media screen and (min-width: 1836px) {
   .additional_padding {
-    padding-top: 19rem !important;
+    padding-top: 24rem !important;
   }
 }
 

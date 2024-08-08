@@ -2,7 +2,10 @@
 import { AdminactualizeHomePage } from "@/app/lib/actions";
 import {
   empty_five_values,
+  EmptyServices,
   getSecondPathValue,
+  EmptyTimbermaxLike,
+  empty_three_values,
 } from "@/app/lib/functionsClient";
 import { HomePageElements, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
@@ -41,6 +44,8 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
     sluzby: [],
     svg_titles: [],
     timbermax_ako: [],
+    timbermax_ako_mobile_nadpis: "",
+    timbermax_ako_mobile_popisy: [],
     text_photo1: "",
     text_photo2: "",
     text_photo3: "",
@@ -87,9 +92,17 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
         o_nas_elements: data.o_nas_elements,
         ref_elements: data.ref_elements,
         rokov_skusenosti: data.rokov_skusenosti ? data.rokov_skusenosti : "",
-        sluzby: data.sluzby,
-        svg_titles: data.svg_titles,
-        timbermax_ako: data.timbermax_ako,
+        sluzby: data.sluzby ? data.sluzby : EmptyServices,
+        svg_titles: data.svg_titles ? data.svg_titles : empty_three_values,
+        timbermax_ako: data.timbermax_ako
+          ? data.timbermax_ako
+          : EmptyTimbermaxLike,
+        timbermax_ako_mobile_nadpis: data.timbermax_ako_mobile_nadpis
+          ? data.timbermax_ako_mobile_nadpis
+          : "",
+        timbermax_ako_mobile_popisy: data.timbermax_ako_mobile_popisy
+          ? data.timbermax_ako_mobile_popisy
+          : EmptyTimbermaxLike,
         text_photo1: data.text_photo1 ? data.text_photo1 : "",
         text_photo2: data.text_photo2 ? data.text_photo2 : "",
         text_photo3: data.text_photo3 ? data.text_photo3 : "",
@@ -464,6 +477,70 @@ const AdminHomePage = ({ language, data, languages }: Props) => {
                     handleChangeItemTwoArray("timbermax_ako", index, "link", e)
                   }
                   className="md:!w-[450px] mt-2"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="product_admin_row">
+          <p>timbermax_ako_mobile_nadpis:</p>
+          <input
+            type="text"
+            name="timbermax_ako_mobile_nadpis"
+            value={actualizeData.timbermax_ako_mobile_nadpis}
+            onChange={handleChange}
+            className=""
+          />
+        </div>
+        <div className="product_admin_row">
+          <p>timbermax_ako_mobile_popisy:</p>
+          <div className="flex flex-col">
+            {actualizeData.timbermax_ako_mobile_popisy.map((element, index) => (
+              <div key={index} className="flex flex-row gap-4">
+                <input
+                  type="text"
+                  name={`timbermax_ako_mobile_popisy-nadpis-${index}`}
+                  value={element.nadpis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "timbermax_ako_mobile_popisy",
+                      index,
+                      "nadpis",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                  placeholder="nadpis"
+                />
+                <input
+                  type="text"
+                  name={`timbermax_ako_mobile_popisy-popis-${index}`}
+                  value={element.popis}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "timbermax_ako_mobile_popisy",
+                      index,
+                      "popis",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                  placeholder="popis"
+                />
+                <input
+                  type="text"
+                  name={`timbermax_ako_mobile_popisy-link-${index}`}
+                  value={element.link}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray(
+                      "timbermax_ako_mobile_popisy",
+                      index,
+                      "link",
+                      e
+                    )
+                  }
+                  className="md:!w-[450px] mt-2"
+                  placeholder="link"
                 />
               </div>
             ))}

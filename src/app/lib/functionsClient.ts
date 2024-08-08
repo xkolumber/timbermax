@@ -11,6 +11,69 @@ export function getSecondPathValue(pathname: string) {
 export const empty_three_values = ["", "", ""];
 export const empty_five_values = ["", "", "", "", ""];
 
+export const EmptyNacenovac = [
+  {
+    nadpis: "",
+    popis: "",
+    button: "",
+    link: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+    button: "",
+    link: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+    button: "",
+    link: "",
+  },
+];
+
+export const EmptyTimbermaxLike = [
+  {
+    nadpis: "",
+    popis: "",
+    link: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+    link: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+    link: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+    link: "",
+  },
+];
+
+export const EmptyServices = [
+  {
+    nadpis: "",
+    popis: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+  },
+  {
+    nadpis: "",
+    popis: "",
+  },
+];
+
 export const colors = [
   {
     farba:

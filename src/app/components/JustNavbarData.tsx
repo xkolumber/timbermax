@@ -33,7 +33,7 @@ export const navbar_sk: NavbarItem[] = [
       },
       {
         nazov: "Záruka",
-        link: "/zaruka",
+        link: "/",
         icon: "",
       },
       {
@@ -162,7 +162,7 @@ export const navbar_en: NavbarItem[] = [
       },
       {
         nazov: "Guarantee",
-        link: "/zaruka",
+        link: "/",
         icon: "",
       },
       {
@@ -291,7 +291,7 @@ export const navbar_cz: NavbarItem[] = [
       },
       {
         nazov: "Záruka",
-        link: "/zaruka",
+        link: "/",
         icon: "",
       },
       {

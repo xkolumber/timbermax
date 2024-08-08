@@ -28,6 +28,16 @@ const HomePageWholePage = ({ data }: Props) => {
         button_citat_viac={
           data?.button_citat_viac ? data.button_citat_viac : ""
         }
+        timbermax_ako_mobile_nadpis={
+          data?.timbermax_ako_mobile_nadpis
+            ? data.timbermax_ako_mobile_nadpis
+            : ""
+        }
+        timbermax_ako_mobile_popisy={
+          data?.timbermax_ako_mobile_popisy
+            ? data.timbermax_ako_mobile_popisy
+            : []
+        }
       />
       <HomePageAboutUs
         o_nas_nadpis={data?.o_nas_nadpis ? data.o_nas_nadpis : ""}

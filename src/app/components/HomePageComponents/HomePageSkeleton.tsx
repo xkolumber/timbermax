@@ -26,17 +26,17 @@ const HomePageSkeleton = () => {
           className="absolute w-full h-[50%] object-cover"
           fill
         />
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2xl:scale-150">
+        {/* <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2xl:scale-150">
           <IconDoubleArrow />
-        </div>
+        </div> */}
       </div>
       <div className="navbar_section min-h-[700px] md:min-h-[800px] xl:min-h-screen  w-full  flex flex-col justify-between p-12">
-        <Link
+        {/* <Link
           href={"/cennik"}
           className="btn btn--secondary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase !font-medium"
         >
           <Skeleton baseColor="#DEDEDE" width={300} />
-        </Link>
+        </Link> */}
 
         <div className="flex flex-col  gap-8 md:gap-12 items-end absolute right-0 top-[70%] md:top-[65%] left-1/2 transform -translate-y-1/2 p-[1.6rem]">
           <div className="cursor-pointer">

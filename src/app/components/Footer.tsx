@@ -46,7 +46,7 @@ const Footer = () => {
             </Link>
             <div className="flex flex-col md:flex-row gap-12 items-center md:items-start  mt-24 md:mt-8 md:w-[80%] xl:w-[70%] 2xl:w-[60%] justify-between">
               <div className="footer_elements">
-                <p className="uppercase font-medium  cursor-pointer pb-2">
+                <p className="uppercase font-medium  pb-2">
                   {footerData[0].sidlo}
                 </p>
                 <p>Newface, s.r.o.</p>
@@ -55,7 +55,7 @@ const Footer = () => {
               </div>
 
               <div className="footer_elements ">
-                <p className="uppercase font-medium  cursor-pointer pb-2">
+                <p className="uppercase font-medium  pb-2">
                   {footerData[0].sklad}
                 </p>
                 <p>{footerData[0].vzorkova_predajna}</p>
@@ -64,11 +64,15 @@ const Footer = () => {
               </div>
 
               <div className="footer_elements">
-                <p className="uppercase font-medium   cursor-pointer pb-2">
+                <p className="uppercase font-medium   pb-2">
                   {footerData[0].kontakt}
                 </p>
-                <p>info@timbermax.sk</p>
-                <p>+421 918 475 563</p>
+                <a href="mailto:info@timbermax.sk?subject=Otázka">
+                  <p>info@timbermax.sk</p>
+                </a>
+                <a href="tel:+421918475563">
+                  <p>+421 918 475 563</p>{" "}
+                </a>
               </div>
 
               <div className="footer_elements pb-16 md:pb-0">
@@ -76,8 +80,13 @@ const Footer = () => {
                   {footerData[0].social}
                 </p>
                 <div className="flex flex-row gap-4 items-center pt-4">
-                  <IconFacebook />
-                  <IconInstagram />
+                  <Link href={"https://www.facebook.com/Timbermax"}>
+                    <IconFacebook />
+                  </Link>
+                  <Link href={"https://www.instagram.com/timbermax_eu/"}>
+                    {" "}
+                    <IconInstagram />
+                  </Link>
                 </div>
               </div>
             </div>

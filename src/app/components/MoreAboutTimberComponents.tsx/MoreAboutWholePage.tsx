@@ -69,7 +69,7 @@ const MoreAboutWholePage = ({ data }: Props) => {
       />
       <div className="main_section hidden md:block">
         <p className="text-primary">{data?.next_popis4} </p>
-        <div className="flex flex-col md:flex-row gap-6 justify-center">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12 xl:gap-16 justify-center">
           <button className="btn btn--fourthtiary uppercase">
             Timbermax Exotic
           </button>
@@ -77,7 +77,9 @@ const MoreAboutWholePage = ({ data }: Props) => {
             Timbermax Rustic
           </button>
         </div>
-        <p className="text-primary">{data?.pod_btn}</p>
+        <p className="text-primary pt-16 2xl:pt-32 !-mb-8 2xl:!-mb-16">
+          {data?.pod_btn}
+        </p>
       </div>
       <div className="bg-[#C6BFB6] flex flex-col justify-center items-center pt-12 pb-12 md:hidden">
         <p className="text-primary font-normal">TIMBERMAX</p>
@@ -113,7 +115,7 @@ const MoreAboutWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority
-          className="w-full h-full object-cover hidden md:hlock "
+          className="w-full h-full object-cover hidden md:block "
         />
         <Image
           src={"/more_about/fifth_m.png"}
@@ -125,11 +127,11 @@ const MoreAboutWholePage = ({ data }: Props) => {
           className="w-full h-full object-cover md:hidden mt-16 mb-16"
         />
         <p className="text-primary">{data?.another_popis2}</p>
-        <h3 className="mt-8 text-primary font-semibold">
+        <h3 className="mt-8 2xl:mt-16 text-primary font-bold">
           {data?.lahko_nadpis}
         </h3>{" "}
         <p className="mt-4 text-primary">{data?.lahko_popis}</p>
-        <h3 className="mt-8 text-primary font-semibold">
+        <h3 className="mt-8 2xl:mt-16 text-primary font-bold">
           {data?.fareb_nadpis}
         </h3>{" "}
         <p className="mt-4 text-primary">{data?.fareb_popis}</p>
@@ -144,11 +146,11 @@ const MoreAboutWholePage = ({ data }: Props) => {
         className="w-full h-full object-cover max-h-[400px] 2xl:max-h-[600px] "
       />
       <div className="main_section">
-        <h3 className="mt-8 text-primary font-semibold">
+        <h3 className="mt-4 2xl:mt-16 text-primary font-bold">
           {data?.tepel_nadpis}
         </h3>{" "}
-        <p className="text-primary">{data?.tepel_popis}</p>
-        <h3 className="mt-8 text-primary font-semibold">
+        <p className="text-primary mt-4 ">{data?.tepel_popis}</p>
+        <h3 className="mt-8  2xl:mt-16 text-primary font-bold">
           {data?.prehrev_nadpis}
         </h3>{" "}
         <p className="text-primary">{data?.prehrev_popis1}</p>
@@ -158,20 +160,20 @@ const MoreAboutWholePage = ({ data }: Props) => {
         <p className="text-primary mt-8">{data?.prehrev_popis4}</p>
         <p className="text-primary mt-8">{data?.prehrev_popis5}</p>
         <p className="text-primary mt-8">{data?.prehrev_popis6}</p>
-        <h3 className="mt-8 text-primary font-semibold">
+        <h3 className="mt-8 2xl:mt-16 text-primary font-bold">
           {data?.mech_nadpis}
         </h3>{" "}
-        <p className="text-primary">{data?.mech_popis}</p>
-        <h3 className="mt-8 text-primary font-semibold">
+        <p className="text-primary mt-4">{data?.mech_popis}</p>
+        <h3 className="mt-8 2xl:mt-16 text-primary font-bold">
           {data?.tvar_nadpis}
         </h3>{" "}
-        <p className="text-primary">{data?.tvar_popis1}</p>
+        <p className="text-primary mt-4">{data?.tvar_popis1}</p>
         <p className="text-primary mt-8">{data?.tvar_popis2}</p>
         <p className="text-primary mt-8">{data?.tvar_popis3}</p>
         <p className="text-primary mt-8">{data?.tvar_popis4}</p>
         <p className="text-primary mt-8">{data?.tvar_popis5}</p>
         <p className="text-primary mt-8">{data?.tvar_popis6}</p>
-        <h3 className="mt-8 text-primary font-semibold">
+        <h3 className="mt-8 2xl:mt-16 text-primary font-bold">
           {data?.profil_nadpis}
         </h3>{" "}
         <Image
@@ -181,12 +183,14 @@ const MoreAboutWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority
-          className="w-full h-full object-cover "
+          className="w-full h-full object-cover md:max-w-[90%] m-auto "
         />
         <p className="text-primary mt-8">{data?.profil_popis1}</p>
         <p className="text-primary mt-8">{data?.profil_popis2}</p>
         <p className="text-primary mt-8">{data?.profil_popis3}</p>
-        <p className="text-primary mt-8">{data?.profil_popis4}</p>
+        <p className="text-primary mt-8 mb-8 2xl:mb-32">
+          {data?.profil_popis4}
+        </p>
         <Image
           src={"/tabulka.png"}
           alt="hlavna_fotka"
@@ -194,9 +198,9 @@ const MoreAboutWholePage = ({ data }: Props) => {
           width={1920}
           quality={100}
           priority
-          className="w-full h-full object-cover mt-8 "
+          className="w-full h-full object-cover mt-8 md:max-w-[90%] m-auto"
         />
-        <h3 className="mt-8 text-primary custom-underline">
+        <h3 className="mt-8 2xl:mt-16 text-primary custom-underline">
           {data?.nadpis_vizualizacia}
         </h3>{" "}
         <p className="text-primary mt-8">{data?.popis_viz_1}</p>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const buttons = [
   {
@@ -67,7 +68,9 @@ const HomePageAboutUs = ({
           </p>
         </div>
         <div className="max-w-[70%] lg:justify-end hidden md:flex">
-          <button className="btn btn--secondary">{button_citat_viac}</button>
+          <Link className="btn btn--secondary" href={"/o-nas"}>
+            {button_citat_viac}
+          </Link>
         </div>
       </div>
       <div className="bg-[#D9D5CF] absolute right-0 top-[40%] transform -translate-y-1/2 z-[10] rounded-l-[8px] p-24 hidden xl:block 3xl:w-[500px]">
@@ -96,7 +99,9 @@ const HomePageAboutUs = ({
         </div>
       </div>
       <div className="justify-center flex md:hidden !pb-16 ">
-        <button className="btn btn--secondary">{button_citat_viac}</button>
+        <Link className="btn btn--secondary" href={"/o-nas"}>
+          {button_citat_viac}
+        </Link>
       </div>
     </div>
   );
