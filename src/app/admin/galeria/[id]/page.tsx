@@ -24,11 +24,12 @@ async function Validate(id: string) {
 
   if (browser_uid === process.env.ADMIN_UID) {
     const data = await GetAdminGalleryId(id);
+    const languages = await GetLanguages();
     if (data) {
-      return <AdminGalleryCertainAlbum data={data} />;
+      return <AdminGalleryCertainAlbum data={data} languages={languages} />;
     }
 
-    return <AdminGalleryCertainAlbum data={undefined} />;
+    return <AdminGalleryCertainAlbum data={undefined} languages={languages} />;
   } else {
     return <AdminFinalNotAuthorized />;
   }

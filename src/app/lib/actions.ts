@@ -1559,9 +1559,8 @@ export async function AdminActualizeAlbumGallery(
       nazov: actualizeGallery.nazov,
       profil: actualizeGallery.profil,
       farba: actualizeGallery.farba,
-      popis1: actualizeGallery.popis1,
-      popis2: actualizeGallery.popis2,
-      popis3: actualizeGallery.popis3,
+
+      jazyky_kontent: actualizeGallery.jazyky_kontent,
     });
     revalidatePath(`/admin/galeria/[${id}]/page`, "page");
     return "success";

@@ -1,6 +1,6 @@
 "use client";
 import { categories, CompressImages } from "@/app/lib/functionsClient";
-import { Gallery, IsLoadingMap } from "@/app/lib/interface";
+import { Gallery, IsLoadingMap, Jazyk } from "@/app/lib/interface";
 import React, { useEffect, useRef, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Image from "next/image";
@@ -15,9 +15,10 @@ import Link from "next/link";
 
 interface Props {
   data: Gallery | undefined;
+  languages: Jazyk[];
 }
 
-const AdminGalleryCertainAlbum = ({ data }: Props) => {
+const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
   const [actualizeGallery, setActualizeGallery] = useState<Gallery>({
     fotky: [],
     kategorie: [],
@@ -25,9 +26,7 @@ const AdminGalleryCertainAlbum = ({ data }: Props) => {
     id: "",
     profil: "",
     farba: "",
-    popis1: "",
-    popis2: "",
-    popis3: "",
+    jazyky_kontent: [],
   });
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
 
@@ -120,6 +119,22 @@ const AdminGalleryCertainAlbum = ({ data }: Props) => {
     });
   };
 
+  const handleChangeMainLanguagesContent = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { name, value } = e.target;
+    const updatedJazykyKontent = [...actualizeGallery.jazyky_kontent];
+    updatedJazykyKontent[index] = {
+      ...updatedJazykyKontent[index],
+      [name]: value,
+    };
+    setActualizeGallery((prev) => ({
+      ...prev,
+      jazyky_kontent: updatedJazykyKontent,
+    }));
+  };
+
   const handlePhotosLoad = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -164,12 +179,35 @@ const AdminGalleryCertainAlbum = ({ data }: Props) => {
         id: "",
         profil: data.profil ? data.profil : "",
         farba: data.farba ? data.farba : "",
-        popis1: data.popis1 ? data.popis1 : "",
-        popis2: data.popis2 ? data.popis2 : "",
-        popis3: data.popis3 ? data.popis3 : "",
+        jazyky: data.jazyky_kontent ? data.jazyky_kontent : [],
       }));
     }
   }, [data]);
+
+  useEffect(() => {
+    const initializedJazykyKontent = languages.map((lang) => {
+      const existingLangContent = actualizeGallery.jazyky_kontent.find(
+        (content) => content.jazyk === lang.jazyk
+      );
+      return (
+        existingLangContent || {
+          jazyk: lang.jazyk,
+          nazov_farba: "",
+          nazov_profil: "",
+          nazov_projekt: "",
+          popis1: "",
+          popis2: "",
+          popis3: "",
+        }
+      );
+    });
+    setActualizeGallery((prev) => ({
+      ...prev,
+      jazyky_kontent: initializedJazykyKontent,
+    }));
+  }, [languages]);
+
+  console.log(actualizeGallery);
 
   return (
     <div>
@@ -240,39 +278,80 @@ const AdminGalleryCertainAlbum = ({ data }: Props) => {
             required
           />
         </div>
-        <div className="flex flex-row justify-between items-center gap-4 mt-8">
-          <h6>popis1:</h6>
-          <input
-            type="text"
-            name="popis1"
-            value={actualizeGallery.popis1}
-            onChange={handleChangeMain}
-            className="w-full border border-solid border-black h-[5rem] mt-4"
-            required
-          />
-        </div>
-        <div className="flex flex-row justify-between items-center gap-4 mt-8">
-          <h6>popis2:</h6>
-          <input
-            type="text"
-            name="popis2"
-            value={actualizeGallery.popis2}
-            onChange={handleChangeMain}
-            className="w-full border border-solid border-black h-[5rem] mt-4"
-            required
-          />
-        </div>
-        <div className="flex flex-row justify-between items-center gap-4 mt-8">
-          <h6>popis3:</h6>
-          <input
-            type="text"
-            name="popis3"
-            value={actualizeGallery.popis3}
-            onChange={handleChangeMain}
-            className="w-full border border-solid border-black h-[5rem] mt-4"
-            required
-          />
-        </div>
+        {actualizeGallery.jazyky_kontent.map((object, index) => (
+          <div key={index} className="mb-16">
+            <p className="text-primary font-bold">Jazyk: {object.jazyk}</p>
+            <div className="flex flex-row justify-between items-center gap-4 mt-8">
+              <h6>nazov_farba:</h6>
+              <p>{actualizeGallery.jazyky_kontent[0].nazov_farba}</p>
+              <input
+                type="text"
+                name="nazov_farba"
+                value={object.nazov_farba}
+                onChange={(e) => handleChangeMainLanguagesContent(e, index)}
+                className="w-full border border-solid border-black h-[5rem] mt-4"
+                required
+              />
+            </div>
+            <div className="flex flex-row justify-between items-center gap-4 mt-8">
+              <h6>nazov_profil:</h6>
+              <input
+                type="text"
+                name="nazov_profil"
+                value={object.nazov_profil}
+                onChange={(e) => handleChangeMainLanguagesContent(e, index)}
+                className="w-full border border-solid border-black h-[5rem] mt-4"
+                required
+              />
+            </div>
+            <div className="flex flex-row justify-between items-center gap-4 mt-8">
+              <h6>nazov_projekt:</h6>
+              <input
+                type="text"
+                name="nazov_projekt"
+                value={object.nazov_projekt}
+                onChange={(e) => handleChangeMainLanguagesContent(e, index)}
+                className="w-full border border-solid border-black h-[5rem] mt-4"
+                required
+              />
+            </div>
+            <div className="flex flex-row justify-between items-center gap-4 mt-8">
+              <h6>Popis 1:</h6>
+              <input
+                type="text"
+                name="popis1"
+                value={object.popis1}
+                onChange={(e) => handleChangeMainLanguagesContent(e, index)}
+                className="w-full border border-solid border-black h-[5rem] mt-4"
+                required
+              />
+            </div>
+
+            <div className="flex flex-row justify-between items-center gap-4 mt-8">
+              <h6>Popis 2:</h6>
+              <input
+                type="text"
+                name="popis2"
+                value={object.popis2}
+                onChange={(e) => handleChangeMainLanguagesContent(e, index)}
+                className="w-full border border-solid border-black h-[5rem] mt-4"
+                required
+              />
+            </div>
+            <div className="flex flex-row justify-between items-center gap-4 mt-8">
+              <h6>Popis 3:</h6>
+              <input
+                type="text"
+                name="popis3"
+                value={object.popis3}
+                onChange={(e) => handleChangeMainLanguagesContent(e, index)}
+                className="w-full border border-solid border-black h-[5rem] mt-4"
+                required
+              />
+            </div>
+          </div>
+        ))}
+
         <div className="product_admin_row pt-8">
           <h6 className="text-primary">
             Zaškrtnite kategériu, kde sa má zobraziť album:

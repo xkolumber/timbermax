@@ -571,6 +571,14 @@ export interface Gallery {
   profil: string;
   farba: string;
   id: string;
+  jazyky_kontent: GalleryTranslate[];
+}
+
+export interface GalleryTranslate {
+  jazyk: string;
+  nazov_farba: string;
+  nazov_profil: string;
+  nazov_projekt: string;
   popis1: string;
   popis2: string;
   popis3: string;
