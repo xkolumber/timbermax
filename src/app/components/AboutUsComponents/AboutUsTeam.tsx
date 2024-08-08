@@ -126,9 +126,9 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                   key={index}
                 >
                   <Image
-                    src={`${object.image} `}
+                    src={`${object.image}`}
                     alt="hlavna_fotka"
-                    height={400}
+                    height={600}
                     width={200}
                     quality={100}
                     priority={true}
