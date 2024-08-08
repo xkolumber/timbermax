@@ -21,9 +21,7 @@ const Page = () => {
     id: "",
     profil: "",
     farba: "",
-    popis1: "",
-    popis2: "",
-    popis3: "",
+    jazyky_kontent: [],
   });
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [photoLoading, setPhotoLoading] = useState(false);
@@ -101,6 +99,22 @@ const Page = () => {
     });
   };
 
+  const handleChangeMainLanguagesContent = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const { name, value } = e.target;
+    const updatedJazykyKontent = [...actualizeGallery.jazyky_kontent];
+    updatedJazykyKontent[index] = {
+      ...updatedJazykyKontent[index],
+      [name]: value,
+    };
+    setActualizeGallery((prev) => ({
+      ...prev,
+      jazyky_kontent: updatedJazykyKontent,
+    }));
+  };
+
   const handleCheckboxChangeCategory = (productTitle: string) => {
     setSelectedCategory((prevSelected) => {
       const updatedSelected = prevSelected.includes(productTitle)
@@ -158,39 +172,8 @@ const Page = () => {
             required
           />
         </div>
-        <div className="flex flex-row justify-between items-center gap-4 mt-8">
-          <h6>popis1:</h6>
-          <input
-            type="text"
-            name="popis1"
-            value={actualizeGallery.popis1}
-            onChange={handleChangeMain}
-            className="w-full border border-solid border-black h-[5rem] mt-4"
-            required
-          />
-        </div>
-        <div className="flex flex-row justify-between items-center gap-4 mt-8">
-          <h6>popis2:</h6>
-          <input
-            type="text"
-            name="popis2"
-            value={actualizeGallery.popis2}
-            onChange={handleChangeMain}
-            className="w-full border border-solid border-black h-[5rem] mt-4"
-            required
-          />
-        </div>
-        <div className="flex flex-row justify-between items-center gap-4 mt-8">
-          <h6>popis3:</h6>
-          <input
-            type="text"
-            name="popis3"
-            value={actualizeGallery.popis3}
-            onChange={handleChangeMain}
-            className="w-full border border-solid border-black h-[5rem] mt-4"
-            required
-          />
-        </div>
+        <p className="text-primary"> *popisy sa dodatočne nahadzujú</p>
+
         <div className="product_admin_row pt-8">
           <h6 className="text-primary">
             Zaškrtnite kategériu, kde sa má zobraziť album:

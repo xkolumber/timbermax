@@ -9,9 +9,10 @@ import Link from "next/link";
 
 interface Props {
   data: Gallery | undefined;
+  language: string;
 }
 
-const GalleryPageId = ({ data }: Props) => {
+const GalleryPageId = ({ data, language }: Props) => {
   const [choosenAlbum, setChoosenAlbum] = useState<SlideImage[]>([]);
   const [open, setOpen] = useState(false);
 
@@ -27,21 +28,35 @@ const GalleryPageId = ({ data }: Props) => {
     setOpen(true);
   };
 
+  const selectedLanguageContent = data?.jazyky_kontent.find(
+    (content) => content.jazyk === language
+  );
+
   return (
     <div className="">
       <Link href={"/galeria"}>
         <p className="hover:underline ease-in text-black">Späť</p>
       </Link>
-      <h2 className="text-primary">Projekt {data?.nazov}</h2>
+      <h2 className="text-primary">
+        {selectedLanguageContent?.nazov_projekt} {data?.nazov}
+      </h2>
       <div className="flex flex-col md:flex-row md:gap-6 pt-4">
         <h5>
-          PROFIL: <span className="font-semibold">{data?.profil}</span>
+          <span className="uppercase">
+            {selectedLanguageContent?.nazov_profil}
+          </span>{" "}
+          <span className="font-semibold">{data?.profil}</span>
         </h5>
         <h5>
-          VO FARBE: <span className="font-semibold">{data?.farba} </span>
+          <span className="uppercase">
+            {selectedLanguageContent?.nazov_farba}
+          </span>{" "}
+          <span className="font-semibold">{data?.farba} </span>
         </h5>
       </div>
-      {data?.popis1 && <p className="text-primary pt-8">{data?.popis1}</p>}
+      {selectedLanguageContent?.popis1 && (
+        <p className="text-primary pt-8">{selectedLanguageContent.popis1}</p>
+      )}
       {data?.fotky[0] && (
         <Image
           src={data.fotky[0]}
@@ -56,7 +71,9 @@ const GalleryPageId = ({ data }: Props) => {
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
         />
       )}
-      {data?.popis2 && <p className="text-primary pt-8">{data?.popis2}</p>}
+      {selectedLanguageContent?.popis2 && (
+        <p className="text-primary pt-8">{selectedLanguageContent.popis2}</p>
+      )}
       <div className="flex flex-col md:flex-row gap-6  pt-8">
         {data?.fotky[1] && (
           <Image
@@ -87,7 +104,9 @@ const GalleryPageId = ({ data }: Props) => {
           />
         )}
       </div>
-      {data?.popis3 && <p className="text-primary  pt-8">{data?.popis3}</p>}
+      {selectedLanguageContent?.popis3 && (
+        <p className="text-primary pt-8">{selectedLanguageContent.popis3}</p>
+      )}
       {data?.fotky[3] && (
         <Image
           src={data.fotky[3]}

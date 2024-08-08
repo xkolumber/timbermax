@@ -185,29 +185,29 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
   }, [data]);
 
   useEffect(() => {
-    const initializedJazykyKontent = languages.map((lang) => {
-      const existingLangContent = actualizeGallery.jazyky_kontent.find(
-        (content) => content.jazyk === lang.jazyk
-      );
-      return (
-        existingLangContent || {
-          jazyk: lang.jazyk,
-          nazov_farba: "",
-          nazov_profil: "",
-          nazov_projekt: "",
-          popis1: "",
-          popis2: "",
-          popis3: "",
-        }
-      );
-    });
-    setActualizeGallery((prev) => ({
-      ...prev,
-      jazyky_kontent: initializedJazykyKontent,
-    }));
-  }, [languages]);
-
-  console.log(actualizeGallery);
+    if (data) {
+      const initializedJazykyKontent = languages.map((lang) => {
+        const existingLangContent = data?.jazyky_kontent?.find(
+          (content) => content.jazyk === lang.jazyk
+        );
+        return (
+          existingLangContent || {
+            jazyk: lang.jazyk,
+            nazov_farba: "",
+            nazov_profil: "",
+            nazov_projekt: "",
+            popis1: "",
+            popis2: "",
+            popis3: "",
+          }
+        );
+      });
+      setActualizeGallery((prev) => ({
+        ...prev,
+        jazyky_kontent: initializedJazykyKontent,
+      }));
+    }
+  }, [languages, data]);
 
   return (
     <div>
@@ -283,7 +283,7 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
             <p className="text-primary font-bold">Jazyk: {object.jazyk}</p>
             <div className="flex flex-row justify-between items-center gap-4 mt-8">
               <h6>nazov_farba:</h6>
-              <p>{actualizeGallery.jazyky_kontent[0].nazov_farba}</p>
+
               <input
                 type="text"
                 name="nazov_farba"

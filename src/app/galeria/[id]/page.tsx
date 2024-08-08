@@ -1,6 +1,7 @@
 import GalleryPageId from "@/app/components/GalleryPageId";
 import { GetAdminGalleryId } from "@/app/lib/functionsServer";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -16,12 +17,14 @@ export const metadata: Metadata = {
 };
 
 async function GetGalleryPhotosId(id: string) {
+  const cookieStore = cookies();
+  const language = cookieStore.get("language");
   const data = await GetAdminGalleryId(id);
 
-  if (data) {
-    return <GalleryPageId data={data} />;
+  if (data && language) {
+    return <GalleryPageId data={data} language={language.value} />;
   }
-  return <GalleryPageId data={undefined} />;
+  return <GalleryPageId data={undefined} language={"sk"} />;
 }
 
 type Props = {
