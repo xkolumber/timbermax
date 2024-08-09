@@ -20,6 +20,7 @@ interface Props {
 
 const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
   const [actualizeGallery, setActualizeGallery] = useState<Gallery>({
+    datum_pridania: "",
     fotky: [],
     kategorie: [],
     nazov: "",
@@ -238,8 +239,11 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
                 src={foto}
                 width={500}
                 height={500}
+                priority
                 alt="logo"
                 className="w-[200px] h-[200px] pt-2 pb-2 md:pb-0 cursor-pointer object-cover"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGPoyAnauXnji/+fbVNdGZqyAqe1FtlEajHIMzD42mhFBFjwaAgw8DEAAEdSDLK7z3GTAAAAAElFTkSuQmCC"
               />
 
               <button
@@ -265,6 +269,7 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
             onChange={handleChangeMain}
             className="w-full border border-solid border-black h-[5rem] mt-4"
             required
+            placeholder="t138"
           />
         </div>
         <div className="flex flex-row justify-between items-center gap-4 mt-8">
@@ -276,6 +281,7 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
             onChange={handleChangeMain}
             className="w-full border border-solid border-black h-[5rem] mt-4"
             required
+            placeholder="brown"
           />
         </div>
         {actualizeGallery.jazyky_kontent.map((object, index) => (
@@ -291,6 +297,7 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
                 onChange={(e) => handleChangeMainLanguagesContent(e, index)}
                 className="w-full border border-solid border-black h-[5rem] mt-4"
                 required
+                placeholder="vo farbe - preklad slova"
               />
             </div>
             <div className="flex flex-row justify-between items-center gap-4 mt-8">
@@ -302,6 +309,7 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
                 onChange={(e) => handleChangeMainLanguagesContent(e, index)}
                 className="w-full border border-solid border-black h-[5rem] mt-4"
                 required
+                placeholder="profil - preklad slova"
               />
             </div>
             <div className="flex flex-row justify-between items-center gap-4 mt-8">
@@ -313,6 +321,7 @@ const AdminGalleryCertainAlbum = ({ data, languages }: Props) => {
                 onChange={(e) => handleChangeMainLanguagesContent(e, index)}
                 className="w-full border border-solid border-black h-[5rem] mt-4"
                 required
+                placeholder="projekt - preklad slova"
               />
             </div>
             <div className="flex flex-row justify-between items-center gap-4 mt-8">

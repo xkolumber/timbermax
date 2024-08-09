@@ -28,7 +28,7 @@ async function GetGalleryPhotos() {
 
 const Page = () => (
   <>
-    <div className=" relative main_section overflow-hidden additional_padding">
+    <div className=" relative navbar_section overflow-hidden additional_padding">
       <Suspense
         fallback={
           <div className="mt-4 min-h-screen">

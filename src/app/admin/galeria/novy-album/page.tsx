@@ -4,7 +4,7 @@ import { categories, CompressImages } from "@/app/lib/functionsClient";
 import { Gallery } from "@/app/lib/interface";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -13,8 +13,10 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const [actualizeGallery, setActualizeGallery] = useState<Gallery>({
+    datum_pridania: "",
     fotky: [],
     kategorie: [],
     nazov: "",
@@ -58,17 +60,14 @@ const Page = () => {
         })
       );
 
-      const response = await AdminAddPhotoGallery(
-        photoUrls,
-        actualizeGallery.kategorie,
-        actualizeGallery.nazov
-      );
+      const response = await AdminAddPhotoGallery(photoUrls, actualizeGallery);
       if (response === "success") {
         toast.success("Album bol pridaný");
         setActualizeGallery((prevData) => ({
           ...prevData,
           fotky: [],
           kategorie: [],
+          profil: "",
           nazov: "",
         }));
         setProjectPhotos([]);
@@ -76,6 +75,7 @@ const Page = () => {
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
+        router.push("/admin/galeria");
       } else {
         toast.error("Niekde nastala chyba");
       }
@@ -97,22 +97,6 @@ const Page = () => {
       const updatedData = { ...prevData, [name]: value };
       return updatedData;
     });
-  };
-
-  const handleChangeMainLanguagesContent = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { name, value } = e.target;
-    const updatedJazykyKontent = [...actualizeGallery.jazyky_kontent];
-    updatedJazykyKontent[index] = {
-      ...updatedJazykyKontent[index],
-      [name]: value,
-    };
-    setActualizeGallery((prev) => ({
-      ...prev,
-      jazyky_kontent: updatedJazykyKontent,
-    }));
   };
 
   const handleCheckboxChangeCategory = (productTitle: string) => {
@@ -159,6 +143,7 @@ const Page = () => {
             onChange={handleChangeMain}
             className="w-full border border-solid border-black h-[5rem] mt-4"
             required
+            placeholder="t138"
           />
         </div>
         <div className="flex flex-row justify-between items-center gap-4 mt-8">
@@ -170,6 +155,7 @@ const Page = () => {
             onChange={handleChangeMain}
             className="w-full border border-solid border-black h-[5rem] mt-4"
             required
+            placeholder="brown"
           />
         </div>
         <p className="text-primary"> *popisy sa dodatočne nahadzujú</p>
@@ -194,6 +180,10 @@ const Page = () => {
           </div>
         </div>
         <h6 className="text-primary pt-8">Pridajte fotky:</h6>
+        <p className="text-primary">
+          P.S. :Prvá fotka by mala byť na šírku, druhá a tretia - nezávisí..
+          zbytok ideálne na šírku{" "}
+        </p>
         <input
           type="file"
           multiple

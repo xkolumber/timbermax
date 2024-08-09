@@ -567,6 +567,7 @@ export interface Fasady {
 }
 
 export interface Gallery {
+  datum_pridania: string;
   fotky: string[];
   kategorie: string[];
   nazov: string;

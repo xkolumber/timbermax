@@ -303,11 +303,18 @@ export async function GetAdminGallery() {
     const dataGallery: Gallery[] = querySnapshot.docs.map((doc) => {
       const data = doc.data();
       return {
+        datum_pridania: data.datum_pridania,
         fotky: data.fotky,
         kategorie: data.kategorie,
         nazov: data.nazov,
         id: doc.id,
       } as Gallery;
+    });
+
+    dataGallery.sort((a, b) => {
+      const dateA = new Date(a.datum_pridania);
+      const dateB = new Date(b.datum_pridania);
+      return dateB.getTime() - dateA.getTime();
     });
 
     return dataGallery;

@@ -1462,17 +1462,19 @@ export async function AdminActualizeFasadyPage(
 
 export async function AdminAddPhotoGallery(
   fotky: string[],
-  kategorie: string[],
-  nazov: string
+  actualizeGallery: Gallery
 ) {
   const db = getFirestore();
   const couponCollectionRef = db.collection("galeria");
 
   try {
     await couponCollectionRef.add({
+      farba: actualizeGallery.farba,
       fotky: fotky,
-      nazov: nazov,
-      kategorie: kategorie,
+      nazov: actualizeGallery.nazov,
+      kategorie: actualizeGallery.kategorie,
+      profil: actualizeGallery.profil,
+      datum_pridania: new Date().toString(),
     });
     revalidatePath(`/admin/galeria/novy-album`);
     return "success";
@@ -1552,16 +1554,12 @@ export async function AdminActualizeAlbumGallery(
         new_fotky.push(photo);
       });
     }
-
-    console.log(new_fotky);
-
     await docRef.update({
       fotky: new_fotky,
       kategorie: actualizeGallery.kategorie,
       nazov: actualizeGallery.nazov,
       profil: actualizeGallery.profil,
       farba: actualizeGallery.farba,
-
       jazyky_kontent: actualizeGallery.jazyky_kontent,
     });
     revalidatePath(`/admin/galeria/[${id}]/page`, "page");
