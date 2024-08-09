@@ -24,12 +24,12 @@ const GalleryPage = ({ data }: Props) => {
 
   return (
     <>
-      <h3 className="text-primary mb-4 custom-underline navbar_section ">
+      <h3 className="text-primary custom-underline  ">
         {" "}
         {galleryData[0].title}
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-16 2xl:gap-24 navbar_section">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-16 2xl:gap-24  md:!mb-24 !-mt-4 md:!-mt-0">
         {data.map((item, index) => (
           <Link
             className="h-[500px] 2xl:h-[800px] relative rounded-[8px] flex justify-center items-center flex-col cursor-pointer overflow-hidden group"

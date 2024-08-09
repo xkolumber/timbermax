@@ -5,7 +5,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 const GalleryPageSkeleton = () => {
   return (
     <div>
-      <h3 className="text-primary mb-4 custom-underline navbar_section">
+      <h3 className="text-primary custom-underline navbar_section">
         <Skeleton baseColor="#DEDEDE" width={150} height={24} />
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-16 2xl:gap-24 navbar_section">

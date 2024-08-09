@@ -5,16 +5,17 @@ const page = () => {
   return (
     <>
       <div className="main_section additional_padding">
-        <h1 className="text-primarz">Kontakt</h1>
+        <h3 className="text-primary custom-underline">Kontakt</h3>
         <p className="text-primary">
           Dosky Timbermax máte teraz v blízkosti Vášho domova.
         </p>
-        <p className="text-primary pt-4">
+
+        <p className="text-primary pt-8 lg:max-w-[80%]">
           Pripravili sme pre Vás exteriérovú výstavu všetkých farieb a profilov
           Timbermax. Dosky si môžete pozrieť, chytiť, prirovnať si k nim vzorky
           materiálov použitých v interiéri...
         </p>
-        <p className="text-primary pt-4">
+        <p className="text-primary pt-8">
           V prípade potreby konzultácie zavoláte na infolinku priamo zo
           vzorkovne a odpovieme Vám na akýkoľvek dotaz.
         </p>
@@ -31,15 +32,23 @@ const page = () => {
       </div>
       <SwiperContactPage />
       <div className="main_section">
-        <p className="text-primary">
-          Sídlo firmy Bottova 1, 811 09 Staré Mesto Po schválení predbežnej
-          cenovej ponuky je možné dohodnúť si osobné stretnutie buď priamo na
-          stavbe u klienta alebo v našich kancelárskych priestoroch. Interný
-          architekt je pripravený prekonzultovať s Vami možnosti osadenia
-          terasových a fasádnych obkladov. Vieme spracovať návrh a vizualizácie
-          osadenia obkladov, vykresliť technické detaily a realizačné detaily
-          stavby. V prípade potreby konzultácie technických riešení nás
-          kontaktujete telefonicky alebo mailom a odpovieme Vám na akýkoľvek
+        <h3 className="custom-underline"> Sídlo firmy</h3>
+        <p className="text-primary pt-8 lg:max-w-[80%]"></p>
+        <p className="text-primary">Bottova 1, 811 09 Staré Mesto</p>
+        <p className="pt-4 text-primary">
+          Po schválení predbežnej cenovej ponuky je možné dohodnúť si osobné
+          stretnutie buď priamo na stavbe u klienta alebo v našich kancelárskych
+          priestoroch.
+        </p>
+        <p className="pt-4 text-primary">
+          Interný architekt je pripravený prekonzultovať s Vami možnosti
+          osadenia terasových a fasádnych obkladov. Vieme spracovať návrh a
+          vizualizácie osadenia obkladov, vykresliť technické detaily a
+          realizačné detaily stavby.
+        </p>
+        <p className="pt-4 text-primary">
+          V prípade potreby konzultácie technických riešení nás kontaktujete
+          telefonicky alebo mailom a odpovieme Vám na akýkoľvek
         </p>
       </div>
     </>
