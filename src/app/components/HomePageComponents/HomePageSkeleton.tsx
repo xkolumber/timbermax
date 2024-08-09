@@ -1,10 +1,8 @@
+import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Image from "next/image";
-import IconDoubleArrow from "../Icons/IconDoubleArrow";
 import IconArrowLoopLeft from "../Icons/IconArrowLoopLeft";
 import IconArrowLoopRight from "../Icons/IconArrowLoopRight";
-import Link from "next/link";
 
 const HomePageSkeleton = () => {
   return (

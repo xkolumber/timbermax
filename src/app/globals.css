@@ -615,3 +615,10 @@ a {
 .showrooms p {
   color: var(--color-primary);
 }
+
+.full-width-container {
+  width: 100%;
+  max-width: 100%;
+  clear: both;
+  margin: 0 auto;
+}

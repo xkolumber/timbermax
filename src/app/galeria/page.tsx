@@ -5,6 +5,7 @@ import GalleryPage from "../components/GalleryPage";
 import { GetAdminGallery } from "../lib/functionsServer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import GalleryPageSkeleton from "../components/GalleryPageSkeleton";
 
 export const metadata: Metadata = {
   title: "Galéria fotiek",
@@ -29,13 +30,7 @@ async function GetGalleryPhotos() {
 const Page = () => (
   <>
     <div className=" relative navbar_section overflow-hidden additional_padding">
-      <Suspense
-        fallback={
-          <div className="mt-4 min-h-screen">
-            <ClipLoader size={20} color={"#00000"} loading={true} />
-          </div>
-        }
-      >
+      <Suspense fallback={<GalleryPageSkeleton />}>
         {GetGalleryPhotos()}
       </Suspense>
     </div>
