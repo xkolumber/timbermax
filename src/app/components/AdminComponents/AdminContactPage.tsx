@@ -1,6 +1,10 @@
 "use client";
 import { AdminActualizeContactPage } from "@/app/lib/actions";
-import { getSecondPathValue } from "@/app/lib/functionsClient";
+import {
+  daysOrder,
+  getSecondPathValue,
+  OpeningHoursEmpty,
+} from "@/app/lib/functionsClient";
 import { Jazyk, ContactPage } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -73,7 +77,7 @@ const AdminContactPage = ({ language, data, languages }: Props) => {
         vzorkovne_popis4: data.vzorkovne_popis4 ? data.vzorkovne_popis4 : "",
         prevadzky_nadpis: data.prevadzky_nadpis ? data.prevadzky_nadpis : "",
         otvaracie_hodiny: data.otvaracie_hodiny ? data.otvaracie_hodiny : "",
-        hodiny: data.hodiny ? data.hodiny : OpeningHours,
+        hodiny: data.hodiny ? data.hodiny : OpeningHoursEmpty,
         sidlo_nadpis: data.sidlo_nadpis ? data.sidlo_nadpis : "",
         sidlo: data.sidlo ? data.sidlo : "",
         sidlo_popis1: data.sidlo_popis1 ? data.sidlo_popis1 : "",
@@ -82,16 +86,6 @@ const AdminContactPage = ({ language, data, languages }: Props) => {
       }));
     }
   }, [data]);
-
-  const OpeningHours = {
-    pon: "",
-    ut: "",
-    st: "",
-    stv: "",
-    pi: "",
-    sob: "",
-    ne: "",
-  };
 
   interface OpeningHours {
     pon: string;
@@ -120,6 +114,8 @@ const AdminContactPage = ({ language, data, languages }: Props) => {
     day: keyof OpeningHours,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    console.log("Day: ", day);
+    console.log("Value: ", event.target.value);
     setActualizeData((prevData) => ({
       ...prevData,
       hodiny: {
@@ -128,6 +124,8 @@ const AdminContactPage = ({ language, data, languages }: Props) => {
       },
     }));
   };
+
+  console.log(actualizeData);
 
   return (
     <div className="main_section additional_padding">
@@ -254,17 +252,15 @@ const AdminContactPage = ({ language, data, languages }: Props) => {
         {/*opening hours*/}
 
         <div className="product_admin_row">
-          <p>Otváracie hodiny: / dni v týždni</p>
+          <p>Dni v týždni</p>
           <div className="flex flex-col">
-            {Object.keys(actualizeData.hodiny).map((day, index) => (
+            {daysOrder.map((day, index) => (
               <input
                 key={index}
                 type="text"
                 name={`hodiny_${day}`}
-                value={(actualizeData.hodiny as any)[day]}
-                onChange={(e) =>
-                  handleChangeHodiny(day as keyof OpeningHours, e)
-                }
+                value={actualizeData.hodiny[day]}
+                onChange={(e) => handleChangeHodiny(day, e)}
                 className="md:!w-[450px] mt-2"
               />
             ))}

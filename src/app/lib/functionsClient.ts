@@ -1,7 +1,7 @@
 "use client";
 
 import imageCompression from "browser-image-compression";
-import { Prevadzka } from "./interface";
+import { OpeningHours, Prevadzka } from "./interface";
 
 export function getSecondPathValue(pathname: string) {
   const parts = pathname.split("/").filter(Boolean);
@@ -333,4 +333,24 @@ export const prevadzky: Prevadzka[] = [
       ne: "-",
     },
   },
+];
+
+export const OpeningHoursEmpty = {
+  pon: "",
+  ut: "",
+  st: "",
+  stv: "",
+  pi: "",
+  sob: "",
+  ne: "",
+};
+
+export const daysOrder: (keyof OpeningHours)[] = [
+  "pon",
+  "ut",
+  "st",
+  "stv",
+  "pi",
+  "sob",
+  "ne",
 ];

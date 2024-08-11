@@ -9,10 +9,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import IconArrowCart from "./Icons/IconArrowCart";
 import IconCloseButton from "./Icons/IconCloseButton";
-import { Prevadzka } from "../lib/interface";
+import { OpeningHours, Prevadzka } from "../lib/interface";
 import { prevadzky } from "../lib/functionsClient";
 
-const SwiperContactPage = () => {
+interface Props {
+  otvaracie_hodiny: string;
+  hodiny: OpeningHours;
+}
+
+const SwiperContactPage = ({ otvaracie_hodiny, hodiny }: Props) => {
   const [isHovered, setIsHovered] = useState(-1);
   const [showWindow, setShowWindow] = useState(false);
   const [choosenPrevadzka, setChoosenPrevadzka] = useState<Prevadzka>();
@@ -81,7 +86,7 @@ const SwiperContactPage = () => {
                   className="btn btn--secondary absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                   onClick={() => handleShowShop(item)}
                 >
-                  otváracie hodiny
+                  {otvaracie_hodiny}
                 </button>
               )}
             </div>
@@ -102,35 +107,35 @@ const SwiperContactPage = () => {
               {" "}
               {choosenPrevadzka?.adresa}
             </h6>
-            <p className="text-primary text-center pt-8">Otváracie hodiny:</p>
+            <p className="text-primary text-center pt-8">{otvaracie_hodiny}:</p>
             <div className="flex flex-col showrooms">
               <div className="flex flex-row gap-8 justify-between">
-                <p className="font-bold">Pondelok</p>
+                <p className="font-bold">{hodiny.pon}</p>
                 <p>{choosenPrevadzka?.hodiny.pon}</p>
               </div>
               <div className="flex flex-row gap-8 justify-between">
-                <p className="font-bold">Utorok</p>
+                <p className="font-bold">{hodiny.ut}</p>
                 <p>{choosenPrevadzka?.hodiny.ut}</p>
               </div>
               <div className="flex flex-row gap-8 justify-between">
-                <p className="font-bold">Streda</p>
+                <p className="font-bold">{hodiny.st}</p>
                 <p>{choosenPrevadzka?.hodiny.st}</p>
               </div>
               <div className="flex flex-row gap-8 justify-between">
-                <p className="font-bold">Štvrtok</p>
+                <p className="font-bold">{hodiny.stv}</p>
                 <p>{choosenPrevadzka?.hodiny.stv}</p>
               </div>
               <div className="flex flex-row gap-8 justify-between">
-                <p className="font-bold">Piatok</p>
+                <p className="font-bold">{hodiny.pi}</p>
                 <p>{choosenPrevadzka?.hodiny.pi}</p>
               </div>
               <div className="flex flex-row gap-8 justify-between">
-                <p className="font-bold">Sobota</p>
+                <p className="font-bold">{hodiny.sob}</p>
                 <p>{choosenPrevadzka?.hodiny.sob}</p>
               </div>
               {choosenPrevadzka?.hodiny.ne === "-" ? (
                 <div className="flex flex-row gap-8 justify-between">
-                  <p className="font-bold">Nedeľa</p>
+                  <p className="font-bold">{hodiny.ne}</p>
                   <div className="flex justify-center w-full items-center">
                     {" "}
                     <p className="text-center">{choosenPrevadzka?.hodiny.ne}</p>

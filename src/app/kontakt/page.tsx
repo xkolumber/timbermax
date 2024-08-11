@@ -1,58 +1,34 @@
-import SwiperContactPage from "../components/SwiperContactPage";
-import Image from "next/image";
+import { unstable_noStore } from "next/cache";
+import { cookies } from "next/headers";
+import { Suspense } from "react";
+import ContactPagee from "../components/ContactPagee";
+import HomePageSkeleton from "../components/HomePageComponents/HomePageSkeleton";
+import { GetAdminContactPage } from "../lib/functionsServer";
 
-const page = () => {
+async function GetData() {
+  unstable_noStore();
+  const cookieStore = cookies();
+  const language = cookieStore.get("language");
+
+  if (
+    language?.value === "sk" ||
+    language?.value === "cz" ||
+    language?.value === "en"
+  ) {
+    const data = await GetAdminContactPage(language.value);
+    if (data) {
+      return <ContactPagee data={data} />;
+    }
+    console.log(language);
+
+    return <ContactPagee data={undefined} />;
+  }
+}
+
+export default function Home() {
   return (
-    <>
-      <div className="main_section additional_padding">
-        <h3 className="text-primary custom-underline">Kontakt</h3>
-        <p className="text-primary">
-          Dosky Timbermax máte teraz v blízkosti Vášho domova.
-        </p>
-
-        <p className="text-primary pt-8 lg:max-w-[80%]">
-          Pripravili sme pre Vás exteriérovú výstavu všetkých farieb a profilov
-          Timbermax. Dosky si môžete pozrieť, chytiť, prirovnať si k nim vzorky
-          materiálov použitých v interiéri...
-        </p>
-        <p className="text-primary pt-8">
-          V prípade potreby konzultácie zavoláte na infolinku priamo zo
-          vzorkovne a odpovieme Vám na akýkoľvek dotaz.
-        </p>
-        <Image
-          src="/showroom_new.svg"
-          className="w-full h-full object-cover min-h-[200px] pt-8 pb-8 "
-          alt="referencie"
-          width={1000}
-          height={1000}
-          quality={100}
-          priority
-        />
-        <h3 className="custom-underline !mb-0 mt-16">Prevádzky</h3>
-      </div>
-      <SwiperContactPage />
-      <div className="main_section">
-        <h3 className="custom-underline"> Sídlo firmy</h3>
-        <p className="text-primary pt-8 lg:max-w-[80%]"></p>
-        <p className="text-primary">Bottova 1, 811 09 Staré Mesto</p>
-        <p className="pt-4 text-primary">
-          Po schválení predbežnej cenovej ponuky je možné dohodnúť si osobné
-          stretnutie buď priamo na stavbe u klienta alebo v našich kancelárskych
-          priestoroch.
-        </p>
-        <p className="pt-4 text-primary">
-          Interný architekt je pripravený prekonzultovať s Vami možnosti
-          osadenia terasových a fasádnych obkladov. Vieme spracovať návrh a
-          vizualizácie osadenia obkladov, vykresliť technické detaily a
-          realizačné detaily stavby.
-        </p>
-        <p className="pt-4 text-primary">
-          V prípade potreby konzultácie technických riešení nás kontaktujete
-          telefonicky alebo mailom a odpovieme Vám na akýkoľvek
-        </p>
-      </div>
-    </>
+    <Suspense fallback={<HomePageSkeleton />}>
+      <GetData />
+    </Suspense>
   );
-};
-
-export default page;
+}
