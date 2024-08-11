@@ -6,6 +6,7 @@ import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import {
   AboutUsElements,
   Bazeny,
+  ContactPage,
   Fasady,
   Gallery,
   HomePageElements,
@@ -351,5 +352,28 @@ export async function GetAdminGalleryId(id: string) {
   } catch (error) {
     console.error("Database Error: Failed to fetch orders.", error);
     throw new Error("Database Error: Failed to fetch orders.");
+  }
+}
+
+export async function GetAdminContactPage(language: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore();
+    const podstrankaCollectionRef = db.collection("contact");
+    const querySnapshot = await podstrankaCollectionRef
+      .where("jazyk", "==", language)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error("Document does not exist for uid:", language);
+      return null;
+    }
+    const doc = querySnapshot.docs[0];
+    const orderData = doc.data() as ContactPage;
+
+    return orderData;
+  } catch (error) {
+    return null;
   }
 }

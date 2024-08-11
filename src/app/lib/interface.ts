@@ -607,3 +607,22 @@ export interface OpeningHours {
   sob: string;
   ne: string;
 }
+
+export interface ContactPage {
+  kontakt_nadpis: string;
+  tel_number: string;
+  email: string;
+  vzorkovne_nadpis: string;
+  vzorkovne_popis1: string;
+  vzorkovne_popis2: string;
+  vzorkovne_popis3: string;
+  vzorkovne_popis4: string;
+  prevadzky_nadpis: string;
+  otvaracie_hodiny: string;
+  hodiny: OpeningHours;
+  sidlo_nadpis: string;
+  sidlo: string;
+  sidlo_popis1: string;
+  sidlo_popis2: string;
+  sidlo_popis3: string;
+}

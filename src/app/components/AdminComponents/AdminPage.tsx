@@ -40,6 +40,7 @@ const AdminPage = ({ languages }: Props) => {
   const [isClicked3, setIsClicked3] = useState(false);
   const [isClicked4, setIsClicked4] = useState(false);
   const [isClicked5, setIsClicked5] = useState(false);
+  const [isClicked6, setIsClicked6] = useState(false);
   const [servicesClicked, setServicesClicked] = useState(false);
   const [certainServiceClicked, setCertainServiceClicked] = useState(-1);
   const [certainServiceSlug, setCertainServiceSlug] = useState("");
@@ -191,6 +192,26 @@ const AdminPage = ({ languages }: Props) => {
         <Link className=" btn btn--primary max-h-[50px]" href="/admin/galeria">
           Galéria
         </Link>
+        <div className="flex flex-col">
+          <button
+            className=" btn btn--primary"
+            onClick={() => setIsClicked6((prevState) => !prevState)}
+          >
+            Kontakt
+          </button>
+          <div className="flex flex-col w-[150px]">
+            {isClicked6 &&
+              languages.map((language, index) => (
+                <Link
+                  className="index p-4 bg-white text-black cursor-pointer hover:bg-gray-500 duration-200"
+                  key={index}
+                  href={`/admin/kontakt/${language.jazyk}`}
+                >
+                  {language.jazyk}
+                </Link>
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

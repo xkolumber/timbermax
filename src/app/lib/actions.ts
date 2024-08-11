@@ -8,6 +8,7 @@ import { z } from "zod";
 import { firestore } from "./firebaseServer";
 import {
   Bazeny,
+  ContactPage,
   Fasady,
   Gallery,
   HomePageElements,
@@ -1568,4 +1569,65 @@ export async function AdminActualizeAlbumGallery(
     console.error("Database Error: Failed", error);
     return "false";
   }
+}
+
+export async function AdminActualizeContactPage(
+  actualizeData: ContactPage,
+  jazyk: string
+) {
+  const db = getFirestore();
+  const podstrankaCollectionRef = db.collection(`contact`);
+  const querySnapshot = await podstrankaCollectionRef
+    .where("jazyk", "==", jazyk)
+    .get();
+
+  if (querySnapshot.empty) {
+    console.error("Document does not exist for uid:");
+
+    await podstrankaCollectionRef.add({
+      kontakt_nadpis: actualizeData.kontakt_nadpis,
+      tel_number: actualizeData.tel_number,
+      email: actualizeData.email,
+      jazyk: jazyk,
+      vzorkovne_nadpis: actualizeData.vzorkovne_nadpis,
+      vzorkovne_popis1: actualizeData.vzorkovne_popis1,
+      vzorkovne_popis2: actualizeData.vzorkovne_popis2,
+      vzorkovne_popis3: actualizeData.vzorkovne_popis3,
+      vzorkovne_popis4: actualizeData.vzorkovne_popis4,
+      prevadzky_nadpis: actualizeData.prevadzky_nadpis,
+      otvaracie_hodiny: actualizeData.otvaracie_hodiny,
+      hodiny: actualizeData.hodiny,
+      sidlo_nadpis: actualizeData.sidlo_nadpis,
+      sidlo: actualizeData.sidlo,
+      sidlo_popis1: actualizeData.sidlo_popis1,
+      sidlo_popis2: actualizeData.sidlo_popis2,
+      sidlo_popis3: actualizeData.sidlo_popis3,
+    });
+    return "success";
+  }
+
+  const doc = querySnapshot.docs[0];
+  const docId = doc.id;
+
+  await podstrankaCollectionRef.doc(docId).update({
+    kontakt_nadpis: actualizeData.kontakt_nadpis,
+    tel_number: actualizeData.tel_number,
+    email: actualizeData.email,
+    jazyk: jazyk,
+    vzorkovne_nadpis: actualizeData.vzorkovne_nadpis,
+    vzorkovne_popis1: actualizeData.vzorkovne_popis1,
+    vzorkovne_popis2: actualizeData.vzorkovne_popis2,
+    vzorkovne_popis3: actualizeData.vzorkovne_popis3,
+    vzorkovne_popis4: actualizeData.vzorkovne_popis4,
+    prevadzky_nadpis: actualizeData.prevadzky_nadpis,
+    otvaracie_hodiny: actualizeData.otvaracie_hodiny,
+    hodiny: actualizeData.hodiny,
+    sidlo_nadpis: actualizeData.sidlo_nadpis,
+    sidlo: actualizeData.sidlo,
+    sidlo_popis1: actualizeData.sidlo_popis1,
+    sidlo_popis2: actualizeData.sidlo_popis2,
+    sidlo_popis3: actualizeData.sidlo_popis3,
+  });
+  revalidatePath(`/admin/contact/[${jazyk}]/page`, "page");
+  return "success";
 }
