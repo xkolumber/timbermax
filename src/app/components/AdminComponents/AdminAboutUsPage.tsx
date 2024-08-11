@@ -1,6 +1,6 @@
 "use client";
 import { AdminActualizeAboutUsPage } from "@/app/lib/actions";
-import { getSecondPathValue } from "@/app/lib/functionsClient";
+import { getSecondPathValue, TeamValuesEmpty } from "@/app/lib/functionsClient";
 import { AboutUsElements, Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -60,33 +60,10 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
         jazyk: language,
         spoznajte_tim: data.spoznajte_tim ? data.spoznajte_tim : "",
         staviame_znacka: data.staviame_znacka ? data.staviame_znacka : "",
-        tim: data.tim.length > 0 ? data.tim : TeamValues,
+        tim: data.tim.length > 0 ? data.tim : TeamValuesEmpty,
       }));
     }
   }, [data]);
-
-  const TeamValues = [
-    {
-      meno: "",
-      funkcia: "",
-      popis: "",
-    },
-    {
-      meno: "",
-      funkcia: "",
-      popis: "",
-    },
-    {
-      meno: "",
-      funkcia: "",
-      popis: "",
-    },
-    {
-      meno: "",
-      funkcia: "",
-      popis: "",
-    },
-  ];
 
   const handleSaveProduct = async (e: any) => {
     e.preventDefault();
@@ -260,6 +237,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
                     handleChangeItemTwoArray("tim", index, "meno", e)
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Meno a priezvisko"
                 />
                 <input
                   type="text"
@@ -269,6 +247,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
                     handleChangeItemTwoArray("tim", index, "funkcia", e)
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Práca"
                 />
                 <input
                   type="text"
@@ -278,6 +257,17 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
                     handleChangeItemTwoArray("tim", index, "popis", e)
                   }
                   className="md:!w-[450px] mt-2"
+                  placeholder="Popis"
+                />
+                <input
+                  type="text"
+                  name={`tim-tel-${index}`}
+                  value={element.tel}
+                  onChange={(e) =>
+                    handleChangeItemTwoArray("tim", index, "tel", e)
+                  }
+                  className="md:!w-[450px] mt-2"
+                  placeholder="Telefónny kontakt"
                 />
               </div>
             ))}

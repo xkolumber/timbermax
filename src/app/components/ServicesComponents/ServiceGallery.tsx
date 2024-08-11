@@ -82,6 +82,7 @@ const ServiceGallery = ({ nadpis_galeria }: Props) => {
                 <div className="absolute w-full h-full bg-[#363128] opacity-70 rounded-[8px] transition-opacity duration-300"></div>
               )}
 
+              <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
               <Image
                 src={item.photo}
                 alt="hlavna_fotka"

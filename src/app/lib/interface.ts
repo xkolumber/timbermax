@@ -143,6 +143,7 @@ export interface Team {
   meno: string;
   funkcia: string;
   popis: string;
+  tel: string;
 }
 
 export interface Sluzby {
@@ -625,4 +626,13 @@ export interface ContactPage {
   sidlo_popis1: string;
   sidlo_popis2: string;
   sidlo_popis3: string;
+}
+
+export interface TeamMember {
+  job: string;
+  meno: string;
+  main_image: string;
+  image: string;
+  text: string;
+  tel: string;
 }

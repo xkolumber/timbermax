@@ -3,7 +3,10 @@ import { cookies } from "next/headers";
 import { Suspense } from "react";
 import ContactPagee from "../components/ContactPagee";
 import HomePageSkeleton from "../components/HomePageComponents/HomePageSkeleton";
-import { GetAdminContactPage } from "../lib/functionsServer";
+import {
+  GetAdminAboutUsPage,
+  GetAdminContactPage,
+} from "../lib/functionsServer";
 
 async function GetData() {
   unstable_noStore();
@@ -16,12 +19,13 @@ async function GetData() {
     language?.value === "en"
   ) {
     const data = await GetAdminContactPage(language.value);
-    if (data) {
-      return <ContactPagee data={data} />;
-    }
-    console.log(language);
 
-    return <ContactPagee data={undefined} />;
+    const data2 = await GetAdminAboutUsPage(language.value);
+    if (data && data2) {
+      return <ContactPagee data={data} data2={data2} />;
+    }
+
+    return <ContactPagee data={undefined} data2={undefined} />;
   }
 }
 
