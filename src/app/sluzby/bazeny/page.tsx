@@ -1,6 +1,9 @@
 import BazenyPage from "@/app/components/ServicesComponents/BazenyPage";
 import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
-import { GetAdminBazeny } from "@/app/lib/functionsServer";
+import {
+  GetAdminBazeny,
+  GetGalleriesForServicePage,
+} from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 
@@ -14,16 +17,18 @@ async function GetData() {
     language?.value === "en"
   ) {
     const data = await GetAdminBazeny(language.value);
+    const galleries = await GetGalleriesForServicePage("bazeny");
     if (data) {
-      return <BazenyPage data={data} />;
+      return <BazenyPage data={data} galleries={galleries} />;
     }
-    <BazenyPage data={undefined} />;
+    <BazenyPage data={undefined} galleries={galleries} />;
   }
   const data = await GetAdminBazeny("sk");
+  const galleries = await GetGalleriesForServicePage("bazeny");
   if (data) {
-    return <BazenyPage data={data} />;
+    return <BazenyPage data={data} galleries={galleries} />;
   }
-  <BazenyPage data={undefined} />;
+  <BazenyPage data={undefined} galleries={galleries} />;
 }
 
 export default function Page() {

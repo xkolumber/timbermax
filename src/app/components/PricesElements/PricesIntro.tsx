@@ -7,7 +7,7 @@ interface Props {
 }
 
 const PricesIntro = ({ cennik_stiahnutie }: Props) => {
-  // const myBlurDataUrl = await getBase64(`${process.env.URL}/pic.webp`);
+  // const myBlurDataUrl = await getBase64(`${process.env.URL}/terasa.jpg`);
   // console.log(myBlurDataUrl);
 
   return (

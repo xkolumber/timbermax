@@ -52,7 +52,7 @@ const Properties = ({ data }: Props) => {
       />
       <div className="main_section">
         <p className="text-tertiary mt-8">{data?.vlastnosti_popis8}</p>
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-col md:flex-row">
           <Link
             className="btn btn--secondary border border-black"
             href={`/viac-o-timbermaxe`}

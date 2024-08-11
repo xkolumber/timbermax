@@ -1,6 +1,9 @@
 import PlotyPage from "@/app/components/ServicesComponents/PlotyPage";
 import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
-import { GetAdminPloty } from "@/app/lib/functionsServer";
+import {
+  GetAdminPloty,
+  GetGalleriesForServicePage,
+} from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 
@@ -14,16 +17,18 @@ async function GetData() {
     language?.value === "en"
   ) {
     const data = await GetAdminPloty(language.value);
+    const galleries = await GetGalleriesForServicePage("ploty");
     if (data) {
-      return <PlotyPage data={data} />;
+      return <PlotyPage data={data} galleries={galleries} />;
     }
-    <PlotyPage data={undefined} />;
+    <PlotyPage data={undefined} galleries={galleries} />;
   }
   const data = await GetAdminPloty("sk");
+  const galleries = await GetGalleriesForServicePage("slnolamy");
   if (data) {
-    return <PlotyPage data={data} />;
+    return <PlotyPage data={data} galleries={galleries} />;
   }
-  <PlotyPage data={undefined} />;
+  <PlotyPage data={undefined} galleries={galleries} />;
 }
 
 export default function Page() {

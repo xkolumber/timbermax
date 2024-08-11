@@ -1,27 +1,23 @@
 "use client";
-import { Slnolamy } from "@/app/lib/interface";
+import { Gallery, Slnolamy } from "@/app/lib/interface";
 
 import Image from "next/image";
 
-import IconServiceFeatures from "../Icons/IconServiceFeatures";
-import IconServiceInstallation from "../Icons/IconServiceInstallation";
-import IconServiceOrder from "../Icons/IconServiceOrder";
-import IconServiceProfile from "../Icons/IconServiceProfile";
-import IconServiceVariants from "../Icons/IconServiceVariants";
-import ServiceGallery from "./ServiceGallery";
-import { useState } from "react";
 import { icon_text } from "@/app/lib/data";
+import { useState } from "react";
 import ColorVariants from "./ColorVariants";
 import Installation from "./Installation";
 import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
+import ServiceGallery from "./ServiceGallery";
 
 interface Props {
   data: Slnolamy | undefined;
+  galleries: Gallery[] | [];
 }
 
-const SlnolamyPage = ({ data }: Props) => {
+const SlnolamyPage = ({ data, galleries }: Props) => {
   const [variantClicked, setVariantClicked] = useState(0);
   return (
     <main>
@@ -38,6 +34,8 @@ const SlnolamyPage = ({ data }: Props) => {
           quality={100}
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGPw0OAy5WbQYWBg6GnM9DDht1BmY0iJ96rOi28qSGb49e3L6f27/v/+BgC/aQ8LE9jBAQAAAABJRU5ErkJggg=="
         />
 
         <div className="main_section ">
@@ -49,12 +47,11 @@ const SlnolamyPage = ({ data }: Props) => {
               </p>
             ))}
           </div>
-
-          <h4 className="text-tertiary">{data?.nadpis_galeria}</h4>
         </div>
       </div>
       <ServiceGallery
         nadpis_galeria={data?.nadpis_galeria ? data.nadpis_galeria : ""}
+        galleries={galleries}
       />
 
       <div className="bg-secondary">

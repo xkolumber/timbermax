@@ -6,6 +6,7 @@ import NextJsImage from "./NextImage";
 import Image from "next/image";
 import "yet-another-react-lightbox/styles.css";
 import Link from "next/link";
+import StepBack from "./StepBack";
 
 interface Props {
   data: Gallery | undefined;
@@ -43,9 +44,7 @@ const GalleryPageId = ({ data, language }: Props) => {
 
   return (
     <div className="">
-      <Link href={"/galeria"}>
-        <p className="hover:underline ease-in text-black">Späť</p>
-      </Link>
+      <StepBack />
       <h2 className="text-primary">
         {selectedLanguageContent?.nazov_projekt} {data?.nazov}
       </h2>

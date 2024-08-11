@@ -1,6 +1,9 @@
 import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
 import TerasyPage from "@/app/components/ServicesComponents/TerasyPage";
-import { GetAdminTerasy } from "@/app/lib/functionsServer";
+import {
+  GetAdminTerasy,
+  GetGalleriesForServicePage,
+} from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 
@@ -14,16 +17,20 @@ async function GetData() {
     language?.value === "en"
   ) {
     const data = await GetAdminTerasy(language.value);
+    const galleries = await GetGalleriesForServicePage("terasy");
+
     if (data) {
-      return <TerasyPage data={data} />;
+      return <TerasyPage data={data} galleries={galleries} />;
     }
-    <TerasyPage data={undefined} />;
+    <TerasyPage data={undefined} galleries={galleries} />;
   }
   const data = await GetAdminTerasy("sk");
+  const galleries = await GetGalleriesForServicePage("terasy");
+
   if (data) {
-    return <TerasyPage data={data} />;
+    return <TerasyPage data={data} galleries={galleries} />;
   }
-  <TerasyPage data={undefined} />;
+  <TerasyPage data={undefined} galleries={galleries} />;
 }
 
 export default function Page() {

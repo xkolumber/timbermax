@@ -1,6 +1,9 @@
 import OstatnePage from "@/app/components/ServicesComponents/OstatnePage";
 import ServiceSkeleton from "@/app/components/ServicesComponents/ServiceSkeleton";
-import { GetAdminOstatne } from "@/app/lib/functionsServer";
+import {
+  GetAdminOstatne,
+  GetGalleriesForServicePage,
+} from "@/app/lib/functionsServer";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 
@@ -14,16 +17,18 @@ async function GetData() {
     language?.value === "en"
   ) {
     const data = await GetAdminOstatne(language.value);
+    const galleries = await GetGalleriesForServicePage("ostatne");
     if (data) {
-      return <OstatnePage data={data} />;
+      return <OstatnePage data={data} galleries={galleries} />;
     }
-    <OstatnePage data={undefined} />;
+    <OstatnePage data={undefined} galleries={galleries} />;
   }
   const data = await GetAdminOstatne("sk");
+  const galleries = await GetGalleriesForServicePage("ostatne");
   if (data) {
-    return <OstatnePage data={data} />;
+    return <OstatnePage data={data} galleries={galleries} />;
   }
-  <OstatnePage data={undefined} />;
+  <OstatnePage data={undefined} galleries={galleries} />;
 }
 
 export default function Page() {

@@ -7,6 +7,7 @@ import {
   GetAdminAboutUsPage,
   GetAdminContactPage,
 } from "../lib/functionsServer";
+import { ClipLoader } from "react-spinners";
 
 async function GetData() {
   unstable_noStore();
@@ -29,9 +30,15 @@ async function GetData() {
   }
 }
 
-export default function Home() {
+export default function Contact() {
   return (
-    <Suspense fallback={<HomePageSkeleton />}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen">
+          <ClipLoader size={20} color={"#32a8a0"} loading={true} />
+        </div>
+      }
+    >
       <GetData />
     </Suspense>
   );

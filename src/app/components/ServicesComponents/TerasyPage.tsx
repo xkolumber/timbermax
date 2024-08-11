@@ -1,5 +1,5 @@
 "use client";
-import { Terasy } from "@/app/lib/interface";
+import { Gallery, Terasy } from "@/app/lib/interface";
 
 import Image from "next/image";
 
@@ -14,9 +14,10 @@ import ServiceGallery from "./ServiceGallery";
 
 interface Props {
   data: Terasy | undefined;
+  galleries: Gallery[] | [];
 }
 
-const TerasyPage = ({ data }: Props) => {
+const TerasyPage = ({ data, galleries }: Props) => {
   const [variantClicked, setVariantClicked] = useState(0);
 
   return (
@@ -53,6 +54,7 @@ const TerasyPage = ({ data }: Props) => {
       </div>
       <ServiceGallery
         nadpis_galeria={data?.nadpis_galeria ? data.nadpis_galeria : ""}
+        galleries={galleries}
       />
 
       <div className="bg-secondary">

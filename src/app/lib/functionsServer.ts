@@ -1,8 +1,8 @@
 "use server";
 
+import { getFirestore } from "firebase-admin/firestore";
 import { unstable_noStore } from "next/cache";
 import { firestore } from "./firebaseServer";
-import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import {
   AboutUsElements,
   Bazeny,
@@ -17,7 +17,6 @@ import {
   Slnolamy,
   Terasy,
 } from "./interface";
-import getBase64 from "./functions";
 
 export async function GetAdminHomePage(language: string) {
   unstable_noStore();
@@ -375,5 +374,37 @@ export async function GetAdminContactPage(language: string) {
     return orderData;
   } catch (error) {
     return null;
+  }
+}
+
+export async function GetGalleriesForServicePage(category: string) {
+  unstable_noStore();
+
+  try {
+    const db = getFirestore();
+    const podstrankaCollectionRef = db.collection("galeria");
+    const querySnapshot = await podstrankaCollectionRef
+      .where("kategorie", "array-contains", category)
+      .get();
+
+    if (querySnapshot.empty) {
+      console.error("No documents found for category:", category);
+      return [];
+    }
+    const galleries = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      datum_pridania: doc.data().datum_pridania,
+      fotky: doc.data().fotky,
+      kategorie: doc.data().kategorie,
+      nazov: doc.data().nazov,
+      profil: doc.data().profil,
+      farba: doc.data().farba,
+      jazyky_kontent: doc.data().jazyky_kontent,
+    }));
+
+    return galleries;
+  } catch (error) {
+    console.error("Error fetching galleries:", error);
+    return [];
   }
 }

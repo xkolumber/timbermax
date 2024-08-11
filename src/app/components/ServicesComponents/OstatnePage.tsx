@@ -1,5 +1,5 @@
 "use client";
-import { Slnolamy } from "@/app/lib/interface";
+import { Gallery, Slnolamy } from "@/app/lib/interface";
 
 import Image from "next/image";
 
@@ -14,9 +14,10 @@ import ServiceGallery from "./ServiceGallery";
 
 interface Props {
   data: Slnolamy | undefined;
+  galleries: Gallery[] | [];
 }
 
-const OstatnePage = ({ data }: Props) => {
+const OstatnePage = ({ data, galleries }: Props) => {
   const [variantClicked, setVariantClicked] = useState(0);
   return (
     <main>
@@ -33,6 +34,8 @@ const OstatnePage = ({ data }: Props) => {
           quality={100}
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGPw0OAy5WbQYWBg6GnM9DDht1BmY0iJ96rOi28qSGb49e3L6f27/v/+BgC/aQ8LE9jBAQAAAABJRU5ErkJggg=="
         />
 
         <div className="main_section ">
@@ -44,12 +47,11 @@ const OstatnePage = ({ data }: Props) => {
               </p>
             ))}
           </div>
-
-          <h4 className="text-tertiary">{data?.nadpis_galeria}</h4>
         </div>
       </div>
       <ServiceGallery
         nadpis_galeria={data?.nadpis_galeria ? data.nadpis_galeria : ""}
+        galleries={galleries}
       />
       <div className="bg-secondary">
         <div className="main_section">
