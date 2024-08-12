@@ -593,6 +593,7 @@ export interface IsLoadingMap {
 }
 
 export interface Prevadzka {
+  id: string;
   kraj: string;
   adresa: string;
   photo: string;

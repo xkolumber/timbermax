@@ -180,7 +180,7 @@ const SwiperContactPage = ({ otvaracie_hodiny, hodiny }: Props) => {
         <>
           {" "}
           <div className="behind_card_background"></div>
-          <div className="popup_message min-h-[600px] md:min-h-fit justify-center">
+          <div className="popup_message  max-h-[90vh]  overflow-y-auto md:max-h-fit justify-center">
             <div className="" onClick={() => setShowWindow(false)}>
               <IconCloseButton />
             </div>{" "}

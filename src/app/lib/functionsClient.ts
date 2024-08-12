@@ -222,6 +222,7 @@ export function createSlug(title: string): string {
 
 export const prevadzky: Prevadzka[] = [
   {
+    id: "1",
     kraj: "Bratislavský kraj",
     adresa: "Senecká cesta 2, Šamorín",
     photo: "/o_nas.jpg",
@@ -236,7 +237,8 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
-    kraj: "Trnavský Kraj",
+    id: "2",
+    kraj: "Trnavský kraj",
     adresa: "Dedinská 102, Trnava-Modranka | Záhradníctvo Dechtický",
     photo: "/o_nas.jpg",
     hodiny: {
@@ -250,6 +252,7 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
+    id: "3",
     kraj: "Trenčiansky kraj",
     adresa: "Pripravujeme",
     photo: "/o_nas.jpg",
@@ -264,6 +267,7 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
+    id: "4",
     kraj: "Nitriansky kraj",
     adresa: "Bratislavská 19A, 949 01 Nitra-Mlynárce | Záhradníctvo ProRain",
     photo: "/o_nas.jpg",
@@ -278,6 +282,7 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
+    id: "5",
     kraj: "Žilinský kraj",
     adresa: "Ovčiarsko 185, 010 04 Ovčiarsko - Žilina | Lány záhradné centrum",
     photo: "/o_nas.jpg",
@@ -292,6 +297,7 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
+    id: "6",
     kraj: "Banskobystrický kraj",
     adresa: "Klinovisko, 962 33 Budča | Ovocná škôlka BOBA",
     photo: "/o_nas.jpg",
@@ -306,6 +312,7 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
+    id: "7",
     kraj: "Prešovský kraj",
     adresa: "Hlavná 6/21, 059 21 Svit | Kvety Tatry",
     photo: "/o_nas.jpg",
@@ -320,6 +327,7 @@ export const prevadzky: Prevadzka[] = [
     },
   },
   {
+    id: "8",
     kraj: "Košický kraj",
     adresa: "Školská 2, 044 42 Rozhanovce | Zahradníctvo KaK",
     photo: "/o_nas.jpg",

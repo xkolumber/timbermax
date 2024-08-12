@@ -178,7 +178,7 @@ export const navbar_en: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Terraces",
-        link: "sluzby/terasy",
+        link: "/sluzby/terasy",
         icon: <IconTerasa />,
       },
       {

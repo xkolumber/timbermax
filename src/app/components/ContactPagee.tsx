@@ -1,11 +1,21 @@
 "use client";
 import Image from "next/image";
-import { localPeople, OpeningHoursEmpty } from "../lib/functionsClient";
-import { AboutUsElements, ContactPage, TeamMember } from "../lib/interface";
+import {
+  localPeople,
+  OpeningHoursEmpty,
+  prevadzky,
+} from "../lib/functionsClient";
+import {
+  AboutUsElements,
+  ContactPage,
+  Prevadzka,
+  TeamMember,
+} from "../lib/interface";
 import SwiperContactPage from "./SwiperContactPage";
 import { useEffect, useRef, useState } from "react";
 import IconDoubleArrowLeft from "./Icons/IconDoubleArrowLeft";
 import IconDoubleArrowRight from "./Icons/IconDoubleArrowRight";
+import IconCloseButton from "./Icons/IconCloseButton";
 
 interface Props {
   data: ContactPage | undefined;
@@ -14,6 +24,8 @@ interface Props {
 
 const ContactPagee = ({ data, data2 }: Props) => {
   const [people, setPeople] = useState<TeamMember[] | null>(null);
+  const [showWindow, setShowWindow] = useState(false);
+  const [choosenPrevadzka, setChoosenPrevadzka] = useState<Prevadzka>();
 
   useEffect(() => {
     const people_data = localPeople.map((localPerson, index) => ({
@@ -36,6 +48,16 @@ const ContactPagee = ({ data, data2 }: Props) => {
         left: direction === "right" ? scrollAmount : -scrollAmount,
         behavior: "smooth",
       });
+    }
+  };
+
+  const handleShowShop = (id: string, e: any) => {
+    e.preventDefault();
+
+    const item = prevadzky.find((item) => item.id === id);
+    if (item) {
+      setChoosenPrevadzka(item);
+      setShowWindow(true);
     }
   };
   return (
@@ -112,15 +134,96 @@ const ContactPagee = ({ data, data2 }: Props) => {
         </p>
         <p className="text-primary pt-8">{data?.vzorkovne_popis4}</p>
 
-        <Image
-          src="/showroom_new.svg"
-          className="w-full h-full object-cover min-h-[200px] pt-8 pb-8 hidden md:block"
-          alt="referencie"
-          width={1000}
-          height={1000}
-          quality={100}
-          priority
-        />
+        <div className="relative">
+          <Image
+            src="/showroom_new.svg"
+            className="w-full h-full object-cover min-h-[200px] pt-8 pb-8 hidden md:block"
+            alt="referencie"
+            width={1000}
+            height={1000}
+            quality={100}
+            priority
+            useMap="#workmap"
+          />
+
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "62%",
+              left: "21%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("1", e)}
+          />
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "56%",
+              left: "27%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("2", e)}
+          />
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "60%",
+              left: "32%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("4", e)}
+          />
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "30%",
+              left: "41%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("5", e)}
+          />
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "50%",
+              left: "44%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("6", e)}
+          />
+          <div
+            className="absolute 0 rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "36%",
+              left: "56%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("7", e)}
+          />
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "5%",
+              height: "7%",
+              top: "47%",
+              left: "68%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("8", e)}
+          />
+        </div>
 
         <h3 className="custom-underline !mb-0 mt-16 hidden md:block">
           {data?.prevadzky_nadpis}
@@ -154,6 +257,83 @@ const ContactPagee = ({ data, data2 }: Props) => {
               quality={100}
             />
           </div>
+          <div
+            className="absolute   rounded-full cursor-pointer"
+            style={{
+              width: "6%",
+              height: "8%",
+              top: "65%",
+              left: "58%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("1", e)}
+          />
+          <div
+            className="absolute   rounded-full cursor-pointer"
+            style={{
+              width: "8%",
+              height: "8%",
+              top: "57%",
+              left: "71%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("2", e)}
+          />
+          <div
+            className="absolute  rounded-full cursor-pointer"
+            style={{
+              width: "10%",
+              height: "8%",
+              top: "59%",
+              left: "86%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("4", e)}
+          />
+          <div
+            className="absolute rounded-full cursor-pointer"
+            style={{
+              width: "10%",
+              height: "8%",
+              top: "29%",
+              left: "108%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("5", e)}
+          />
+          <div
+            className="absolute   rounded-full cursor-pointer"
+            style={{
+              width: "15%",
+              height: "8%",
+              top: "49%",
+              left: "118%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("6", e)}
+          />
+          <div
+            className="absolute   rounded-full cursor-pointer"
+            style={{
+              width: "15%",
+              height: "8%",
+              top: "36%",
+              left: "150%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("7", e)}
+          />
+          <div
+            className="absolute   rounded-full cursor-pointer"
+            style={{
+              width: "15%",
+              height: "8%",
+              top: "47%",
+              left: "180%",
+              transform: "translate(-50%, -50%)",
+            }}
+            onClick={(e) => handleShowShop("8", e)}
+          />
         </div>
       </div>
       <h3 className="custom-underline !mb-0 p-[2.5rem] md:hidden ">
@@ -171,6 +351,66 @@ const ContactPagee = ({ data, data2 }: Props) => {
         <p className="pt-4 text-primary">{data?.sidlo_popis2}</p>
         <p className="pt-4 text-primary">{data?.sidlo_popis3}</p>
       </div>
+
+      {showWindow && (
+        <>
+          {" "}
+          <div className="behind_card_background"></div>
+          <div className="popup_message  max-h-[90vh]  overflow-y-auto md:max-h-fit justify-center">
+            <div className="" onClick={() => setShowWindow(false)}>
+              <IconCloseButton />
+            </div>{" "}
+            <h5 className="text-center underline">{choosenPrevadzka?.kraj}</h5>
+            <h6 className="text-center max-w-[80%] pt-8">
+              {" "}
+              {choosenPrevadzka?.adresa}
+            </h6>
+            <p className="text-primary text-center pt-8">
+              {data?.otvaracie_hodiny}:
+            </p>
+            <div className="flex flex-col showrooms">
+              <div className="flex flex-row gap-8 justify-between">
+                <p className="font-bold">{data?.hodiny.pon}</p>
+                <p>{choosenPrevadzka?.hodiny.pon}</p>
+              </div>
+              <div className="flex flex-row gap-8 justify-between">
+                <p className="font-bold">{data?.hodiny.ut}</p>
+                <p>{choosenPrevadzka?.hodiny.ut}</p>
+              </div>
+              <div className="flex flex-row gap-8 justify-between">
+                <p className="font-bold">{data?.hodiny.st}</p>
+                <p>{choosenPrevadzka?.hodiny.st}</p>
+              </div>
+              <div className="flex flex-row gap-8 justify-between">
+                <p className="font-bold">{data?.hodiny.stv}</p>
+                <p>{choosenPrevadzka?.hodiny.stv}</p>
+              </div>
+              <div className="flex flex-row gap-8 justify-between">
+                <p className="font-bold">{data?.hodiny.pi}</p>
+                <p>{choosenPrevadzka?.hodiny.pi}</p>
+              </div>
+              <div className="flex flex-row gap-8 justify-between">
+                <p className="font-bold">{data?.hodiny.sob}</p>
+                <p>{choosenPrevadzka?.hodiny.sob}</p>
+              </div>
+              {choosenPrevadzka?.hodiny.ne === "-" ? (
+                <div className="flex flex-row gap-8 justify-between">
+                  <p className="font-bold">{data?.hodiny.ne}</p>
+                  <div className="flex justify-center w-full items-center">
+                    {" "}
+                    <p className="text-center">{choosenPrevadzka?.hodiny.ne}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-row gap-8 justify-between">
+                  <p className="font-bold">Nedeľa</p>
+                  <p>{choosenPrevadzka?.hodiny.ne}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

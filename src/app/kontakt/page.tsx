@@ -34,7 +34,7 @@ export default function Contact() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen">
+        <div className="min-h-screen main_section additional_padding">
           <ClipLoader size={20} color={"#32a8a0"} loading={true} />
         </div>
       }
