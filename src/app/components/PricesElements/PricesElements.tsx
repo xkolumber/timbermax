@@ -4,6 +4,7 @@ import Image from "next/image";
 import IconFasady from "../Icons/IconFasady";
 import IconPloty from "../Icons/IconPloty";
 import IconTerasa from "../Icons/IconTerasa";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 const data = [
   {
@@ -50,6 +51,8 @@ const PricesElements = ({ relacie }: Props) => {
               quality={100}
               priority={true}
               className="absolute h-full w-full z-5 rounded-[8px] object-cover"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL_GRAY}
             />
             <div
               className={`w-24 h-24 absolute z-10 top-[25%] scale-[1.5] 2xl:scale-[2]  duration-300`}

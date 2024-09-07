@@ -20,6 +20,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
   const pathname = usePathname();
 
   const [actualizeData, setActualizeData] = useState<AboutUsElements>({
+    o_nas: "",
     citat: "",
     history_nadpis: "",
     history_popis: "",
@@ -50,6 +51,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
     if (data) {
       setActualizeData((prevData) => ({
         ...prevData,
+        o_nas: data.o_nas ? data.o_nas : "",
         citat: data.citat ? data.citat : "",
         history_nadpis: data.history_nadpis ? data.history_nadpis : "",
         history_popis: data.history_popis ? data.history_popis : "",
@@ -69,19 +71,7 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await AdminActualizeAboutUsPage(
-      actualizeData.citat,
-      actualizeData.history_nadpis,
-      actualizeData.history_popis,
-      actualizeData.filozofia_nadpis,
-      actualizeData.filozofia_popis1,
-      actualizeData.filozofia_popis2,
-      actualizeData.filozofia_popis3,
-      language,
-      actualizeData.spoznajte_tim,
-      actualizeData.staviame_znacka,
-      actualizeData.tim
-    );
+    const response = await AdminActualizeAboutUsPage(actualizeData, language);
     setIsLoading(false);
     if (response === "success") {
       toast.success("Sekcia bola aktualizovaná");
@@ -132,6 +122,16 @@ const AdminAboutUsPage = ({ language, data, languages }: Props) => {
               {one_lang.jazyk}
             </Link>
           ))}
+        </div>
+        <div className="product_admin_row">
+          <p>o_nas:</p>
+          <input
+            type="text"
+            name="o_nas"
+            value={actualizeData.o_nas}
+            onChange={handleChange}
+            className="w-[400px]"
+          />
         </div>
         <div className="product_admin_row">
           <p>history_nadpis:</p>

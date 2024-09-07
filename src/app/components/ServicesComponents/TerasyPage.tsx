@@ -11,6 +11,7 @@ import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
 import ServiceGallery from "./ServiceGallery";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: Terasy | undefined;
@@ -38,7 +39,7 @@ const TerasyPage = ({ data, galleries }: Props) => {
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGPw0OAy5WbQYWBg6GnM9DDht1BmY0iJ96rOi28qSGb49e3L6f27/v/+BgC/aQ8LE9jBAQAAAABJRU5ErkJggg=="
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
 
         <div className="main_section ">
@@ -106,6 +107,8 @@ const TerasyPage = ({ data, galleries }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
     </main>
   );

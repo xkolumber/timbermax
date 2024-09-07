@@ -3,6 +3,7 @@ import Image from "next/image";
 import IconCalculateGreen from "../Icons/IconCalculateGreen";
 import { Nacenovac } from "@/app/lib/interface";
 import Link from "next/link";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: any;
@@ -24,7 +25,7 @@ const OrderProcedure = ({ data }: Props) => {
           priority={true}
           className="w-full  md:h-full max-h-[600px] object-cover "
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
         <div className="absolute z-[100] bottom-0 left-1/2 transform -translate-x-1/2  bg-secondary rounded-[8px] w-48 h-48 p-8 -mb-20">
           <IconCalculateGreen />

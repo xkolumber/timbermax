@@ -1,6 +1,7 @@
 import { PriceOffer } from "@/app/lib/interface";
 import Image from "next/image";
 import PricesElements from "./PricesElements";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: PriceOffer | undefined;
@@ -30,7 +31,7 @@ const PricesDescription = ({ data }: Props) => {
         priority={true}
         className="w-full  md:h-full max-h-[600px] object-cover"
         placeholder="blur"
-        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
       <div className="main_section">
         <h3 className="custom-underline !normal-case ">

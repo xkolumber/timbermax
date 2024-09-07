@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 interface Props {
   data: any;
 }
@@ -17,6 +18,8 @@ const Profiles = ({ data }: Props) => {
           quality={100}
           priority={true}
           className="w-full h-[300px] md:h-full max-h-[400px] object-contain"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
         <p className="text-tertiary mt-8">{data?.profil_popis1}</p>
         <p className="text-tertiary mt-8">{data?.profil_popis2}</p>

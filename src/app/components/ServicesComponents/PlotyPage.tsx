@@ -11,6 +11,7 @@ import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
 import ServiceGallery from "./ServiceGallery";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: Ploty | undefined;
@@ -23,7 +24,7 @@ const PlotyPage = ({ data, galleries }: Props) => {
     <main>
       <div className="bg-secondary">
         <div className="main_section additional_padding">
-          <h4 className="text-tertiary">{data?.nadpis}</h4>
+          <h4 className="text-tertiary custom-underline">{data?.nadpis}</h4>
           <p className="text-tertiary">{data?.popis1}</p>
         </div>
         <Image
@@ -35,7 +36,7 @@ const PlotyPage = ({ data, galleries }: Props) => {
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGPw0OAy5WbQYWBg6GnM9DDht1BmY0iJ96rOi28qSGb49e3L6f27/v/+BgC/aQ8LE9jBAQAAAABJRU5ErkJggg=="
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
 
         <div className="main_section ">
@@ -103,6 +104,8 @@ const PlotyPage = ({ data, galleries }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
     </main>
   );

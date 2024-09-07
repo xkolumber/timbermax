@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { firestore } from "./firebaseServer";
 import {
+  AboutUsElements,
   Bazeny,
   ContactPage,
   Fasady,
@@ -132,17 +133,8 @@ export async function AdminactualizeHomePage(
 }
 
 export async function AdminActualizeAboutUsPage(
-  citat: string,
-  history_nadpis: string,
-  history_popis: string,
-  filozofia_nadpis: string,
-  filozofia_popis1: string,
-  filozofia_popis2: string,
-  filozofia_popis3: string,
-  jazyk: string,
-  spoznajte_tim: string,
-  staviame_znacka: string,
-  tim: Team[]
+  actualizeData: AboutUsElements,
+  jazyk: string
 ) {
   const db = getFirestore();
   const podstrankaCollectionRef = db.collection("about-us");
@@ -154,17 +146,18 @@ export async function AdminActualizeAboutUsPage(
     console.error("Document does not exist for uid:");
 
     await podstrankaCollectionRef.add({
-      citat: citat,
-      history_nadpis: history_nadpis,
-      history_popis: history_popis,
-      filozofia_nadpis: filozofia_nadpis,
-      filozofia_popis1: filozofia_popis1,
-      filozofia_popis2: filozofia_popis2,
-      filozofia_popis3: filozofia_popis3,
+      o_nas: actualizeData.o_nas,
+      citat: actualizeData.citat,
+      history_nadpis: actualizeData.history_nadpis,
+      history_popis: actualizeData.history_popis,
+      filozofia_nadpis: actualizeData.filozofia_nadpis,
+      filozofia_popis1: actualizeData.filozofia_popis1,
+      filozofia_popis2: actualizeData.filozofia_popis2,
+      filozofia_popis3: actualizeData.filozofia_popis3,
       jazyk: jazyk,
-      spoznajte_tim: spoznajte_tim,
-      staviame_znacka: staviame_znacka,
-      tim: tim,
+      spoznajte_tim: actualizeData.spoznajte_tim,
+      staviame_znacka: actualizeData.staviame_znacka,
+      tim: actualizeData.tim,
     });
     return "success";
   }
@@ -173,17 +166,18 @@ export async function AdminActualizeAboutUsPage(
   const docId = doc.id;
 
   await podstrankaCollectionRef.doc(docId).update({
-    citat: citat,
-    history_nadpis: history_nadpis,
-    history_popis: history_popis,
-    filozofia_nadpis: filozofia_nadpis,
-    filozofia_popis1: filozofia_popis1,
-    filozofia_popis2: filozofia_popis2,
-    filozofia_popis3: filozofia_popis3,
+    o_nas: actualizeData.o_nas,
+    citat: actualizeData.citat,
+    history_nadpis: actualizeData.history_nadpis,
+    history_popis: actualizeData.history_popis,
+    filozofia_nadpis: actualizeData.filozofia_nadpis,
+    filozofia_popis1: actualizeData.filozofia_popis1,
+    filozofia_popis2: actualizeData.filozofia_popis2,
+    filozofia_popis3: actualizeData.filozofia_popis3,
     jazyk: jazyk,
-    spoznajte_tim: spoznajte_tim,
-    staviame_znacka: staviame_znacka,
-    tim: tim,
+    spoznajte_tim: actualizeData.spoznajte_tim,
+    staviame_znacka: actualizeData.staviame_znacka,
+    tim: actualizeData.tim,
   });
   revalidatePath(`/admin/o-nas/[${jazyk}]/page`, "page");
   return "success";

@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: any;
@@ -21,6 +22,8 @@ const Properties = ({ data }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
       <div className="main_section">
         <p className="text-tertiary">{data?.vlastnosti_popis3}</p>
@@ -34,6 +37,8 @@ const Properties = ({ data }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[300px] md:h-full max-h-[400px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
       <div className="main_section">
         <h5 className="text-tertiary">{data?.vlastnosti_nadpis_}</h5>
@@ -49,6 +54,8 @@ const Properties = ({ data }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
       <div className="main_section">
         <p className="text-tertiary mt-8">{data?.vlastnosti_popis8}</p>

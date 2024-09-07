@@ -32,9 +32,9 @@ async function GetData() {
     if (!querySnapshot.empty) {
       const docSnap = querySnapshot.docs[0];
       const data = docSnap.data() as MoreAboutTimElements;
-      return <MoreAboutWholePage data={data} />;
+      return <MoreAboutWholePage data={data} language={language.value} />;
     } else {
-      return <MoreAboutWholePage data={undefined} />;
+      return <MoreAboutWholePage data={undefined} language="sk" />;
     }
   }
   const db = getFirestore(app);
@@ -43,9 +43,9 @@ async function GetData() {
   if (!querySnapshot.empty) {
     const docSnap = querySnapshot.docs[0];
     const data = docSnap.data() as MoreAboutTimElements;
-    return <MoreAboutWholePage data={data} />;
+    return <MoreAboutWholePage data={data} language="sk" />;
   } else {
-    return <MoreAboutWholePage data={undefined} />;
+    return <MoreAboutWholePage data={undefined} language="sk" />;
   }
 }
 

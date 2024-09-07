@@ -12,7 +12,7 @@ import IconGalleryLeft from "../Icons/IconGalleryLeft";
 import IconGalleryRight from "../Icons/IconGalleryRight";
 import { Gallery } from "@/app/lib/interface";
 import Link from "next/link";
-import { getFirstWord } from "@/app/lib/functionsClient";
+import { BLUR_DATA_URL_GRAY, getFirstWord } from "@/app/lib/functionsClient";
 
 interface Props {
   nadpis_galeria: string;
@@ -88,7 +88,7 @@ const ServiceGallery = ({ nadpis_galeria, galleries }: Props) => {
                     priority={true}
                     className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px]"
                     placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
+                    blurDataURL={BLUR_DATA_URL_GRAY}
                   />
 
                   <h6 className="text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -157,7 +157,7 @@ const ServiceGallery = ({ nadpis_galeria, galleries }: Props) => {
                     priority={true}
                     className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px]"
                     placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
+                    blurDataURL={BLUR_DATA_URL_GRAY}
                   />
 
                   <h6 className="text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">

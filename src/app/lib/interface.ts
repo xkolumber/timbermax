@@ -37,6 +37,7 @@ export interface HomePageElements {
 }
 
 export interface AboutUsElements {
+  o_nas: string;
   citat: string;
   history_nadpis: string;
   history_popis: string;

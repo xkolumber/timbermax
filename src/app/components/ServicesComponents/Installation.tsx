@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: any;
@@ -22,6 +23,8 @@ const Installation = ({ data }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[300px] md:h-full max-h-[400px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
       <div className="main_section">
         <p className="text-tertiary mt-8">{data?.montaz_popis4}</p>
@@ -34,6 +37,8 @@ const Installation = ({ data }: Props) => {
         quality={100}
         priority={true}
         className="w-full h-[300px] md:h-full max-h-[400px] object-cover"
+        placeholder="blur"
+        blurDataURL={BLUR_DATA_URL_GRAY}
       />
       <div className="bg-[#B2A496] !pb-16">
         <p className="text-tertiary font-semibold text-white text-center pt-8 pb-8">
@@ -51,6 +56,8 @@ const Installation = ({ data }: Props) => {
             quality={100}
             priority={true}
             className="w-full  md:h-full  object-cover"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
           <p className="text-tertiary mt-8">
             {data?.montaz_nadpis_2_category_popis1}
@@ -74,6 +81,8 @@ const Installation = ({ data }: Props) => {
             quality={100}
             priority={true}
             className="w-full  md:h-full  object-cover"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
           <p className="text-tertiary mt-8">
             {data?.montaz_nadpis_2_category2_popis1}
@@ -100,6 +109,8 @@ const Installation = ({ data }: Props) => {
             quality={100}
             priority={true}
             className="w-full  md:h-full  object-cover"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
           <p className="text-tertiary mt-8">
             {data?.montaz_nadpis_2_category3_popis1}
@@ -126,6 +137,8 @@ const Installation = ({ data }: Props) => {
             quality={100}
             priority={true}
             className="w-full  md:h-full  object-cover"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
           <p className="text-tertiary mt-8">
             {data?.montaz_nadpis_2_category4_popis1}

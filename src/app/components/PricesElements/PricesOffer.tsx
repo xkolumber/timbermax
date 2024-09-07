@@ -44,7 +44,7 @@ const PricesOffer = ({ data }: Props) => {
           src={"/cennik/nacenovac.png"}
           alt="hlavna_fotka"
           height={1000}
-          width={1000}
+          width={1920}
           quality={100}
           priority={true}
           className="w-full  md:h-full h-[250px] max-h-[600px] object-cover "

@@ -3,6 +3,7 @@ import PricesIntro from "./PricesIntro";
 import Image from "next/image";
 import PricesOffer from "./PricesOffer";
 import { PriceOffer } from "@/app/lib/interface";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 
 interface Props {
   data: PriceOffer | undefined;
@@ -34,7 +35,7 @@ const PriceWholeObject = ({ data }: Props) => {
           priority={true}
           className="w-full  md:h-full max-h-[600px] object-cover md:max-w-[90%] m-auto"
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAACCAYAAAB/qH1jAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAJ0lEQVR4nGNggIL/3+58ub5vzReGsuLUW0d3L799Ym3n7aubp9wGAO9XEfVObI8ZAAAAAElFTkSuQmCC"
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
       </div>
       <PricesDescription data={data} />

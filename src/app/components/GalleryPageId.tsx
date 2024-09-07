@@ -7,6 +7,7 @@ import Image from "next/image";
 import "yet-another-react-lightbox/styles.css";
 import Link from "next/link";
 import StepBack from "./StepBack";
+import { BLUR_DATA_URL_GRAY } from "../lib/functionsClient";
 
 interface Props {
   data: Gallery | undefined;
@@ -76,7 +77,7 @@ const GalleryPageId = ({ data, language }: Props) => {
           className="w-full md:h-[500px]  2xl:h-[800px] object-cover cursor-pointer mt-8 rounded-[8px]"
           onClick={() => handleOpenGallery(0)}
           placeholder="blur"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
       )}
       {selectedLanguageContent?.popis2 && (
@@ -94,7 +95,7 @@ const GalleryPageId = ({ data, language }: Props) => {
             className="w-full md:w-1/2 md:h-[500px]   2xl:h-[800px] object-cover rounded-[8px] cursor-pointer"
             onClick={() => handleOpenGallery(1)}
             placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
         )}
         {data?.fotky[2] && (
@@ -108,7 +109,7 @@ const GalleryPageId = ({ data, language }: Props) => {
             className="w-full md:w-1/2 md:h-[500px]  2xl:h-[800px] object-cover rounded-[8px]  cursor-pointer"
             onClick={() => handleOpenGallery(2)}
             placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
         )}
       </div>
@@ -129,7 +130,7 @@ const GalleryPageId = ({ data, language }: Props) => {
                 className="w-full h-[600px] md:h-full  2xl:h-[800px] object-cover  cursor-pointer rounded-[8px]  mt-8 2xl:mt-16"
                 onClick={() => handleOpenGallery(index)}
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAAM0lEQVR4nAEoANf/AOT8/9jz/6fC4gAcLTgiMDcAAQQAsbWug6GhUYaKAJ6SfeLh3Onq5KPQFUEu0lHCAAAAAElFTkSuQmCC"
+                blurDataURL={BLUR_DATA_URL_GRAY}
               />
             )}
           </div>

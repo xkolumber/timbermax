@@ -10,7 +10,7 @@ import { Navigation } from "swiper/modules";
 import IconArrowCart from "./Icons/IconArrowCart";
 import IconCloseButton from "./Icons/IconCloseButton";
 import { OpeningHours, Prevadzka } from "../lib/interface";
-import { prevadzky } from "../lib/functionsClient";
+import { BLUR_DATA_URL_GRAY, prevadzky } from "../lib/functionsClient";
 
 interface Props {
   otvaracie_hodiny: string;
@@ -72,6 +72,8 @@ const SwiperContactPage = ({ otvaracie_hodiny, hodiny }: Props) => {
                   quality={100}
                   priority={true}
                   className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[12px]"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL_GRAY}
                 />
 
                 <h6 className="text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -138,6 +140,8 @@ const SwiperContactPage = ({ otvaracie_hodiny, hodiny }: Props) => {
                   quality={100}
                   priority={true}
                   className="w-full h-[600px] md:h-full max-h-[800px] object-cover rounded-[8px]"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL_GRAY}
                 />
 
                 <h6 className="text-white text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">

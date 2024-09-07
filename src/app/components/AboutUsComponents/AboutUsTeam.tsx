@@ -9,7 +9,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import IconArrowLoopLeft from "../Icons/IconArrowLoopLeft";
 import IconArrowLoopRight from "../Icons/IconArrowLoopRight";
-import { localPeople } from "@/app/lib/functionsClient";
+import { BLUR_DATA_URL_GRAY, localPeople } from "@/app/lib/functionsClient";
 
 interface Props {
   tim: Team[];
@@ -57,6 +57,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
           quality={100}
           priority={true}
           className="w-full h-full   object-cover absolute"
+          placeholder="blur"
+          blurDataURL={BLUR_DATA_URL_GRAY}
         />
         <div className="flex flex-row h-full">
           <div className="w-1/2"></div>
@@ -96,6 +98,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                     priority={true}
                     className="w-full h-[600px] object-cover cursor-pointer hover:scale-[1.10] duration-300 z-10"
                     onClick={() => setSelectedHuman(object)}
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL_GRAY}
                   />
                   {isHovered?.meno === object.meno && (
                     <div className="absolute bottom-0 left-0 pb-16 pl-8 z-50">
@@ -137,6 +141,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                     quality={100}
                     priority={true}
                     className="w-full  h-[342px] rounded-t-[12px] object-cover"
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL_GRAY}
                   />
                   <div className="absolute bottom-0  left-1/2 transform -translate-x-1/2  text-white pb-4 w-full z-10">
                     <div className="flex flex-col items-center">

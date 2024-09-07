@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { colors } from "@/app/lib/functionsClient";
+import { BLUR_DATA_URL_GRAY, colors } from "@/app/lib/functionsClient";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -34,6 +34,8 @@ const ColorVariants = ({ data }: Props) => {
               quality={100}
               priority={true}
               className="w-[160px] h-[300px] object-cover"
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL_GRAY}
             />
             <p
               className={`uppercase absolute top-3/4 left-1/2 transform -translate-x-1/2 bottom-0 duration-300 ${
@@ -76,6 +78,8 @@ const ColorVariants = ({ data }: Props) => {
                 quality={100}
                 priority={true}
                 className="h-[300px] object-cover"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL_GRAY}
               />
               <p
                 className={`uppercase absolute top-3/4 left-1/2 transform -translate-x-1/2 bottom-0 duration-300 

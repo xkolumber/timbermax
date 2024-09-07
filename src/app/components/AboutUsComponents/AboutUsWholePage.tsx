@@ -34,7 +34,7 @@ const AboutUsWholePage = ({ data }: Props) => {
           fill
         />
         <h3 className="custom-underline text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase  ">
-          O nás
+          {data?.o_nas ? data.o_nas : ""}
         </h3>
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 2xl:scale-150">
           <IconDoubleArrow />

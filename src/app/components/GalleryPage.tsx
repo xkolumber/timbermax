@@ -7,6 +7,7 @@ import { Gallery, GalleryObject } from "../lib/interface";
 import useLanguageStore from "../zustand/store";
 import IconArrowCart from "./Icons/IconArrowCart";
 import { galleries, gallery_sk } from "./JustGalleryData";
+import { BLUR_DATA_URL_GRAY } from "../lib/functionsClient";
 
 interface Props {
   data: Gallery[] | [];
@@ -51,7 +52,7 @@ const GalleryPage = ({ data }: Props) => {
                 priority={true}
                 className="w-full h-full md:h-full max-h-[800px] object-cover rounded-[8px]"
                 placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGOY9/D/sf//O/duiWgrY2ia3Nk4vVlYg4GBn4GBQZArsSzIK1ZNzUsQAHlRDqY1UQU5AAAAAElFTkSuQmCC"
+                blurDataURL={BLUR_DATA_URL_GRAY}
               />
             )}
             <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>

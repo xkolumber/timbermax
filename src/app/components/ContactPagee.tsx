@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import {
+  BLUR_DATA_URL_GRAY,
   localPeople,
   OpeningHoursEmpty,
   prevadzky,
@@ -80,7 +81,7 @@ const ContactPagee = ({ data, data2 }: Props) => {
                     priority={true}
                     className="w-full  h-[342px]  object-cover rounded-[10px]"
                     placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AIOBfwUDAv/8+AAwMTFdXV3c29kA0tLSlJSR8O/rAK+vr4WFhcLBwIFsFZK4NPpmAAAAAElFTkSuQmCC"
+                    blurDataURL={BLUR_DATA_URL_GRAY}
                   />
                   <div className="absolute bottom-0  left-10  text-white pb-4  z-10">
                     <div className="flex flex-col">
@@ -107,7 +108,7 @@ const ContactPagee = ({ data, data2 }: Props) => {
                     priority={true}
                     className="w-full  h-[342px]  object-cover rounded-[8px]"
                     placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/AIOBfwUDAv/8+AAwMTFdXV3c29kA0tLSlJSR8O/rAK+vr4WFhcLBwIFsFZK4NPpmAAAAAElFTkSuQmCC"
+                    blurDataURL={BLUR_DATA_URL_GRAY}
                   />
                   <div className="absolute bottom-0  left-10  text-white pb-4  z-10">
                     <div className="flex flex-col">
@@ -144,6 +145,8 @@ const ContactPagee = ({ data, data2 }: Props) => {
             quality={100}
             priority
             useMap="#workmap"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL_GRAY}
           />
 
           <div
@@ -255,6 +258,8 @@ const ContactPagee = ({ data, data2 }: Props) => {
               width={1000}
               height={600}
               quality={100}
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL_GRAY}
             />
           </div>
           <div
