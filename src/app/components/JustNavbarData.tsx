@@ -38,7 +38,7 @@ export const navbar_sk: NavbarItem[] = [
       },
       {
         nazov: "Blog",
-        link: "/",
+        link: "/blog",
         icon: "",
       },
     ],
