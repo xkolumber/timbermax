@@ -1,13 +1,22 @@
+"use client";
 import React from "react";
 
 const IconDoubleArrow = () => {
+  const scrollToTop = (event: any) => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 600,
+      behavior: "smooth",
+    });
+  };
   return (
     <svg
       id="Layer_2"
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 53.16 63"
-      className="w-16 h-16"
+      className="w-16 h-16 cursor-pointer"
+      onClick={scrollToTop}
     >
       <g id="MainPage">
         <g id="Buttons">

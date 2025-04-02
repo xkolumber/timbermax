@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import IconRefCalculate from "../Icons/IconRefCalculate";
 import IconRefHome from "../Icons/IconRefHome";
 import IconRefQuality from "../Icons/IconRefQuality";
 import IconRefEurope from "../Icons/IconRefEurope";
 import HomePageJustReferencies from "./HomePageJustReferencies";
+import { usePathname } from "next/navigation";
 
 const pictures_object = [
   {
@@ -35,11 +38,16 @@ const HomePageReferencies = ({
   references_title,
   references,
 }: Props) => {
+  const pathname = usePathname();
   return (
     <div>
       <div className="w-full bg-secondary z-20" id="referencie">
         <div className="navbar_section ">
-          <div className="grid grid-cols-2 xl:grid-cols-4 justify-between gap-8 md:gap-16 mt-8 mb-8">
+          <div
+            className={`grid grid-cols-2 xl:grid-cols-4 justify-between gap-8 md:gap-16 mt-8 mb-8 ${
+              pathname === "/o-nas" && "hidden"
+            } `}
+          >
             {pictures_object.map((one_button, index) => (
               <div
                 className="flex flex-col xl:flex-row items-center gap-4 md:gap-8"

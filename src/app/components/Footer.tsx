@@ -21,6 +21,8 @@ const Footer = () => {
     setFooterData(footers[language] || footer_sk);
   }, [language]);
 
+  const actual_year = new Date().getFullYear();
+
   return (
     <footer className="w-full relative  flex flex-col footer">
       <div className="absolute right-12 md:right-24 top-0 cursor-pointer z-[300]">
@@ -95,7 +97,7 @@ const Footer = () => {
         <div className="bg-primary opacity-95">
           <div className="navbar_section w-full flex flex-col md:flex-row justify-between gap-4 copyright !pt-8 !pb-8">
             <p className="text-center">
-              Copyright © 2024 - Newface, s.r.o, All Right Reserved
+              Copyright © {actual_year} - Newface, s.r.o, All Right Reserved
             </p>
             <p className="text-center">Designed by RoyalBuild</p>
             <a href="tel:+421918654146">

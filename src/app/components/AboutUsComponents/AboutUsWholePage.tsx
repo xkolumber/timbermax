@@ -1,17 +1,18 @@
-import React from "react";
+import { AboutUsElements, HomePageElements } from "@/app/lib/interface";
 import Image from "next/image";
-import { AboutUsElements } from "@/app/lib/interface";
+import HomePageReferencies from "../HomePageComponents/HomePageReferencies";
+import HomePageShowRoom from "../HomePageComponents/HomePageShowRoom";
+import IconDoubleArrow from "../Icons/IconDoubleArrow";
 import AboutUsHistory from "./AboutUsHistory";
 import AboutUsPhilosophy from "./AboutUsPhilosophy";
 import AboutUsTeam from "./AboutUsTeam";
-import Link from "next/link";
-import IconDoubleArrow from "../Icons/IconDoubleArrow";
 
 interface Props {
   data: AboutUsElements | undefined;
+  data2: HomePageElements | undefined;
 }
 
-const AboutUsWholePage = ({ data }: Props) => {
+const AboutUsWholePage = ({ data, data2 }: Props) => {
   return (
     <>
       <div className="relative h-[600px] md:h-[800px] lg:min-h-[900px]">
@@ -57,6 +58,18 @@ const AboutUsWholePage = ({ data }: Props) => {
         <AboutUsTeam
           tim={data?.tim ? data.tim : []}
           spoznajte_tim={data?.spoznajte_tim ? data?.spoznajte_tim : ""}
+        />
+
+        <HomePageReferencies
+          ref_elements={data2?.ref_elements ? data2.ref_elements : []}
+          references_title={
+            data2?.references_title ? data2.references_title : ""
+          }
+          references={data2?.references ? data2.references : []}
+        />
+
+        <HomePageShowRoom
+          mapa_showroomov={data2?.mapa_showroomov ? data2.mapa_showroomov : ""}
         />
       </div>
     </>

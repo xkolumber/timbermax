@@ -367,32 +367,40 @@ export const localPeople = [
   {
     job: "CEO",
     meno: "Peter Barták",
-    main_image: "/team/peter_main.jpg",
-    image: "/team/peter.jpg",
+    main_image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpeter_pc.png?alt=media&token=f42bd2f6-46e5-49b6-88bc-5b1499024adf",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpeter_mobile.png?alt=media&token=c7b520a4-a155-4d18-b436-9fc639b96248",
     text: "Stavebníctvu a WPC materiálom sa venujem už 20 rokov. Zodpovedám za finálne prevedenie zákazky, návrh dizajnu profilov a technického riešenia montáže. Spolu s Daliborom som postavil túto firmu na prepojení kvalitného materiálu so správnym technickým prevedením montáže. Pokiaľ udržíme nadstavenú latku týchto dvoch pilierov nemá potenciál firmy hraníc. Nadšenie klienta z každého detailu podľa jeho predstavy je pre mňa prioritou. Cieľom každej realizácie je, aby som si po dokončení zákazky mohol povedať, že takúto terasu či fasádu chcem mať aj u seba doma. Snažím sa kontolovať kvalitatívne prevedenie každej stavby po jej dokončení a byť pri jej finálnom odovzdaní. Aktuálne sa venujem primárne rozvoju firmy a zahraničnej expanzii.",
     tel: "+421XXXXXXXXX",
   },
   {
     job: "COO",
     meno: "Dalibor Lenárt",
-    main_image: "/team/dalibor_main.jpg",
-    image: "/team/dalibor.jpg",
+    main_image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fdalibor_pc.png?alt=media&token=fa7c1359-45ac-464a-a76a-0e1179fc59bf",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fdalibor_mobile.png?alt=media&token=558ba676-cd46-40b5-a12b-57b02a4b6979",
     text: "WPC materiálmi a možnostiam ich použitia sa venujem už viac ako 25 rokov. Zodpovedám za zabezpečenie plynulého chodu firmy, zefektívnenie a optimalizáciu procesov, komunikáciu s výrobným procesom, zazmluvňovanie zákaziek a koordináciu montážnych skupín. S klientom komunikujem po oficiálnom schválení cenovej ponuky, upravujem zmluvy aby sedeli presne podľa parametrov stavby a zohľadňujem v nej aj špecifické požiadavky zákazníka. Dbám na spokojnosti klientov a dodržanie stanovených časových rámcov. Dlhodobo sa venujem rozširovaniu sortimentu pre dosiahnutie najširšej škály farebných odtieňov na Európskom trhu. Spracovávam ponuky novovznikajúcich pokrokových výrobných technológii. Komunikujem s firmami o prípadnej spolupráci. ",
     tel: "+421XXXXXXXXX",
   },
   {
-    job: "Vedúca prevádzky",
-    meno: "Daliborova žena",
-    main_image: "/team/zena_main.jpg",
-    image: "/team/zena.jpg",
+    job: "Vedúca klientely",
+    meno: "Ivana Lénartová",
+    main_image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fzena_pc.png?alt=media&token=d0b484ac-7366-4318-a63b-7f3b8b210c3d",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fzena_mobile.png?alt=media&token=b3d28e76-1bc4-45df-8976-2ef0479e300d",
     text: "Patrím k služobne najskúsenejším členom postupne rozrastajúceho sa tímu. Verím v efektivitu a kvalitne odvedenú prácu. Zabezpečujem klientelistický servis, doskladňovanie materiálov, správu rozvozov objednávok a vypomáham so zazmluvňovaním zákaziek. Pri finálnom spracovaní zákazky dokážem klietom kvalitne poradiť či už pri výbere farebnosti variantov, základných technických otázkach alebo správnom umiestnení požadovaného obkladu. ",
     tel: "+421XXXXXXXXX",
   },
   {
     job: "Architekt",
     meno: "Pavol Remenár",
-    main_image: "/team/pavol_main.jpg",
-    image: "/team/pavol.jpg",
+    main_image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpalo_pc.png?alt=media&token=279432e1-8188-4449-ab81-fc42e95e4a0d",
+    image:
+      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpalo_mobile.png?alt=media&token=138677cb-78f0-4575-9dcd-25a018f2874e",
     text: "Materiál Timbermax spolu s nevídanými možnosťami kvality spracovania montážnych detailov a ľudský prístup vedenia firmy ma zaujaľ natoľko, že som sa s chalanmi rozhodol dlhodobo bližšie spolupracovať. Ako externá firma im spracovávam upresnenie cenových ponúk, návrhy dizajnov, návrhy možných aplikácii obkladov na nové či jestvujúce budovy, realizujem zamerania a obhliadky stavieb. Spolu s Peťom som navrhol automatický naceňovač, ktorý má za úlohu odľahčiť veľký počet žiadostí o cenové ponuky. Klienti sa týmto spôsobom vedia pred kontaktovaním firmy samostatne oboznámiť s technickými požiadavkami produktu a hlavne s cenou realizácie či samotného materiálu. Aktuálne sa zaoberám rozšírením počtu showroomových pobočiek do zvyšnej časti Slovenska a okolitých krajín EU.",
     tel: "+421XXXXXXXXX",
   },

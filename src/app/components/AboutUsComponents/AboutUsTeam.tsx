@@ -44,7 +44,7 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
 
   return (
     <div className="bg-secondary">
-      <h3 className="pt-16 xl:pt-48 text-center  custom-underline font-normal">
+      <h3 className="pt-16 xl:pt-48 text-center  custom-underline font-normal !normal-case">
         {spoznajte_tim}
       </h3>
 
@@ -61,8 +61,16 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
           blurDataURL={BLUR_DATA_URL_GRAY}
         />
         <div className="flex flex-row h-full">
-          <div className="w-1/2"></div>
-          <div className="w-1/2 z-10 relative flex flex-col justify-center">
+          <div
+            className={`w-1/2 ${
+              selectedHuman.meno === "Pavol Remenár" && "order-2"
+            }`}
+          ></div>
+          <div
+            className={`w-1/2 z-10 relative flex flex-col justify-center  ${
+              selectedHuman.meno === "Pavol Remenár" && "order-1 pl-40"
+            }`}
+          >
             <div className="flex flex-row gap-4  items-center">
               {" "}
               <h5 className="text-[#1D281F]">{selectedHuman.meno} </h5>
@@ -72,7 +80,7 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
             </div>
             <div className="h-[2px] w-full bg-primary mt-4 mb-16"></div>
 
-            <p className="text-[#1D281F] md:max-w-[80%]">
+            <p className="text-[#1D281F] md:max-w-[80%] pl-8">
               {selectedHuman.text}
             </p>
           </div>

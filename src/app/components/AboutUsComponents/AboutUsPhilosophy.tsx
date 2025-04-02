@@ -2,6 +2,7 @@ import React from "react";
 import IconQuoteUpper from "../Icons/IconQuoteUpper";
 import IconQueoteDown from "../Icons/IconQuoteDown";
 import IconQuoteDown from "../Icons/IconQuoteDown";
+import Image from "next/image";
 
 interface Props {
   nadpis: string;
@@ -53,7 +54,15 @@ const AboutUsPhilosophy = ({
           <p className="font-thin text-[#D9D4CD] pt-8 2xl:pt-16 pb-8">
             Peter Barták | CEO
           </p>
-          <div className="bg-[#D7D3CD] opacity-[19%] h-[48px] 2xl:h-[63px] w-[80%] md:w-[30%] mb-8"></div>
+
+          <Image
+            src={`https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2FAsset%201.png?alt=media&token=e4952a2f-fa19-4d2b-a996-b882f8c1e568`}
+            alt={`Image`}
+            className=" w-full h-[50px] object-contain"
+            priority
+            width={400}
+            height={200}
+          />
         </div>
       </div>
       <div className="h-16 2xl:h-48"></div>
