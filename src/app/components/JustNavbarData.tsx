@@ -85,32 +85,33 @@ export const navbar_sk: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Profily",
-        link: "produkty/profily",
+        link: "produkty#profily",
         icon: "",
       },
+
       {
-        nazov: "Farby",
-        link: "produkty/farby",
-        icon: "",
-      },
-      {
-        nazov: "Výkresy",
-        link: "produkty/vykresy",
+        nazov: "Podklady",
+        link: "produkty#podklady",
         icon: "",
       },
       {
         nazov: "Technický list",
-        link: "produkty/technicky-list",
+        link: "produkty#technicky-list",
         icon: "",
       },
       {
         nazov: "Brožúra",
-        link: "produkty/brozura",
+        link: "produkty#brozura",
         icon: "",
       },
       {
         nazov: "Certifikáty",
-        link: "produkty/certifikaty",
+        link: "produkty#certifikaty",
+        icon: "",
+      },
+      {
+        nazov: "Farby",
+        link: "produkty#farby",
         icon: "",
       },
     ],
@@ -214,32 +215,33 @@ export const navbar_en: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Profiles",
-        link: "produkty/profily",
+        link: "produkty#profily",
         icon: "",
       },
-      {
-        nazov: "Colors",
-        link: "produkty/farby",
-        icon: "",
-      },
+
       {
         nazov: "Drawings",
-        link: "produkty/vykresy",
+        link: "produkty#podklady",
         icon: "",
       },
       {
         nazov: "Technical Data Sheet",
-        link: "produkty/technicky-list",
+        link: "produkty#technicky-list",
         icon: "",
       },
       {
         nazov: "Brochure",
-        link: "produkty/brozura",
+        link: "produkty#brozura",
         icon: "",
       },
       {
         nazov: "Certificates",
-        link: "produkty/certifikaty",
+        link: "produkty#certifikaty",
+        icon: "",
+      },
+      {
+        nazov: "Colors",
+        link: "produkty#farby",
         icon: "",
       },
     ],
@@ -343,32 +345,33 @@ export const navbar_cz: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Profily",
-        link: "produkty/profily",
+        link: "produkty#profily",
         icon: "",
       },
+
       {
-        nazov: "Barvy",
-        link: "produkty/farby",
-        icon: "",
-      },
-      {
-        nazov: "Výkresy",
-        link: "produkty/vykresy",
+        nazov: "Podklady",
+        link: "produkty#podklady",
         icon: "",
       },
       {
         nazov: "Technický list",
-        link: "produkty/technicky-list",
+        link: "produkty#technicky-list",
         icon: "",
       },
       {
         nazov: "Brožura",
-        link: "produkty/brozura",
+        link: "produkty#brozura",
         icon: "",
       },
       {
         nazov: "Certifikáty",
-        link: "produkty/certifikaty",
+        link: "produkty#certifikaty",
+        icon: "",
+      },
+      {
+        nazov: "Barvy",
+        link: "produkty#farby",
         icon: "",
       },
     ],
