@@ -443,3 +443,87 @@ export const getFirstWord = (str: string) => {
 
 export const BLUR_DATA_URL_GRAY =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAEklEQVR4nGN48uTJf2TMQFAAAGDvLAXo+D4xAAAAAElFTkSuQmCC";
+
+export const colors_circles = [
+  {
+    farba: "#2E231A",
+    text: "ipe",
+  },
+  {
+    farba: "#4C3E3D",
+    text: "redwood",
+  },
+  {
+    farba: "#4E3829",
+    text: "bangkirai",
+  },
+  {
+    farba: "#5D331F",
+    text: "mahagony",
+  },
+  {
+    farba: "#7C4D1E",
+    text: "meranti",
+  },
+  {
+    farba: "#705436",
+    text: "okume",
+  },
+  {
+    farba: "#856C3F",
+    text: "garapa",
+  },
+
+  {
+    farba: "#A97E55",
+    text: "teak",
+  },
+  {
+    farba: "#A47E6A",
+    text: "maple",
+  },
+  {
+    farba: "#BFA083",
+    text: "accoya",
+  },
+  {
+    farba: "#98806E",
+    text: "ivory",
+  },
+  {
+    farba: "#808080",
+    text: "sky",
+  },
+  {
+    farba: "#7F6D5C",
+    text: "vintage",
+  },
+  {
+    farba: "#5E544A",
+    text: "stone",
+  },
+  {
+    farba: "#363837",
+    text: "graphite",
+  },
+  {
+    farba: "#42474B",
+    text: "ebony",
+  },
+  {
+    farba: "#607A4F",
+    text: "green",
+  },
+  {
+    farba: "#893D39",
+    text: "red",
+  },
+  {
+    farba: "#0087C5",
+    text: "blue",
+  },
+  {
+    farba: "#F68000",
+    text: "orange",
+  },
+];

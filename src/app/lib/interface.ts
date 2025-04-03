@@ -638,3 +638,8 @@ export interface TeamMember {
   text: string;
   tel: string;
 }
+
+export interface PalleteObject {
+  farba: string;
+  text: string;
+}

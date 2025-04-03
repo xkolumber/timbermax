@@ -632,3 +632,11 @@ ul {
   list-style: disc;
   padding-left: 2rem;
 }
+
+.circle_pallete {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
