@@ -5,6 +5,7 @@ import PriceIconText from "@/app/components/PricesElements/PriceIconText";
 import TechnicalTable from "@/app/components/TechnicalTable";
 import ColorVariantsOnly from "../components/ServicesComponents/ColorVariantsOnly";
 import CertificateDownload from "../components/CertificateDownload";
+import ProductsPodklady from "../components/ProductsPodklady";
 
 const page = () => {
   return (
@@ -98,7 +99,7 @@ const page = () => {
             dostupné do konca roka 2025.
           </p>
         </div>
-        <div className="p">obrazky terasy fasady</div>
+        <ProductsPodklady />
         <div className="main_section">
           <h4 className="text-tertiary custom-underline" id="technicky-list">
             Technický list

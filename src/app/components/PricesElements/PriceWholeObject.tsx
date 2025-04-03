@@ -4,6 +4,7 @@ import Image from "next/image";
 import PricesOffer from "./PricesOffer";
 import { PriceOffer } from "@/app/lib/interface";
 import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
+import PriceComparison from "./PriceComparison";
 
 interface Props {
   data: PriceOffer | undefined;
@@ -17,6 +18,7 @@ const PriceWholeObject = ({ data }: Props) => {
           data?.cennik_stiahnutie ? data?.cennik_stiahnutie : ""
         }
       />
+      <PriceComparison />
       <div className="main_section">
         <h3 className="custom-underline !normal-case ">
           {data?.ceny_sposob_nadpis}

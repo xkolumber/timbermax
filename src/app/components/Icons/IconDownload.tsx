@@ -11,6 +11,7 @@ const IconDownload = ({ isHovered }: Props) => {
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 33.29 32.14"
+      className="w-10 h-10"
     >
       <g id="Cennik">
         <g id="Lista">

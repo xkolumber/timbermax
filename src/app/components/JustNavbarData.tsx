@@ -85,7 +85,7 @@ export const navbar_sk: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Profily",
-        link: "produkty#profily",
+        link: "produkty",
         icon: "",
       },
 
@@ -215,7 +215,7 @@ export const navbar_en: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Profiles",
-        link: "produkty#profily",
+        link: "produkty",
         icon: "",
       },
 
@@ -345,7 +345,7 @@ export const navbar_cz: NavbarItem[] = [
     sekcie: [
       {
         nazov: "Profily",
-        link: "produkty#profily",
+        link: "produkty",
         icon: "",
       },
 

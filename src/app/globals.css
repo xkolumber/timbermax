@@ -427,6 +427,14 @@ li {
 .btn--fourthtiary:hover {
   color: var(--color-primary);
 }
+.btn--transparent {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--color-secondary);
+}
+.btn--transparent:hover {
+  background-color: #d9d4cd;
+  color: rgba(0, 0, 0, 1);
+}
 
 .line-container {
   position: relative;
@@ -715,4 +723,8 @@ table tr:last-child td:last-child {
 
 .product_li li {
   color: var(--color-tertiary);
+}
+
+.comparison p {
+  text-align: center;
 }

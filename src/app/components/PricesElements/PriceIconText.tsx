@@ -23,9 +23,7 @@ absolute top-[55%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 items-ce
         onMouseLeave={() => setIconHovered(false)}
       >
         {" "}
-        <div className="w-10 h-10">
-          <IconDownload isHovered={iconHovered} />
-        </div>
+        <IconDownload isHovered={iconHovered} />
       </div>
     </div>
   );
