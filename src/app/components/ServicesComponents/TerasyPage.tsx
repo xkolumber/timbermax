@@ -147,16 +147,20 @@ const TerasyPage = ({ data, galleries }: Props) => {
             <div className="flex flex-col gap-6 bg-secondary p-8 rounded-b-[16px]">
               {" "}
               <div
-                className="cursor-pointer"
+                className={`cursor-pointer ${
+                  selectedHorVer === "ver" ? "opacity-100" : "opacity-25"
+                }`}
                 onClick={() => setSelectedHorVer("ver")}
               >
-                <IconPalleteVertical isClicked={selectedHorVer === "ver"} />
+                <IconPalleteVertical />
               </div>
               <div
-                className="cursor-pointer"
+                className={`cursor-pointer ${
+                  selectedHorVer === "hor" ? "opacity-100" : "opacity-25"
+                }`}
                 onClick={() => setSelectedHorVer("hor")}
               >
-                <IconPalleteHorizontal isClicked={selectedHorVer === "hor"} />
+                <IconPalleteHorizontal />
               </div>
             </div>
             <div

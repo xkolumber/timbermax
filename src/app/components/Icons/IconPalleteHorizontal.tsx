@@ -1,10 +1,6 @@
 import React from "react";
 
-interface Props {
-  isClicked: boolean;
-}
-
-const IconPalleteHorizontal = ({ isClicked }: Props) => {
+const IconPalleteHorizontal = () => {
   return (
     <svg
       id="Layer_2"
@@ -13,14 +9,13 @@ const IconPalleteHorizontal = ({ isClicked }: Props) => {
       viewBox="0 0 36.9 36.9"
       width="30"
       height="30"
-      className={isClicked ? "opacity-100" : "opacity-25"}
     >
       <defs>
         <style>
           {` 
          
     
-          .cls-2 {
+          .cls-2xx {
             fill: none;
             stroke: #1d281f;
             stroke-linecap: round;
@@ -37,7 +32,7 @@ const IconPalleteHorizontal = ({ isClicked }: Props) => {
               <g id="BANGKIRAI">
                 <g className="cls-1">
                   <rect
-                    className="cls-2"
+                    className="cls-2xx"
                     x="14.9"
                     y="14.9"
                     width="7.1"
@@ -45,7 +40,7 @@ const IconPalleteHorizontal = ({ isClicked }: Props) => {
                     transform="translate(-14.2 51.1) rotate(-90)"
                   />
                   <rect
-                    className="cls-2"
+                    className="cls-2xx"
                     x="14.9"
                     y="7.8"
                     width="7.1"
@@ -53,7 +48,7 @@ const IconPalleteHorizontal = ({ isClicked }: Props) => {
                     transform="translate(-7.1 44) rotate(-90)"
                   />
                   <rect
-                    className="cls-2"
+                    className="cls-2xx"
                     x="14.9"
                     y="-6.4"
                     width="7.1"
@@ -61,7 +56,7 @@ const IconPalleteHorizontal = ({ isClicked }: Props) => {
                     transform="translate(7.1 29.8) rotate(-90)"
                   />
                   <rect
-                    className="cls-2"
+                    className="cls-2xx"
                     x="14.9"
                     y="-13.5"
                     width="7.1"
@@ -69,7 +64,7 @@ const IconPalleteHorizontal = ({ isClicked }: Props) => {
                     transform="translate(14.2 22.7) rotate(-90)"
                   />
                   <rect
-                    className="cls-2"
+                    className="cls-2xx"
                     x="14.9"
                     y=".7"
                     width="7.1"

@@ -1,10 +1,6 @@
 import React from "react";
 
-interface Props {
-  isClicked: boolean;
-}
-
-const IconPalleteVertical = ({ isClicked }: Props) => {
+const IconPalleteVertical = () => {
   return (
     <svg
       id="Layer_2"
@@ -13,12 +9,11 @@ const IconPalleteVertical = ({ isClicked }: Props) => {
       viewBox="0 0 36.9 36.9"
       width="30"
       height="30"
-      className={isClicked ? "opacity-100" : "opacity-25"}
     >
       <defs>
         <style>
           {`
-          .cls-1 {
+          .cls-1xx {
             fill: none;
             stroke: #1d281f;
             stroke-linecap: round;
@@ -35,35 +30,35 @@ const IconPalleteVertical = ({ isClicked }: Props) => {
               <g id="BANGKIRAI">
                 <g>
                   <rect
-                    className="cls-1"
+                    className="cls-1xx"
                     x=".7"
                     y=".7"
                     width="7.1"
                     height="35.5"
                   />
                   <rect
-                    className="cls-1"
+                    className="cls-1xx"
                     x="7.8"
                     y=".7"
                     width="7.1"
                     height="35.5"
                   />
                   <rect
-                    className="cls-1"
+                    className="cls-1xx"
                     x="22"
                     y=".7"
                     width="7.1"
                     height="35.5"
                   />
                   <rect
-                    className="cls-1"
+                    className="cls-1xx"
                     x="29.1"
                     y=".7"
                     width="7.1"
                     height="35.5"
                   />
                   <rect
-                    className="cls-1"
+                    className="cls-1xx"
                     x="14.9"
                     y=".7"
                     width="7.1"
