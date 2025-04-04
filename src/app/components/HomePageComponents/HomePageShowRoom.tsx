@@ -25,14 +25,14 @@ const HomePageShowRoom = ({ mapa_showroomov }: Props) => {
   return (
     <div id="showroom">
       <div id="showroom" className="relative !hidden md:!block">
-        <button className="btn btn--secondary absolute top-12 left-56 z-10 uppercase ">
+        <button className="btn btn--secondary !m-0 !rounded-t-[0px]  absolute top-0 left-1/2 transform -translate-x-1/2 z-10 uppercase ">
           {mapa_showroomov}
         </button>
         <button className="btn btn--secondary absolute top-0 z-10 uppercase md:hidden !m-0 map_round transform -translate-x-1/2 left-1/2">
           {mapa_showroomov}
         </button>
         <Image
-          src="/showroom_new.svg"
+          src="/nova_mapa.svg"
           className="w-full h-full object-cover min-h-[200px] "
           alt="referencie"
           width={1000}

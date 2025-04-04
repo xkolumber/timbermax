@@ -46,7 +46,7 @@ const HomePageReferencies = ({
           <div
             className={`grid grid-cols-2 xl:grid-cols-4 justify-between gap-8 md:gap-16 mt-8 mb-8 ${
               pathname === "/o-nas" && "hidden"
-            } `}
+            } ${pathname === "/cennik" && "hidden"} `}
           >
             {pictures_object.map((one_button, index) => (
               <div

@@ -2,6 +2,7 @@ import { PriceOffer } from "@/app/lib/interface";
 import Image from "next/image";
 import PricesElements from "./PricesElements";
 import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
+import PricesArchitect from "./PricesArchitect";
 
 interface Props {
   data: PriceOffer | undefined;
@@ -23,10 +24,12 @@ const PricesDescription = ({ data }: Props) => {
         <p className="text-primary mt-8">{data?.profil_popis6}</p>
       </div>
       <Image
-        src={"/cennik/cennik2.jpg"}
+        src={
+          "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fcennik_photo.png?alt=media&token=2824f64d-dab1-4752-80ff-7fc43262f15d"
+        }
         alt="hlavna_fotka"
         height={1000}
-        width={1000}
+        width={1920}
         quality={100}
         priority={true}
         className="w-full  md:h-full max-h-[600px] object-cover"

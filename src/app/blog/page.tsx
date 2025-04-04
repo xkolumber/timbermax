@@ -20,8 +20,8 @@ const page = () => {
         <Image
           src={"/terasa.jpg"}
           alt="hlavna_fotka"
-          height={1000}
-          width={1000}
+          height={1080}
+          width={1920}
           quality={100}
           priority={true}
           className="w-full h-[600px] md:h-full max-h-[800px] object-cover"

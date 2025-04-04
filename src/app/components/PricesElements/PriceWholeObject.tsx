@@ -2,15 +2,19 @@ import PricesDescription from "./PricesDescription";
 import PricesIntro from "./PricesIntro";
 import Image from "next/image";
 import PricesOffer from "./PricesOffer";
-import { PriceOffer } from "@/app/lib/interface";
+import { HomePageElements, PriceOffer } from "@/app/lib/interface";
 import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 import PriceComparison from "./PriceComparison";
+import PricesArchitect from "./PricesArchitect";
+import HomePageReferencies from "../HomePageComponents/HomePageReferencies";
+import HomePageShowRoom from "../HomePageComponents/HomePageShowRoom";
 
 interface Props {
   data: PriceOffer | undefined;
+  data2: HomePageElements | undefined;
 }
 
-const PriceWholeObject = ({ data }: Props) => {
+const PriceWholeObject = ({ data, data2 }: Props) => {
   return (
     <main className="relative">
       <PricesIntro
@@ -42,6 +46,16 @@ const PriceWholeObject = ({ data }: Props) => {
       </div>
       <PricesDescription data={data} />
       <PricesOffer data={data} />
+      <PricesArchitect />
+
+      <HomePageReferencies
+        ref_elements={data2?.ref_elements ? data2.ref_elements : []}
+        references_title={data2?.references_title ? data2.references_title : ""}
+        references={data2?.references ? data2.references : []}
+      />
+      <HomePageShowRoom
+        mapa_showroomov={data2?.mapa_showroomov ? data2.mapa_showroomov : ""}
+      />
     </main>
   );
 };

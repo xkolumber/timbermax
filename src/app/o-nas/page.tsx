@@ -54,7 +54,7 @@ async function GetAboutUsData() {
   const q2 = query(collection(db, "homepage"), where("jazyk", "==", "sk"));
 
   const querySnapshot2 = await getDocs(q2);
-  if (!querySnapshot.empty) {
+  if (!querySnapshot.empty && !querySnapshot2.empty) {
     const docSnap = querySnapshot.docs[0];
     const data = docSnap.data() as AboutUsElements;
 

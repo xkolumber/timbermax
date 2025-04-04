@@ -94,7 +94,7 @@ const MoreAboutWholePage = ({ data, language }: Props) => {
       <Image
         src={"/more_about/third.jpg"}
         alt="hlavna_fotka"
-        height={300}
+        height={480}
         width={1920}
         quality={100}
         priority={true}
@@ -135,7 +135,7 @@ const MoreAboutWholePage = ({ data, language }: Props) => {
       <Image
         src={"/more_about/fourth.jpg"}
         alt="hlavna_fotka"
-        height={700}
+        height={800}
         width={1920}
         quality={100}
         priority

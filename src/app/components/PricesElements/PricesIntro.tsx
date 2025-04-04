@@ -23,7 +23,7 @@ const PricesIntro = ({ cennik_stiahnutie }: Props) => {
         src={"/cennik/cennik.jpg"}
         alt="hlavna_fotka"
         height={1000}
-        width={1000}
+        width={1920}
         quality={100}
         priority={true}
         className="w-full  object-cover object-right h-[600px] md:h-[800px] lg:min-h-[900px]"

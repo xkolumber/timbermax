@@ -53,7 +53,7 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
           src={`${selectedHuman.main_image}`}
           alt="hlavna_fotka"
           height={1080}
-          width={1900}
+          width={1920}
           quality={100}
           priority={true}
           className="w-full h-full   object-cover absolute"
@@ -100,8 +100,8 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                   <Image
                     src={`${object.image}`}
                     alt="hlavna_fotka"
-                    height={600}
-                    width={200}
+                    height={960}
+                    width={480}
                     quality={100}
                     priority={true}
                     className="w-full h-[600px] object-cover cursor-pointer hover:scale-[1.10] duration-300 z-10"

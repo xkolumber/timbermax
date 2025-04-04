@@ -87,8 +87,8 @@ const PricesOffer = ({ data }: Props) => {
       <Image
         src={"/cennik/cennik3.jpg"}
         alt="hlavna_fotka"
-        height={1000}
-        width={1000}
+        height={800}
+        width={1920}
         quality={100}
         priority={true}
         className="w-full  md:h-[350px] h-[250px] lg:h-full  max-h-[600px] object-cover object-top"
@@ -101,6 +101,19 @@ const PricesOffer = ({ data }: Props) => {
         <p className="text-primary mt-8">{data?.posl_popis3}</p>
         <p className="text-primary mt-8">{data?.posl_popis4}</p>
       </div>
+      <Image
+        src={
+          "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fcennik_interier.png?alt=media&token=88d6e3c9-4414-4512-bfc6-78dd3778463d"
+        }
+        alt="hlavna_fotka"
+        height={800}
+        width={1920}
+        quality={100}
+        priority={true}
+        className="w-full  md:h-[350px] h-[250px] lg:h-full  max-h-[600px] object-cover object-top"
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMklEQVR4nAEnANj/AGes0azW8sP//0JscQBcWTCfh3n/6r2AdlYApLaJzNq0MkEkAAcAs24Tihp4VaIAAAAASUVORK5CYII="
+      />
     </>
   );
 };
