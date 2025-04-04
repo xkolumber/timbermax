@@ -641,5 +641,12 @@ export interface TeamMember {
 
 export interface PalleteObject {
   farba: string;
-  text: string;
+  type: string;
+}
+
+export interface ObjectInteface {
+  id: number;
+  type: string;
+  vertical: string;
+  horizontal: string;
 }

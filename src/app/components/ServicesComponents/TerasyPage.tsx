@@ -1,5 +1,10 @@
 "use client";
-import { Gallery, PalleteObject, Terasy } from "@/app/lib/interface";
+import {
+  Gallery,
+  ObjectInteface,
+  PalleteObject,
+  Terasy,
+} from "@/app/lib/interface";
 
 import Image from "next/image";
 
@@ -11,9 +16,15 @@ import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
 import ServiceGallery from "./ServiceGallery";
-import { BLUR_DATA_URL_GRAY, colors_circles } from "@/app/lib/functionsClient";
+import {
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+  colors_circles,
+  terasy_url,
+} from "@/app/lib/functionsClient";
 import IconPalleteHorizontal from "../Icons/IconPalleteHorizontal";
 import IconPalleteVertical from "../Icons/IconPalleteVertical";
+import VisualizationElement from "../VisualizationElement";
 
 interface Props {
   data: Terasy | undefined;
@@ -29,6 +40,18 @@ const TerasyPage = ({ data, galleries }: Props) => {
   );
 
   const [selectedHorVer, setSelectedHorVer] = useState("ver");
+
+  const [choosenObject, setChoosenObject] = useState<ObjectInteface>(
+    terasy_url[0]
+  );
+
+  const handleSetNewObject = (object: PalleteObject) => {
+    setSelectedPallete(object);
+    const found_object = terasy_url.find((item) => item.type === object.type);
+    if (found_object) {
+      setChoosenObject(found_object);
+    }
+  };
 
   return (
     <main>
@@ -101,92 +124,7 @@ const TerasyPage = ({ data, galleries }: Props) => {
       {variantClicked === 3 && <Profiles data={data} />}
       {variantClicked === 4 && <OrderProcedure data={data} />}
 
-      <div className="bg-secondary">
-        <main className="main_section !pb-8">
-          {" "}
-          <h4 className="text-tertiary">{data?.nadpis_vizualizacia}</h4>
-          <p className="text-tertiary">{data?.popis_viz_1}</p>
-          <div className="flex justify-end pt-40">
-            <div className="relative flex flex-wrap gap-6">
-              {colors_circles.map((object, index) => (
-                <div
-                  key={index}
-                  className="relative flex flex-col items-center"
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(-1)}
-                  onClick={() => setSelectedPallete(object)}
-                >
-                  {hoveredIndex === index && (
-                    <p className="absolute -top-16 text-[#1D281F] uppercase">
-                      {object.text}{" "}
-                    </p>
-                  )}
-
-                  <div
-                    className={`circle_pallete w-12 h-12 rounded-full ${
-                      selectedPallete.farba === object.farba && "scale-[1.4]"
-                    } ${
-                      selectedPallete.farba != object.farba &&
-                      "hover:scale-[1.4]"
-                    }`}
-                    style={{ backgroundColor: object.farba }}
-                  ></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </main>
-      </div>
-
-      <div
-        className="relative 
-      "
-      >
-        <div className="w-full m-auto absolute top-0">
-          <div className="flex flex-row     w-full main_section m-auto !pt-0 ">
-            <div className="flex flex-col gap-6 bg-secondary p-8 rounded-b-[16px]">
-              {" "}
-              <div
-                className={`cursor-pointer ${
-                  selectedHorVer === "ver" ? "opacity-100" : "opacity-25"
-                }`}
-                onClick={() => setSelectedHorVer("ver")}
-              >
-                <IconPalleteVertical />
-              </div>
-              <div
-                className={`cursor-pointer ${
-                  selectedHorVer === "hor" ? "opacity-100" : "opacity-25"
-                }`}
-                onClick={() => setSelectedHorVer("hor")}
-              >
-                <IconPalleteHorizontal />
-              </div>
-            </div>
-            <div
-              className=" rounded-br-[16px] w-[236px] h-fit p-8"
-              style={{ backgroundColor: selectedPallete.farba }}
-            >
-              <p className="text-white">
-                {" "}
-                farba:{" "}
-                <span className="uppercase"> {selectedPallete.text}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <Image
-          src={"/terasa.jpg"}
-          alt="hlavna_fotka"
-          height={1080}
-          width={1920}
-          quality={100}
-          priority={true}
-          className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
-          placeholder="blur"
-          blurDataURL={BLUR_DATA_URL_GRAY}
-        />
-      </div>
+      <VisualizationElement data={data} service_type="terasy" />
     </main>
   );
 };

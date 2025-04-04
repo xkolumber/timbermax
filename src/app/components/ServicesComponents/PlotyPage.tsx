@@ -12,6 +12,7 @@ import Profiles from "./Profiles";
 import Properties from "./Properties";
 import ServiceGallery from "./ServiceGallery";
 import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
+import VisualizationElement from "../VisualizationElement";
 
 interface Props {
   data: Ploty | undefined;
@@ -89,24 +90,7 @@ const PlotyPage = ({ data, galleries }: Props) => {
       {variantClicked === 3 && <Profiles data={data} />}
       {variantClicked === 4 && <OrderProcedure data={data} />}
 
-      <div className="bg-secondary">
-        <main className="main_section">
-          {" "}
-          <h4 className="text-tertiary">{data?.nadpis_vizualizacia}</h4>
-          <p className="text-tertiary">{data?.popis_viz_1}</p>
-        </main>
-      </div>
-      <Image
-        src={"/terasa.jpg"}
-        alt="hlavna_fotka"
-        height={1000}
-        width={1000}
-        quality={100}
-        priority={true}
-        className="w-full h-[600px] md:h-full max-h-[800px] object-cover"
-        placeholder="blur"
-        blurDataURL={BLUR_DATA_URL_GRAY}
-      />
+      <VisualizationElement data={data} service_type="ploty" />
     </main>
   );
 };

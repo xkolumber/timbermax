@@ -447,83 +447,580 @@ export const BLUR_DATA_URL_GRAY =
 export const colors_circles = [
   {
     farba: "#2E231A",
-    text: "ipe",
+    type: "ipe",
   },
   {
     farba: "#4C3E3D",
-    text: "redwood",
+    type: "redwood",
   },
   {
     farba: "#4E3829",
-    text: "bangkirai",
+    type: "bangkirai",
   },
   {
     farba: "#5D331F",
-    text: "mahagony",
+    type: "mahagony",
   },
   {
     farba: "#7C4D1E",
-    text: "meranti",
+    type: "meranti",
   },
   {
     farba: "#705436",
-    text: "okume",
+    type: "okume",
   },
   {
     farba: "#856C3F",
-    text: "garapa",
+    type: "garapa",
   },
 
   {
     farba: "#A97E55",
-    text: "teak",
+    type: "teak",
   },
   {
     farba: "#A47E6A",
-    text: "maple",
+    type: "maple",
   },
   {
     farba: "#BFA083",
-    text: "accoya",
+    type: "accoya",
   },
   {
     farba: "#98806E",
-    text: "ivory",
+    type: "ivory",
   },
   {
     farba: "#808080",
-    text: "sky",
+    type: "sky",
   },
   {
     farba: "#7F6D5C",
-    text: "vintage",
+    type: "vintage",
   },
   {
     farba: "#5E544A",
-    text: "stone",
+    type: "stone",
   },
   {
     farba: "#363837",
-    text: "graphite",
+    type: "graphite",
   },
   {
     farba: "#42474B",
-    text: "ebony",
+    type: "ebony",
   },
   {
     farba: "#607A4F",
-    text: "green",
+    type: "green",
   },
   {
     farba: "#893D39",
-    text: "red",
+    type: "red",
   },
   {
     farba: "#0087C5",
-    text: "blue",
+    type: "blue",
   },
   {
     farba: "#F68000",
-    text: "orange",
+    type: "orange",
+  },
+];
+
+export const cloudfront_url = "https://d29wtx2fjqcm1t.cloudfront.net";
+
+export const terasy_url = [
+  {
+    id: 1,
+    type: "ipe",
+    vertical: "/T_Z_Ipe.jpg",
+    horizontal: "/T_Ipe.jpg",
+  },
+  {
+    id: 2,
+    type: "redwood",
+    vertical: "/T_Z_Redwood.jpg",
+    horizontal: "/T_Z_Redwood.jpg",
+  },
+  {
+    id: 3,
+    type: "bangkirai",
+    vertical: "/T_Z_Bangkirai.jpg",
+    horizontal: "/T_Bangkirai.jpg",
+  },
+  {
+    id: 4,
+    type: "mahagony",
+    vertical: "/T_Z_Mahogany.jpg",
+    horizontal: "/T_Mahogany.jpg",
+  },
+  {
+    id: 5,
+    type: "meranti",
+    vertical: "/T_Z_Meranti.jpg",
+    horizontal: "/T_Meranti.jpg",
+  },
+  {
+    id: 6,
+    type: "okume",
+    vertical: "/T_Z_Okume.jpg",
+    horizontal: "/T_Okume.jpg",
+  },
+  {
+    id: 7,
+    type: "garapa",
+    vertical: "/T_Z_Garapa.jpg",
+    horizontal: "/T_Garapa.jpg",
+  },
+  {
+    id: 8,
+    type: "teak",
+    vertical: "/T_Z_Teak.jpg",
+    horizontal: "/T_Z_Teak.jpg" /*Missing*/,
+  },
+  {
+    id: 9,
+    type: "maple",
+    vertical: "/T_Z_Maple.jpg",
+    horizontal: "/T_Z_Maple.jpg" /*Missing*/,
+  },
+  {
+    id: 10,
+    type: "accoya",
+    vertical: "/T_Z_Accoya.jpg",
+    horizontal: "/T_Z_Accoya.jpg" /*Missing*/,
+  },
+  {
+    id: 11,
+    type: "ivory",
+    vertical: "/T_Z_Ivory.jpg",
+    horizontal: "/T_Ivory.jpg",
+  },
+  {
+    id: 12,
+    type: "sky",
+    vertical: "/T_Z_Sky.jpg",
+    horizontal: "/T_Z_Sky.jpg" /*Missing*/,
+  },
+  {
+    id: 13,
+    type: "vintage",
+    vertical: "/T_Z_Vintage.jpg",
+    horizontal: "/T_Z_Vintage.jpg" /*Missing*/,
+  },
+  {
+    id: 14,
+    type: "stone",
+    vertical: "/T_Z_Stone.jpg",
+    horizontal: "/T_Z_Stone.jpg" /*Missing*/,
+  },
+  {
+    id: 15,
+    type: "graphite",
+    vertical: "/T_Z_Graphite.jpg",
+    horizontal: "/T_Graphite.jpg",
+  },
+  {
+    id: 16,
+    type: "ebony",
+    vertical: "/T_Z_Ebony.jpg",
+    horizontal: "/T_Z_Ebony.jpg",
+  },
+  {
+    id: 17,
+    type: "green",
+    vertical: "/T_Z_Ebony.jpg" /*missing */,
+    horizontal: "/T_Z_Ebony.jpg" /*Missing */,
+  },
+  {
+    id: 18,
+    type: "red",
+    vertical: "/T_Z_Ebony.jpg" /*Missing*/,
+    horizontal: "/T_Z_Ebony.jpg" /*Missing */,
+  },
+  {
+    id: 19,
+    type: "blue",
+    vertical: "/T_Z_Ebony.jpg" /*Missing*/,
+    horizontal: "/T_Z_Ebony.jpg" /*Missing*/,
+  },
+  {
+    id: 20,
+    type: "orange",
+    vertical: "/T_Z_Ebony.jpg" /*Missing*/,
+    horizontal: "/T_Z_Ebony.jpg" /*Missing*/,
+  },
+];
+
+export const fasady_url = [
+  {
+    id: 1,
+    type: "ipe",
+    vertical: "/F_Z_Ipe.jpg",
+    horizontal: "/F_H_Ipe.jpg",
+  },
+  {
+    id: 2,
+    type: "redwood",
+    vertical: "/F_Z_Redwood.jpg",
+    horizontal: "/F_H_Redwood.jpg",
+  },
+  {
+    id: 3,
+    type: "bangkirai",
+    vertical: "/F_Z_Bangkirai.jpg",
+    horizontal: "/F_H_Bangkirai.jpg",
+  },
+  {
+    id: 4,
+    type: "mahagony",
+    vertical: "/F_Z_Mahogany.jpg",
+    horizontal: "/F_H_Mahogany.jpg",
+  },
+  {
+    id: 5,
+    type: "meranti",
+    vertical: "/F_Z_Meranti.jpg",
+    horizontal: "/F_H_Meranti.jpg",
+  },
+  {
+    id: 6,
+    type: "okume",
+    vertical: "/F_Z_Okume.jpg",
+    horizontal: "/F_H_Okume.jpg",
+  },
+  {
+    id: 7,
+    type: "garapa",
+    vertical: "/F_Z_Garapa.jpg",
+    horizontal: "/F_H_Garapa.jpg",
+  },
+
+  {
+    id: 8,
+    type: "teak",
+    vertical: "/F_Z_Teak.jpg",
+    horizontal: "/F_H_Teak.jpg",
+  },
+  {
+    id: 9,
+    type: "maple",
+    vertical: "/F_Z_Maple.jpg",
+    horizontal: "/F_H_Maple.jpg",
+  },
+  {
+    id: 10,
+    type: "accoya",
+    vertical: "/F_Z_Accoya.jpg",
+    horizontal: "/F_H_Accoya.jpg",
+  },
+  {
+    id: 11,
+    type: "ivory",
+    vertical: "/F_Z_Ivory.jpg",
+    horizontal: "/F_H_Ivory.jpg",
+  },
+  {
+    id: 12,
+    type: "sky",
+    vertical: "/F_Z_Sky.jpg",
+    horizontal: "/F_H_Sky.jpg",
+  },
+  {
+    id: 13,
+    type: "vintage",
+    vertical: "/F_Z_Vintage.jpg",
+    horizontal: "/F_H_Vintage.jpg",
+  },
+  {
+    id: 14,
+    type: "stone",
+    vertical: "/F_H_Graphite.jpg" /*Missing*/,
+    horizontal: "/F_H_Graphite.jpg" /*Missing*/,
+  },
+  {
+    id: 15,
+    type: "graphite",
+    vertical: "/F_Z_Graphite.jpg",
+    horizontal: "/F_H_Graphite.jpg",
+  },
+  {
+    id: 16,
+    type: "ebony",
+    vertical: "/F_Z_Ebony.jpg",
+    horizontal: "/F_H_Ebony.jpg",
+  },
+  {
+    id: 17,
+    type: "green",
+    vertical: "/F_Z_Green.jpg",
+    horizontal: "/F_H_Green.jpg",
+  },
+  {
+    id: 18,
+    type: "red",
+    vertical: "/F_Z_Red.jpg",
+    horizontal: "/F_H_Red.jpg",
+  },
+  {
+    id: 19,
+    type: "blue",
+    vertical: "/F_Z_Blue.jpg",
+    horizontal: "/F_H_Blue.jpg",
+  },
+  {
+    id: 20,
+    type: "orange",
+    vertical: "/F_Z_Orange.jpg",
+    horizontal: "/F_H_Orange.jpg",
+  },
+];
+
+export const ploty_url = [
+  {
+    id: 1,
+    type: "ipe",
+    vertical: "/Plot_Ipe.jpg",
+    horizontal: "/Plot_Ipe.jpg",
+  },
+  {
+    id: 2,
+    type: "redwood",
+    vertical: "/Plot_Redwood.jpg",
+    horizontal: "/Plot_Redwood.jpg",
+  },
+  {
+    id: 3,
+    type: "bangkirai",
+    vertical: "/Plot_Bangkirai.jpg",
+    horizontal: "/Plot_Bangkirai.jpg",
+  },
+  {
+    id: 4,
+    type: "mahagony",
+    vertical: "/Plot_Mahogany.jpg",
+    horizontal: "/Plot_Mahogany.jpg",
+  },
+  {
+    id: 5,
+    type: "meranti",
+    vertical: "/Plot_Meranti.jpg",
+    horizontal: "/Plot_Meranti.jpg",
+  },
+  {
+    id: 6,
+    type: "okume",
+    vertical: "/Plot_Okume.jpg",
+    horizontal: "/Plot_Okume.jpg",
+  },
+  {
+    id: 7,
+    type: "garapa",
+    vertical: "/Plot_Garapa.jpg",
+    horizontal: "/Plot_Garapa.jpg",
+  },
+
+  {
+    id: 8,
+    type: "teak",
+    vertical: "/Plot_Teak.jpg",
+    horizontal: "/Plot_Teak.jpg",
+  },
+  {
+    id: 9,
+    type: "maple",
+    vertical: "/Plot_Maple.jpg",
+    horizontal: "/Plot_Maple.jpg",
+  },
+  {
+    id: 10,
+    type: "accoya",
+    vertical: "/Plot_Accoya.jpg",
+    horizontal: "/Plot_Accoya.jpg",
+  },
+  {
+    id: 11,
+    type: "ivory",
+    vertical: "/Plot_Ivory.jpg",
+    horizontal: "/Plot_Ivory.jpg",
+  },
+  {
+    id: 12,
+    type: "sky",
+    vertical: "/Plot_Sky.jpg",
+    horizontal: "/Plot_Sky.jpg",
+  },
+  {
+    id: 13,
+    type: "vintage",
+    vertical: "/Plot_Vintage.jpg",
+    horizontal: "/Plot_Vintage.jpg",
+  },
+  {
+    id: 14,
+    type: "stone",
+    vertical: "/Plot_Stone.jpg",
+    horizontal: "/Plot_Stone.jpg",
+  },
+  {
+    id: 15,
+    type: "graphite",
+    vertical: "/Plot_Graphite.jpg",
+    horizontal: "/Plot_Graphite.jpg",
+  },
+  {
+    id: 16,
+    type: "ebony",
+    vertical: "/Plot_Ebony.jpg",
+    horizontal: "/Plot_Ebony.jpg",
+  },
+  {
+    id: 17,
+    type: "green",
+    vertical: "/Plot_Ebony.jpg" /*Missing */,
+    horizontal: "/Plot_Ebony.jpg" /*Missing */,
+  },
+  {
+    id: 18,
+    type: "red",
+    vertical: "/Plot_Ebony.jpg" /*Missing*/,
+    horizontal: "/Plot_Ebony.jpg" /*Missing*/,
+  },
+  {
+    id: 19,
+    type: "blue",
+    vertical: "/Plot_Ebony.jpg" /*Missing*/,
+    horizontal: "/Plot_Ebony.jpg" /*Missing*/,
+  },
+  {
+    id: 20,
+    type: "orange",
+    vertical: "/Plot_Ebony.jpg" /*Missing*/,
+    horizontal: "/Plot_Ebony.jpg" /*Missing*/,
+  },
+];
+
+export const slnolamy_url = [
+  {
+    id: 1,
+    type: "ipe",
+    vertical: "/SP_Ipe.jpg",
+    horizontal: "/SP_Ipe.jpg",
+  },
+  {
+    id: 2,
+    type: "redwood",
+    vertical: "/SP_Redwood.jpg",
+    horizontal: "/SP_Redwood.jpg",
+  },
+  {
+    id: 3,
+    type: "bangkirai",
+    vertical: "/SP_Bangkirai.jpg",
+    horizontal: "/SP_Bangkirai.jpg",
+  },
+  {
+    id: 4,
+    type: "mahagony",
+    vertical: "/SP_Mahogany.jpg",
+    horizontal: "/SP_Mahogany.jpg",
+  },
+  {
+    id: 5,
+    type: "meranti",
+    vertical: "/SP_Meranti.jpg",
+    horizontal: "/SP_Meranti.jpg",
+  },
+  {
+    id: 6,
+    type: "okume",
+    vertical: "/SP_Okume.jpg",
+    horizontal: "/SP_Okume.jpg",
+  },
+  {
+    id: 7,
+    type: "garapa",
+    vertical: "/SP_Garapa.jpg",
+    horizontal: "/SP_Garapa.jpg",
+  },
+
+  {
+    id: 8,
+    type: "teak",
+    vertical: "/SP_Teak.jpg",
+    horizontal: "/SP_Teak.jpg",
+  },
+  {
+    id: 9,
+    type: "maple",
+    vertical: "/SP_Maple.jpg",
+    horizontal: "/SP_Maple.jpg",
+  },
+  {
+    id: 10,
+    type: "accoya",
+    vertical: "/Slnolam- Pergola-Accoya.jpg",
+    horizontal: "/Slnolam- Pergola-Accoya.jpg",
+  },
+  {
+    id: 11,
+    type: "ivory",
+    vertical: "/SP_Ivory.jpg",
+    horizontal: "/SP_Ivory.jpg",
+  },
+  {
+    id: 12,
+    type: "sky",
+    vertical: "/SP_Sky.jpg",
+    horizontal: "/SP_Sky.jpg",
+  },
+  {
+    id: 13,
+    type: "vintage",
+    vertical: "/SP_Vintage.jpg",
+    horizontal: "/SP_Vintage.jpg",
+  },
+  {
+    id: 14,
+    type: "stone",
+    vertical: "/SP_Stone.jpg",
+    horizontal: "/SP_Stone.jpg",
+  },
+  {
+    id: 15,
+    type: "graphite",
+    vertical: "/SP_Graphite.jpg",
+    horizontal: "/SP_Graphite.jpg",
+  },
+  {
+    id: 16,
+    type: "ebony",
+    vertical: "/SP_Ebony.jpg",
+    horizontal: "/SP_Ebony.jpg",
+  },
+  {
+    id: 17,
+    type: "green",
+    vertical: "/SP_Ebony.jpg" /*Missing */,
+    horizontal: "/SP_Ebony.jpg" /*Missing */,
+  },
+  {
+    id: 18,
+    type: "red",
+    vertical: "/SP_Ebony.jpg" /*Missing*/,
+    horizontal: "/SP_Ebony.jpg" /*Missing*/,
+  },
+  {
+    id: 19,
+    type: "blue",
+    vertical: "/SP_Ebony.jpg" /*Missing*/,
+    horizontal: "/SP_Ebony.jpg" /*Missing*/,
+  },
+  {
+    id: 20,
+    type: "orange",
+    vertical: "/SP_Ebony.jpg" /*Missing*/,
+    horizontal: "/SP_Ebony.jpg" /*Missing*/,
   },
 ];
