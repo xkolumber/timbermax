@@ -17,6 +17,10 @@ import {
   Slnolamy,
   Terasy,
 } from "./interface";
+import { GetCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { docClient } from "./awsConfig";
+import { allowedLanguages } from "./functions";
+// import { allowedLanguages } from "./functionsClient";
 
 export async function GetAdminHomePage(language: string) {
   unstable_noStore();
@@ -406,5 +410,35 @@ export async function GetGalleriesForServicePage(category: string) {
   } catch (error) {
     console.error("Error fetching galleries:", error);
     return [];
+  }
+}
+
+export async function fetchHomepage(
+  jazyk: string | undefined
+): Promise<HomePageElements | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "homepage",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as HomePageElements;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    return null;
   }
 }

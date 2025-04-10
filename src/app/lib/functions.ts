@@ -17,3 +17,5 @@ export default async function getBase64(imageUrl: string) {
     if (e instanceof Error) console.log(e.stack);
   }
 }
+
+export const allowedLanguages = ["cz", "en", "sk"];

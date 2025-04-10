@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HydrationZustand from "./components/HydrationZustand";
 import { AuthContextProvider } from "./auth/Provider";
+import Provider from "./hooks/providerQuery";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +23,13 @@ export default function RootLayout({
     <html lang="sk">
       <body className={inter.className}>
         <AuthContextProvider>
-          <HydrationZustand>
-            <Navbar />
-            {children}
-            <Footer />
-          </HydrationZustand>
+          <Provider>
+            <HydrationZustand>
+              <Navbar />
+              {children}
+              <Footer />
+            </HydrationZustand>
+          </Provider>
         </AuthContextProvider>
       </body>
     </html>
