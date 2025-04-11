@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HydrationZustand from "./components/HydrationZustand";
-import { AuthContextProvider } from "./auth/Provider";
+import Navbar from "./components/Navbar";
+import "./globals.css";
 import Provider from "./hooks/providerQuery";
+import ConfigureAmplifyClientSide from "./lib/awsAmplifyCognito";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,8 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sk">
-      <body className={inter.className}>
-        <AuthContextProvider>
+      <AppRouterCacheProvider>
+        <body className={inter.className}>
+          <ConfigureAmplifyClientSide />
           <Provider>
             <HydrationZustand>
               <Navbar />
@@ -30,8 +32,8 @@ export default function RootLayout({
               <Footer />
             </HydrationZustand>
           </Provider>
-        </AuthContextProvider>
-      </body>
+        </body>
+      </AppRouterCacheProvider>
     </html>
   );
 }

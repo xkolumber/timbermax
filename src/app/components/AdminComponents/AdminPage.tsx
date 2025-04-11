@@ -1,11 +1,12 @@
 "use client";
+import { handleSignOut } from "@/app/lib/awsCofnitoActions";
 import { Jazyk } from "@/app/lib/interface";
 import Link from "next/link";
 import React, { useState } from "react";
 
-interface Props {
-  languages: Jazyk[];
-}
+// interface Props {
+//   languages: Jazyk[];
+// }
 
 const services_elements = [
   {
@@ -34,7 +35,7 @@ const services_elements = [
   },
 ];
 
-const AdminPage = ({ languages }: Props) => {
+const AdminPage = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [isClicked2, setIsClicked2] = useState(false);
   const [isClicked3, setIsClicked3] = useState(false);
@@ -50,10 +51,13 @@ const AdminPage = ({ languages }: Props) => {
     setCertainServiceSlug(slug);
   };
 
+  const handleLogout = async () => {
+    await handleSignOut();
+  };
   return (
     <div className="min-h-screen main_section additional_padding">
       <h2>Admin Zóna</h2>
-      <div className="flex flex-wrap gap-4">
+      {/* <div className="flex flex-wrap gap-4">
         <div className="flex flex-col">
           <button
             className=" btn btn--primary"
@@ -212,6 +216,10 @@ const AdminPage = ({ languages }: Props) => {
               ))}
           </div>
         </div>
+      </div> */}
+
+      <div className="" onClick={handleLogout}>
+        Odlhasit sa
       </div>
     </div>
   );
