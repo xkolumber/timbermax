@@ -17,7 +17,7 @@ import {
   Slnolamy,
   Terasy,
 } from "./interface";
-import { GetCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { docClient } from "./awsConfig";
 import { allowedLanguages } from "./functions";
 // import { allowedLanguages } from "./functionsClient";
@@ -440,5 +440,268 @@ export async function fetchHomepage(
   } catch (err) {
     console.log(err);
     return null;
+  }
+}
+
+export async function fetchAboutUs(
+  jazyk: string | undefined
+): Promise<AboutUsElements | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "about-us",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as AboutUsElements;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
+
+export async function fetchMoreAbout(
+  jazyk: string | undefined
+): Promise<MoreAboutTimElements | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "more-about",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as MoreAboutTimElements;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
+
+export async function fetchTerasy(
+  jazyk: string | undefined
+): Promise<Terasy | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "terasy",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Terasy;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+}
+
+export async function fetchFasady(
+  type: string,
+  jazyk: string | undefined
+): Promise<Fasady | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: type,
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Fasady;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
+export async function fetchBazeny(
+  jazyk: string | undefined
+): Promise<Bazeny | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "bazeny",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Bazeny;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
+export async function fetchSlnolamy(
+  jazyk: string | undefined
+): Promise<Slnolamy | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "slnolamy",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Slnolamy;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
+export async function fetchPloty(
+  jazyk: string | undefined
+): Promise<Ploty | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "ploty",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Ploty;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
+export async function fetchOstatne(
+  jazyk: string | undefined
+): Promise<Ostatne | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "ostatne",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Ostatne;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
+export async function fetchGalleryType(type: string): Promise<Gallery[]> {
+  try {
+    const command = new ScanCommand({
+      TableName: "galeria",
+      FilterExpression: "contains(kategorie, :type)",
+      ExpressionAttributeValues: {
+        ":type": type,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items) {
+      return response.Items as Gallery[];
+    }
+
+    throw new Error(`Item with  not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with  not found.`);
   }
 }
