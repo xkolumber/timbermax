@@ -714,6 +714,36 @@ export async function fetchContact(
   }
 }
 
+export async function fetchPriceOffer(
+  jazyk: string | undefined
+): Promise<PriceOffer | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "price-offer",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as PriceOffer;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
 export async function fetchGalleryType(type: string): Promise<Gallery[]> {
   try {
     const command = new ScanCommand({
