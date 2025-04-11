@@ -1,29 +1,48 @@
 "use client";
+import { useQuery } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import {
   BLUR_DATA_URL_GRAY,
   localPeople,
   OpeningHoursEmpty,
   prevadzky,
 } from "../lib/functionsClient";
+import { fetchAboutUs, fetchContact } from "../lib/functionsServer";
 import {
   AboutUsElements,
   ContactPage,
   Prevadzka,
   TeamMember,
 } from "../lib/interface";
-import SwiperContactPage from "./SwiperContactPage";
-import { useEffect, useRef, useState } from "react";
+import IconCloseButton from "./Icons/IconCloseButton";
 import IconDoubleArrowLeft from "./Icons/IconDoubleArrowLeft";
 import IconDoubleArrowRight from "./Icons/IconDoubleArrowRight";
-import IconCloseButton from "./Icons/IconCloseButton";
+import SwiperContactPage from "./SwiperContactPage";
+import { ClipLoader } from "react-spinners";
 
-interface Props {
-  data: ContactPage | undefined;
-  data2: AboutUsElements | undefined;
-}
+const ContactPagee = () => {
+  const {
+    data: data2,
+    error: error2,
+    isLoading: isLoading2,
+  } = useQuery<AboutUsElements | null>({
+    queryKey: ["about_us", Cookies.get("language")],
+    queryFn: () => fetchAboutUs(Cookies.get("language")),
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    placeholderData: (previousData, previousQuery) => previousData,
+  });
 
-const ContactPagee = ({ data, data2 }: Props) => {
+  const { data, error, isLoading } = useQuery<ContactPage | null>({
+    queryKey: ["contact", Cookies.get("language")],
+    queryFn: () => fetchContact(Cookies.get("language")),
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    placeholderData: (previousData, previousQuery) => previousData,
+  });
+
   const [people, setPeople] = useState<TeamMember[] | null>(null);
   const [showWindow, setShowWindow] = useState(false);
   const [choosenPrevadzka, setChoosenPrevadzka] = useState<Prevadzka>();
@@ -63,299 +82,319 @@ const ContactPagee = ({ data, data2 }: Props) => {
   };
   return (
     <>
-      <div className="main_section additional_padding">
-        <h3 className="text-primary custom-underline">
-          {data?.kontakt_nadpis}
-        </h3>
-        <div className="flex flex-col md:hidden gap-8 !-mt-4">
-          {people &&
-            people.map((item, index) => (
-              <div className="w-full h-full rounded-[12px]" key={index}>
-                <div className="relative">
-                  <Image
-                    src={`${localPeople[index].image}`}
-                    alt="hlavna_fotka"
-                    height={342}
-                    width={342}
-                    quality={100}
-                    priority={true}
-                    className="w-full  h-[342px]  object-cover rounded-[10px]"
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL_GRAY}
-                  />
-                  <div className="absolute bottom-0  left-10  text-white pb-4  z-10">
-                    <div className="flex flex-col">
-                      <p className="font-medium">{item.meno}</p>{" "}
-                      <p className="">{item.job}</p>
-                      <p>{item.tel}</p>
+      {isLoading && (
+        <div className="min-h-screen main_section additional_padding">
+          <ClipLoader size={20} color={"#32a8a0"} loading={true} />
+        </div>
+      )}
+
+      {error && (
+        <div className="min-h-screen flex justify-center items-center">
+          <p className="text-black"> Chyba pri načítaní dát.</p>
+        </div>
+      )}
+
+      {data && (
+        <>
+          <div className="main_section additional_padding">
+            <h3 className="text-primary custom-underline">
+              {data?.kontakt_nadpis}
+            </h3>
+            <div className="flex flex-col md:hidden gap-8 !-mt-4">
+              {people &&
+                people.map((item, index) => (
+                  <div className="w-full h-full rounded-[12px]" key={index}>
+                    <div className="relative">
+                      <Image
+                        src={`${localPeople[index].image}`}
+                        alt="hlavna_fotka"
+                        height={342}
+                        width={342}
+                        quality={100}
+                        priority={true}
+                        className="w-full  h-[342px]  object-cover rounded-[10px]"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL_GRAY}
+                      />
+                      <div className="absolute bottom-0  left-10  text-white pb-4  z-10">
+                        <div className="flex flex-col">
+                          <p className="font-medium">{item.meno}</p>{" "}
+                          <p className="">{item.job}</p>
+                          <p>{item.tel}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
-        </div>
-        <div className="grid-cols-2 hidden md:grid lg:grid-cols-4 gap-6 mt-16">
-          {people &&
-            people.map((item, index) => (
-              <div className="w-full h-full" key={index}>
-                <div className="relative">
-                  <Image
-                    src={`${localPeople[index].image}`}
-                    alt="hlavna_fotka"
-                    height={342}
-                    width={342}
-                    quality={100}
-                    priority={true}
-                    className="w-full  h-[342px]  object-cover rounded-[8px]"
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL_GRAY}
-                  />
-                  <div className="absolute bottom-0  left-10  text-white pb-4  z-10">
-                    <div className="flex flex-col">
-                      <p className="font-medium">{item.meno}</p>{" "}
-                      <p className="">{item.job}</p>
-                      <p>{item.tel}</p>
+                ))}
+            </div>
+            <div className="grid-cols-2 hidden md:grid lg:grid-cols-4 gap-6 mt-16">
+              {people &&
+                people.map((item, index) => (
+                  <div className="w-full h-full" key={index}>
+                    <div className="relative">
+                      <Image
+                        src={`${localPeople[index].image}`}
+                        alt="hlavna_fotka"
+                        height={342}
+                        width={342}
+                        quality={100}
+                        priority={true}
+                        className="w-full  h-[342px]  object-cover rounded-[8px]"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL_GRAY}
+                      />
+                      <div className="absolute bottom-0  left-10  text-white pb-4  z-10">
+                        <div className="flex flex-col">
+                          <p className="font-medium">{item.meno}</p>{" "}
+                          <p className="">{item.job}</p>
+                          <p>{item.tel}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            ))}
-        </div>
+                ))}
+            </div>
 
-        <h6 className="text-primary custom-underline mt-16">
-          {data?.vzorkovne_nadpis}
-        </h6>
-        <p className="text-primary">{data?.vzorkovne_popis1}</p>
+            <h6 className="text-primary custom-underline mt-16">
+              {data?.vzorkovne_nadpis}
+            </h6>
+            <p className="text-primary">{data?.vzorkovne_popis1}</p>
 
-        <p className="text-primary pt-8 lg:max-w-[80%]">
-          {data?.vzorkovne_popis2}
-        </p>
-        <p className="text-primary pt-8 lg:max-w-[80%]">
-          {data?.vzorkovne_popis3}
-        </p>
-        <p className="text-primary pt-8">{data?.vzorkovne_popis4}</p>
+            <p className="text-primary pt-8 lg:max-w-[80%]">
+              {data?.vzorkovne_popis2}
+            </p>
+            <p className="text-primary pt-8 lg:max-w-[80%]">
+              {data?.vzorkovne_popis3}
+            </p>
+            <p className="text-primary pt-8">{data?.vzorkovne_popis4}</p>
 
-        <div className="relative">
-          <Image
-            src="/showroom_new.svg"
-            className="w-full h-full object-cover min-h-[200px] pt-8 pb-8 hidden md:block"
-            alt="referencie"
-            width={1000}
-            height={1000}
-            quality={100}
-            priority
-            useMap="#workmap"
-            placeholder="blur"
-            blurDataURL={BLUR_DATA_URL_GRAY}
-          />
+            <div className="relative">
+              <Image
+                src="/showroom_new.svg"
+                className="w-full h-full object-cover min-h-[200px] pt-8 pb-8 hidden md:block"
+                alt="referencie"
+                width={1000}
+                height={1000}
+                quality={100}
+                priority
+                useMap="#workmap"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL_GRAY}
+              />
 
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "62%",
-              left: "21%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("1", e)}
-          />
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "56%",
-              left: "27%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("2", e)}
-          />
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "60%",
-              left: "32%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("4", e)}
-          />
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "30%",
-              left: "41%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("5", e)}
-          />
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "50%",
-              left: "44%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("6", e)}
-          />
-          <div
-            className="absolute 0 rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "36%",
-              left: "56%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("7", e)}
-          />
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "5%",
-              height: "7%",
-              top: "47%",
-              left: "68%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("8", e)}
-          />
-        </div>
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "62%",
+                  left: "21%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("1", e)}
+              />
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "56%",
+                  left: "27%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("2", e)}
+              />
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "60%",
+                  left: "32%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("4", e)}
+              />
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "30%",
+                  left: "41%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("5", e)}
+              />
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "50%",
+                  left: "44%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("6", e)}
+              />
+              <div
+                className="absolute 0 rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "36%",
+                  left: "56%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("7", e)}
+              />
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "5%",
+                  height: "7%",
+                  top: "47%",
+                  left: "68%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("8", e)}
+              />
+            </div>
 
-        <h3 className="custom-underline !mb-0 mt-16 hidden md:block">
-          {data?.prevadzky_nadpis}
-        </h3>
-      </div>
-      <div className="relative md:hidden">
-        <div
-          className="absolute left-[42%] bottom-0 transform -translate-x-1/2 z-10 pb-8"
-          onClick={() => scroll("left")}
-        >
-          <IconDoubleArrowLeft />
-        </div>
-        <div
-          className="absolute left-[58%] bottom-0 transform -translate-x-1/2 z-10 pb-8"
-          onClick={() => scroll("right")}
-        >
-          <IconDoubleArrowRight />
-        </div>
-
-        <div
-          className="relative overflow-x-auto w-full scroll"
-          ref={scrollContainerRef}
-        >
-          <div className="flex w-[1000px] h-full">
-            <Image
-              src="/showroom_new.svg"
-              className="object-contain"
-              alt="referencie"
-              width={1000}
-              height={600}
-              quality={100}
-              placeholder="blur"
-              blurDataURL={BLUR_DATA_URL_GRAY}
-            />
+            <h3 className="custom-underline !mb-0 mt-16 hidden md:block">
+              {data?.prevadzky_nadpis}
+            </h3>
           </div>
-          <div
-            className="absolute   rounded-full cursor-pointer"
-            style={{
-              width: "6%",
-              height: "8%",
-              top: "65%",
-              left: "58%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("1", e)}
-          />
-          <div
-            className="absolute   rounded-full cursor-pointer"
-            style={{
-              width: "8%",
-              height: "8%",
-              top: "57%",
-              left: "71%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("2", e)}
-          />
-          <div
-            className="absolute  rounded-full cursor-pointer"
-            style={{
-              width: "10%",
-              height: "8%",
-              top: "59%",
-              left: "86%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("4", e)}
-          />
-          <div
-            className="absolute rounded-full cursor-pointer"
-            style={{
-              width: "10%",
-              height: "8%",
-              top: "29%",
-              left: "108%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("5", e)}
-          />
-          <div
-            className="absolute   rounded-full cursor-pointer"
-            style={{
-              width: "15%",
-              height: "8%",
-              top: "49%",
-              left: "118%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("6", e)}
-          />
-          <div
-            className="absolute   rounded-full cursor-pointer"
-            style={{
-              width: "15%",
-              height: "8%",
-              top: "36%",
-              left: "150%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("7", e)}
-          />
-          <div
-            className="absolute   rounded-full cursor-pointer"
-            style={{
-              width: "15%",
-              height: "8%",
-              top: "47%",
-              left: "180%",
-              transform: "translate(-50%, -50%)",
-            }}
-            onClick={(e) => handleShowShop("8", e)}
-          />
-        </div>
-      </div>
-      <h3 className="custom-underline !mb-0 p-[2.5rem] md:hidden ">
-        {data?.prevadzky_nadpis}
-      </h3>
+          <div className="relative md:hidden">
+            <div
+              className="absolute left-[42%] bottom-0 transform -translate-x-1/2 z-10 pb-8"
+              onClick={() => scroll("left")}
+            >
+              <IconDoubleArrowLeft />
+            </div>
+            <div
+              className="absolute left-[58%] bottom-0 transform -translate-x-1/2 z-10 pb-8"
+              onClick={() => scroll("right")}
+            >
+              <IconDoubleArrowRight />
+            </div>
 
-      <SwiperContactPage
-        otvaracie_hodiny={data?.otvaracie_hodiny ? data.otvaracie_hodiny : ""}
-        hodiny={data?.hodiny ? data.hodiny : OpeningHoursEmpty}
-      />
-      <div className="main_section">
-        <h3 className="custom-underline">{data?.sidlo_nadpis}</h3>
-        <p className="text-primary font-bold !-mt-8 md:mt-0">{data?.sidlo}</p>
-        <p className="pt-4 text-primary mt-8">{data?.sidlo_popis1}</p>
-        <p className="pt-4 text-primary">{data?.sidlo_popis2}</p>
-        <p className="pt-4 text-primary">{data?.sidlo_popis3}</p>
-      </div>
+            <div
+              className="relative overflow-x-auto w-full scroll"
+              ref={scrollContainerRef}
+            >
+              <div className="flex w-[1000px] h-full">
+                <Image
+                  src="/showroom_new.svg"
+                  className="object-contain"
+                  alt="referencie"
+                  width={1000}
+                  height={600}
+                  quality={100}
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL_GRAY}
+                />
+              </div>
+              <div
+                className="absolute   rounded-full cursor-pointer"
+                style={{
+                  width: "6%",
+                  height: "8%",
+                  top: "65%",
+                  left: "58%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("1", e)}
+              />
+              <div
+                className="absolute   rounded-full cursor-pointer"
+                style={{
+                  width: "8%",
+                  height: "8%",
+                  top: "57%",
+                  left: "71%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("2", e)}
+              />
+              <div
+                className="absolute  rounded-full cursor-pointer"
+                style={{
+                  width: "10%",
+                  height: "8%",
+                  top: "59%",
+                  left: "86%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("4", e)}
+              />
+              <div
+                className="absolute rounded-full cursor-pointer"
+                style={{
+                  width: "10%",
+                  height: "8%",
+                  top: "29%",
+                  left: "108%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("5", e)}
+              />
+              <div
+                className="absolute   rounded-full cursor-pointer"
+                style={{
+                  width: "15%",
+                  height: "8%",
+                  top: "49%",
+                  left: "118%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("6", e)}
+              />
+              <div
+                className="absolute   rounded-full cursor-pointer"
+                style={{
+                  width: "15%",
+                  height: "8%",
+                  top: "36%",
+                  left: "150%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("7", e)}
+              />
+              <div
+                className="absolute   rounded-full cursor-pointer"
+                style={{
+                  width: "15%",
+                  height: "8%",
+                  top: "47%",
+                  left: "180%",
+                  transform: "translate(-50%, -50%)",
+                }}
+                onClick={(e) => handleShowShop("8", e)}
+              />
+            </div>
+          </div>
+          <h3 className="custom-underline !mb-0 p-[2.5rem] md:hidden ">
+            {data?.prevadzky_nadpis}
+          </h3>
+
+          <SwiperContactPage
+            otvaracie_hodiny={
+              data?.otvaracie_hodiny ? data.otvaracie_hodiny : ""
+            }
+            hodiny={data?.hodiny ? data.hodiny : OpeningHoursEmpty}
+          />
+          <div className="main_section">
+            <h3 className="custom-underline">{data?.sidlo_nadpis}</h3>
+            <p className="text-primary font-bold !-mt-8 md:mt-0">
+              {data?.sidlo}
+            </p>
+            <p className="pt-4 text-primary mt-8">{data?.sidlo_popis1}</p>
+            <p className="pt-4 text-primary">{data?.sidlo_popis2}</p>
+            <p className="pt-4 text-primary">{data?.sidlo_popis3}</p>
+          </div>
+        </>
+      )}
 
       {showWindow && (
         <>

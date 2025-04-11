@@ -684,6 +684,36 @@ export async function fetchOstatne(
   }
 }
 
+export async function fetchContact(
+  jazyk: string | undefined
+): Promise<ContactPage | null> {
+  const languageToFetch = allowedLanguages.includes(jazyk || "") ? jazyk : "sk";
+
+  try {
+    const command = new QueryCommand({
+      TableName: "contact",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": languageToFetch,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as ContactPage;
+    }
+
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${languageToFetch} not found.`);
+  }
+}
+
 export async function fetchGalleryType(type: string): Promise<Gallery[]> {
   try {
     const command = new ScanCommand({
@@ -700,6 +730,45 @@ export async function fetchGalleryType(type: string): Promise<Gallery[]> {
     }
 
     throw new Error(`Item with  not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with  not found.`);
+  }
+}
+
+export async function fetchGalleries(): Promise<Gallery[]> {
+  try {
+    const command = new ScanCommand({
+      TableName: "galeria",
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items) {
+      return response.Items as Gallery[];
+    }
+
+    throw new Error(`Item with  not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with  not found.`);
+  }
+}
+
+export async function fetchGalleryId(id: string): Promise<Gallery> {
+  try {
+    const command = new GetCommand({
+      TableName: "galeria",
+      Key: {
+        id: id,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (!response.Item) {
+      throw new Error(`Item with id not found.`);
+    }
+
+    return response.Item as Gallery;
   } catch (err) {
     console.log(err);
     throw new Error(`Item with  not found.`);

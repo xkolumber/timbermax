@@ -1,16 +1,7 @@
 "use client";
-import {
-  AdminActualizeAboutUsPage,
-  AdminActualizeMoreAboutPage,
-  AdminActualizePriceOffer,
-} from "@/app/lib/actions";
+import { AdminActualizePriceOffer } from "@/app/lib/actions";
 import { getSecondPathValue } from "@/app/lib/functionsClient";
-import {
-  AboutUsElements,
-  Jazyk,
-  MoreAboutTimElements,
-  PriceOffer,
-} from "@/app/lib/interface";
+import { Jazyk, PriceOffer } from "@/app/lib/interface";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
