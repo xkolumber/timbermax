@@ -230,128 +230,336 @@ export async function AdminActualizeAboutUsPage(
   }
 }
 
+// export async function AdminActualizeMoreAboutPage(
+//   jazyk: string,
+//   actualizeData: MoreAboutTimElements
+// ) {
+//   const db = getFirestore();
+//   const podstrankaCollectionRef = db.collection("more-about");
+//   const querySnapshot = await podstrankaCollectionRef
+//     .where("jazyk", "==", jazyk)
+//     .get();
+
+//   if (querySnapshot.empty) {
+//     console.error("Document does not exist for uid:");
+
+//     await podstrankaCollectionRef.add({
+//       nadpis: actualizeData.nadpis,
+//       popis1: actualizeData.popis1,
+//       popis2: actualizeData.popis2,
+//       popis_porovnanie: actualizeData.popis_porovnanie,
+//       tim_vs_konk: actualizeData.tim_vs_konk,
+//       next_popis1: actualizeData.next_popis1,
+//       next_popis2: actualizeData.next_popis2,
+//       next_popis3: actualizeData.next_popis3,
+//       next_popis4: actualizeData.next_popis4,
+//       btn_exotic: actualizeData.btn_exotic,
+//       btn_rustic: actualizeData.btn_rustic,
+//       pod_btn: actualizeData.pod_btn,
+//       jazyk: jazyk,
+//       another_popis1: actualizeData.another_popis1,
+//       another_popis2: actualizeData.another_popis2,
+//       lahko_nadpis: actualizeData.lahko_nadpis,
+//       lahko_popis: actualizeData.lahko_popis,
+//       fareb_nadpis: actualizeData.fareb_nadpis,
+//       fareb_popis: actualizeData.fareb_popis,
+//       tepel_nadpis: actualizeData.tepel_nadpis,
+//       tepel_popis: actualizeData.tepel_popis,
+//       prehrev_nadpis: actualizeData.prehrev_nadpis,
+//       prehrev_popis1: actualizeData.prehrev_popis1,
+//       prehrev_popis2: actualizeData.prehrev_popis2,
+//       prehrev_popis3: actualizeData.prehrev_popis3,
+//       prehrev_popis4: actualizeData.prehrev_popis4,
+//       prehrev_popis5: actualizeData.prehrev_popis5,
+//       prehrev_popis6: actualizeData.prehrev_popis6,
+//       mech_nadpis: actualizeData.mech_nadpis,
+//       mech_popis: actualizeData.mech_popis,
+//       tvar_nadpis: actualizeData.tvar_nadpis,
+//       tvar_popis1: actualizeData.tvar_popis1,
+//       tvar_popis2: actualizeData.tvar_popis2,
+//       tvar_popis3: actualizeData.tvar_popis3,
+//       tvar_popis4: actualizeData.tvar_popis4,
+//       tvar_popis5: actualizeData.tvar_popis5,
+//       tvar_popis6: actualizeData.tvar_popis6,
+//       tvar_popis7: actualizeData.tvar_popis7,
+//       profil_nadpis: actualizeData.profil_nadpis,
+//       profil_popis1: actualizeData.profil_popis1,
+//       profil_popis2: actualizeData.profil_popis2,
+//       profil_popis3: actualizeData.profil_popis3,
+//       profil_popis4: actualizeData.profil_popis4,
+//       nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+//       popis_viz_1: actualizeData.popis_viz_1,
+//       farba: actualizeData.farba,
+//       btn_ceny: actualizeData.btn_ceny,
+//       btn_kalkulator: actualizeData.btn_kalkulator,
+//     });
+//     return "success";
+//   }
+
+//   const doc = querySnapshot.docs[0];
+//   const docId = doc.id;
+
+//   await podstrankaCollectionRef.doc(docId).update({
+//     nadpis: actualizeData.nadpis,
+//     popis1: actualizeData.popis1,
+//     popis2: actualizeData.popis2,
+//     popis_porovnanie: actualizeData.popis_porovnanie,
+//     tim_vs_konk: actualizeData.tim_vs_konk,
+//     next_popis1: actualizeData.next_popis1,
+//     next_popis2: actualizeData.next_popis2,
+//     next_popis3: actualizeData.next_popis3,
+//     next_popis4: actualizeData.next_popis4,
+//     btn_exotic: actualizeData.btn_exotic,
+//     btn_rustic: actualizeData.btn_rustic,
+//     pod_btn: actualizeData.pod_btn,
+//     jazyk: jazyk,
+//     another_popis1: actualizeData.another_popis1,
+//     another_popis2: actualizeData.another_popis2,
+//     lahko_nadpis: actualizeData.lahko_nadpis,
+//     lahko_popis: actualizeData.lahko_popis,
+//     fareb_nadpis: actualizeData.fareb_nadpis,
+//     fareb_popis: actualizeData.fareb_popis,
+//     tepel_nadpis: actualizeData.tepel_nadpis,
+//     tepel_popis: actualizeData.tepel_popis,
+//     prehrev_nadpis: actualizeData.prehrev_nadpis,
+//     prehrev_popis1: actualizeData.prehrev_popis1,
+//     prehrev_popis2: actualizeData.prehrev_popis2,
+//     prehrev_popis3: actualizeData.prehrev_popis3,
+//     prehrev_popis4: actualizeData.prehrev_popis4,
+//     prehrev_popis5: actualizeData.prehrev_popis5,
+//     prehrev_popis6: actualizeData.prehrev_popis6,
+//     mech_nadpis: actualizeData.mech_nadpis,
+//     mech_popis: actualizeData.mech_popis,
+//     tvar_nadpis: actualizeData.tvar_nadpis,
+//     tvar_popis1: actualizeData.tvar_popis1,
+//     tvar_popis2: actualizeData.tvar_popis2,
+//     tvar_popis3: actualizeData.tvar_popis3,
+//     tvar_popis4: actualizeData.tvar_popis4,
+//     tvar_popis5: actualizeData.tvar_popis5,
+//     tvar_popis6: actualizeData.tvar_popis6,
+//     tvar_popis7: actualizeData.tvar_popis7,
+//     profil_nadpis: actualizeData.profil_nadpis,
+//     profil_popis1: actualizeData.profil_popis1,
+//     profil_popis2: actualizeData.profil_popis2,
+//     profil_popis3: actualizeData.profil_popis3,
+//     profil_popis4: actualizeData.profil_popis4,
+//     nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
+//     popis_viz_1: actualizeData.popis_viz_1,
+//     farba: actualizeData.farba,
+//     btn_ceny: actualizeData.btn_ceny,
+//     btn_kalkulator: actualizeData.btn_kalkulator,
+//   });
+//   revalidatePath(`/admin/viac-o-timbermaxe/[${jazyk}]/page`, "page");
+//   return "success";
+// }
+
 export async function AdminActualizeMoreAboutPage(
   jazyk: string,
   actualizeData: MoreAboutTimElements
 ) {
-  console.log(jazyk);
-  const db = getFirestore();
-  const podstrankaCollectionRef = db.collection("more-about");
-  const querySnapshot = await podstrankaCollectionRef
-    .where("jazyk", "==", jazyk)
-    .get();
-
-  if (querySnapshot.empty) {
-    console.error("Document does not exist for uid:");
-
-    await podstrankaCollectionRef.add({
-      nadpis: actualizeData.nadpis,
-      popis1: actualizeData.popis1,
-      popis2: actualizeData.popis2,
-      popis_porovnanie: actualizeData.popis_porovnanie,
-      tim_vs_konk: actualizeData.tim_vs_konk,
-      next_popis1: actualizeData.next_popis1,
-      next_popis2: actualizeData.next_popis2,
-      next_popis3: actualizeData.next_popis3,
-      next_popis4: actualizeData.next_popis4,
-      btn_exotic: actualizeData.btn_exotic,
-      btn_rustic: actualizeData.btn_rustic,
-      pod_btn: actualizeData.pod_btn,
-      jazyk: jazyk,
-      another_popis1: actualizeData.another_popis1,
-      another_popis2: actualizeData.another_popis2,
-      lahko_nadpis: actualizeData.lahko_nadpis,
-      lahko_popis: actualizeData.lahko_popis,
-      fareb_nadpis: actualizeData.fareb_nadpis,
-      fareb_popis: actualizeData.fareb_popis,
-      tepel_nadpis: actualizeData.tepel_nadpis,
-      tepel_popis: actualizeData.tepel_popis,
-      prehrev_nadpis: actualizeData.prehrev_nadpis,
-      prehrev_popis1: actualizeData.prehrev_popis1,
-      prehrev_popis2: actualizeData.prehrev_popis2,
-      prehrev_popis3: actualizeData.prehrev_popis3,
-      prehrev_popis4: actualizeData.prehrev_popis4,
-      prehrev_popis5: actualizeData.prehrev_popis5,
-      prehrev_popis6: actualizeData.prehrev_popis6,
-      mech_nadpis: actualizeData.mech_nadpis,
-      mech_popis: actualizeData.mech_popis,
-      tvar_nadpis: actualizeData.tvar_nadpis,
-      tvar_popis1: actualizeData.tvar_popis1,
-      tvar_popis2: actualizeData.tvar_popis2,
-      tvar_popis3: actualizeData.tvar_popis3,
-      tvar_popis4: actualizeData.tvar_popis4,
-      tvar_popis5: actualizeData.tvar_popis5,
-      tvar_popis6: actualizeData.tvar_popis6,
-      tvar_popis7: actualizeData.tvar_popis7,
-      profil_nadpis: actualizeData.profil_nadpis,
-      profil_popis1: actualizeData.profil_popis1,
-      profil_popis2: actualizeData.profil_popis2,
-      profil_popis3: actualizeData.profil_popis3,
-      profil_popis4: actualizeData.profil_popis4,
-      nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
-      popis_viz_1: actualizeData.popis_viz_1,
-      farba: actualizeData.farba,
-      btn_ceny: actualizeData.btn_ceny,
-      btn_kalkulator: actualizeData.btn_kalkulator,
+  try {
+    const command = new QueryCommand({
+      TableName: "more-about",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
     });
-    return "success";
+
+    const data = await docClient.send(command);
+
+    if (data.Items && data.Items.length > 0) {
+      const docId = data.Items[0].id.S;
+
+      const command = new UpdateCommand({
+        TableName: "more-about",
+        Key: {
+          id: docId,
+        },
+        ExpressionAttributeNames: {
+          "#nadpis": "nadpis",
+          "#popis1": "popis1",
+          "#popis2": "popis2",
+          "#popis_porovnanie": "popis_porovnanie",
+          "#tim_vs_konk": "tim_vs_konk",
+          "#next_popis1": "next_popis1",
+          "#next_popis2": "next_popis2",
+          "#next_popis3": "next_popis3",
+          "#next_popis4": "next_popis4",
+          "#btn_exotic": "btn_exotic",
+          "#btn_rustic": "btn_rustic",
+          "#pod_btn": "pod_btn",
+          "#jazyk": "jazyk",
+          "#another_popis1": "another_popis1",
+          "#another_popis2": "another_popis2",
+          "#lahko_nadpis": "lahko_nadpis",
+          "#lahko_popis": "lahko_popis",
+          "#fareb_nadpis": "fareb_nadpis",
+          "#fareb_popis": "fareb_popis",
+          "#tepel_nadpis": "tepel_nadpis",
+          "#tepel_popis": "tepel_popis",
+          "#prehrev_nadpis": "prehrev_nadpis",
+          "#prehrev_popis1": "prehrev_popis1",
+          "#prehrev_popis2": "prehrev_popis2",
+          "#prehrev_popis3": "prehrev_popis3",
+          "#prehrev_popis4": "prehrev_popis4",
+          "#prehrev_popis5": "prehrev_popis5",
+          "#prehrev_popis6": "prehrev_popis6",
+          "#mech_nadpis": "mech_nadpis",
+          "#mech_popis": "mech_popis",
+          "#tvar_nadpis": "tvar_nadpis",
+          "#tvar_popis1": "tvar_popis1",
+          "#tvar_popis2": "tvar_popis2",
+          "#tvar_popis3": "tvar_popis3",
+          "#tvar_popis4": "tvar_popis4",
+          "#tvar_popis5": "tvar_popis5",
+          "#tvar_popis6": "tvar_popis6",
+          "#tvar_popis7": "tvar_popis7",
+          "#profil_nadpis": "profil_nadpis",
+          "#profil_popis1": "profil_popis1",
+          "#profil_popis2": "profil_popis2",
+          "#profil_popis3": "profil_popis3",
+          "#profil_popis4": "profil_popis4",
+          "#nadpis_vizualizacia": "nadpis_vizualizacia",
+          "#popis_viz_1": "popis_viz_1",
+          "#farba": "farba",
+          "#btn_ceny": "btn_ceny",
+          "#btn_kalkulator": "btn_kalkulator",
+        },
+        UpdateExpression: `
+        SET 
+          #nadpis = :nadpis,
+          #popis1 = :popis1,
+          #popis2 = :popis2,
+          #popis_porovnanie = :popis_porovnanie,
+          #tim_vs_konk = :tim_vs_konk,
+          #next_popis1 = :next_popis1,
+          #next_popis2 = :next_popis2,
+          #next_popis3 = :next_popis3,
+          #next_popis4 = :next_popis4,
+          #btn_exotic = :btn_exotic,
+          #btn_rustic = :btn_rustic,
+          #pod_btn = :pod_btn,
+          #another_popis1 = :another_popis1,
+          #another_popis2 = :another_popis2,
+          #lahko_nadpis = :lahko_nadpis,
+          #lahko_popis = :lahko_popis,
+          #fareb_nadpis = :fareb_nadpis,
+          #fareb_popis = :fareb_popis,
+          #tepel_nadpis = :tepel_nadpis,
+          #tepel_popis = :tepel_popis,
+          #prehrev_nadpis = :prehrev_nadpis,
+          #prehrev_popis1 = :prehrev_popis1,
+          #prehrev_popis2 = :prehrev_popis2,
+          #prehrev_popis3 = :prehrev_popis3,
+          #prehrev_popis4 = :prehrev_popis4,
+          #prehrev_popis5 = :prehrev_popis5,
+          #prehrev_popis6 = :prehrev_popis6,
+          #mech_nadpis = :mech_nadpis,
+          #mech_popis = :mech_popis,
+          #tvar_nadpis = :tvar_nadpis,
+          #tvar_popis1 = :tvar_popis1,
+          #tvar_popis2 = :tvar_popis2,
+          #tvar_popis3 = :tvar_popis3,
+          #tvar_popis4 = :tvar_popis4,
+          #tvar_popis5 = :tvar_popis5,
+          #tvar_popis6 = :tvar_popis6,
+          #tvar_popis7 = :tvar_popis7,
+          #profil_nadpis = :profil_nadpis,
+          #profil_popis1 = :profil_popis1,
+          #profil_popis2 = :profil_popis2,
+          #profil_popis3 = :profil_popis3,
+          #profil_popis4 = :profil_popis4,
+          #nadpis_vizualizacia = :nadpis_vizualizacia,
+          #popis_viz_1 = :popis_viz_1,
+          #farba = :farba,
+          #btn_ceny = :btn_ceny,
+          #btn_kalkulator = :btn_kalkulator,
+          #jazyk = :jazyk
+      `,
+
+        ExpressionAttributeValues: {
+          ":nadpis": actualizeData.nadpis,
+          ":popis1": actualizeData.popis1,
+          ":popis2": actualizeData.popis2,
+          ":popis_porovnanie": actualizeData.popis_porovnanie,
+          ":tim_vs_konk": actualizeData.tim_vs_konk,
+          ":next_popis1": actualizeData.next_popis1,
+          ":next_popis2": actualizeData.next_popis2,
+          ":next_popis3": actualizeData.next_popis3,
+          ":next_popis4": actualizeData.next_popis4,
+          ":btn_exotic": actualizeData.btn_exotic,
+          ":btn_rustic": actualizeData.btn_rustic,
+          ":pod_btn": actualizeData.pod_btn,
+          ":another_popis1": actualizeData.another_popis1,
+          ":another_popis2": actualizeData.another_popis2,
+          ":lahko_nadpis": actualizeData.lahko_nadpis,
+          ":lahko_popis": actualizeData.lahko_popis,
+          ":fareb_nadpis": actualizeData.fareb_nadpis,
+          ":fareb_popis": actualizeData.fareb_popis,
+          ":tepel_nadpis": actualizeData.tepel_nadpis,
+          ":tepel_popis": actualizeData.tepel_popis,
+          ":prehrev_nadpis": actualizeData.prehrev_nadpis,
+          ":prehrev_popis1": actualizeData.prehrev_popis1,
+          ":prehrev_popis2": actualizeData.prehrev_popis2,
+          ":prehrev_popis3": actualizeData.prehrev_popis3,
+          ":prehrev_popis4": actualizeData.prehrev_popis4,
+          ":prehrev_popis5": actualizeData.prehrev_popis5,
+          ":prehrev_popis6": actualizeData.prehrev_popis6,
+          ":mech_nadpis": actualizeData.mech_nadpis,
+          ":mech_popis": actualizeData.mech_popis,
+          ":tvar_nadpis": actualizeData.tvar_nadpis,
+          ":tvar_popis1": actualizeData.tvar_popis1,
+          ":tvar_popis2": actualizeData.tvar_popis2,
+          ":tvar_popis3": actualizeData.tvar_popis3,
+          ":tvar_popis4": actualizeData.tvar_popis4,
+          ":tvar_popis5": actualizeData.tvar_popis5,
+          ":tvar_popis6": actualizeData.tvar_popis6,
+          ":tvar_popis7": actualizeData.tvar_popis7,
+          ":profil_nadpis": actualizeData.profil_nadpis,
+          ":profil_popis1": actualizeData.profil_popis1,
+          ":profil_popis2": actualizeData.profil_popis2,
+          ":profil_popis3": actualizeData.profil_popis3,
+          ":profil_popis4": actualizeData.profil_popis4,
+          ":nadpis_vizualizacia": actualizeData.nadpis_vizualizacia,
+          ":popis_viz_1": actualizeData.popis_viz_1,
+          ":farba": actualizeData.farba,
+          ":btn_ceny": actualizeData.btn_ceny,
+          ":btn_kalkulator": actualizeData.btn_kalkulator,
+          ":jazyk": jazyk,
+        },
+        ReturnValues: "ALL_NEW",
+      });
+
+      try {
+        const response = await docClient.send(command);
+        return response.$metadata.httpStatusCode;
+      } catch (error) {
+        console.error("Error updating product:", error);
+        throw new Error("Failed to update product");
+      }
+    } else {
+      const newId = crypto.randomUUID();
+
+      const putCommand = new PutCommand({
+        TableName: "more-about",
+        Item: {
+          id: newId,
+          ...actualizeData,
+        },
+      });
+
+      const response = await docClient.send(putCommand);
+      return response.$metadata.httpStatusCode;
+    }
+  } catch (error) {
+    console.error("Error updating/adding item in DynamoDB", error);
+    throw new Error("Error updating/adding item in DynamoDB");
   }
-
-  const doc = querySnapshot.docs[0];
-  const docId = doc.id;
-
-  await podstrankaCollectionRef.doc(docId).update({
-    nadpis: actualizeData.nadpis,
-    popis1: actualizeData.popis1,
-    popis2: actualizeData.popis2,
-    popis_porovnanie: actualizeData.popis_porovnanie,
-    tim_vs_konk: actualizeData.tim_vs_konk,
-    next_popis1: actualizeData.next_popis1,
-    next_popis2: actualizeData.next_popis2,
-    next_popis3: actualizeData.next_popis3,
-    next_popis4: actualizeData.next_popis4,
-    btn_exotic: actualizeData.btn_exotic,
-    btn_rustic: actualizeData.btn_rustic,
-    pod_btn: actualizeData.pod_btn,
-    jazyk: jazyk,
-    another_popis1: actualizeData.another_popis1,
-    another_popis2: actualizeData.another_popis2,
-    lahko_nadpis: actualizeData.lahko_nadpis,
-    lahko_popis: actualizeData.lahko_popis,
-    fareb_nadpis: actualizeData.fareb_nadpis,
-    fareb_popis: actualizeData.fareb_popis,
-    tepel_nadpis: actualizeData.tepel_nadpis,
-    tepel_popis: actualizeData.tepel_popis,
-    prehrev_nadpis: actualizeData.prehrev_nadpis,
-    prehrev_popis1: actualizeData.prehrev_popis1,
-    prehrev_popis2: actualizeData.prehrev_popis2,
-    prehrev_popis3: actualizeData.prehrev_popis3,
-    prehrev_popis4: actualizeData.prehrev_popis4,
-    prehrev_popis5: actualizeData.prehrev_popis5,
-    prehrev_popis6: actualizeData.prehrev_popis6,
-    mech_nadpis: actualizeData.mech_nadpis,
-    mech_popis: actualizeData.mech_popis,
-    tvar_nadpis: actualizeData.tvar_nadpis,
-    tvar_popis1: actualizeData.tvar_popis1,
-    tvar_popis2: actualizeData.tvar_popis2,
-    tvar_popis3: actualizeData.tvar_popis3,
-    tvar_popis4: actualizeData.tvar_popis4,
-    tvar_popis5: actualizeData.tvar_popis5,
-    tvar_popis6: actualizeData.tvar_popis6,
-    tvar_popis7: actualizeData.tvar_popis7,
-    profil_nadpis: actualizeData.profil_nadpis,
-    profil_popis1: actualizeData.profil_popis1,
-    profil_popis2: actualizeData.profil_popis2,
-    profil_popis3: actualizeData.profil_popis3,
-    profil_popis4: actualizeData.profil_popis4,
-    nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
-    popis_viz_1: actualizeData.popis_viz_1,
-    farba: actualizeData.farba,
-    btn_ceny: actualizeData.btn_ceny,
-    btn_kalkulator: actualizeData.btn_kalkulator,
-  });
-  revalidatePath(`/admin/viac-o-timbermaxe/[${jazyk}]/page`, "page");
-  return "success";
 }
 
 export async function AdminActualizePriceOffer(
