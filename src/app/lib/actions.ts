@@ -18,6 +18,7 @@ import {
   Nacenovac,
   Ostatne,
   Ploty,
+  PriceOffer,
   Slnolamy,
   Sluzby,
   Team,
@@ -562,113 +563,217 @@ export async function AdminActualizeMoreAboutPage(
   }
 }
 
+// export async function AdminActualizePriceOffer(
+
+//   jazyk: string,
+// actualizeData: PriceOffer
+// ) {
+//   const db = getFirestore();
+//   const podstrankaCollectionRef = db.collection("price-offer");
+//   const querySnapshot = await podstrankaCollectionRef
+//     .where("jazyk", "==", jazyk)
+//     .get();
+
+//   if (querySnapshot.empty) {
+//     console.error("Document does not exist for uid:");
+
+//     await podstrankaCollectionRef.add({
+//       cennik_stiahnutie: cennik_stiahnutie,
+//       ceny_sposob_nadpis: ceny_sposob_nadpis,
+//       ceny_sposob_popis: ceny_sposob_popis,
+//       popis_nad_fotkou: popis_nad_fotkou,
+//       profil_nadpis: profil_nadpis,
+//       profil_popis1: profil_popis1,
+//       profil_popis2: profil_popis2,
+//       profil_popis3: profil_popis3,
+//       profil_popis4: profil_popis4,
+//       profil_popis5: profil_popis5,
+//       profil_popis6: profil_popis6,
+//       dielo_nadpis: dielo_nadpis,
+//       dielo_popis: dielo_popis,
+//       relacia_nadpis: relacia_nadpis,
+//       relacia_popis1: relacia_popis1,
+//       relacia_popis2: relacia_popis2,
+//       relacia_lista1: relacia_lista1,
+//       relacia_lista2: relacia_lista2,
+//       relacie: relacie,
+//       jazyk: jazyk,
+//       cenova_ponuka_nadpis: cenova_ponuka_nadpis,
+//       cenova_ponuka_popis: cenova_ponuka_popis,
+//       nacenovac: nacenovac,
+//       nacenovac_sekcie: nacenovac_sekcie,
+//       posl_popis1: posl_popis1,
+//       posl_popis2: posl_popis2,
+//       posl_popis3: posl_popis3,
+//       posl_popis4: posl_popis4,
+//     });
+//     return "success";
+//   }
+
+//   const doc = querySnapshot.docs[0];
+//   const docId = doc.id;
+
+//   await podstrankaCollectionRef.doc(docId).update({
+//     cennik_stiahnutie: cennik_stiahnutie,
+//     ceny_sposob_nadpis: ceny_sposob_nadpis,
+//     ceny_sposob_popis: ceny_sposob_popis,
+//     popis_nad_fotkou: popis_nad_fotkou,
+//     profil_nadpis: profil_nadpis,
+//     profil_popis1: profil_popis1,
+//     profil_popis2: profil_popis2,
+//     profil_popis3: profil_popis3,
+//     profil_popis4: profil_popis4,
+//     profil_popis5: profil_popis5,
+//     profil_popis6: profil_popis6,
+//     dielo_nadpis: dielo_nadpis,
+//     dielo_popis: dielo_popis,
+//     relacia_nadpis: relacia_nadpis,
+//     relacia_popis1: relacia_popis1,
+//     relacia_popis2: relacia_popis2,
+//     relacia_lista1: relacia_lista1,
+//     relacia_lista2: relacia_lista2,
+//     relacie: relacie,
+//     jazyk: jazyk,
+//     cenova_ponuka_nadpis: cenova_ponuka_nadpis,
+//     cenova_ponuka_popis: cenova_ponuka_popis,
+//     nacenovac: nacenovac,
+//     nacenovac_sekcie: nacenovac_sekcie,
+//     posl_popis1: posl_popis1,
+//     posl_popis2: posl_popis2,
+//     posl_popis3: posl_popis3,
+//     posl_popis4: posl_popis4,
+//   });
+//   revalidatePath(`/admin/cennik/[${jazyk}]/page`, "page");
+//   return "success";
+// }
+
 export async function AdminActualizePriceOffer(
-  cennik_stiahnutie: string,
-  ceny_sposob_nadpis: string,
-  ceny_sposob_popis: string,
-  popis_nad_fotkou: string,
-  profil_nadpis: string,
-  profil_popis1: string,
-  profil_popis2: string,
-  profil_popis3: string,
-  profil_popis4: string,
-  profil_popis5: string,
-  profil_popis6: string,
-  dielo_nadpis: string,
-  dielo_popis: string,
-  relacia_nadpis: string,
-  relacia_popis1: string,
-  relacia_popis2: string,
-  relacia_lista1: string,
-  relacia_lista2: string,
-  relacie: Sluzby[],
   jazyk: string,
-  cenova_ponuka_nadpis: string,
-  cenova_ponuka_popis: string,
-  nacenovac: string,
-  nacenovac_sekcie: Nacenovac[],
-  posl_popis1: string,
-  posl_popis2: string,
-  posl_popis3: string,
-  posl_popis4: string
+  actualizeData: PriceOffer
 ) {
-  const db = getFirestore();
-  const podstrankaCollectionRef = db.collection("price-offer");
-  const querySnapshot = await podstrankaCollectionRef
-    .where("jazyk", "==", jazyk)
-    .get();
-
-  if (querySnapshot.empty) {
-    console.error("Document does not exist for uid:");
-
-    await podstrankaCollectionRef.add({
-      cennik_stiahnutie: cennik_stiahnutie,
-      ceny_sposob_nadpis: ceny_sposob_nadpis,
-      ceny_sposob_popis: ceny_sposob_popis,
-      popis_nad_fotkou: popis_nad_fotkou,
-      profil_nadpis: profil_nadpis,
-      profil_popis1: profil_popis1,
-      profil_popis2: profil_popis2,
-      profil_popis3: profil_popis3,
-      profil_popis4: profil_popis4,
-      profil_popis5: profil_popis5,
-      profil_popis6: profil_popis6,
-      dielo_nadpis: dielo_nadpis,
-      dielo_popis: dielo_popis,
-      relacia_nadpis: relacia_nadpis,
-      relacia_popis1: relacia_popis1,
-      relacia_popis2: relacia_popis2,
-      relacia_lista1: relacia_lista1,
-      relacia_lista2: relacia_lista2,
-      relacie: relacie,
-      jazyk: jazyk,
-      cenova_ponuka_nadpis: cenova_ponuka_nadpis,
-      cenova_ponuka_popis: cenova_ponuka_popis,
-      nacenovac: nacenovac,
-      nacenovac_sekcie: nacenovac_sekcie,
-      posl_popis1: posl_popis1,
-      posl_popis2: posl_popis2,
-      posl_popis3: posl_popis3,
-      posl_popis4: posl_popis4,
+  try {
+    const queryCommand = new QueryCommand({
+      TableName: "price-offer",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
     });
-    return "success";
+
+    const data = await docClient.send(queryCommand);
+
+    if (data.Items && data.Items.length > 0) {
+      const docId = data.Items[0].id.S;
+
+      const updateCommand = new UpdateCommand({
+        TableName: "price-offer",
+        Key: {
+          id: docId,
+        },
+        UpdateExpression: `
+          SET 
+            #cennik_stiahnutie = :cennik_stiahnutie,
+            #ceny_sposob_nadpis = :ceny_sposob_nadpis,
+            #ceny_sposob_popis = :ceny_sposob_popis,
+            #popis_nad_fotkou = :popis_nad_fotkou,
+            #profil_nadpis = :profil_nadpis,
+            #profil_popis1 = :profil_popis1,
+            #profil_popis2 = :profil_popis2,
+            #profil_popis3 = :profil_popis3,
+            #profil_popis4 = :profil_popis4,
+            #profil_popis5 = :profil_popis5,
+            #profil_popis6 = :profil_popis6,
+            #dielo_nadpis = :dielo_nadpis,
+            #dielo_popis = :dielo_popis,
+            #relacia_nadpis = :relacia_nadpis,
+            #relacia_popis1 = :relacia_popis1,
+            #relacia_popis2 = :relacia_popis2,
+            #relacia_lista1 = :relacia_lista1,
+            #relacia_lista2 = :relacia_lista2,
+            #relacie = :relacie,
+            #cenova_ponuka_nadpis = :cenova_ponuka_nadpis,
+            #cenova_ponuka_popis = :cenova_ponuka_popis,
+            #nacenovac = :nacenovac,
+            #nacenovac_sekcie = :nacenovac_sekcie,
+            #posl_popis1 = :posl_popis1,
+            #posl_popis2 = :posl_popis2,
+            #posl_popis3 = :posl_popis3,
+            #posl_popis4 = :posl_popis4,
+            #jazyk = :jazyk
+        `,
+        ExpressionAttributeNames: {
+          "#cennik_stiahnutie": "cennik_stiahnutie",
+          "#ceny_sposob_nadpis": "ceny_sposob_nadpis",
+          "#ceny_sposob_popis": "ceny_sposob_popis",
+          "#popis_nad_fotkou": "popis_nad_fotkou",
+          "#profil_nadpis": "profil_nadpis",
+          "#profil_popis1": "profil_popis1",
+          "#profil_popis2": "profil_popis2",
+          "#profil_popis3": "profil_popis3",
+          "#profil_popis4": "profil_popis4",
+          "#profil_popis5": "profil_popis5",
+          "#profil_popis6": "profil_popis6",
+          "#dielo_nadpis": "dielo_nadpis",
+          "#dielo_popis": "dielo_popis",
+          "#relacia_nadpis": "relacia_nadpis",
+          "#relacia_popis1": "relacia_popis1",
+          "#relacia_popis2": "relacia_popis2",
+          "#relacia_lista1": "relacia_lista1",
+          "#relacia_lista2": "relacia_lista2",
+          "#relacie": "relacie",
+          "#cenova_ponuka_nadpis": "cenova_ponuka_nadpis",
+          "#cenova_ponuka_popis": "cenova_ponuka_popis",
+          "#nacenovac": "nacenovac",
+          "#nacenovac_sekcie": "nacenovac_sekcie",
+          "#posl_popis1": "posl_popis1",
+          "#posl_popis2": "posl_popis2",
+          "#posl_popis3": "posl_popis3",
+          "#posl_popis4": "posl_popis4",
+          "#jazyk": "jazyk",
+        },
+        ExpressionAttributeValues: {
+          ":cennik_stiahnutie": actualizeData.cennik_stiahnutie,
+          ":ceny_sposob_nadpis": actualizeData.ceny_sposob_nadpis,
+          ":ceny_sposob_popis": actualizeData.ceny_sposob_popis,
+          ":popis_nad_fotkou": actualizeData.popis_nad_fotkou,
+          ":profil_nadpis": actualizeData.profil_nadpis,
+          ":profil_popis1": actualizeData.profil_popis1,
+          ":profil_popis2": actualizeData.profil_popis2,
+          ":profil_popis3": actualizeData.profil_popis3,
+          ":profil_popis4": actualizeData.profil_popis4,
+          ":profil_popis5": actualizeData.profil_popis5,
+          ":profil_popis6": actualizeData.profil_popis6,
+          ":dielo_nadpis": actualizeData.dielo_nadpis,
+          ":dielo_popis": actualizeData.dielo_popis,
+          ":relacia_nadpis": actualizeData.relacia_nadpis,
+          ":relacia_popis1": actualizeData.relacia_popis1,
+          ":relacia_popis2": actualizeData.relacia_popis2,
+          ":relacia_lista1": actualizeData.relacia_lista1,
+          ":relacia_lista2": actualizeData.relacia_lista2,
+          ":relacie": actualizeData.relacie,
+          ":cenova_ponuka_nadpis": actualizeData.cenova_ponuka_nadpis,
+          ":cenova_ponuka_popis": actualizeData.cenova_ponuka_popis,
+          ":nacenovac": actualizeData.nacenovac,
+          ":nacenovac_sekcie": actualizeData.nacenovac_sekcie,
+          ":posl_popis1": actualizeData.posl_popis1,
+          ":posl_popis2": actualizeData.posl_popis2,
+          ":posl_popis3": actualizeData.posl_popis3,
+          ":posl_popis4": actualizeData.posl_popis4,
+          ":jazyk": jazyk,
+        },
+      });
+
+      const response = await docClient.send(updateCommand);
+      return response.$metadata.httpStatusCode;
+    }
+  } catch (err) {
+    console.error("Error updating price offer:", err);
+    throw err;
   }
-
-  const doc = querySnapshot.docs[0];
-  const docId = doc.id;
-
-  await podstrankaCollectionRef.doc(docId).update({
-    cennik_stiahnutie: cennik_stiahnutie,
-    ceny_sposob_nadpis: ceny_sposob_nadpis,
-    ceny_sposob_popis: ceny_sposob_popis,
-    popis_nad_fotkou: popis_nad_fotkou,
-    profil_nadpis: profil_nadpis,
-    profil_popis1: profil_popis1,
-    profil_popis2: profil_popis2,
-    profil_popis3: profil_popis3,
-    profil_popis4: profil_popis4,
-    profil_popis5: profil_popis5,
-    profil_popis6: profil_popis6,
-    dielo_nadpis: dielo_nadpis,
-    dielo_popis: dielo_popis,
-    relacia_nadpis: relacia_nadpis,
-    relacia_popis1: relacia_popis1,
-    relacia_popis2: relacia_popis2,
-    relacia_lista1: relacia_lista1,
-    relacia_lista2: relacia_lista2,
-    relacie: relacie,
-    jazyk: jazyk,
-    cenova_ponuka_nadpis: cenova_ponuka_nadpis,
-    cenova_ponuka_popis: cenova_ponuka_popis,
-    nacenovac: nacenovac,
-    nacenovac_sekcie: nacenovac_sekcie,
-    posl_popis1: posl_popis1,
-    posl_popis2: posl_popis2,
-    posl_popis3: posl_popis3,
-    posl_popis4: posl_popis4,
-  });
-  revalidatePath(`/admin/cennik/[${jazyk}]/page`, "page");
-  return "success";
 }
 
 export async function AdminActualizeSlnolamyPage(
