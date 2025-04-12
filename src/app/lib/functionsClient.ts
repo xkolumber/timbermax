@@ -1024,3 +1024,30 @@ export const slnolamy_url = [
     horizontal: "/SP_Ebony.jpg" /*Missing*/,
   },
 ];
+
+export const services_elements = [
+  {
+    nazov: "Terasy",
+    slug: "terasy",
+  },
+  {
+    nazov: "Fasády",
+    slug: "fasady",
+  },
+  {
+    nazov: "Bazény",
+    slug: "bazeny",
+  },
+  {
+    nazov: "Slnolamy",
+    slug: "slnolamy",
+  },
+  {
+    nazov: "Ploty",
+    slug: "ploty",
+  },
+  {
+    nazov: "Ostatné",
+    slug: "ostatne",
+  },
+];

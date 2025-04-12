@@ -35,7 +35,7 @@ const mainListItems = [
   {
     text: "Služby",
     icon: <AutoStoriesIcon />,
-    link: "/admin/blogy",
+    link: "/admin/sluzby",
   },
   {
     text: "Galéria",
