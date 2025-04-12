@@ -10,6 +10,7 @@ import {
   Fasady,
   Gallery,
   HomePageElements,
+  LanguagesAdming,
   MoreAboutTimElements,
   Ostatne,
   Ploty,
@@ -799,6 +800,24 @@ export async function fetchGalleryId(id: string): Promise<Gallery> {
     }
 
     return response.Item as Gallery;
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with  not found.`);
+  }
+}
+
+export async function fetchAllLanguages(): Promise<LanguagesAdming[]> {
+  try {
+    const command = new ScanCommand({
+      TableName: "jazyky",
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items) {
+      return response.Items as LanguagesAdming[];
+    }
+
+    throw new Error(`Item with  not found.`);
   } catch (err) {
     console.log(err);
     throw new Error(`Item with  not found.`);

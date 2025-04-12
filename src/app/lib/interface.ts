@@ -650,3 +650,8 @@ export interface ObjectInteface {
   vertical: string;
   horizontal: string;
 }
+
+export interface LanguagesAdming {
+  id: string;
+  jazyk: string;
+}

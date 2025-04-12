@@ -511,6 +511,16 @@ li {
 .products_admin p {
   color: black;
 }
+.products_admin textarea {
+  width: 100%;
+  resize: none;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid black;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
 
 .products_admin input[type="text"],
 .products_admin input[type="number"] {
@@ -527,6 +537,10 @@ li {
   font-size: 1.4rem;
   width: 100%;
   border-radius: 0px;
+}
+
+.products_admin input:focus {
+  border: 2px solid black;
 }
 
 .behind_card_background {
@@ -570,7 +584,7 @@ li {
 
 .disabledBtn {
   opacity: 0.7;
-  cursor: not-allowed;
+  cursor: default;
 }
 
 @keyframes moveUpDown {

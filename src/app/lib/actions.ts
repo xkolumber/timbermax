@@ -24,6 +24,9 @@ import {
   Terasy,
   TimbermaxLike,
 } from "./interface";
+import { docClient } from "./awsConfig";
+import { QueryCommand } from "@aws-sdk/client-dynamodb";
+import { PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const FormSchema = z.object({
   jazyk: z.string(),
@@ -136,51 +139,95 @@ export async function AdminActualizeAboutUsPage(
   actualizeData: AboutUsElements,
   jazyk: string
 ) {
-  const db = getFirestore();
-  const podstrankaCollectionRef = db.collection("about-us");
-  const querySnapshot = await podstrankaCollectionRef
-    .where("jazyk", "==", jazyk)
-    .get();
-
-  if (querySnapshot.empty) {
-    console.error("Document does not exist for uid:");
-
-    await podstrankaCollectionRef.add({
-      o_nas: actualizeData.o_nas,
-      citat: actualizeData.citat,
-      history_nadpis: actualizeData.history_nadpis,
-      history_popis: actualizeData.history_popis,
-      filozofia_nadpis: actualizeData.filozofia_nadpis,
-      filozofia_popis1: actualizeData.filozofia_popis1,
-      filozofia_popis2: actualizeData.filozofia_popis2,
-      filozofia_popis3: actualizeData.filozofia_popis3,
-      jazyk: jazyk,
-      spoznajte_tim: actualizeData.spoznajte_tim,
-      staviame_znacka: actualizeData.staviame_znacka,
-      tim: actualizeData.tim,
+  try {
+    const command = new QueryCommand({
+      TableName: "about-us",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
     });
-    return "success";
+
+    const data = await docClient.send(command);
+
+    if (data.Items && data.Items.length > 0) {
+      const docId = data.Items[0].id.S;
+
+      const command = new UpdateCommand({
+        TableName: "about-us",
+        Key: {
+          id: docId,
+        },
+        ExpressionAttributeNames: {
+          "#o_nas": "o_nas",
+          "#citat": "citat",
+          "#history_nadpis": "history_nadpis",
+          "#history_popis": "history_popis",
+          "#filozofia_nadpis": "filozofia_nadpis",
+          "#filozofia_popis1": "filozofia_popis1",
+          "#filozofia_popis2": "filozofia_popis2",
+          "#filozofia_popis3": "filozofia_popis3",
+          "#staviame_znacka": "staviame_znacka",
+          "#tim": "tim",
+          "#spoznajte_tim": "spoznajte_tim",
+        },
+        UpdateExpression:
+          "set #o_nas = :o_nas, #citat = :citat, #history_nadpis = :history_nadpis, #history_popis = :history_popis, #filozofia_nadpis = :filozofia_nadpis, #filozofia_popis1 = :filozofia_popis1, #filozofia_popis2 = :filozofia_popis2, #filozofia_popis3 = :filozofia_popis3, #spoznajte_tim = :spoznajte_tim, #staviame_znacka = :staviame_znacka, #tim = :tim",
+        ExpressionAttributeValues: {
+          ":o_nas": actualizeData.o_nas,
+          ":citat": actualizeData.citat,
+          ":history_nadpis": actualizeData.history_nadpis,
+          ":history_popis": actualizeData.history_popis,
+          ":filozofia_nadpis": actualizeData.filozofia_nadpis,
+          ":filozofia_popis1": actualizeData.filozofia_popis1,
+          ":filozofia_popis2": actualizeData.filozofia_popis2,
+          ":filozofia_popis3": actualizeData.filozofia_popis3,
+          ":spoznajte_tim": actualizeData.spoznajte_tim,
+          ":staviame_znacka": actualizeData.staviame_znacka,
+          ":tim": actualizeData.tim,
+        },
+        ReturnValues: "ALL_NEW",
+      });
+
+      try {
+        const response = await docClient.send(command);
+        return response.$metadata.httpStatusCode;
+      } catch (error) {
+        console.error("Error updating product:", error);
+        throw new Error("Failed to update product");
+      }
+    } else {
+      const uuid = crypto.randomUUID();
+      const putParams = {
+        TableName: "about-us",
+        Item: {
+          id: uuid,
+          o_nas: actualizeData.o_nas,
+          citat: actualizeData.citat,
+          history_nadpis: actualizeData.history_nadpis,
+          history_popis: actualizeData.history_popis,
+          filozofia_nadpis: actualizeData.filozofia_nadpis,
+          filozofia_popis1: actualizeData.filozofia_popis1,
+          filozofia_popis2: actualizeData.filozofia_popis2,
+          filozofia_popis3: actualizeData.filozofia_popis3,
+          jazyk: jazyk,
+          spoznajte_tim: actualizeData.spoznajte_tim,
+          staviame_znacka: actualizeData.staviame_znacka,
+          tim: actualizeData.tim,
+        },
+      };
+
+      const response = await docClient.send(new PutCommand(putParams));
+      return response.$metadata.httpStatusCode;
+    }
+  } catch (error) {
+    console.error("Error updating/adding item in DynamoDB", error);
+    throw new Error("Error updating/adding item in DynamoDB");
   }
-
-  const doc = querySnapshot.docs[0];
-  const docId = doc.id;
-
-  await podstrankaCollectionRef.doc(docId).update({
-    o_nas: actualizeData.o_nas,
-    citat: actualizeData.citat,
-    history_nadpis: actualizeData.history_nadpis,
-    history_popis: actualizeData.history_popis,
-    filozofia_nadpis: actualizeData.filozofia_nadpis,
-    filozofia_popis1: actualizeData.filozofia_popis1,
-    filozofia_popis2: actualizeData.filozofia_popis2,
-    filozofia_popis3: actualizeData.filozofia_popis3,
-    jazyk: jazyk,
-    spoznajte_tim: actualizeData.spoznajte_tim,
-    staviame_znacka: actualizeData.staviame_znacka,
-    tim: actualizeData.tim,
-  });
-  revalidatePath(`/admin/o-nas/[${jazyk}]/page`, "page");
-  return "success";
 }
 
 export async function AdminActualizeMoreAboutPage(

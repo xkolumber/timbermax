@@ -30,9 +30,9 @@ export default function OptionsMenu() {
       <MenuButton
         aria-label="Open menu"
         onClick={handleClick}
-        sx={{ borderColor: "transparent" }}
+        sx={{ borderColor: "#ffffff" }}
       >
-        <MoreVertRoundedIcon />
+        <MoreVertRoundedIcon sx={{ color: "#ffffff" }} />
       </MenuButton>
       <Menu
         anchorEl={anchorEl}
