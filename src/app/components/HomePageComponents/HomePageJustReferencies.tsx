@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import IconArrowLoopLeft from "../Icons/IconArrowLoopLeft";
 import IconArrowLoopRight from "../Icons/IconArrowLoopRight";
 import { Navigation } from "swiper/modules";
+import { cloudfront_url } from "@/app/lib/functionsClient";
 
 interface Props {
   references: string[];
@@ -20,7 +21,7 @@ const HomePageJustReferencies = ({ references }: Props) => {
     <div className="md:main_section !pt-0 !pb-0">
       <div className="relative ">
         <Image
-          src="/ref.jpg"
+          src={`${cloudfront_url}/neutral/ref.jpg`}
           className="w-full h-full object-cover absolute rounded-[8px]"
           alt="referencie"
           width={1000}

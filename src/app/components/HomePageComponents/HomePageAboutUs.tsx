@@ -1,3 +1,4 @@
+import { cloudfront_url } from "@/app/lib/functionsClient";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,20 +39,22 @@ const HomePageAboutUs = ({
   return (
     <div className="relative  w-full">
       <Image
-        src="/o_nas.jpg"
+        src={`${cloudfront_url}/neutral/o_nas.jpg`}
         alt="Obrazok"
         layout="fill"
         objectFit="cover"
         quality={100}
         className="z-0 hidden md:block"
+        priority
       />
       <Image
-        src="/o_nas_m.jpg"
+        src={`${cloudfront_url}/neutral/o_nas_m.jpg`}
         alt="Obrazok"
         layout="fill"
         objectFit="cover"
         quality={100}
         className="z-0 md:hidden"
+        priority
       />
 
       <div className="absolute inset-0 bg-black opacity-30 z-10"></div>
@@ -85,7 +88,7 @@ const HomePageAboutUs = ({
           <div className="grid grid-cols-2 xl:grid-cols-4 md:flex-row justify-between gap-4 ">
             {buttons.map((one_button, index) => (
               <div className="flex flex-col items-center" key={index}>
-                <button className="btn btn--tertiary !max-w-none !w-[150px] !text-[24px] !font-normal ">
+                <button className="btn btn--tertiary !max-w-none !w-[150px] !text-[24px] !font-normal !cursor-default">
                   {one_button.nunber}
                 </button>
                 <p className="uppercase text-center max-w-[150px] z-50">

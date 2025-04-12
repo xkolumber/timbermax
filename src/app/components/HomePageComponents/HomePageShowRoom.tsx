@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import IconDoubleArrowLeft from "../Icons/IconDoubleArrowLeft";
 import IconDoubleArrowRight from "../Icons/IconDoubleArrowRight";
+import { cloudfront_url } from "@/app/lib/functionsClient";
 
 interface Props {
   mapa_showroomov: string;
@@ -25,19 +26,20 @@ const HomePageShowRoom = ({ mapa_showroomov }: Props) => {
   return (
     <div id="showroom">
       <div id="showroom" className="relative !hidden md:!block">
-        <button className="btn btn--secondary !m-0 !rounded-t-[0px]  absolute top-0 left-1/2 transform -translate-x-1/2 z-10 uppercase ">
+        <button className="btn btn--secondary !m-0 !rounded-t-[0px]  absolute top-2 xl:top-4 left-1/2 transform -translate-x-1/2 z-10 uppercase hover:!bg-secondary !cursor-default">
           {mapa_showroomov}
         </button>
-        <button className="btn btn--secondary absolute top-0 z-10 uppercase md:hidden !m-0 map_round transform -translate-x-1/2 left-1/2">
+        <button className="btn btn--secondary absolute top-0 z-10 uppercase md:hidden !m-0 map_round transform -translate-x-1/2 left-1/2 hover:!bg-secondary !cursor-default">
           {mapa_showroomov}
         </button>
         <Image
-          src="/nova_mapa.svg"
+          src={`${cloudfront_url}/neutral/nova_mapa.svg`}
           className="w-full h-full object-cover min-h-[200px] "
           alt="referencie"
-          width={1000}
-          height={1000}
+          width={1920}
+          height={1080}
           quality={100}
+          priority
         />
       </div>
 
@@ -61,7 +63,7 @@ const HomePageShowRoom = ({ mapa_showroomov }: Props) => {
         >
           <div className="flex w-[1000px] h-full">
             <Image
-              src="/showroom_new.svg"
+              src={`${cloudfront_url}/neutral/nova_mapa.svg`}
               className="object-contain"
               alt="referencie"
               width={1000}

@@ -4,14 +4,15 @@ import Link from "next/link";
 
 import Image from "next/image";
 
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import IconFacebook from "./Icons/IconFacebook";
-import IconInstagram from "./Icons/IconInstagram";
+import { cloudfront_url } from "../lib/functionsClient";
 import { FooterItem } from "../lib/interface";
 import useLanguageStore from "../zustand/store";
-import { footer_sk, footers } from "./JustFooderData";
+import IconFacebook from "./Icons/IconFacebook";
+import IconInstagram from "./Icons/IconInstagram";
 import IconScrollButton from "./Icons/IconScrollButton";
+import { footer_sk, footers } from "./JustFooderData";
 
 const Footer = () => {
   const { language } = useLanguageStore();
@@ -22,9 +23,14 @@ const Footer = () => {
   }, [language]);
 
   const actual_year = new Date().getFullYear();
+  const pathname = usePathname();
 
   return (
-    <footer className="w-full relative  flex flex-col footer">
+    <footer
+      className={`w-full relative  flex flex-col footer ${
+        pathname.startsWith("/admin") && "!hidden"
+      }`}
+    >
       <div className="absolute right-12 md:right-24 top-0 cursor-pointer z-[300]">
         <IconScrollButton />
       </div>
@@ -38,7 +44,7 @@ const Footer = () => {
               className="flex items-center md:items-start justify-center"
             >
               <Image
-                src={"/logo.svg"}
+                src={`${cloudfront_url}/neutral/logo.svg`}
                 alt="logo"
                 width={500}
                 height={150}

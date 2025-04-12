@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import IconCalculatePriceOffer from "../Icons/IconCalculatePriceOffer";
 import Link from "next/link";
+import { cloudfront_url } from "@/app/lib/functionsClient";
 
 interface Props {
   nadpis: string | undefined;
@@ -19,7 +20,7 @@ const HomePagePriceOffer = ({
   return (
     <div className="relative w-full">
       <Image
-        src="/price_offer.jpg"
+        src={`${cloudfront_url}/neutral/price_offer.jpg`}
         alt="Obrazok"
         layout="fill"
         objectFit="cover absolute"
@@ -27,7 +28,7 @@ const HomePagePriceOffer = ({
         className="z-0 md:min-h-[700px] 3xl:h-[750px] hidden md:block"
       />
       <Image
-        src="/price_offer_m.png"
+        src={`${cloudfront_url}/neutral/price_offer_m.jpg`}
         alt="Obrazok"
         layout="fill"
         objectFit="cover absolute"

@@ -55,7 +55,7 @@ const AdminPage = () => {
     await handleSignOut();
   };
   return (
-    <div className="min-h-screen main_section additional_padding">
+    <div className="min-h-screen main_section ">
       <h2>Admin Zóna</h2>
       {/* <div className="flex flex-wrap gap-4">
         <div className="flex flex-col">

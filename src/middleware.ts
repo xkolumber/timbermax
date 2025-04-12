@@ -5,8 +5,6 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const user = await authenticatedUser({ request, response });
 
-  console.log(user);
-
   const isOnAdminArea = request.nextUrl.pathname.startsWith("/admin");
 
   if (isOnAdminArea) {

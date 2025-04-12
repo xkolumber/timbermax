@@ -18,6 +18,7 @@ import IconNavbarArrow from "./Icons/IconNavbarArrow";
 import IconNavbarCloseButton from "./Icons/IconNavbarCloseButton";
 import IconTelephone from "./Icons/IconTelephone";
 import { navbar_languages, navbar_sk, navbars } from "./JustNavbarData";
+import { cloudfront_url } from "../lib/functionsClient";
 
 const Navbar = () => {
   const { language, setLanguage } = useLanguageStore();
@@ -97,7 +98,11 @@ const Navbar = () => {
   }, [showLanguages]);
 
   return (
-    <nav className="w-full relative  flex flex-col navbar ">
+    <nav
+      className={`w-full relative  flex flex-col navbar ${
+        pathname.startsWith("/admin") && "!hidden"
+      }`}
+    >
       {showLanguages && (
         <div
           className="absolute z-[2000] bg-primary flex-col w-24 hidden md:flex"
@@ -173,7 +178,7 @@ const Navbar = () => {
           >
             <Link href="/" className="w-[130px] md:w-[150px] 2xl:w-[200px] ">
               <Image
-                src={"/logo.svg"}
+                src={`${cloudfront_url}/neutral/logo.svg`}
                 alt="logo"
                 width={100}
                 height={10}
