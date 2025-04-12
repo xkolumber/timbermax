@@ -94,15 +94,15 @@ const HomePageLoop = ({ blurUrl, data }: Props) => {
         >
           <Image
             src={`/loop${image.src}`}
-            alt={`Image ${index + 1}`}
+            alt={`Image`}
             className="h-full w-full object-cover min-h-[700px] md:min-h-[800px] xl:min-h-screen"
+            layout="responsive"
             width={1920}
             height={1080}
             placeholder="blur"
-            priority={true}
-            blurDataURL={blurUrl}
+            priority
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGPoyAnauXnji/+fbVNdGZqyAqe1FtlEajHIMzD42mhFBFjwaAgw8DEAAEdSDLK7z3GTAAAAAElFTkSuQmCC"
           />
-
           <Image
             src={`/podklad.png`}
             alt={`Image`}

@@ -13,6 +13,7 @@ const HomePageSkeleton = () => {
           src={`/loop/main1_new.jpg`}
           alt={`Image`}
           className="h-full w-full object-cover min-h-[700px] md:min-h-[800px] xl:min-h-screen"
+          layout="responsive"
           width={1920}
           height={1080}
           placeholder="blur"
