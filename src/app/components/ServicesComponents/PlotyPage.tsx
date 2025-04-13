@@ -18,11 +18,6 @@ import Cookies from "js-cookie";
 import { fetchGalleryType, fetchPloty } from "@/app/lib/functionsServer";
 import ServiceSkeleton from "./ServiceSkeleton";
 
-// interface Props {
-//   data: Ploty | undefined;
-//   galleries: Gallery[] | [];
-// }
-
 const PlotyPage = () => {
   const { data, error, isLoading } = useQuery<Ploty | null>({
     queryKey: ["ploty", Cookies.get("language")],
