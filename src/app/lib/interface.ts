@@ -323,7 +323,6 @@ export interface Bazeny {
   nadpis: string;
   popis1: string;
   popis2: string;
-  // vlastnosti: string[];
   nadpis_galeria: string;
   nadpis_informacie: string;
   popis_informacie_1: string;

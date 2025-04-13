@@ -1,32 +1,27 @@
 "use client";
-import { Bazeny, Gallery, Slnolamy } from "@/app/lib/interface";
+import { Bazeny, Gallery } from "@/app/lib/interface";
 
 import Image from "next/image";
 
-import IconServiceFeatures from "../Icons/IconServiceFeatures";
-import IconServiceInstallation from "../Icons/IconServiceInstallation";
-import IconServiceOrder from "../Icons/IconServiceOrder";
-import IconServiceProfile from "../Icons/IconServiceProfile";
-import IconServiceVariants from "../Icons/IconServiceVariants";
-import ServiceGallery from "./ServiceGallery";
+import { icon_text } from "@/app/lib/data";
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
+import { fetchBazeny, fetchGalleryType } from "@/app/lib/functionsServer";
+import { useQuery } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import ColorVariants from "./ColorVariants";
 import Installation from "./Installation";
 import OrderProcedure from "./OrderProcedure";
 import Profiles from "./Profiles";
 import Properties from "./Properties";
-import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
-import { useQuery } from "@tanstack/react-query";
-import Cookies from "js-cookie";
-import { fetchBazeny, fetchGalleryType } from "@/app/lib/functionsServer";
+import ServiceGallery from "./ServiceGallery";
 import ServiceSkeleton from "./ServiceSkeleton";
-import { icon_text } from "@/app/lib/data";
 
 const BazenyPage = () => {
   const [variantClicked, setVariantClicked] = useState(0);
 
   const { data, error, isLoading } = useQuery<Bazeny | null>({
-    queryKey: ["terasy", Cookies.get("language")],
+    queryKey: ["bazeny", Cookies.get("language")],
     queryFn: () => fetchBazeny(Cookies.get("language")),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,

@@ -5,7 +5,6 @@ import { fetchFasady } from "@/app/lib/functionsServer";
 import { Fasady } from "@/app/lib/interface";
 import { CircularProgress } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -25,8 +24,6 @@ const AdminFasadyOdvetrana = ({ language }: Props) => {
   });
 
   const [isLoading2, setIsLoading2] = useState(false);
-  const [randomArray, setRandomArray] = useState<string[]>([""]);
-  const pathname = usePathname();
 
   const [actualizeData, setActualizeData] = useState<Fasady>({
     nadpis: "",
