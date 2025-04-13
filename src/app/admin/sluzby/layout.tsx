@@ -8,11 +8,25 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
+const categories_fasady = [
+  {
+    id: 1,
+    name: "Predsadená",
+    slug: "predsadena",
+  },
+  {
+    id: 1,
+    name: "Odvetraná",
+    slug: "odvetrana",
+  },
+];
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [chosenElement, setChosenElement] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedFasade, setSelectedFasade] = useState("");
 
   const {
     data: languages,
@@ -27,9 +41,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   });
 
   const handleMakeRoute = (language: string) => {
-    setSelectedLanguage(language);
-    if (chosenElement) {
-      router.push(`/admin/sluzby/${chosenElement}/${language}`);
+    const found_element = services_elements.find(
+      (item) => item.slug === chosenElement
+    );
+    if (found_element) {
+      setSelectedLanguage(language);
+      if (found_element.slug === "fasady") {
+        if (selectedFasade != "") {
+          router.push(
+            `/admin/sluzby/${chosenElement}/${selectedFasade}/${language}`
+          );
+        } else {
+          toast.error("Vyber typ fasády");
+        }
+      } else {
+        router.push(`/admin/sluzby/${chosenElement}/${language}`);
+      }
     } else {
       toast.error("Vyber službu");
     }
@@ -38,18 +65,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const currentPath = pathname.split("/").pop();
 
   const segments = pathname.split("/").filter(Boolean);
-  const penultimate = segments[segments.length - 2];
+  const secondPart = segments[2];
+  const thirdPart = segments[3];
 
   useEffect(() => {
     if (pathname && currentPath) {
-      setChosenElement(penultimate);
+      setChosenElement(secondPart);
       setSelectedLanguage(currentPath);
+      if (secondPart === "fasady") {
+        setSelectedFasade(thirdPart);
+      }
     }
   }, [pathname]);
 
   const handleSetElement = (slug: string) => {
     setSelectedLanguage("");
     setChosenElement(slug);
+  };
+
+  const handleTypeFasade = (slug: string) => {
+    setSelectedLanguage("");
+    setSelectedFasade(slug);
   };
 
   return (
@@ -69,9 +105,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 style={{
                   border: "1px solid rgba(0, 0, 0, 0.10)",
                 }}
-                onClick={() => handleSetElement(object.slug)}
               >
-                {object.nazov}
+                <div onClick={() => handleSetElement(object.slug)}>
+                  {object.nazov}
+                </div>
               </div>
             ))}
           </div>
@@ -81,6 +118,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <CircularProgress size={24} color="inherit" className="mt-16 mb-16" />
         )}
         {error && <p>Chyba pri načítaní dát.</p>}
+
+        {chosenElement === "fasady" && (
+          <div className="grid grid-cols-2 gap-4 pt-16">
+            {categories_fasady.map((object, index) => (
+              <div
+                className={`p-[24px] rounded-[8px] hover:scale-[1.02] duration-200 cursor-pointer text-black ${
+                  selectedFasade === object.slug
+                    ? "bg-[#384239] text-white"
+                    : "bg-white"
+                }`}
+                key={index}
+                style={{
+                  border: "1px solid rgba(0, 0, 0, 0.10)",
+                }}
+                onClick={() => handleTypeFasade(object.slug)}
+              >
+                {object.name}
+              </div>
+            ))}
+          </div>
+        )}
 
         {languages && (
           <div className="grid grid-cols-3 gap-4 pt-16">

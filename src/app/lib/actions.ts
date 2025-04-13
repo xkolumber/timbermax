@@ -1,10 +1,13 @@
 "use server";
 
+import { QueryCommand } from "@aws-sdk/client-dynamodb";
+import { PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { getFirestore } from "firebase-admin/firestore";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { docClient } from "./awsConfig";
 import { firestore } from "./firebaseServer";
 import {
   AboutUsElements,
@@ -15,19 +18,12 @@ import {
   HomePageElements,
   Jazyk,
   MoreAboutTimElements,
-  Nacenovac,
   Ostatne,
   Ploty,
   PriceOffer,
   Slnolamy,
-  Sluzby,
-  Team,
   Terasy,
-  TimbermaxLike,
 } from "./interface";
-import { docClient } from "./awsConfig";
-import { QueryCommand } from "@aws-sdk/client-dynamodb";
-import { PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const FormSchema = z.object({
   jazyk: z.string(),
@@ -1438,180 +1434,248 @@ export async function AdminActualizeTerasyPage(
   }
 }
 
-export async function AdminActualizeFasadyPage(
+export async function AdminActualizeFasadyPresadenaPage(
   actualizeData: Fasady,
-  jazyk: string,
-  name_database: string
+  jazyk: string
 ) {
-  const db = getFirestore();
-  const podstrankaCollectionRef = db.collection(`fasady-${name_database}`);
-  const querySnapshot = await podstrankaCollectionRef
-    .where("jazyk", "==", jazyk)
-    .get();
-
-  if (querySnapshot.empty) {
-    console.error("Document does not exist for uid:");
-
-    await podstrankaCollectionRef.add({
-      nadpis: actualizeData.nadpis,
-      popis1: actualizeData.popis1,
-      popis2: actualizeData.popis2,
-      btn_odvetrana: actualizeData.btn_odvetrana,
-      btn_predsadena: actualizeData.btn_predsadena,
-      nadpis_galeria: actualizeData.nadpis_galeria,
-      nadpis_informacie: actualizeData.nadpis_informacie,
-      popis_informacie_1: actualizeData.popis_informacie_1,
-      info_variants: actualizeData.info_variants,
-      jazyk: jazyk,
-      fareb_var_popis1: actualizeData.fareb_var_popis1,
-      fareb_var_popis2: actualizeData.fareb_var_popis2,
-      vlastnosti_popis1: actualizeData.vlastnosti_popis1,
-      vlastnosti_popis2: actualizeData.vlastnosti_popis2,
-      vlastnosti_popis3: actualizeData.vlastnosti_popis3,
-      vlastnosti_popis4: actualizeData.vlastnosti_popis4,
-      vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
-      vlastnosti_popis5: actualizeData.vlastnosti_popis5,
-      vlastnosti_popis6: actualizeData.vlastnosti_popis6,
-      vlastnosti_popis7: actualizeData.vlastnosti_popis7,
-      vlastnosti_popis8: actualizeData.vlastnosti_popis8,
-      vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
-      vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
-      montaz_nadpis: actualizeData.montaz_nadpis,
-      montaz_popis1: actualizeData.montaz_popis1,
-      montaz_popis2: actualizeData.montaz_popis2,
-      montaz_popis3: actualizeData.montaz_popis3,
-      montaz_popis4: actualizeData.montaz_popis4,
-      montaz_nadpis_2: actualizeData.montaz_nadpis_2,
-      montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
-      montaz_nadpis_2_category_popis1:
-        actualizeData.montaz_nadpis_2_category_popis1,
-      montaz_nadpis_2_category_popis2:
-        actualizeData.montaz_nadpis_2_category_popis2,
-      montaz_nadpis_2_category_popis3:
-        actualizeData.montaz_nadpis_2_category_popis3,
-      montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
-      montaz_nadpis_2_category2_popis1:
-        actualizeData.montaz_nadpis_2_category2_popis1,
-      montaz_nadpis_2_category2_popis2:
-        actualizeData.montaz_nadpis_2_category2_popis2,
-      montaz_nadpis_2_category2_popis3:
-        actualizeData.montaz_nadpis_2_category2_popis3,
-      montaz_nadpis_2_category2_popis4:
-        actualizeData.montaz_nadpis_2_category2_popis4,
-      montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
-      montaz_nadpis_2_category3_popis1:
-        actualizeData.montaz_nadpis_2_category3_popis1,
-      montaz_nadpis_2_category3_popis2:
-        actualizeData.montaz_nadpis_2_category3_popis2,
-      montaz_nadpis_2_category3_popis3:
-        actualizeData.montaz_nadpis_2_category3_popis3,
-      montaz_nadpis_2_category3_popis4:
-        actualizeData.montaz_nadpis_2_category3_popis4,
-      montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
-      montaz_nadpis_2_category4_popis1:
-        actualizeData.montaz_nadpis_2_category4_popis1,
-      montaz_nadpis_2_category4_popis2:
-        actualizeData.montaz_nadpis_2_category4_popis2,
-      montaz_nadpis_2_category4_popis3:
-        actualizeData.montaz_nadpis_2_category4_popis3,
-      profil_orientacia: actualizeData.profil_orientacia,
-      profil_popis1: actualizeData.profil_popis1,
-      profil_popis2: actualizeData.profil_popis2,
-      profil_popis3: actualizeData.profil_popis3,
-      profil_popis4: actualizeData.profil_popis4,
-      postup_popis: actualizeData.postup_popis,
-      postup_nacenovac: actualizeData.postup_nacenovac,
-      nacenovac_sekcie: actualizeData.nacenovac_sekcie,
-      nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
-      popis_viz_1: actualizeData.popis_viz_1,
-      farba: actualizeData.farba,
-      btn_ceny: actualizeData.btn_ceny,
-      btn_kalkulator: actualizeData.btn_kalkulator,
+  try {
+    const getCommand = new QueryCommand({
+      TableName: "fasady-predsadena",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
     });
-    return "success";
+
+    const data = await docClient.send(getCommand);
+
+    if (data.Items && data.Items.length > 0) {
+      const docId = data.Items[0].id.S;
+
+      const updateCommand = new UpdateCommand({
+        TableName: "fasady-predsadena",
+        Key: {
+          id: docId,
+        },
+        UpdateExpression: `set ${Object.keys(actualizeData)
+          .map((key) => `#${key} = :${key}`)
+          .join(", ")}`,
+        ExpressionAttributeNames: {
+          ...Object.fromEntries(
+            Object.keys(actualizeData).map((key) => ["#" + key, key])
+          ),
+        },
+        ExpressionAttributeValues: {
+          ":nadpis": actualizeData.nadpis,
+          ":popis1": actualizeData.popis1,
+          ":popis2": actualizeData.popis2,
+          ":btn_odvetrana": actualizeData.btn_odvetrana,
+          ":btn_predsadena": actualizeData.btn_predsadena,
+          ":nadpis_galeria": actualizeData.nadpis_galeria,
+          ":nadpis_informacie": actualizeData.nadpis_informacie,
+          ":popis_informacie_1": actualizeData.popis_informacie_1,
+          ":info_variants": actualizeData.info_variants,
+          ":jazyk": actualizeData.jazyk,
+          ":fareb_var_popis1": actualizeData.fareb_var_popis1,
+          ":fareb_var_popis2": actualizeData.fareb_var_popis2,
+          ":vlastnosti_popis1": actualizeData.vlastnosti_popis1,
+          ":vlastnosti_popis2": actualizeData.vlastnosti_popis2,
+          ":vlastnosti_popis3": actualizeData.vlastnosti_popis3,
+          ":vlastnosti_popis4": actualizeData.vlastnosti_popis4,
+          ":vlastnosti_nadpis_": actualizeData.vlastnosti_nadpis_,
+          ":vlastnosti_popis5": actualizeData.vlastnosti_popis5,
+          ":vlastnosti_popis6": actualizeData.vlastnosti_popis6,
+          ":vlastnosti_popis7": actualizeData.vlastnosti_popis7,
+          ":vlastnosti_popis8": actualizeData.vlastnosti_popis8,
+          ":vlastnosti_btn_viac": actualizeData.vlastnosti_btn_viac,
+          ":vlastnosti_btn_konkurencia":
+            actualizeData.vlastnosti_btn_konkurencia,
+          ":montaz_nadpis": actualizeData.montaz_nadpis,
+          ":montaz_popis1": actualizeData.montaz_popis1,
+          ":montaz_popis2": actualizeData.montaz_popis2,
+          ":montaz_popis3": actualizeData.montaz_popis3,
+          ":montaz_popis4": actualizeData.montaz_popis4,
+          ":montaz_nadpis_2": actualizeData.montaz_nadpis_2,
+          ":montaz_nadpis_2_category": actualizeData.montaz_nadpis_2_category,
+          ":montaz_nadpis_2_category_popis1":
+            actualizeData.montaz_nadpis_2_category_popis1,
+          ":montaz_nadpis_2_category_popis2":
+            actualizeData.montaz_nadpis_2_category_popis2,
+          ":montaz_nadpis_2_category_popis3":
+            actualizeData.montaz_nadpis_2_category_popis3,
+          ":montaz_nadpis_2_category2": actualizeData.montaz_nadpis_2_category2,
+          ":montaz_nadpis_2_category2_popis1":
+            actualizeData.montaz_nadpis_2_category2_popis1,
+          ":montaz_nadpis_2_category2_popis2":
+            actualizeData.montaz_nadpis_2_category2_popis2,
+          ":montaz_nadpis_2_category2_popis3":
+            actualizeData.montaz_nadpis_2_category2_popis3,
+          ":montaz_nadpis_2_category2_popis4":
+            actualizeData.montaz_nadpis_2_category2_popis4,
+          ":montaz_nadpis_2_category3": actualizeData.montaz_nadpis_2_category3,
+          ":montaz_nadpis_2_category3_popis1":
+            actualizeData.montaz_nadpis_2_category3_popis1,
+          ":montaz_nadpis_2_category3_popis2":
+            actualizeData.montaz_nadpis_2_category3_popis2,
+          ":montaz_nadpis_2_category3_popis3":
+            actualizeData.montaz_nadpis_2_category3_popis3,
+          ":montaz_nadpis_2_category3_popis4":
+            actualizeData.montaz_nadpis_2_category3_popis4,
+          ":montaz_nadpis_2_category4": actualizeData.montaz_nadpis_2_category4,
+          ":montaz_nadpis_2_category4_popis1":
+            actualizeData.montaz_nadpis_2_category4_popis1,
+          ":montaz_nadpis_2_category4_popis2":
+            actualizeData.montaz_nadpis_2_category4_popis2,
+          ":montaz_nadpis_2_category4_popis3":
+            actualizeData.montaz_nadpis_2_category4_popis3,
+          ":profil_orientacia": actualizeData.profil_orientacia,
+          ":profil_popis1": actualizeData.profil_popis1,
+          ":profil_popis2": actualizeData.profil_popis2,
+          ":profil_popis3": actualizeData.profil_popis3,
+          ":profil_popis4": actualizeData.profil_popis4,
+          ":postup_popis": actualizeData.postup_popis,
+          ":postup_nacenovac": actualizeData.postup_nacenovac,
+          ":nacenovac_sekcie": actualizeData.nacenovac_sekcie,
+          ":nadpis_vizualizacia": actualizeData.nadpis_vizualizacia,
+          ":popis_viz_1": actualizeData.popis_viz_1,
+          ":farba": actualizeData.farba,
+          ":btn_ceny": actualizeData.btn_ceny,
+          ":btn_kalkulator": actualizeData.btn_kalkulator,
+        },
+      });
+
+      const response = await docClient.send(updateCommand);
+      return response.$metadata.httpStatusCode;
+    }
+  } catch (error) {
+    console.error("Error updating fasady page:", error);
   }
+}
 
-  const doc = querySnapshot.docs[0];
-  const docId = doc.id;
+export async function AdminActualizeFasadyOdvetranaPage(
+  actualizeData: Fasady,
+  jazyk: string
+) {
+  try {
+    const getCommand = new QueryCommand({
+      TableName: "fasady-odvetrana",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
+    });
 
-  await podstrankaCollectionRef.doc(docId).update({
-    nadpis: actualizeData.nadpis,
-    popis1: actualizeData.popis1,
-    popis2: actualizeData.popis2,
-    btn_odvetrana: actualizeData.btn_odvetrana,
-    btn_predsadena: actualizeData.btn_predsadena,
-    nadpis_galeria: actualizeData.nadpis_galeria,
-    nadpis_informacie: actualizeData.nadpis_informacie,
-    popis_informacie_1: actualizeData.popis_informacie_1,
-    info_variants: actualizeData.info_variants,
-    jazyk: jazyk,
-    fareb_var_popis1: actualizeData.fareb_var_popis1,
-    fareb_var_popis2: actualizeData.fareb_var_popis2,
-    vlastnosti_popis1: actualizeData.vlastnosti_popis1,
-    vlastnosti_popis2: actualizeData.vlastnosti_popis2,
-    vlastnosti_popis3: actualizeData.vlastnosti_popis3,
-    vlastnosti_popis4: actualizeData.vlastnosti_popis4,
-    vlastnosti_nadpis_: actualizeData.vlastnosti_nadpis_,
-    vlastnosti_popis5: actualizeData.vlastnosti_popis5,
-    vlastnosti_popis6: actualizeData.vlastnosti_popis6,
-    vlastnosti_popis7: actualizeData.vlastnosti_popis7,
-    vlastnosti_popis8: actualizeData.vlastnosti_popis8,
-    vlastnosti_btn_viac: actualizeData.vlastnosti_btn_viac,
-    vlastnosti_btn_konkurencia: actualizeData.vlastnosti_btn_konkurencia,
-    montaz_nadpis: actualizeData.montaz_nadpis,
-    montaz_popis1: actualizeData.montaz_popis1,
-    montaz_popis2: actualizeData.montaz_popis2,
-    montaz_popis3: actualizeData.montaz_popis3,
-    montaz_popis4: actualizeData.montaz_popis4,
-    montaz_nadpis_2: actualizeData.montaz_nadpis_2,
-    montaz_nadpis_2_category: actualizeData.montaz_nadpis_2_category,
-    montaz_nadpis_2_category_popis1:
-      actualizeData.montaz_nadpis_2_category_popis1,
-    montaz_nadpis_2_category_popis2:
-      actualizeData.montaz_nadpis_2_category_popis2,
-    montaz_nadpis_2_category_popis3:
-      actualizeData.montaz_nadpis_2_category_popis3,
-    montaz_nadpis_2_category2: actualizeData.montaz_nadpis_2_category2,
-    montaz_nadpis_2_category2_popis1:
-      actualizeData.montaz_nadpis_2_category2_popis1,
-    montaz_nadpis_2_category2_popis2:
-      actualizeData.montaz_nadpis_2_category2_popis2,
-    montaz_nadpis_2_category2_popis3:
-      actualizeData.montaz_nadpis_2_category2_popis3,
-    montaz_nadpis_2_category2_popis4:
-      actualizeData.montaz_nadpis_2_category2_popis4,
-    montaz_nadpis_2_category3: actualizeData.montaz_nadpis_2_category3,
-    montaz_nadpis_2_category3_popis1:
-      actualizeData.montaz_nadpis_2_category3_popis1,
-    montaz_nadpis_2_category3_popis2:
-      actualizeData.montaz_nadpis_2_category3_popis2,
-    montaz_nadpis_2_category3_popis3:
-      actualizeData.montaz_nadpis_2_category3_popis3,
-    montaz_nadpis_2_category3_popis4:
-      actualizeData.montaz_nadpis_2_category3_popis4,
-    montaz_nadpis_2_category4: actualizeData.montaz_nadpis_2_category4,
-    montaz_nadpis_2_category4_popis1:
-      actualizeData.montaz_nadpis_2_category4_popis1,
-    montaz_nadpis_2_category4_popis2:
-      actualizeData.montaz_nadpis_2_category4_popis2,
-    montaz_nadpis_2_category4_popis3:
-      actualizeData.montaz_nadpis_2_category4_popis3,
-    profil_orientacia: actualizeData.profil_orientacia,
-    profil_popis1: actualizeData.profil_popis1,
-    profil_popis2: actualizeData.profil_popis2,
-    profil_popis3: actualizeData.profil_popis3,
-    profil_popis4: actualizeData.profil_popis4,
-    postup_popis: actualizeData.postup_popis,
-    postup_nacenovac: actualizeData.postup_nacenovac,
-    nacenovac_sekcie: actualizeData.nacenovac_sekcie,
-    nadpis_vizualizacia: actualizeData.nadpis_vizualizacia,
-    popis_viz_1: actualizeData.popis_viz_1,
-    farba: actualizeData.farba,
-    btn_ceny: actualizeData.btn_ceny,
-    btn_kalkulator: actualizeData.btn_kalkulator,
-  });
-  revalidatePath(`/admin/terasy/[${jazyk}]/page`, "page");
-  return "success";
+    const data = await docClient.send(getCommand);
+
+    if (data.Items && data.Items.length > 0) {
+      const docId = data.Items[0].id.S;
+
+      const updateCommand = new UpdateCommand({
+        TableName: "fasady-odvetrana",
+        Key: {
+          id: docId,
+        },
+        UpdateExpression: `set ${Object.keys(actualizeData)
+          .map((key) => `#${key} = :${key}`)
+          .join(", ")}`,
+        ExpressionAttributeNames: {
+          ...Object.fromEntries(
+            Object.keys(actualizeData).map((key) => ["#" + key, key])
+          ),
+        },
+        ExpressionAttributeValues: {
+          ":nadpis": actualizeData.nadpis,
+          ":popis1": actualizeData.popis1,
+          ":popis2": actualizeData.popis2,
+          ":btn_odvetrana": actualizeData.btn_odvetrana,
+          ":btn_predsadena": actualizeData.btn_predsadena,
+          ":nadpis_galeria": actualizeData.nadpis_galeria,
+          ":nadpis_informacie": actualizeData.nadpis_informacie,
+          ":popis_informacie_1": actualizeData.popis_informacie_1,
+          ":info_variants": actualizeData.info_variants,
+          ":jazyk": actualizeData.jazyk,
+          ":fareb_var_popis1": actualizeData.fareb_var_popis1,
+          ":fareb_var_popis2": actualizeData.fareb_var_popis2,
+          ":vlastnosti_popis1": actualizeData.vlastnosti_popis1,
+          ":vlastnosti_popis2": actualizeData.vlastnosti_popis2,
+          ":vlastnosti_popis3": actualizeData.vlastnosti_popis3,
+          ":vlastnosti_popis4": actualizeData.vlastnosti_popis4,
+          ":vlastnosti_nadpis_": actualizeData.vlastnosti_nadpis_,
+          ":vlastnosti_popis5": actualizeData.vlastnosti_popis5,
+          ":vlastnosti_popis6": actualizeData.vlastnosti_popis6,
+          ":vlastnosti_popis7": actualizeData.vlastnosti_popis7,
+          ":vlastnosti_popis8": actualizeData.vlastnosti_popis8,
+          ":vlastnosti_btn_viac": actualizeData.vlastnosti_btn_viac,
+          ":vlastnosti_btn_konkurencia":
+            actualizeData.vlastnosti_btn_konkurencia,
+          ":montaz_nadpis": actualizeData.montaz_nadpis,
+          ":montaz_popis1": actualizeData.montaz_popis1,
+          ":montaz_popis2": actualizeData.montaz_popis2,
+          ":montaz_popis3": actualizeData.montaz_popis3,
+          ":montaz_popis4": actualizeData.montaz_popis4,
+          ":montaz_nadpis_2": actualizeData.montaz_nadpis_2,
+          ":montaz_nadpis_2_category": actualizeData.montaz_nadpis_2_category,
+          ":montaz_nadpis_2_category_popis1":
+            actualizeData.montaz_nadpis_2_category_popis1,
+          ":montaz_nadpis_2_category_popis2":
+            actualizeData.montaz_nadpis_2_category_popis2,
+          ":montaz_nadpis_2_category_popis3":
+            actualizeData.montaz_nadpis_2_category_popis3,
+          ":montaz_nadpis_2_category2": actualizeData.montaz_nadpis_2_category2,
+          ":montaz_nadpis_2_category2_popis1":
+            actualizeData.montaz_nadpis_2_category2_popis1,
+          ":montaz_nadpis_2_category2_popis2":
+            actualizeData.montaz_nadpis_2_category2_popis2,
+          ":montaz_nadpis_2_category2_popis3":
+            actualizeData.montaz_nadpis_2_category2_popis3,
+          ":montaz_nadpis_2_category2_popis4":
+            actualizeData.montaz_nadpis_2_category2_popis4,
+          ":montaz_nadpis_2_category3": actualizeData.montaz_nadpis_2_category3,
+          ":montaz_nadpis_2_category3_popis1":
+            actualizeData.montaz_nadpis_2_category3_popis1,
+          ":montaz_nadpis_2_category3_popis2":
+            actualizeData.montaz_nadpis_2_category3_popis2,
+          ":montaz_nadpis_2_category3_popis3":
+            actualizeData.montaz_nadpis_2_category3_popis3,
+          ":montaz_nadpis_2_category3_popis4":
+            actualizeData.montaz_nadpis_2_category3_popis4,
+          ":montaz_nadpis_2_category4": actualizeData.montaz_nadpis_2_category4,
+          ":montaz_nadpis_2_category4_popis1":
+            actualizeData.montaz_nadpis_2_category4_popis1,
+          ":montaz_nadpis_2_category4_popis2":
+            actualizeData.montaz_nadpis_2_category4_popis2,
+          ":montaz_nadpis_2_category4_popis3":
+            actualizeData.montaz_nadpis_2_category4_popis3,
+          ":profil_orientacia": actualizeData.profil_orientacia,
+          ":profil_popis1": actualizeData.profil_popis1,
+          ":profil_popis2": actualizeData.profil_popis2,
+          ":profil_popis3": actualizeData.profil_popis3,
+          ":profil_popis4": actualizeData.profil_popis4,
+          ":postup_popis": actualizeData.postup_popis,
+          ":postup_nacenovac": actualizeData.postup_nacenovac,
+          ":nacenovac_sekcie": actualizeData.nacenovac_sekcie,
+          ":nadpis_vizualizacia": actualizeData.nadpis_vizualizacia,
+          ":popis_viz_1": actualizeData.popis_viz_1,
+          ":farba": actualizeData.farba,
+          ":btn_ceny": actualizeData.btn_ceny,
+          ":btn_kalkulator": actualizeData.btn_kalkulator,
+        },
+      });
+
+      const response = await docClient.send(updateCommand);
+      return response.$metadata.httpStatusCode;
+    }
+  } catch (error) {
+    console.error("Error updating fasady page:", error);
+  }
 }
 
 export async function AdminAddPhotoGallery(
