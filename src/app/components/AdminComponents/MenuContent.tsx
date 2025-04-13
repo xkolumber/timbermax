@@ -45,7 +45,7 @@ const mainListItems = [
   {
     text: "Kontakt",
     icon: <ContactsIcon />,
-    link: "/admin/vinse",
+    link: "/admin/kontakt",
   },
 ];
 
