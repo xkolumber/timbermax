@@ -1,8 +1,7 @@
+import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
 import { PriceOffer } from "@/app/lib/interface";
 import Image from "next/image";
 import PricesElements from "./PricesElements";
-import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
-import PricesArchitect from "./PricesArchitect";
 
 interface Props {
   data: PriceOffer | undefined;

@@ -8,12 +8,19 @@ import { ClipLoader } from "react-spinners";
 import IconCloseButton from "../Icons/IconCloseButton";
 import IconPen from "../Icons/IconPen";
 import IconTrash from "../Icons/IconTrash";
+import { useQuery } from "@tanstack/react-query";
+import { fetchGalleries } from "@/app/lib/functionsServer";
+import { CircularProgress } from "@mui/material";
 
-interface Props {
-  data: Gallery[] | undefined;
-}
+const AdminGallery = () => {
+  const { data, error, isLoading } = useQuery<Gallery[]>({
+    queryKey: ["admin_gallery"],
+    queryFn: () => fetchGalleries(),
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    placeholderData: (previousData, previousQuery) => previousData,
+  });
 
-const AdminGallery = ({ data }: Props) => {
   const [deleteWindow, setDeleteWindow] = useState(false);
   const [choosenAlbum, setChoosenAlbum] = useState("");
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
@@ -52,35 +59,40 @@ const AdminGallery = ({ data }: Props) => {
   };
 
   return (
-    <div className="main_section additional_padding min-h-screen">
+    <div className=" min-h-screen">
       <Link className=" btn btn--primary" href="/admin/galeria/novy-album">
         Pridať galériu
       </Link>
       <Toaster />
-      <h4 className="mt-8">Všetky albumy</h4>
-      {data?.map((object, index) => (
-        <div
-          className="border-b border-black flex flex-row justify-between items-center"
-          key={index}
-        >
-          <p className="text-primary"> {object.nazov}</p>
-          <div className="flex flex-row items-center gap-6">
-            <Link
-              className="cursor-pointer"
-              href={`/admin/galeria/${object.id}`}
-            >
-              <IconPen />
-            </Link>
 
-            <div
-              className="cursor-pointer"
-              onClick={() => handleDeleteWindow(object.id, object.nazov)}
-            >
-              <IconTrash />
+      <h4 className="mt-8">Všetky albumy</h4>
+      {isLoading && <CircularProgress size={24} color="inherit" />}
+      {error && <p>Chyba pri načítaní dát.</p>}
+
+      {data &&
+        data?.map((object, index) => (
+          <div
+            className="border-b border-black flex flex-row justify-between items-center"
+            key={index}
+          >
+            <p className="text-primary"> {object.nazov}</p>
+            <div className="flex flex-row items-center gap-6">
+              <Link
+                className="cursor-pointer"
+                href={`/admin/galeria/${object.id}`}
+              >
+                <IconPen />
+              </Link>
+
+              <div
+                className="cursor-pointer"
+                onClick={() => handleDeleteWindow(object.id, object.nazov)}
+              >
+                <IconTrash />
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
 
       {deleteWindow && (
         <>

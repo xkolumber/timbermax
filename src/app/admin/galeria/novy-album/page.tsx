@@ -2,6 +2,7 @@
 import { AdminAddPhotoGallery } from "@/app/lib/actions";
 import { categories, CompressImages } from "@/app/lib/functionsClient";
 import { Gallery } from "@/app/lib/interface";
+import { useQueryClient } from "@tanstack/react-query";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
@@ -10,6 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
 
 const Page = () => {
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
   const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -61,7 +63,10 @@ const Page = () => {
       );
 
       const response = await AdminAddPhotoGallery(photoUrls, actualizeGallery);
-      if (response === "success") {
+      if (response === 200) {
+        await queryClient.refetchQueries({
+          queryKey: ["admin_gallery"],
+        });
         toast.success("Album bol pridaný");
         setActualizeGallery((prevData) => ({
           ...prevData,
@@ -115,7 +120,7 @@ const Page = () => {
   };
 
   return (
-    <div className="main_section additional_padding min-h-screen">
+    <div className="">
       <Toaster />
       <Link href={"/admin/galeria"}>
         <p className="hover:underline ease-in text-black">Späť</p>

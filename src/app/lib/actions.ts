@@ -1,7 +1,7 @@
 "use server";
 
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
-import { PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { getFirestore } from "firebase-admin/firestore";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
@@ -1923,22 +1923,27 @@ export async function AdminAddPhotoGallery(
   fotky: string[],
   actualizeGallery: Gallery
 ) {
-  const db = getFirestore();
-  const couponCollectionRef = db.collection("galeria");
+  const uuid = crypto.randomUUID();
 
   try {
-    await couponCollectionRef.add({
-      farba: actualizeGallery.farba,
-      fotky: fotky,
-      nazov: actualizeGallery.nazov,
-      kategorie: actualizeGallery.kategorie,
-      profil: actualizeGallery.profil,
-      datum_pridania: new Date().toString(),
-    });
-    revalidatePath(`/admin/galeria/novy-album`);
-    return "success";
+    const response = await docClient.send(
+      new PutCommand({
+        TableName: "galeria",
+        Item: {
+          id: uuid,
+          farba: actualizeGallery.farba,
+          fotky: fotky,
+          nazov: actualizeGallery.nazov,
+          kategorie: actualizeGallery.kategorie,
+          profil: actualizeGallery.profil,
+          datum_pridania: new Date().toISOString(),
+        },
+      })
+    );
+
+    return response.$metadata.httpStatusCode;
   } catch (error) {
-    console.log(error);
+    console.error("DynamoDB Add Error:", error);
     return "false";
   }
 }
@@ -1997,34 +2002,48 @@ export async function AdminActualizeAlbumGallery(
   actualizeGallery: Gallery
 ) {
   try {
-    const docRef = firestore.collection("galeria").doc(id);
+    const getResult = await docClient.send(
+      new GetCommand({
+        TableName: "galeria",
+        Key: { id },
+      })
+    );
 
-    const docSnapshot = await docRef.get();
-
-    if (!docSnapshot.exists) {
+    const item = getResult.Item;
+    if (!item) {
       console.error("Document not found.");
       return "false";
     }
 
-    const new_fotky: string[] = actualizeGallery.fotky;
+    const existingPhotos: string[] = item.fotky || [];
+    const updatedPhotos = [...existingPhotos, ...photoUrls];
 
-    if (photoUrls.length > 0) {
-      photoUrls.map((photo) => {
-        new_fotky.push(photo);
-      });
-    }
-    await docRef.update({
-      fotky: new_fotky,
-      kategorie: actualizeGallery.kategorie,
-      nazov: actualizeGallery.nazov,
-      profil: actualizeGallery.profil,
-      farba: actualizeGallery.farba,
-      jazyky_kontent: actualizeGallery.jazyky_kontent,
-    });
-    revalidatePath(`/admin/galeria/[${id}]/page`, "page");
-    return "success";
+    const response = await docClient.send(
+      new UpdateCommand({
+        TableName: "galeria",
+        Key: { id },
+        UpdateExpression: `
+          SET fotky = :fotky,
+              kategorie = :kategorie,
+              nazov = :nazov,
+              profil = :profil,
+              farba = :farba,
+              jazyky_kontent = :jazyky_kontent
+        `,
+        ExpressionAttributeValues: {
+          ":fotky": updatedPhotos,
+          ":kategorie": actualizeGallery.kategorie,
+          ":nazov": actualizeGallery.nazov,
+          ":profil": actualizeGallery.profil,
+          ":farba": actualizeGallery.farba,
+          ":jazyky_kontent": actualizeGallery.jazyky_kontent,
+        },
+      })
+    );
+
+    return response.$metadata.httpStatusCode;
   } catch (error) {
-    console.error("Database Error: Failed", error);
+    console.error("DynamoDB Error:", error);
     return "false";
   }
 }
