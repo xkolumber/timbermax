@@ -18,7 +18,7 @@ const AdminBazeny = ({ language }: Props) => {
   const [isLoading2, setIsLoading2] = useState(false);
 
   const { data, error, isLoading } = useQuery<Bazeny | null>({
-    queryKey: ["bazeny", language],
+    queryKey: ["admin_bazeny", language],
     queryFn: () => fetchBazeny(language),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
