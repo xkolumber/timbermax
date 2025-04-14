@@ -1056,3 +1056,32 @@ export const aws_bucket_name = "timbermaxopen";
 
 export const aws_bucket_url =
   "https://timbermaxopen.s3.eu-north-1.amazonaws.com";
+
+export const price_material_tim = 143.52;
+export const dph = 0.23;
+
+export const price_work_tim = 38;
+export const price_vrn_tim = 13;
+
+export const terracePriceTimbermax = (size: number) => {
+  const final_price = (price_material_tim + price_material_tim * dph) * size;
+
+  return final_price.toFixed();
+};
+
+export const terracePriceTimbermaxOther = (size: number) => {
+  const final_price =
+    (price_work_tim + price_work_tim * dph) * size +
+    (price_vrn_tim + price_vrn_tim * dph) * size;
+
+  return final_price.toFixed();
+};
+
+export const terracePriceTimbermaxPerYear = (size: number, years: number) => {
+  const price1 = parseInt(terracePriceTimbermax(size));
+  const price2 = parseInt(terracePriceTimbermaxOther(size));
+
+  const final_price = (price1 + price2) / years;
+
+  return final_price.toFixed();
+};

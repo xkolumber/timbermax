@@ -1,6 +1,9 @@
 "use client";
-import { AdminDeleteAlbum, AdminDeleteBlog } from "@/app/lib/actions";
-import { BlogInterface, Gallery, IsLoadingMap } from "@/app/lib/interface";
+import { AdminDeleteBlog } from "@/app/lib/actions";
+import { fetchBlogs } from "@/app/lib/functionsServer";
+import { BlogInterface, IsLoadingMap } from "@/app/lib/interface";
+import { CircularProgress } from "@mui/material";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,9 +11,6 @@ import { ClipLoader } from "react-spinners";
 import IconCloseButton from "../Icons/IconCloseButton";
 import IconPen from "../Icons/IconPen";
 import IconTrash from "../Icons/IconTrash";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchBlogs, fetchGalleries } from "@/app/lib/functionsServer";
-import { CircularProgress } from "@mui/material";
 
 const AdminBlogs = () => {
   const queryClient = useQueryClient();
