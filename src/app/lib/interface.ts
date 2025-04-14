@@ -578,6 +578,23 @@ export interface Gallery {
   jazyky_kontent: GalleryTranslate[];
 }
 
+export interface BlogInterface {
+  id: string;
+  title: string;
+  date: string;
+  slug: string;
+  title_photo: string;
+  partition_key: string;
+  language_content: BlogContent[];
+}
+
+export interface BlogContent {
+  language: string;
+  text1: string;
+  text2: string;
+  text3: string;
+}
+
 export interface GalleryTranslate {
   jazyk: string;
   nazov_farba: string;

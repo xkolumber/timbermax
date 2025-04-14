@@ -14,6 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const mainListItems = [
   { text: "Domov", icon: <HomeRoundedIcon />, link: "/admin" },
@@ -41,6 +42,11 @@ const mainListItems = [
     text: "Galéria",
     icon: <CollectionsIcon />,
     link: "/admin/galeria",
+  },
+  {
+    text: "Blog",
+    icon: <MenuBookIcon />,
+    link: "/admin/blog",
   },
   {
     text: "Kontakt",

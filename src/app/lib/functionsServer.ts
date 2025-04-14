@@ -6,6 +6,7 @@ import { firestore } from "./firebaseServer";
 import {
   AboutUsElements,
   Bazeny,
+  BlogInterface,
   ContactPage,
   Fasady,
   Gallery,
@@ -800,6 +801,24 @@ export async function fetchGalleryId(id: string): Promise<Gallery> {
     }
 
     return response.Item as Gallery;
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with  not found.`);
+  }
+}
+
+export async function fetchBlogs(): Promise<BlogInterface[]> {
+  try {
+    const command = new ScanCommand({
+      TableName: "blog",
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items) {
+      return response.Items as BlogInterface[];
+    }
+
+    throw new Error(`Item with  not found.`);
   } catch (err) {
     console.log(err);
     throw new Error(`Item with  not found.`);
