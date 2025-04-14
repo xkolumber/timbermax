@@ -1,7 +1,12 @@
 "use server";
 
 import { QueryCommand } from "@aws-sdk/client-dynamodb";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import {
+  DeleteCommand,
+  GetCommand,
+  PutCommand,
+  UpdateCommand,
+} from "@aws-sdk/lib-dynamodb";
 import { getFirestore } from "firebase-admin/firestore";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { cookies } from "next/headers";
@@ -12,6 +17,7 @@ import { firestore } from "./firebaseServer";
 import {
   AboutUsElements,
   Bazeny,
+  BlogInterface,
   ContactPage,
   Fasady,
   Gallery,
@@ -25,6 +31,7 @@ import {
   Terasy,
 } from "./interface";
 import { RepeatOneSharp } from "@mui/icons-material";
+import { createSlug } from "./functions";
 
 const FormSchema = z.object({
   jazyk: z.string(),
@@ -1784,11 +1791,16 @@ export async function AdminAddPhotoGallery(
 
 export async function AdminDeleteAlbum(id: string) {
   try {
-    const db = getFirestore();
-    await db.collection("galeria").doc(id).delete();
-    revalidatePath(`/admin/galeria`);
+    const command = new DeleteCommand({
+      TableName: "galeria",
+      Key: {
+        id,
+      },
+    });
 
-    return "success";
+    const response = await docClient.send(command);
+
+    return response.$metadata.httpStatusCode;
   } catch (error) {
     console.error("Database Error: Failed", error);
     return "false";
@@ -1971,6 +1983,83 @@ export async function AdminActualizeContactPage(
     }
   } catch (error) {
     console.error("DynamoDB Update Error:", error);
+    return "false";
+  }
+}
+
+export async function AdminAddBlog(actualizeData: BlogInterface) {
+  const uuid = crypto.randomUUID();
+
+  try {
+    const response = await docClient.send(
+      new PutCommand({
+        TableName: "blog",
+        Item: {
+          id: uuid,
+          date: new Date().toISOString(),
+          title: actualizeData.title,
+          slug: createSlug(actualizeData.title),
+          title_photo: actualizeData.title_photo,
+          partition_key: "all",
+          language_content: [],
+        },
+      })
+    );
+
+    return response.$metadata.httpStatusCode;
+  } catch (error) {
+    console.error("DynamoDB Add Error:", error);
+    return "false";
+  }
+}
+
+export const AdminDeleteBlog = async (id: string) => {
+  const command = new DeleteCommand({
+    TableName: "blog",
+    Key: {
+      id,
+    },
+  });
+
+  const response = await docClient.send(command);
+
+  return response.$metadata.httpStatusCode;
+};
+
+export async function AdminActualizeBlog(
+  id: string,
+  actualizeData: BlogInterface
+) {
+  try {
+    const response = await docClient.send(
+      new UpdateCommand({
+        TableName: "blog",
+        Key: { id },
+        UpdateExpression: `
+          SET title = :title,
+              #dt = :date,
+              slug = :slug,
+              title_photo = :title_photo,
+              partition_key = :partition_key,
+              language_content = :language_content
+        `,
+        ExpressionAttributeNames: {
+          "#dt": "date",
+        },
+        ExpressionAttributeValues: {
+          ":title": actualizeData.title,
+          ":date": actualizeData.date,
+          ":slug": createSlug(actualizeData.title),
+          ":title_photo": actualizeData.title_photo,
+          ":partition_key": actualizeData.partition_key,
+          ":language_content": actualizeData.language_content,
+        },
+      })
+    );
+
+    return response.$metadata.httpStatusCode;
+  } catch (error) {
+    console.error("DynamoDB Error:", error);
     return "false";
   }
 }

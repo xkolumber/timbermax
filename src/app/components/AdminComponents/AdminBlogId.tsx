@@ -1,19 +1,32 @@
 "use client";
+import { AdminActualizeBlog } from "@/app/lib/actions";
 import {
-  AdminActualizeAlbumGallery,
-  AdminDeleteImageFromAlbum,
-} from "@/app/lib/actions";
-import { categories, CompressImages } from "@/app/lib/functionsClient";
-import { fetchAllLanguages, fetchGalleryId } from "@/app/lib/functionsServer";
-import { Gallery, IsLoadingMap, LanguagesAdming } from "@/app/lib/interface";
-import { CircularProgress } from "@mui/material";
+  aws_bucket_url,
+  cloudfront_url,
+  CompressImages,
+} from "@/app/lib/functionsClient";
+import {
+  fetchAllLanguages,
+  fetchBlogId,
+  uploadFileToS3,
+} from "@/app/lib/functionsServer";
+import {
+  BlogInterface,
+  IsLoadingMap,
+  LanguagesAdming,
+} from "@/app/lib/interface";
+import {
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
+import StepBack from "../StepBack";
 
 interface Props {
   id: string;
@@ -21,9 +34,9 @@ interface Props {
 
 const AdminBlogId = ({ id }: Props) => {
   const queryClient = useQueryClient();
-  const { data, error, isLoading } = useQuery<Gallery>({
-    queryKey: ["admin_gallery", id],
-    queryFn: () => fetchGalleryId(id),
+  const { data, error, isLoading } = useQuery<BlogInterface>({
+    queryKey: ["admin_blogs", id],
+    queryFn: () => fetchBlogId(id),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     placeholderData: (previousData, previousQuery) => previousData,
@@ -41,22 +54,24 @@ const AdminBlogId = ({ id }: Props) => {
     placeholderData: (previousData, previousQuery) => previousData,
   });
 
-  const [actualizeGallery, setActualizeGallery] = useState<Gallery>({
-    datum_pridania: "",
-    fotky: [],
-    kategorie: [],
-    nazov: "",
+  const [actualizeData, setActualizeData] = useState<BlogInterface>({
     id: "",
-    profil: "",
-    farba: "",
-    jazyky_kontent: [],
+    title: "",
+    date: "",
+    slug: "",
+    title_photo: "",
+    partition_key: "all",
+    language_content: [],
   });
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
+  const [dataLoading, setDataLoading] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
   const [photoLoading, setPhotoLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [clickedPhoto, setClickedPhoto] = useState("");
+  const [openPopUp, setOpenPopUp] = useState(false);
 
   const handleEditAlbumFirebase = async () => {
     setIsLoadingMap((prevState) => ({
@@ -65,26 +80,10 @@ const AdminBlogId = ({ id }: Props) => {
     }));
 
     try {
-      let photoUrls: string[] = [];
-      if (projectPhotos.length > 0) {
-        const storage = getStorage();
-        photoUrls = await Promise.all(
-          projectPhotos.map(async (photo) => {
-            const storageRef = ref(storage, `galeria/${photo.name}`);
-            await uploadBytes(storageRef, photo);
-            return getDownloadURL(storageRef);
-          })
-        );
-      }
-
-      const response = await AdminActualizeAlbumGallery(
-        data!.id,
-        photoUrls,
-        actualizeGallery
-      );
+      const response = await AdminActualizeBlog(data!.id, actualizeData);
       if (response === 200) {
         await queryClient.refetchQueries({
-          queryKey: ["admin_gallery", id],
+          queryKey: ["admin_blogs", id],
         });
         toast.success("Album bol aktualizovaný");
         if (fileInputRef.current) {
@@ -104,34 +103,6 @@ const AdminBlogId = ({ id }: Props) => {
     }
   };
 
-  const handleDeleteImageFromAlbum = async (index_foto: number) => {
-    try {
-      setIsLoadingMap((prevState) => ({
-        ...prevState,
-        [`delete_photo-${index_foto}`]: true,
-      }));
-
-      const response = await AdminDeleteImageFromAlbum(data!.id, index_foto);
-      if (response === "success") {
-        setActualizeGallery((prevData) => ({
-          ...prevData,
-          fotky: prevData.fotky.filter((_, index) => index !== index_foto),
-        }));
-        toast.success("Objekt bol vymazaný");
-        setProjectPhotos([]);
-      } else {
-        toast.error("Niekde nastala chyba");
-      }
-    } catch (error) {
-      console.error("Error deleting photo:", error);
-    } finally {
-      setIsLoadingMap((prevState) => ({
-        ...prevState,
-        [`delete_photo-${index_foto}`]: false,
-      }));
-    }
-  };
-
   const handleChangeMain = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -139,7 +110,7 @@ const AdminBlogId = ({ id }: Props) => {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setActualizeGallery((prevData) => {
+    setActualizeData((prevData) => {
       const updatedData = { ...prevData, [name]: value };
       return updatedData;
     });
@@ -152,12 +123,12 @@ const AdminBlogId = ({ id }: Props) => {
     index: number
   ) => {
     const { name, value } = e.target;
-    const updatedJazykyKontent = [...actualizeGallery.jazyky_kontent];
+    const updatedJazykyKontent = [...actualizeData.language_content];
     updatedJazykyKontent[index] = {
       ...updatedJazykyKontent[index],
       [name]: value,
     };
-    setActualizeGallery((prev) => ({
+    setActualizeData((prev) => ({
       ...prev,
       jazyky_kontent: updatedJazykyKontent,
     }));
@@ -188,7 +159,7 @@ const AdminBlogId = ({ id }: Props) => {
         ? prevSelected.filter((nazov) => nazov !== productTitle)
         : [...prevSelected, productTitle];
 
-      setActualizeGallery((prevData) => ({
+      setActualizeData((prevData) => ({
         ...prevData,
         kategorie: updatedSelected,
       }));
@@ -199,15 +170,16 @@ const AdminBlogId = ({ id }: Props) => {
 
   useEffect(() => {
     if (data) {
-      setActualizeGallery((prevData) => ({
+      setActualizeData((prevData) => ({
         ...prevData,
-        fotky: data.fotky ? data.fotky : [],
-        kategorie: data.kategorie ? data.kategorie : [],
-        nazov: data.nazov ? data.nazov : "",
-        id: "",
-        profil: data.profil ? data.profil : "",
-        farba: data.farba ? data.farba : "",
-        jazyky: data.jazyky_kontent ? data.jazyky_kontent : [],
+
+        id: data.id,
+        title: data.title,
+        date: data.date,
+        slug: data.slug,
+        title_photo: data.title_photo,
+        partition_key: data.partition_key,
+        language_content: data.language_content,
       }));
     }
   }, [data]);
@@ -215,8 +187,8 @@ const AdminBlogId = ({ id }: Props) => {
   useEffect(() => {
     if (data && languages) {
       const initializedJazykyKontent = languages.map((lang) => {
-        const existingLangContent = data?.jazyky_kontent?.find(
-          (content) => content.jazyk === lang.jazyk
+        const existingLangContent = data?.language_content?.find(
+          (content) => content.language === lang.jazyk
         );
         return (
           existingLangContent || {
@@ -230,20 +202,47 @@ const AdminBlogId = ({ id }: Props) => {
           }
         );
       });
-      setActualizeGallery((prev) => ({
+      setActualizeData((prev) => ({
         ...prev,
         jazyky_kontent: initializedJazykyKontent,
       }));
     }
   }, [languages, data]);
 
+  const handleShowBiggerIamge = (src: string) => {
+    setClickedPhoto(src);
+    setOpenPopUp(true);
+  };
+
+  const handleFileChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    title: string
+  ) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      console.error("No file selected");
+      return;
+    }
+
+    setDataLoading(true);
+
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const url = await uploadFileToS3(formData);
+    setActualizeData((prevData) => ({
+      ...prevData,
+      [title]: url,
+    }));
+    e.target.value = "";
+    setDataLoading(false);
+  };
+
   return (
     <div>
       <div className="products_admin">
         <Toaster />
-        <Link href={"/admin/galeria"}>
-          <p className="hover:underline ease-in text-black">Späť</p>
-        </Link>
+        <StepBack />
 
         {isLoading && (
           <CircularProgress size={24} color="inherit" className="mt-16 mb-16" />
@@ -252,139 +251,85 @@ const AdminBlogId = ({ id }: Props) => {
 
         {data && (
           <>
-            <h5 className="text-center">Úprava albumu - {data?.nazov}</h5>
+            <h5 className="text-center">Úprava blogu - {data?.title}</h5>
             <div className="flex flex-row justify-between items-center gap-4 mt-8">
-              <h6>Názov galérie:</h6>
+              <h6>Názov blogu:</h6>
               <input
                 type="text"
-                name="nazov"
-                value={actualizeGallery.nazov}
+                name="title"
+                value={actualizeData.title}
                 onChange={handleChangeMain}
                 className="w-full border border-solid border-black h-[5rem] mt-4"
                 required
               />
             </div>
-            <div className="flex flex-wrap gap-4 mt-4">
-              {actualizeGallery.fotky.map((foto, index_foto) => (
-                <div
-                  className="flex flex-col justify-center items-center"
-                  key={index_foto}
-                >
-                  <Image
-                    src={foto}
-                    width={500}
-                    height={500}
-                    priority
-                    alt="logo"
-                    className="w-[200px] h-[200px] pt-2 pb-2 md:pb-0 cursor-pointer object-cover"
-                    placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAIAAAA7ljmRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMElEQVR4nGPoyAnauXnji/+fbVNdGZqyAqe1FtlEajHIMzD42mhFBFjwaAgw8DEAAEdSDLK7z3GTAAAAAElFTkSuQmCC"
-                  />
 
-                  <button
-                    className="btn btn--primary"
-                    onClick={() => handleDeleteImageFromAlbum(index_foto)}
-                    disabled={isLoadingMap[`delete_photo-${index_foto}`]}
-                  >
-                    {isLoadingMap[`delete_photo-${index_foto}`] ? (
-                      <ClipLoader size={20} color={"#32a8a0"} loading={true} />
-                    ) : (
-                      "Odstrániť"
+            <div className="product_admin_row">
+              <p>Titulná foto:</p>
+              <div className="flex flex-col w-[75%]">
+                {actualizeData.title_photo && (
+                  <img
+                    width={120}
+                    height={120}
+                    src={actualizeData.title_photo.replace(
+                      aws_bucket_url,
+                      cloudfront_url
                     )}
-                  </button>
-                </div>
-              ))}
+                    className="mt-4 mb-4 cursor-pointer"
+                    onClick={() =>
+                      handleShowBiggerIamge(
+                        actualizeData.title_photo.replace(
+                          aws_bucket_url,
+                          cloudfront_url
+                        )
+                      )
+                    }
+                  />
+                )}
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, "title_photo")}
+                  required={actualizeData.title_photo === ""}
+                />
+              </div>
             </div>
-            <div className="flex flex-row justify-between items-center gap-4 mt-8">
-              <h6>profil galérie:</h6>
-              <input
-                type="text"
-                name="profil"
-                value={actualizeGallery.profil}
-                onChange={handleChangeMain}
-                className="w-full border border-solid border-black h-[5rem] mt-4"
-                required
-                placeholder="t138"
-              />
-            </div>
-            <div className="flex flex-row justify-between items-center gap-4 mt-8">
-              <h6>farba:</h6>
-              <input
-                type="text"
-                name="farba"
-                value={actualizeGallery.farba}
-                onChange={handleChangeMain}
-                className="w-full border border-solid border-black h-[5rem] mt-4"
-                required
-                placeholder="brown"
-              />
-            </div>
-            {actualizeGallery.jazyky_kontent.map((object, index) => (
+
+            {actualizeData.language_content.map((object, index) => (
               <div key={index} className="mb-16">
-                <p className="text-primary font-bold">Jazyk: {object.jazyk}</p>
+                <p className="text-primary font-bold">
+                  Jazyk: {object.language}
+                </p>
                 <div className="flex flex-row justify-between items-center gap-4 mt-8">
-                  <h6>nazov_farba:</h6>
+                  <h6>text1:</h6>
 
                   <input
                     type="text"
-                    name="nazov_farba"
-                    value={object.nazov_farba}
+                    name="text1"
+                    value={object.text1}
                     onChange={(e) => handleChangeMainLanguagesContent(e, index)}
                     className="w-full border border-solid border-black h-[5rem] mt-4"
                     required
-                    placeholder="vo farbe - preklad slova"
                   />
                 </div>
                 <div className="flex flex-row justify-between items-center gap-4 mt-8">
-                  <h6>nazov_profil:</h6>
+                  <h6>text2:</h6>
                   <input
                     type="text"
-                    name="nazov_profil"
-                    value={object.nazov_profil}
+                    name="text2"
+                    value={object.text2}
                     onChange={(e) => handleChangeMainLanguagesContent(e, index)}
                     className="w-full border border-solid border-black h-[5rem] mt-4"
                     required
-                    placeholder="profil - preklad slova"
                   />
                 </div>
                 <div className="flex flex-row justify-between items-center gap-4 mt-8">
-                  <h6>nazov_projekt:</h6>
+                  <h6>text3:</h6>
                   <input
                     type="text"
-                    name="nazov_projekt"
-                    value={object.nazov_projekt}
-                    onChange={(e) => handleChangeMainLanguagesContent(e, index)}
-                    className="w-full border border-solid border-black h-[5rem] mt-4"
-                    required
-                    placeholder="projekt - preklad slova"
-                  />
-                </div>
-                <div className="flex flex-row justify-between items-center gap-4 mt-8">
-                  <h6>Popis 1:</h6>
-                  <textarea
-                    name="popis1"
-                    value={object.popis1}
-                    onChange={(e) => handleChangeMainLanguagesContent(e, index)}
-                    className="w-full border border-solid border-black h-[5rem] mt-4"
-                    required
-                  />
-                </div>
-
-                <div className="flex flex-row justify-between items-center gap-4 mt-8">
-                  <h6>Popis 2:</h6>
-                  <textarea
-                    name="popis2"
-                    value={object.popis2}
-                    onChange={(e) => handleChangeMainLanguagesContent(e, index)}
-                    className="w-full border border-solid border-black h-[5rem] mt-4"
-                    required
-                  />
-                </div>
-                <div className="flex flex-row justify-between items-center gap-4 mt-8">
-                  <h6>Popis 3:</h6>
-                  <textarea
-                    name="popis3"
-                    value={object.popis3}
+                    name="text3"
+                    value={object.text3}
                     onChange={(e) => handleChangeMainLanguagesContent(e, index)}
                     className="w-full border border-solid border-black h-[5rem] mt-4"
                     required
@@ -393,44 +338,6 @@ const AdminBlogId = ({ id }: Props) => {
               </div>
             ))}
 
-            <div className="product_admin_row pt-8">
-              <h6 className="text-primary">
-                Zaškrtnite kategériu, kde sa má zobraziť album:
-              </h6>
-              <div className="product_admin_col">
-                {categories.map((category) => (
-                  <div key={category}>
-                    <input
-                      type="checkbox"
-                      id={category}
-                      value={category}
-                      checked={actualizeGallery.kategorie.includes(category)}
-                      onChange={() => handleCheckboxChangeCategory(category)}
-                    />
-                    <label htmlFor={category}>{category}</label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-row items-center pt-8 gap-6">
-              {" "}
-              <h6 className="text-primary ">Pridajte fotky:</h6>
-              <input
-                type="file"
-                multiple
-                ref={fileInputRef}
-                onChange={(event) => handlePhotosLoad(event)}
-                required
-              />
-              {photoLoading && (
-                <ClipLoader
-                  size={20}
-                  color={"#32a8a0"}
-                  loading={true}
-                  className=""
-                />
-              )}
-            </div>
             <button
               className={`btn btn--primary ${
                 (photoLoading || isLoadingMap["actualize_album"]) &&
@@ -453,6 +360,33 @@ const AdminBlogId = ({ id }: Props) => {
           </>
         )}
       </div>
+
+      <Dialog open={dataLoading} onClose={() => setDataLoading(false)}>
+        <DialogTitle>Objekt sa nahráva do cloudu..</DialogTitle>
+        <DialogContent
+          sx={{
+            margin: "auto",
+          }}
+        >
+          <CircularProgress color="inherit" />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={openPopUp} onClose={() => setOpenPopUp(false)}>
+        <DialogContent
+          sx={{
+            margin: "auto",
+          }}
+        >
+          <Image
+            width={420}
+            height={420}
+            src={clickedPhoto}
+            className="max-h-[500px] object-contain"
+            alt="image"
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

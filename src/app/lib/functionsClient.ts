@@ -1051,3 +1051,8 @@ export const services_elements = [
     slug: "ostatne",
   },
 ];
+
+export const aws_bucket_name = "timbermaxopen";
+
+export const aws_bucket_url =
+  "https://timbermaxopen.s3.eu-north-1.amazonaws.com";

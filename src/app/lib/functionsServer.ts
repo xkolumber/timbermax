@@ -20,8 +20,10 @@ import {
   Terasy,
 } from "./interface";
 import { GetCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
-import { docClient } from "./awsConfig";
-import { allowedLanguages } from "./functions";
+import { clientS3, docClient } from "./awsConfig";
+import { allowedLanguages, aws_bucket_name, createSlug } from "./functions";
+
+import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 // import { allowedLanguages } from "./functionsClient";
 
 export async function GetAdminHomePage(language: string) {
@@ -825,6 +827,27 @@ export async function fetchBlogs(): Promise<BlogInterface[]> {
   }
 }
 
+export async function fetchBlogId(id: string): Promise<BlogInterface> {
+  try {
+    const command = new GetCommand({
+      TableName: "blog",
+      Key: {
+        id: id,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (!response.Item) {
+      throw new Error(`Item with id not found.`);
+    }
+
+    return response.Item as BlogInterface;
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with  not found.`);
+  }
+}
+
 export async function fetchAllLanguages(): Promise<LanguagesAdming[]> {
   try {
     const command = new ScanCommand({
@@ -840,5 +863,48 @@ export async function fetchAllLanguages(): Promise<LanguagesAdming[]> {
   } catch (err) {
     console.log(err);
     throw new Error(`Item with  not found.`);
+  }
+}
+
+export async function uploadFileToS3(formData: FormData) {
+  try {
+    const file = formData.get("file") as File;
+    if (!file) throw new Error("No file provided");
+
+    const folderName = new Date().toISOString();
+
+    const originalFileName = file.name.split(".")[0];
+    const fileExtension = file.name.split(".").pop();
+
+    const safeFileName = `${createSlug(originalFileName)}.${fileExtension}`;
+
+    const { url, fields } = await createPresignedPost(clientS3, {
+      Bucket: aws_bucket_name,
+      Key: `${folderName}/${safeFileName}`,
+      Expires: 3600,
+    });
+
+    const formDataS3 = new FormData();
+    Object.entries(fields).forEach(([key, value]) => {
+      formDataS3.append(key, value);
+    });
+    formDataS3.append("file", file);
+
+    const uploadResponse = await fetch(url, {
+      method: "POST",
+      body: formDataS3,
+    });
+
+    if (uploadResponse.status !== 204) {
+      throw new Error("Failed to upload file");
+    }
+
+    const fileKey = `${folderName}/${safeFileName}`;
+    const s3Url = `https://${aws_bucket_name}.s3.eu-north-1.amazonaws.com/${fileKey}`;
+
+    return s3Url;
+  } catch (err) {
+    console.error("S3 Upload Error:", err);
+    throw new Error("S3 upload failed");
   }
 }

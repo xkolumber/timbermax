@@ -1,5 +1,5 @@
 "use client";
-import { AdminDeleteAlbum } from "@/app/lib/actions";
+import { AdminDeleteAlbum, AdminDeleteBlog } from "@/app/lib/actions";
 import { BlogInterface, Gallery, IsLoadingMap } from "@/app/lib/interface";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,11 +8,13 @@ import { ClipLoader } from "react-spinners";
 import IconCloseButton from "../Icons/IconCloseButton";
 import IconPen from "../Icons/IconPen";
 import IconTrash from "../Icons/IconTrash";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchBlogs, fetchGalleries } from "@/app/lib/functionsServer";
 import { CircularProgress } from "@mui/material";
 
 const AdminBlogs = () => {
+  const queryClient = useQueryClient();
+
   const { data, error, isLoading } = useQuery<BlogInterface[]>({
     queryKey: ["admin_blogs"],
     queryFn: () => fetchBlogs(),
@@ -39,10 +41,13 @@ const AdminBlogs = () => {
         [`delete_album`]: true,
       }));
 
-      const response = await AdminDeleteAlbum(idAlbum);
+      const response = await AdminDeleteBlog(idAlbum);
 
-      if (response === "success") {
+      if (response === 200) {
         toast.success("Projekt bol odstránený");
+        await queryClient.refetchQueries({
+          queryKey: ["admin_blogs"],
+        });
         setDeleteWindow(false);
       } else {
         toast.error("Niekde nastala chyba");
@@ -103,7 +108,7 @@ const AdminBlogs = () => {
               <IconCloseButton />
             </div>{" "}
             <h5 className="text-center">
-              Chcete skutočne odstániť projekt - {choosenAlbum}?
+              Chcete skutočne odstániť blog - {choosenAlbum}?
             </h5>
             <button
               className="btn btn--primary"

@@ -19,3 +19,19 @@ export default async function getBase64(imageUrl: string) {
 }
 
 export const allowedLanguages = ["cz", "en", "sk"];
+
+export const aws_bucket_name = "timbermaxopen";
+
+export function createSlug(title: string): string {
+  const slug = title
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-");
+
+  return slug;
+}

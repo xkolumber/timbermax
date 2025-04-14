@@ -41,7 +41,7 @@ const AdminGallery = () => {
 
       const response = await AdminDeleteAlbum(idAlbum);
 
-      if (response === "success") {
+      if (response === 200) {
         toast.success("Projekt bol odstránený");
         setDeleteWindow(false);
       } else {
