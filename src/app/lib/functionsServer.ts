@@ -109,6 +109,34 @@ export async function fetchHomepage(
   }
 }
 
+export async function fetchHomepageAdmin(
+  jazyk: string | undefined
+): Promise<HomePageElements | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "homepage",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as HomePageElements;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchAboutUs(
   jazyk: string | undefined
 ): Promise<AboutUsElements | null> {

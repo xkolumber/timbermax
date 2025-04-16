@@ -130,91 +130,107 @@ export async function AdminactualizeHomePage(
       },
     });
 
-    const result = await docClient.send(query);
+    const data = await docClient.send(query);
 
-    if (!result.Items || result.Items.length === 0) {
-      console.error("Item not found for language:", jazyk);
-      return "false";
+    if (data.Items && data.Items.length > 0) {
+      const docId = data.Items[0].id.S;
+
+      const command = new UpdateCommand({
+        TableName: "homepage",
+        Key: { id: docId },
+        ExpressionAttributeNames: {
+          "#references": "references",
+        },
+        UpdateExpression: `
+          SET 
+            button_citat_viac = :button_citat_viac,
+            button_vypocet = :button_vypocet,
+            cenova_p_nadpis = :cenova_p_nadpis,
+            cenova_p_popis1 = :cenova_p_popis1,
+            cenova_p_popis2 = :cenova_p_popis2,
+            mapa_showroomov = :mapa_showroomov,
+            nase_sluzby_nadpis = :nase_sluzby_nadpis,
+            nase_sluzby_veta = :nase_sluzby_veta,
+            nase_sluzby_popis = :nase_sluzby_popis,
+            o_nas_nadpis = :o_nas_nadpis,
+            o_nas_popis = :o_nas_popis,
+            o_nas_elements = :o_nas_elements,
+            ref_elements = :ref_elements,
+            rokov_skusenosti = :rokov_skusenosti,
+            sluzby = :sluzby,
+            svg_titles = :svg_titles,
+            timbermax_ako = :timbermax_ako,
+            timbermax_ako_mobile_nadpis = :timbermax_ako_mobile_nadpis,
+            timbermax_ako_mobile_popisy = :timbermax_ako_mobile_popisy,
+            text_photo1 = :text_photo1,
+            text_photo2 = :text_photo2,
+            text_photo3 = :text_photo3,
+            text_photo4 = :text_photo4,
+            text_photo5 = :text_photo5,
+            text_photo6 = :text_photo6,
+            text_photo7 = :text_photo7,
+            text_photo8 = :text_photo8,
+            references_title = :references_title,
+            #references = :references
+        `,
+
+        ExpressionAttributeValues: {
+          ":button_citat_viac": actualizeData.button_citat_viac,
+          ":button_vypocet": actualizeData.button_vypocet,
+          ":cenova_p_nadpis": actualizeData.cenova_p_nadpis,
+          ":cenova_p_popis1": actualizeData.cenova_p_popis1,
+          ":cenova_p_popis2": actualizeData.cenova_p_popis2,
+          ":mapa_showroomov": actualizeData.mapa_showroomov,
+          ":nase_sluzby_nadpis": actualizeData.nase_sluzby_nadpis,
+          ":nase_sluzby_veta": actualizeData.nase_sluzby_veta,
+          ":nase_sluzby_popis": actualizeData.nase_sluzby_popis,
+          ":o_nas_nadpis": actualizeData.o_nas_nadpis,
+          ":o_nas_popis": actualizeData.o_nas_popis,
+          ":o_nas_elements": actualizeData.o_nas_elements,
+          ":ref_elements": actualizeData.ref_elements,
+          ":rokov_skusenosti": actualizeData.rokov_skusenosti,
+          ":sluzby": actualizeData.sluzby,
+          ":svg_titles": actualizeData.svg_titles,
+          ":timbermax_ako": actualizeData.timbermax_ako,
+          ":timbermax_ako_mobile_nadpis":
+            actualizeData.timbermax_ako_mobile_nadpis,
+          ":timbermax_ako_mobile_popisy":
+            actualizeData.timbermax_ako_mobile_popisy,
+          ":text_photo1": actualizeData.text_photo1,
+          ":text_photo2": actualizeData.text_photo2,
+          ":text_photo3": actualizeData.text_photo3,
+          ":text_photo4": actualizeData.text_photo4,
+          ":text_photo5": actualizeData.text_photo5,
+          ":text_photo6": actualizeData.text_photo6,
+          ":text_photo7": actualizeData.text_photo7,
+          ":text_photo8": actualizeData.text_photo8,
+          ":references_title": actualizeData.references_title,
+          ":references": actualizeData.references,
+        },
+      });
+
+      try {
+        const response = await docClient.send(command);
+        return response.$metadata.httpStatusCode;
+      } catch (error) {
+        console.error("Error updating product:", error);
+        throw new Error("Failed to update product");
+      }
+    } else {
+      const uuid = crypto.randomUUID();
+
+      const putParams = {
+        TableName: "homepage",
+        Item: {
+          id: uuid,
+          ...actualizeData,
+          jazyk: jazyk,
+        },
+      };
+
+      const response = await docClient.send(new PutCommand(putParams));
+      return response.$metadata.httpStatusCode;
     }
-
-    const itemId = result.Items[0].id.S;
-
-    const update = new UpdateCommand({
-      TableName: "homepage",
-      Key: { id: itemId },
-      ExpressionAttributeNames: {
-        "#references": "references",
-      },
-      UpdateExpression: `
-        SET 
-          button_citat_viac = :button_citat_viac,
-          button_vypocet = :button_vypocet,
-          cenova_p_nadpis = :cenova_p_nadpis,
-          cenova_p_popis1 = :cenova_p_popis1,
-          cenova_p_popis2 = :cenova_p_popis2,
-          mapa_showroomov = :mapa_showroomov,
-          nase_sluzby_nadpis = :nase_sluzby_nadpis,
-          nase_sluzby_veta = :nase_sluzby_veta,
-          nase_sluzby_popis = :nase_sluzby_popis,
-          o_nas_nadpis = :o_nas_nadpis,
-          o_nas_popis = :o_nas_popis,
-          o_nas_elements = :o_nas_elements,
-          ref_elements = :ref_elements,
-          rokov_skusenosti = :rokov_skusenosti,
-          sluzby = :sluzby,
-          svg_titles = :svg_titles,
-          timbermax_ako = :timbermax_ako,
-          timbermax_ako_mobile_nadpis = :timbermax_ako_mobile_nadpis,
-          timbermax_ako_mobile_popisy = :timbermax_ako_mobile_popisy,
-          text_photo1 = :text_photo1,
-          text_photo2 = :text_photo2,
-          text_photo3 = :text_photo3,
-          text_photo4 = :text_photo4,
-          text_photo5 = :text_photo5,
-          text_photo6 = :text_photo6,
-          text_photo7 = :text_photo7,
-          text_photo8 = :text_photo8,
-          references_title = :references_title,
-          #references = :references
-      `,
-
-      ExpressionAttributeValues: {
-        ":button_citat_viac": actualizeData.button_citat_viac,
-        ":button_vypocet": actualizeData.button_vypocet,
-        ":cenova_p_nadpis": actualizeData.cenova_p_nadpis,
-        ":cenova_p_popis1": actualizeData.cenova_p_popis1,
-        ":cenova_p_popis2": actualizeData.cenova_p_popis2,
-        ":mapa_showroomov": actualizeData.mapa_showroomov,
-        ":nase_sluzby_nadpis": actualizeData.nase_sluzby_nadpis,
-        ":nase_sluzby_veta": actualizeData.nase_sluzby_veta,
-        ":nase_sluzby_popis": actualizeData.nase_sluzby_popis,
-        ":o_nas_nadpis": actualizeData.o_nas_nadpis,
-        ":o_nas_popis": actualizeData.o_nas_popis,
-        ":o_nas_elements": actualizeData.o_nas_elements,
-        ":ref_elements": actualizeData.ref_elements,
-        ":rokov_skusenosti": actualizeData.rokov_skusenosti,
-        ":sluzby": actualizeData.sluzby,
-        ":svg_titles": actualizeData.svg_titles,
-        ":timbermax_ako": actualizeData.timbermax_ako,
-        ":timbermax_ako_mobile_nadpis":
-          actualizeData.timbermax_ako_mobile_nadpis,
-        ":timbermax_ako_mobile_popisy":
-          actualizeData.timbermax_ako_mobile_popisy,
-        ":text_photo1": actualizeData.text_photo1,
-        ":text_photo2": actualizeData.text_photo2,
-        ":text_photo3": actualizeData.text_photo3,
-        ":text_photo4": actualizeData.text_photo4,
-        ":text_photo5": actualizeData.text_photo5,
-        ":text_photo6": actualizeData.text_photo6,
-        ":text_photo7": actualizeData.text_photo7,
-        ":text_photo8": actualizeData.text_photo8,
-        ":references_title": actualizeData.references_title,
-        ":references": actualizeData.references,
-      },
-    });
-
-    const updateResult = await docClient.send(update);
-    return updateResult.$metadata.httpStatusCode;
   } catch (error) {
     console.error("DynamoDB Update Error:", error);
     return "false";
