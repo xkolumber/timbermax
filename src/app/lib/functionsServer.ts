@@ -313,6 +313,35 @@ export async function fetchFasady(
   }
 }
 
+export async function fetchFasadyAdmin(
+  type: string,
+  jazyk: string | undefined
+): Promise<Fasady | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: type,
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Fasady;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchBazeny(
   jazyk: string | undefined
 ): Promise<Bazeny | null> {

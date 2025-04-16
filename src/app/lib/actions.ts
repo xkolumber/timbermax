@@ -1748,6 +1748,20 @@ export async function AdminActualizeFasadyPresadenaPage(
 
       const response = await docClient.send(updateCommand);
       return response.$metadata.httpStatusCode;
+    } else {
+      const newId = crypto.randomUUID();
+
+      const putCommand = new PutCommand({
+        TableName: "fasady-predsadena",
+        Item: {
+          id: newId,
+          ...actualizeData,
+          jazyk: jazyk,
+        },
+      });
+
+      const response = await docClient.send(putCommand);
+      return response.$metadata.httpStatusCode;
     }
   } catch (error) {
     console.error("Error updating fasady page:", error);
@@ -1869,6 +1883,20 @@ export async function AdminActualizeFasadyOdvetranaPage(
       });
 
       const response = await docClient.send(updateCommand);
+      return response.$metadata.httpStatusCode;
+    } else {
+      const newId = crypto.randomUUID();
+
+      const putCommand = new PutCommand({
+        TableName: "fasady-odvetrana",
+        Item: {
+          id: newId,
+          ...actualizeData,
+          jazyk: jazyk,
+        },
+      });
+
+      const response = await docClient.send(putCommand);
       return response.$metadata.httpStatusCode;
     }
   } catch (error) {
