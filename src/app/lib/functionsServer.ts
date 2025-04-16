@@ -343,6 +343,34 @@ export async function fetchBazeny(
   }
 }
 
+export async function fetchBazenyAdmin(
+  jazyk: string | undefined
+): Promise<Bazeny | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "bazeny",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Bazeny;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchSlnolamy(
   jazyk: string | undefined
 ): Promise<Slnolamy | null> {

@@ -1433,6 +1433,20 @@ export async function AdminActualizeBazenyPage(
 
       const response = await docClient.send(updateCommand);
       return response.$metadata.httpStatusCode;
+    } else {
+      const newId = crypto.randomUUID();
+
+      const putCommand = new PutCommand({
+        TableName: "bazeny",
+        Item: {
+          id: newId,
+          ...actualizeData,
+          jazyk: jazyk,
+        },
+      });
+
+      const response = await docClient.send(putCommand);
+      return response.$metadata.httpStatusCode;
     }
   } catch (error) {
     console.error("Error updating bazeny page:", error);
