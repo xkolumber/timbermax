@@ -493,6 +493,34 @@ export async function fetchPriceOffer(
   }
 }
 
+export async function fetchPriceOfferAdmin(
+  jazyk: string | undefined
+): Promise<PriceOffer | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "price-offer",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as PriceOffer;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchGalleryType(type: string): Promise<Gallery[]> {
   try {
     const command = new ScanCommand({
