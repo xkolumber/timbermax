@@ -632,6 +632,34 @@ export async function fetchContact(
   }
 }
 
+export async function fetchContactAdmin(
+  jazyk: string | undefined
+): Promise<ContactPage | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "contact",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as ContactPage;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchPriceOffer(
   jazyk: string | undefined
 ): Promise<PriceOffer | null> {
