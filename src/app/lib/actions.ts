@@ -7,13 +7,13 @@ import {
   PutCommand,
   UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
-import { getFirestore } from "firebase-admin/firestore";
-import { revalidatePath, unstable_noStore } from "next/cache";
+import { randomUUID } from "crypto";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 import { docClient } from "./awsConfig";
 import { firestore } from "./firebaseServer";
+import { createSlug } from "./functions";
 import {
   AboutUsElements,
   Bazeny,
@@ -22,7 +22,7 @@ import {
   Fasady,
   Gallery,
   HomePageElements,
-  Jazyk,
+  LanguagesAdming,
   MoreAboutTimElements,
   Ostatne,
   Ploty,
@@ -30,49 +30,76 @@ import {
   Slnolamy,
   Terasy,
 } from "./interface";
-import { RepeatOneSharp } from "@mui/icons-material";
-import { createSlug } from "./functions";
 
 const FormSchema = z.object({
   jazyk: z.string(),
 });
 
-export async function addLanguage(formData: FormData) {
-  const parsedData = FormSchema.parse({
-    jazyk: formData.get("jazyk"),
-  });
-
-  const db = getFirestore();
-  const produktyCollectionRef = db.collection("jazyky");
-
+export async function getCertainLanguage(
+  jazyk: string
+): Promise<LanguagesAdming> {
   try {
-    await produktyCollectionRef.add({ jazyk: parsedData.jazyk });
-    revalidatePath("/languages");
-    redirect("/languages");
+    const getCommand = new QueryCommand({
+      TableName: "jazyky",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
+    });
+
+    const data = await docClient.send(getCommand);
+
+    if (!data.Items || data.Items.length === 0) {
+      console.warn(`Language '${jazyk}' not found in database.`);
+      throw new Error("Failed to fetch language data");
+    }
+
+    return data.Items[0] as any;
   } catch (error) {
-    console.error("Database Error: Failed to add language.", error);
-    return {
-      message: "Database Error: Failed to add language.",
-    };
+    console.error("DynamoDB Query Error:", error);
+    throw new Error("Failed to fetch language data");
   }
 }
 
-export async function GetLanguages(): Promise<Jazyk[]> {
-  unstable_noStore();
-  const produktyCollectionRef = firestore.collection("jazyky");
-
+export async function AdminAddLanguage(jazyk: string) {
   try {
-    const snapshot = await produktyCollectionRef.get();
-    const languages: Jazyk[] = snapshot.docs.map((doc) => {
-      return {
-        ...(doc.data() as Jazyk),
-      };
+    const getCommand = new QueryCommand({
+      TableName: "jazyky",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
     });
 
-    return languages;
+    const data = await docClient.send(getCommand);
+
+    if (data.Items && data.Items.length > 0) {
+      console.warn(`Language '${jazyk}' already exists.`);
+      return "exists";
+    }
+
+    const uuid = randomUUID();
+    const putParams = {
+      TableName: "jazyky",
+      Item: {
+        id: uuid,
+        jazyk: jazyk,
+      },
+    };
+
+    const response = await docClient.send(new PutCommand(putParams));
+    return response.$metadata.httpStatusCode;
   } catch (error) {
-    console.error("Database Error: Failed to fetch languages.", error);
-    throw new Error("Database Error: Failed to fetch languages.");
+    console.error("DynamoDB Add Language Error:", error);
+    return "false";
   }
 }
 
@@ -90,54 +117,108 @@ export async function AdminactualizeHomePage(
   actualizeData: HomePageElements,
   jazyk: string
 ) {
-  const db = getFirestore();
-  const podstrankaCollectionRef = db.collection("homepage");
-  const querySnapshot = await podstrankaCollectionRef
-    .where("jazyk", "==", jazyk)
-    .get();
+  try {
+    const query = new QueryCommand({
+      TableName: "homepage",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": { S: jazyk },
+      },
+    });
 
-  if (querySnapshot.empty) {
-    console.error("Document does not exist for uid:");
+    const result = await docClient.send(query);
+
+    if (!result.Items || result.Items.length === 0) {
+      console.error("Item not found for language:", jazyk);
+      return "false";
+    }
+
+    const itemId = result.Items[0].id.S;
+
+    const update = new UpdateCommand({
+      TableName: "homepage",
+      Key: { id: itemId },
+      ExpressionAttributeNames: {
+        "#references": "references",
+      },
+      UpdateExpression: `
+        SET 
+          button_citat_viac = :button_citat_viac,
+          button_vypocet = :button_vypocet,
+          cenova_p_nadpis = :cenova_p_nadpis,
+          cenova_p_popis1 = :cenova_p_popis1,
+          cenova_p_popis2 = :cenova_p_popis2,
+          mapa_showroomov = :mapa_showroomov,
+          nase_sluzby_nadpis = :nase_sluzby_nadpis,
+          nase_sluzby_veta = :nase_sluzby_veta,
+          nase_sluzby_popis = :nase_sluzby_popis,
+          o_nas_nadpis = :o_nas_nadpis,
+          o_nas_popis = :o_nas_popis,
+          o_nas_elements = :o_nas_elements,
+          ref_elements = :ref_elements,
+          rokov_skusenosti = :rokov_skusenosti,
+          sluzby = :sluzby,
+          svg_titles = :svg_titles,
+          timbermax_ako = :timbermax_ako,
+          timbermax_ako_mobile_nadpis = :timbermax_ako_mobile_nadpis,
+          timbermax_ako_mobile_popisy = :timbermax_ako_mobile_popisy,
+          text_photo1 = :text_photo1,
+          text_photo2 = :text_photo2,
+          text_photo3 = :text_photo3,
+          text_photo4 = :text_photo4,
+          text_photo5 = :text_photo5,
+          text_photo6 = :text_photo6,
+          text_photo7 = :text_photo7,
+          text_photo8 = :text_photo8,
+          references_title = :references_title,
+          #references = :references
+      `,
+
+      ExpressionAttributeValues: {
+        ":button_citat_viac": actualizeData.button_citat_viac,
+        ":button_vypocet": actualizeData.button_vypocet,
+        ":cenova_p_nadpis": actualizeData.cenova_p_nadpis,
+        ":cenova_p_popis1": actualizeData.cenova_p_popis1,
+        ":cenova_p_popis2": actualizeData.cenova_p_popis2,
+        ":mapa_showroomov": actualizeData.mapa_showroomov,
+        ":nase_sluzby_nadpis": actualizeData.nase_sluzby_nadpis,
+        ":nase_sluzby_veta": actualizeData.nase_sluzby_veta,
+        ":nase_sluzby_popis": actualizeData.nase_sluzby_popis,
+        ":o_nas_nadpis": actualizeData.o_nas_nadpis,
+        ":o_nas_popis": actualizeData.o_nas_popis,
+        ":o_nas_elements": actualizeData.o_nas_elements,
+        ":ref_elements": actualizeData.ref_elements,
+        ":rokov_skusenosti": actualizeData.rokov_skusenosti,
+        ":sluzby": actualizeData.sluzby,
+        ":svg_titles": actualizeData.svg_titles,
+        ":timbermax_ako": actualizeData.timbermax_ako,
+        ":timbermax_ako_mobile_nadpis":
+          actualizeData.timbermax_ako_mobile_nadpis,
+        ":timbermax_ako_mobile_popisy":
+          actualizeData.timbermax_ako_mobile_popisy,
+        ":text_photo1": actualizeData.text_photo1,
+        ":text_photo2": actualizeData.text_photo2,
+        ":text_photo3": actualizeData.text_photo3,
+        ":text_photo4": actualizeData.text_photo4,
+        ":text_photo5": actualizeData.text_photo5,
+        ":text_photo6": actualizeData.text_photo6,
+        ":text_photo7": actualizeData.text_photo7,
+        ":text_photo8": actualizeData.text_photo8,
+        ":references_title": actualizeData.references_title,
+        ":references": actualizeData.references,
+      },
+    });
+
+    const updateResult = await docClient.send(update);
+    return updateResult.$metadata.httpStatusCode;
+  } catch (error) {
+    console.error("DynamoDB Update Error:", error);
     return "false";
   }
-
-  const doc = querySnapshot.docs[0];
-  const docId = doc.id;
-
-  await podstrankaCollectionRef.doc(docId).update({
-    button_citat_viac: actualizeData.button_citat_viac,
-    button_vypocet: actualizeData.button_vypocet,
-    cenova_p_nadpis: actualizeData.cenova_p_nadpis,
-    cenova_p_popis1: actualizeData.cenova_p_popis1,
-    cenova_p_popis2: actualizeData.cenova_p_popis2,
-    jazyk: jazyk,
-    mapa_showroomov: actualizeData.mapa_showroomov,
-    nase_sluzby_nadpis: actualizeData.nase_sluzby_nadpis,
-    nase_sluzby_veta: actualizeData.nase_sluzby_veta,
-    nase_sluzby_popis: actualizeData.nase_sluzby_popis,
-    o_nas_nadpis: actualizeData.o_nas_nadpis,
-    o_nas_popis: actualizeData.o_nas_popis,
-    o_nas_elements: actualizeData.o_nas_elements,
-    ref_elements: actualizeData.ref_elements,
-    rokov_skusenosti: actualizeData.rokov_skusenosti,
-    sluzby: actualizeData.sluzby,
-    svg_titles: actualizeData.svg_titles,
-    timbermax_ako: actualizeData.timbermax_ako,
-    timbermax_ako_mobile_nadpis: actualizeData.timbermax_ako_mobile_nadpis,
-    timbermax_ako_mobile_popisy: actualizeData.timbermax_ako_mobile_popisy,
-    text_photo1: actualizeData.text_photo1,
-    text_photo2: actualizeData.text_photo2,
-    text_photo3: actualizeData.text_photo3,
-    text_photo4: actualizeData.text_photo4,
-    text_photo5: actualizeData.text_photo5,
-    text_photo6: actualizeData.text_photo6,
-    text_photo7: actualizeData.text_photo7,
-    text_photo8: actualizeData.text_photo8,
-    references_title: actualizeData.references_title,
-    references: actualizeData.references,
-  });
-  revalidatePath(`/admin/domov/[${jazyk}]/page`, "page");
-  return "success";
 }
 
 export async function AdminActualizeAboutUsPage(

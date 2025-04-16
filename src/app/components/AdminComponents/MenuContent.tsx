@@ -15,9 +15,10 @@ import Stack from "@mui/material/Stack";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import GTranslateIcon from "@mui/icons-material/GTranslate";
 
 const mainListItems = [
-  { text: "Domov", icon: <HomeRoundedIcon />, link: "/admin" },
+  { text: "Domov", icon: <HomeRoundedIcon />, link: "/admin/domov" },
   {
     text: "O nás",
     icon: <PeopleRoundedIcon />,
@@ -55,6 +56,14 @@ const mainListItems = [
   },
 ];
 
+const secondaryListItems = [
+  {
+    text: "Jazyky",
+    icon: <GTranslateIcon />,
+    link: "/admin/jazyky",
+  },
+];
+
 export default function MenuContent() {
   const pathname = usePathname();
   return (
@@ -78,6 +87,20 @@ export default function MenuContent() {
                   },
                 }}
               >
+                <ListItemIcon sx={{ color: "#ffffff" }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+      <List dense>
+        {secondaryListItems.map((item, index) => (
+          <ListItem key={index} disablePadding sx={{ display: "block" }}>
+            <Link href={item.link}>
+              <ListItemButton>
                 <ListItemIcon sx={{ color: "#ffffff" }}>
                   {item.icon}
                 </ListItemIcon>
