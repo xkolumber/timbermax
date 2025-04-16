@@ -224,6 +224,33 @@ export async function fetchMoreAbout(
     return null;
   }
 }
+export async function fetchMoreAboutAdmin(
+  jazyk: string | undefined
+): Promise<MoreAboutTimElements | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "more-about",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as MoreAboutTimElements;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
 
 export async function fetchTerasy(
   jazyk: string | undefined

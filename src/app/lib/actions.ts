@@ -519,6 +519,7 @@ export async function AdminActualizeMoreAboutPage(
         Item: {
           id: newId,
           ...actualizeData,
+          jazyk: jazyk,
         },
       });
 
