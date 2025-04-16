@@ -167,6 +167,34 @@ export async function fetchAboutUs(
   }
 }
 
+export async function fetchAboutUsAdmin(
+  jazyk: string | undefined
+): Promise<AboutUsElements | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "about-us",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as AboutUsElements;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchMoreAbout(
   jazyk: string | undefined
 ): Promise<MoreAboutTimElements | null> {

@@ -308,18 +308,8 @@ export async function AdminActualizeAboutUsPage(
         TableName: "about-us",
         Item: {
           id: uuid,
-          o_nas: actualizeData.o_nas,
-          citat: actualizeData.citat,
-          history_nadpis: actualizeData.history_nadpis,
-          history_popis: actualizeData.history_popis,
-          filozofia_nadpis: actualizeData.filozofia_nadpis,
-          filozofia_popis1: actualizeData.filozofia_popis1,
-          filozofia_popis2: actualizeData.filozofia_popis2,
-          filozofia_popis3: actualizeData.filozofia_popis3,
+          ...actualizeData,
           jazyk: jazyk,
-          spoznajte_tim: actualizeData.spoznajte_tim,
-          staviame_znacka: actualizeData.staviame_znacka,
-          tim: actualizeData.tim,
         },
       };
 
