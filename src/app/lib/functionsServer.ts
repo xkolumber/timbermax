@@ -282,6 +282,34 @@ export async function fetchTerasy(
   }
 }
 
+export async function fetchTerasyAdmin(
+  jazyk: string | undefined
+): Promise<Terasy | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "terasy",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Terasy;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchFasady(
   type: string,
   jazyk: string | undefined

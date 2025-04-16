@@ -1666,7 +1666,19 @@ export async function AdminActualizeTerasyPage(
       const response = await docClient.send(updateCommand);
       return response.$metadata.httpStatusCode;
     } else {
-      throw new Error("Document not found for the provided jazyk.");
+      const newId = crypto.randomUUID();
+
+      const putCommand = new PutCommand({
+        TableName: "terasy",
+        Item: {
+          id: newId,
+          ...actualizeData,
+          jazyk: jazyk,
+        },
+      });
+
+      const response = await docClient.send(putCommand);
+      return response.$metadata.httpStatusCode;
     }
   } catch (err) {
     console.error("Error updating terasy:", err);
