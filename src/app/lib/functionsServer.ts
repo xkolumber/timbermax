@@ -430,6 +430,34 @@ export async function fetchSlnolamy(
   }
 }
 
+export async function fetchSlnolamyAdmin(
+  jazyk: string | undefined
+): Promise<Slnolamy | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "slnolamy",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Slnolamy;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchPloty(
   jazyk: string | undefined
 ): Promise<Ploty | null> {
