@@ -490,6 +490,34 @@ export async function fetchOstatne(
   }
 }
 
+export async function fetchOstatneAdmin(
+  jazyk: string | undefined
+): Promise<Ostatne | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "ostatne",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Ostatne;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchContact(
   jazyk: string | undefined
 ): Promise<ContactPage | null> {
