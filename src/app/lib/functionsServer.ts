@@ -460,6 +460,34 @@ export async function fetchPloty(
   }
 }
 
+export async function fetchPlotyAdmin(
+  jazyk: string | undefined
+): Promise<Ploty | null> {
+  try {
+    const command = new QueryCommand({
+      TableName: "ploty",
+      IndexName: "jazyk-index",
+      KeyConditionExpression: "#jazyk = :jazyk",
+      ExpressionAttributeNames: {
+        "#jazyk": "jazyk",
+      },
+      ExpressionAttributeValues: {
+        ":jazyk": jazyk,
+      },
+    });
+
+    const response = await docClient.send(command);
+    if (response.Items && response.Items.length > 0) {
+      return response.Items[0] as Ploty;
+    }
+
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  } catch (err) {
+    console.log(err);
+    throw new Error(`Item with slug ${jazyk} not found.`);
+  }
+}
+
 export async function fetchOstatne(
   jazyk: string | undefined
 ): Promise<Ostatne | null> {

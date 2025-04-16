@@ -1013,6 +1013,20 @@ export async function AdminActualizePlotyPage(
 
       const response = await docClient.send(updateCommand);
       return response.$metadata.httpStatusCode;
+    } else {
+      const newId = crypto.randomUUID();
+
+      const putCommand = new PutCommand({
+        TableName: "ploty",
+        Item: {
+          id: newId,
+          ...actualizeData,
+          jazyk: jazyk,
+        },
+      });
+
+      const response = await docClient.send(putCommand);
+      return response.$metadata.httpStatusCode;
     }
   } catch (err) {
     console.error("Error updating price offer:", err);
