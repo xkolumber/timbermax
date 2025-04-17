@@ -1,11 +1,12 @@
 "use client";
 import { AdminAddPhotoGallery } from "@/app/lib/actions";
-import { categories, CompressImages } from "@/app/lib/functionsClient";
+import { categories, CompressImage } from "@/app/lib/functionsClient";
+import { uploadFileToS3 } from "@/app/lib/functionsServer";
 import { Gallery } from "@/app/lib/interface";
 import { useQueryClient } from "@tanstack/react-query";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";
@@ -13,7 +14,7 @@ import { ClipLoader } from "react-spinners";
 const Page = () => {
   const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
-  const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -29,40 +30,13 @@ const Page = () => {
   });
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [photoLoading, setPhotoLoading] = useState(false);
-
-  const handlePhotosLoad = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = event.target.files;
-    setPhotoLoading(true);
-
-    if (files && files.length > 0) {
-      const compressedFiles = await CompressImages(files);
-
-      if (compressedFiles === null) {
-        toast.error("Pri načítaní obrázku nastala chyba. Kontaktujte nás.");
-        setPhotoLoading(false);
-      } else {
-        setProjectPhotos(compressedFiles);
-        setPhotoLoading(false);
-      }
-    }
-  };
+  const [dataLoading, setDataLoading] = useState(false);
 
   const handleAddGalleryFirebase = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const storage = getStorage();
-      const photoUrls = await Promise.all(
-        projectPhotos.map(async (photo) => {
-          const storageRef = ref(storage, `galeria/${photo.name}`);
-          await uploadBytes(storageRef, photo);
-          return getDownloadURL(storageRef);
-        })
-      );
-
-      const response = await AdminAddPhotoGallery(photoUrls, actualizeGallery);
+      const response = await AdminAddPhotoGallery(actualizeGallery);
       if (response === 200) {
         await queryClient.refetchQueries({
           queryKey: ["admin_gallery"],
@@ -75,7 +49,6 @@ const Page = () => {
           profil: "",
           nazov: "",
         }));
-        setProjectPhotos([]);
         setSelectedCategory([]);
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
@@ -117,6 +90,66 @@ const Page = () => {
 
       return updatedSelected;
     });
+  };
+
+  const handleUploadPhotos = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    setPhotoLoading(true);
+
+    const fileArray = Array.from(files);
+
+    const validFiles = fileArray.filter((file) =>
+      file.type.startsWith("image/")
+    );
+
+    if (validFiles.length === 0) {
+      toast.error("Iba obrázky sú povolené");
+      return;
+    }
+
+    setDataLoading(true);
+
+    const compressedFiles = [];
+    for (const file of validFiles) {
+      const compressedFile = await CompressImage(file);
+      if (compressedFile) {
+        const newFile = new File([compressedFile], file.name, {
+          type: compressedFile.type,
+          lastModified: file.lastModified,
+        });
+        compressedFiles.push(newFile);
+      }
+    }
+
+    try {
+      const uploadedUrls = await Promise.all(
+        compressedFiles.map(async (compressedFile) => {
+          const formData = new FormData();
+
+          const fileName = compressedFile.name.replace(/\s+/g, "_");
+          console.log(fileName);
+
+          formData.append("file", compressedFile);
+
+          const url = await uploadFileToS3(formData);
+
+          return url;
+        })
+      );
+
+      setActualizeGallery((prevData) => {
+        const updatedPhotos = [...prevData.fotky, ...uploadedUrls];
+        return { ...prevData, fotky: updatedPhotos };
+      });
+    } catch (error) {
+      console.error("Error uploading photos:", error);
+      alert("Failed to upload one or more photos. Please try again.");
+    } finally {
+      setDataLoading(false);
+      e.target.value = "";
+    }
   };
 
   return (
@@ -191,10 +224,10 @@ const Page = () => {
         </p>
         <input
           type="file"
+          accept="image/*"
+          onChange={(e) => handleUploadPhotos(e)}
+          className="mt-6"
           multiple
-          ref={fileInputRef}
-          onChange={(event) => handlePhotosLoad(event)}
-          required
         />
         {photoLoading && (
           <ClipLoader size={20} color={"#32a8a0"} loading={true} className="" />
@@ -218,6 +251,22 @@ const Page = () => {
           )}
         </button>
       </form>
+
+      {dataLoading && (
+        <>
+          {" "}
+          <div className="behind_card_background"></div>
+          <div className="popup_message">
+            <h5 className="text-center">Objekty sa nahrávajú do cloudu...</h5>
+            <ClipLoader
+              size={20}
+              color={"#00000"}
+              loading={true}
+              className="ml-16 mr-16"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

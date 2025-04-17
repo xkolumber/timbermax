@@ -1,11 +1,10 @@
 "use client";
 import { AdminActualizeContactPage } from "@/app/lib/actions";
 import { daysOrder, OpeningHoursEmpty } from "@/app/lib/functionsClient";
-import { fetchContact, fetchContactAdmin } from "@/app/lib/functionsServer";
+import { fetchContactAdmin } from "@/app/lib/functionsServer";
 import { ContactPage } from "@/app/lib/interface";
 import { CircularProgress } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { ClipLoader } from "react-spinners";

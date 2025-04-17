@@ -1,8 +1,6 @@
 "use server";
 
 import { GetCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
-import { getFirestore } from "firebase-admin/firestore";
-import { unstable_noStore } from "next/cache";
 import { clientS3, docClient } from "./awsConfig";
 import { allowedLanguages, aws_bucket_name, createSlug } from "./functions";
 import {
@@ -23,61 +21,6 @@ import {
 } from "./interface";
 
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
-// import { allowedLanguages } from "./functionsClient";
-
-export async function GetAdminHomePage(language: string) {
-  unstable_noStore();
-
-  try {
-    const db = getFirestore();
-    const podstrankaCollectionRef = db.collection("homepage");
-    const querySnapshot = await podstrankaCollectionRef
-      .where("jazyk", "==", language)
-      .get();
-
-    if (querySnapshot.empty) {
-      console.error("Document does not exist for uid:", language);
-      return null;
-    }
-    const doc = querySnapshot.docs[0];
-    const orderData = doc.data() as HomePageElements;
-    return orderData;
-  } catch (error) {
-    return null;
-  }
-}
-
-export async function GetGalleriesForServicePage(category: string) {
-  unstable_noStore();
-
-  try {
-    const db = getFirestore();
-    const podstrankaCollectionRef = db.collection("galeria");
-    const querySnapshot = await podstrankaCollectionRef
-      .where("kategorie", "array-contains", category)
-      .get();
-
-    if (querySnapshot.empty) {
-      console.error("No documents found for category:", category);
-      return [];
-    }
-    const galleries = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      datum_pridania: doc.data().datum_pridania,
-      fotky: doc.data().fotky,
-      kategorie: doc.data().kategorie,
-      nazov: doc.data().nazov,
-      profil: doc.data().profil,
-      farba: doc.data().farba,
-      jazyky_kontent: doc.data().jazyky_kontent,
-    }));
-
-    return galleries;
-  } catch (error) {
-    console.error("Error fetching galleries:", error);
-    return [];
-  }
-}
 
 export async function fetchHomepage(
   jazyk: string | undefined

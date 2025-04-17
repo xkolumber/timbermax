@@ -22,12 +22,10 @@ import { cloudfront_url } from "../lib/functionsClient";
 
 const Navbar = () => {
   const { language, setLanguage } = useLanguageStore();
-  const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [closeClicked, setCloseClicked] = useState(false);
   const [showNavbarPart, setShowNavbarPart] = useState(true);
   const [clickedIndexMobile, setClickedIndexMobile] = useState(-1);
   const pathname = usePathname();
-  const router = useRouter();
   const [navbarData, setNavbarData] = useState<NavbarItem[]>(navbar_sk);
   const [showLanguages, setShowLanguages] = useState(false);
   const [showLanguagesMobile, setShowLanguagesMobile] = useState(false);

@@ -9,10 +9,8 @@ import {
 } from "@aws-sdk/lib-dynamodb";
 import { randomUUID } from "crypto";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import { z } from "zod";
 import { docClient } from "./awsConfig";
-import { firestore } from "./firebaseServer";
 import { createSlug } from "./functions";
 import {
   AboutUsElements,
@@ -106,12 +104,6 @@ export async function AdminAddLanguage(jazyk: string) {
 export async function doRevalidate(pathname: string) {
   revalidatePath(pathname);
 }
-
-export const getToken = async () => {
-  const cookieStore = cookies();
-  const authTokenCookie = cookieStore.get("FirebaseIdTokenTim");
-  return authTokenCookie?.value;
-};
 
 export async function AdminactualizeHomePage(
   actualizeData: HomePageElements,
@@ -1958,10 +1950,7 @@ export async function AdminActualizeFasadyOdvetranaPage(
   }
 }
 
-export async function AdminAddPhotoGallery(
-  fotky: string[],
-  actualizeGallery: Gallery
-) {
+export async function AdminAddPhotoGallery(actualizeGallery: Gallery) {
   const uuid = crypto.randomUUID();
 
   try {
@@ -1971,7 +1960,7 @@ export async function AdminAddPhotoGallery(
         Item: {
           id: uuid,
           farba: actualizeGallery.farba,
-          fotky: fotky,
+          fotky: actualizeGallery.fotky,
           nazov: actualizeGallery.nazov,
           kategorie: actualizeGallery.kategorie,
           profil: actualizeGallery.profil,
@@ -2010,58 +1999,50 @@ export async function AdminDeleteImageFromAlbum(
   indexPhoto: number
 ) {
   try {
-    const docRef = firestore.collection("galeria").doc(id);
-    const docSnapshot = await docRef.get();
+    const getCommand = new GetCommand({
+      TableName: "galeria",
+      Key: { id },
+    });
 
-    if (!docSnapshot.exists) {
+    const result = await docClient.send(getCommand);
+
+    if (!result.Item) {
       console.error("Document not found.");
       return "false";
     }
 
-    const docData = docSnapshot.data();
-    const fotky = docData!.fotky as string[];
+    const fotky = result.Item.fotky as string[];
 
     if (indexPhoto < 0 || indexPhoto >= fotky.length) {
       console.error("Invalid photo index.");
       return "false";
     }
+
     const new_fotky = fotky.filter((_, index) => index !== indexPhoto);
 
-    await docRef.update({
-      fotky: new_fotky,
+    const updateCommand = new UpdateCommand({
+      TableName: "galeria",
+      Key: { id },
+      UpdateExpression: "SET fotky = :new_fotky",
+      ExpressionAttributeValues: {
+        ":new_fotky": new_fotky,
+      },
     });
 
-    revalidatePath(`/admin/galeria/[${id}]/page`, "page");
+    const response = await docClient.send(updateCommand);
 
-    return "success";
+    return response.$metadata.httpStatusCode;
   } catch (error) {
-    console.error("Database Error: Failed", error);
+    console.error("DynamoDB Error:", error);
     return "false";
   }
 }
 
 export async function AdminActualizeAlbumGallery(
   id: string,
-  photoUrls: string[],
   actualizeGallery: Gallery
 ) {
   try {
-    const getResult = await docClient.send(
-      new GetCommand({
-        TableName: "galeria",
-        Key: { id },
-      })
-    );
-
-    const item = getResult.Item;
-    if (!item) {
-      console.error("Document not found.");
-      return "false";
-    }
-
-    const existingPhotos: string[] = item.fotky || [];
-    const updatedPhotos = [...existingPhotos, ...photoUrls];
-
     const response = await docClient.send(
       new UpdateCommand({
         TableName: "galeria",
@@ -2075,7 +2056,7 @@ export async function AdminActualizeAlbumGallery(
               jazyky_kontent = :jazyky_kontent
         `,
         ExpressionAttributeValues: {
-          ":fotky": updatedPhotos,
+          ":fotky": actualizeGallery.fotky,
           ":kategorie": actualizeGallery.kategorie,
           ":nazov": actualizeGallery.nazov,
           ":profil": actualizeGallery.profil,

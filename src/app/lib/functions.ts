@@ -1,4 +1,5 @@
 import { getPlaiceholder } from "plaiceholder";
+import imageCompression from "browser-image-compression";
 
 export default async function getBase64(imageUrl: string) {
   try {

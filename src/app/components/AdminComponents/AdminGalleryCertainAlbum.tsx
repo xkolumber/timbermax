@@ -3,12 +3,22 @@ import {
   AdminActualizeAlbumGallery,
   AdminDeleteImageFromAlbum,
 } from "@/app/lib/actions";
-import { categories, CompressImages } from "@/app/lib/functionsClient";
-import { fetchAllLanguages, fetchGalleryId } from "@/app/lib/functionsServer";
+
+import {
+  aws_bucket_url,
+  categories,
+  cloudfront_url,
+  CompressImage,
+} from "@/app/lib/functionsClient";
+import {
+  fetchAllLanguages,
+  fetchGalleryId,
+  uploadFileToS3,
+} from "@/app/lib/functionsServer";
 import { Gallery, IsLoadingMap, LanguagesAdming } from "@/app/lib/interface";
 import { CircularProgress } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
@@ -54,9 +64,9 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [projectPhotos, setProjectPhotos] = useState<File[]>([]);
   const [photoLoading, setPhotoLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [dataLoading, setDataLoading] = useState(false);
 
   const handleEditAlbumFirebase = async () => {
     setIsLoadingMap((prevState) => ({
@@ -65,21 +75,8 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
     }));
 
     try {
-      let photoUrls: string[] = [];
-      if (projectPhotos.length > 0) {
-        const storage = getStorage();
-        photoUrls = await Promise.all(
-          projectPhotos.map(async (photo) => {
-            const storageRef = ref(storage, `galeria/${photo.name}`);
-            await uploadBytes(storageRef, photo);
-            return getDownloadURL(storageRef);
-          })
-        );
-      }
-
       const response = await AdminActualizeAlbumGallery(
         data!.id,
-        photoUrls,
         actualizeGallery
       );
       if (response === 200) {
@@ -90,7 +87,6 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
-        setProjectPhotos([]);
       } else {
         toast.error("Niekde nastala chyba");
       }
@@ -112,13 +108,12 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
       }));
 
       const response = await AdminDeleteImageFromAlbum(data!.id, index_foto);
-      if (response === "success") {
+      if (response === 200) {
         setActualizeGallery((prevData) => ({
           ...prevData,
           fotky: prevData.fotky.filter((_, index) => index !== index_foto),
         }));
         toast.success("Objekt bol vymazaný");
-        setProjectPhotos([]);
       } else {
         toast.error("Niekde nastala chyba");
       }
@@ -161,25 +156,6 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
       ...prev,
       jazyky_kontent: updatedJazykyKontent,
     }));
-  };
-
-  const handlePhotosLoad = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = event.target.files;
-    setPhotoLoading(true);
-
-    if (files && files.length > 0) {
-      const compressedFiles = await CompressImages(files);
-
-      if (compressedFiles === null) {
-        toast.error("Pri načítaní obrázku nastala chyba. Kontaktujte nás.");
-        setPhotoLoading(false);
-      } else {
-        setProjectPhotos(compressedFiles);
-        setPhotoLoading(false);
-      }
-    }
   };
 
   const handleCheckboxChangeCategory = (productTitle: string) => {
@@ -237,6 +213,66 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
     }
   }, [languages, data]);
 
+  const handleUploadPhotos = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    setPhotoLoading(true);
+
+    const fileArray = Array.from(files);
+
+    const validFiles = fileArray.filter((file) =>
+      file.type.startsWith("image/")
+    );
+
+    if (validFiles.length === 0) {
+      toast.error("Iba obrázky sú povolené");
+      return;
+    }
+
+    setDataLoading(true);
+
+    const compressedFiles = [];
+    for (const file of validFiles) {
+      const compressedFile = await CompressImage(file);
+      if (compressedFile) {
+        const newFile = new File([compressedFile], file.name, {
+          type: compressedFile.type,
+          lastModified: file.lastModified,
+        });
+        compressedFiles.push(newFile);
+      }
+    }
+
+    try {
+      const uploadedUrls = await Promise.all(
+        compressedFiles.map(async (compressedFile) => {
+          const formData = new FormData();
+
+          const fileName = compressedFile.name.replace(/\s+/g, "_");
+          console.log(fileName);
+
+          formData.append("file", compressedFile);
+
+          const url = await uploadFileToS3(formData);
+
+          return url;
+        })
+      );
+
+      setActualizeGallery((prevData) => {
+        const updatedPhotos = [...prevData.fotky, ...uploadedUrls];
+        return { ...prevData, fotky: updatedPhotos };
+      });
+    } catch (error) {
+      console.error("Error uploading photos:", error);
+      alert("Failed to upload one or more photos. Please try again.");
+    } finally {
+      setDataLoading(false);
+      e.target.value = "";
+    }
+  };
+
   return (
     <div>
       <div className="products_admin">
@@ -271,7 +307,7 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
                   key={index_foto}
                 >
                   <Image
-                    src={foto}
+                    src={foto.replace(aws_bucket_url, cloudfront_url)}
                     width={500}
                     height={500}
                     priority
@@ -294,6 +330,25 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
                   </button>
                 </div>
               ))}
+            </div>
+            <div className="flex flex-row items-center pt-8 gap-6 mb-16">
+              {" "}
+              <h6 className="text-primary ">Pridajte fotky:</h6>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleUploadPhotos(e)}
+                className="mt-6"
+                multiple
+              />
+              {photoLoading && (
+                <ClipLoader
+                  size={20}
+                  color={"#32a8a0"}
+                  loading={true}
+                  className=""
+                />
+              )}
             </div>
             <div className="flex flex-row justify-between items-center gap-4 mt-8">
               <h6>profil galérie:</h6>
@@ -412,25 +467,7 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
                 ))}
               </div>
             </div>
-            <div className="flex flex-row items-center pt-8 gap-6">
-              {" "}
-              <h6 className="text-primary ">Pridajte fotky:</h6>
-              <input
-                type="file"
-                multiple
-                ref={fileInputRef}
-                onChange={(event) => handlePhotosLoad(event)}
-                required
-              />
-              {photoLoading && (
-                <ClipLoader
-                  size={20}
-                  color={"#32a8a0"}
-                  loading={true}
-                  className=""
-                />
-              )}
-            </div>
+
             <button
               className={`btn btn--primary ${
                 (photoLoading || isLoadingMap["actualize_album"]) &&
@@ -450,6 +487,22 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
                 "Aktualizovať"
               )}
             </button>
+          </>
+        )}
+
+        {dataLoading && (
+          <>
+            {" "}
+            <div className="behind_card_background"></div>
+            <div className="popup_message">
+              <h5 className="text-center">Objekty sa nahrávajú do cloudu...</h5>
+              <ClipLoader
+                size={20}
+                color={"#00000"}
+                loading={true}
+                className="ml-16 mr-16"
+              />
+            </div>
           </>
         )}
       </div>

@@ -198,6 +198,21 @@ export async function CompressImages(files: FileList) {
   }
 }
 
+export async function CompressImage(file: File) {
+  try {
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
+    const compressedFile = await imageCompression(file, options);
+    return compressedFile;
+  } catch (error) {
+    return null;
+  }
+}
+
 export const categories = [
   "terasy",
   "fasady",

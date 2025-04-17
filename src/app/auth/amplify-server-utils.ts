@@ -29,9 +29,6 @@ export async function authenticatedUser(context: NextServer.Context) {
         // @ts-ignore aws recognize
         user.isAdmin = Boolean(groups && groups.includes("Admins"));
 
-        // @ts-ignore aws recognize
-        console.log(Boolean(groups && groups.includes("Admins")));
-
         return user;
       } catch (error) {
         console.log(error);
