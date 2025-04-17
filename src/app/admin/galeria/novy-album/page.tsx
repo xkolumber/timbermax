@@ -96,8 +96,6 @@ const Page = () => {
     const files = e.target.files;
     if (!files) return;
 
-    setPhotoLoading(true);
-
     const fileArray = Array.from(files);
 
     const validFiles = fileArray.filter((file) =>
