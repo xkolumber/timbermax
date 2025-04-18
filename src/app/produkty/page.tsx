@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
@@ -7,7 +8,7 @@ import ColorVariantsOnly from "../components/ServicesComponents/ColorVariantsOnl
 import CertificateDownload from "../components/CertificateDownload";
 import ProductsPodklady from "../components/ProductsPodklady";
 
-const page = () => {
+const Page = () => {
   return (
     <main className="product_li">
       <div className="bg-secondary  ">
@@ -323,4 +324,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

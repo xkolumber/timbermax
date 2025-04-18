@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { BLUR_DATA_URL_GRAY, colors } from "@/app/lib/functionsClient";
+import {
+  aws_bucket_url,
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+  colors,
+} from "@/app/lib/functionsClient";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
@@ -27,7 +32,7 @@ const ColorVariants = ({ data }: Props) => {
             onMouseLeave={() => setHoveredImage(-1)}
           >
             <Image
-              src={color.farba}
+              src={color.farba.replace(aws_bucket_url, cloudfront_url)}
               alt="hlavna_fotka"
               height={300}
               width={160}
@@ -71,7 +76,7 @@ const ColorVariants = ({ data }: Props) => {
               key={index}
             >
               <Image
-                src={item.farba}
+                src={item.farba.replace(aws_bucket_url, cloudfront_url)}
                 alt="hlavna_fotka"
                 height={300}
                 width={160}

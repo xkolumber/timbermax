@@ -4,6 +4,7 @@ import getBase64 from "@/app/lib/functions";
 import IconCalculateGreen from "../Icons/IconCalculateGreen";
 import { PriceOffer } from "@/app/lib/interface";
 import Link from "next/link";
+import { cloudfront_url } from "@/app/lib/functionsClient";
 
 const three_text = [
   {
@@ -102,9 +103,7 @@ const PricesOffer = ({ data }: Props) => {
         <p className="text-primary mt-8">{data?.posl_popis4}</p>
       </div>
       <Image
-        src={
-          "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fcennik_interier.png?alt=media&token=88d6e3c9-4414-4512-bfc6-78dd3778463d"
-        }
+        src={`${cloudfront_url}/random/cennik_interier_aws.png`}
         alt="hlavna_fotka"
         height={800}
         width={1920}

@@ -12,7 +12,12 @@ import IconGalleryLeft from "../Icons/IconGalleryLeft";
 import IconGalleryRight from "../Icons/IconGalleryRight";
 import { Gallery } from "@/app/lib/interface";
 import Link from "next/link";
-import { BLUR_DATA_URL_GRAY, getFirstWord } from "@/app/lib/functionsClient";
+import {
+  aws_bucket_url,
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+  getFirstWord,
+} from "@/app/lib/functionsClient";
 
 interface Props {
   nadpis_galeria: string;
@@ -80,7 +85,7 @@ const ServiceGallery = ({ nadpis_galeria, galleries }: Props) => {
 
                   <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
                   <Image
-                    src={item.fotky[0]}
+                    src={item.fotky[0].replace(aws_bucket_url, cloudfront_url)}
                     alt="hlavna_fotka"
                     height={1000}
                     width={1000}
@@ -149,7 +154,7 @@ const ServiceGallery = ({ nadpis_galeria, galleries }: Props) => {
 
                   <div className="absolute inset-0 bg-black opacity-30 group-hover:opacity-60  transition-opacity duration-300 z-6"></div>
                   <Image
-                    src={item.fotky[0]}
+                    src={item.fotky[0].replace(aws_bucket_url, cloudfront_url)}
                     alt="hlavna_fotka"
                     height={1000}
                     width={1000}

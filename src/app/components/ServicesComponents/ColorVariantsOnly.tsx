@@ -1,5 +1,10 @@
 "use client";
-import { BLUR_DATA_URL_GRAY, colors } from "@/app/lib/functionsClient";
+import {
+  aws_bucket_url,
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+  colors,
+} from "@/app/lib/functionsClient";
 import React, { useState } from "react";
 import Image from "next/image";
 
@@ -22,7 +27,7 @@ const ColorVariantsOnly = () => {
             onMouseLeave={() => setHoveredImage(-1)}
           >
             <Image
-              src={color.farba}
+              src={color.farba.replace(aws_bucket_url, cloudfront_url)}
               alt="hlavna_fotka"
               height={300}
               width={160}
@@ -63,7 +68,7 @@ const ColorVariantsOnly = () => {
               key={index}
             >
               <Image
-                src={item.farba}
+                src={item.farba.replace(aws_bucket_url, cloudfront_url)}
                 alt="hlavna_fotka"
                 height={300}
                 width={160}

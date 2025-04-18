@@ -9,7 +9,12 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import IconArrowLoopLeft from "../Icons/IconArrowLoopLeft";
 import IconArrowLoopRight from "../Icons/IconArrowLoopRight";
-import { BLUR_DATA_URL_GRAY, localPeople } from "@/app/lib/functionsClient";
+import {
+  aws_bucket_url,
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+  localPeople,
+} from "@/app/lib/functionsClient";
 
 interface Props {
   tim: Team[];
@@ -40,8 +45,6 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
   }, [tim, people]);
   if (!selectedHuman) return null;
 
-  console.log(people);
-
   return (
     <div className="bg-secondary">
       <h3 className="pt-16 xl:pt-48 text-center  custom-underline font-normal !normal-case">
@@ -50,7 +53,10 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
 
       <div className="relative h-[700px]   2xl:h-[850px] 3xl:x-[893px] hidden xl:grid">
         <Image
-          src={`${selectedHuman.main_image}`}
+          src={`${selectedHuman.main_image.replace(
+            aws_bucket_url,
+            cloudfront_url
+          )}`}
           alt="hlavna_fotka"
           height={1080}
           width={1920}
@@ -98,7 +104,10 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
                   key={index}
                 >
                   <Image
-                    src={`${object.image}`}
+                    src={`${object.image.replace(
+                      aws_bucket_url,
+                      cloudfront_url
+                    )}`}
                     alt="hlavna_fotka"
                     height={960}
                     width={480}
@@ -142,7 +151,10 @@ const AboutUsTeam = ({ tim, spoznajte_tim }: Props) => {
               <div className="w-full h-full rounded-[12px]">
                 <div className="relative">
                   <Image
-                    src={`${localPeople[index].image}`}
+                    src={`${localPeople[index].image.replace(
+                      aws_bucket_url,
+                      cloudfront_url
+                    )}`}
                     alt="hlavna_fotka"
                     height={342}
                     width={342}

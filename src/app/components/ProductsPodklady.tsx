@@ -3,31 +3,34 @@ import Image from "next/image";
 import IconTerasa from "./Icons/IconTerasa";
 import IconFasady from "./Icons/IconFasady";
 import IconPloty from "./Icons/IconPloty";
-import { BLUR_DATA_URL_GRAY } from "../lib/functionsClient";
+import {
+  aws_bucket_url,
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+} from "../lib/functionsClient";
 
 const data = [
   {
     title: "Terasy",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fpodklady-typy%2Fterasy.png?alt=media&token=f6cbb1d2-3068-40c8-834a-6042df2625c5",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/random/terasy.png",
     svg_icon: <IconTerasa />,
   },
   {
     title: "Fasády",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fpodklady-typy%2Ffasady.png?alt=media&token=0637e134-a175-4ea2-ab9d-cc6b3424102f",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/random/fasady.png",
     svg_icon: <IconFasady />,
   },
   {
     title: "Ploty",
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fpodklady-typy%2Fploty.png?alt=media&token=8ba3abe4-ae5c-4a0a-a73e-a1eac570d77d",
+    image: "https://timbermaxopen.s3.eu-north-1.amazonaws.com/random/ploty.png",
     svg_icon: <IconPloty />,
   },
   {
     title: "Slnolamy",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fpodklady-typy%2Fslnolamy.png?alt=media&token=0411f34c-66e3-4083-b122-34ab634afbda",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/random/slnolamy.png",
     svg_icon: <IconPloty />,
   },
 ];
@@ -42,7 +45,7 @@ const ProductsPodklady = () => {
             key={index}
           >
             <Image
-              src={object.image}
+              src={object.image.replace(aws_bucket_url, cloudfront_url)}
               alt="Obrazok"
               width={300}
               height={700}

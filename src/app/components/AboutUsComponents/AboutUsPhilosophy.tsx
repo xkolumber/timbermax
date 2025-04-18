@@ -3,6 +3,7 @@ import IconQuoteUpper from "../Icons/IconQuoteUpper";
 import IconQueoteDown from "../Icons/IconQuoteDown";
 import IconQuoteDown from "../Icons/IconQuoteDown";
 import Image from "next/image";
+import { cloudfront_url } from "@/app/lib/functionsClient";
 
 interface Props {
   nadpis: string;
@@ -56,12 +57,13 @@ const AboutUsPhilosophy = ({
           </p>
 
           <Image
-            src={`https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2FAsset%201.png?alt=media&token=e4952a2f-fa19-4d2b-a996-b882f8c1e568`}
+            src={`${cloudfront_url}/random/podpis.png`}
             alt={`Image`}
             className=" w-full h-[50px] object-contain"
             priority
-            width={400}
+            width={600}
             height={200}
+            quality={100}
           />
         </div>
       </div>

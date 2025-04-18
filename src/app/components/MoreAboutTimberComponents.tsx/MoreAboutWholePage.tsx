@@ -2,7 +2,7 @@
 import { MoreAboutTimElements } from "@/app/lib/interface";
 import React from "react";
 import Image from "next/image";
-import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
+import { BLUR_DATA_URL_GRAY, cloudfront_url } from "@/app/lib/functionsClient";
 import Cookies from "js-cookie";
 import { fetchMoreAbout } from "@/app/lib/functionsServer";
 import { useQuery } from "@tanstack/react-query";
@@ -35,7 +35,7 @@ const MoreAboutWholePage = () => {
             {(language === "sk" || language === "cz") && (
               <>
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fpergolas_sk.png?alt=media&token=614a0323-dc46-481e-8075-0809668e7a13"
+                  src={`${cloudfront_url}/more_about/pergolas_sk.png`}
                   alt="hlavna_fotka"
                   height={800}
                   width={1500}
@@ -46,7 +46,7 @@ const MoreAboutWholePage = () => {
                   blurDataURL={BLUR_DATA_URL_GRAY}
                 />
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fpergolas_sk_m.png?alt=media&token=953dc4d7-f8d2-4d79-a19a-c9033f5811b4"
+                  src={`${cloudfront_url}/more_about/pergolas_sk_m.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={900}
@@ -61,7 +61,7 @@ const MoreAboutWholePage = () => {
             {language === "en" && (
               <>
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fpergolas_eng.png?alt=media&token=ab1c4fb6-7275-44c7-8e07-3bfd75928110"
+                  src={`${cloudfront_url}/more_about/pergolas_eng.png`}
                   alt="hlavna_fotka"
                   height={800}
                   width={1500}
@@ -72,7 +72,7 @@ const MoreAboutWholePage = () => {
                   blurDataURL={BLUR_DATA_URL_GRAY}
                 />
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fpergolas_eng_m.png?alt=media&token=2f5b7640-7983-4513-a21b-3f7f936de612"
+                  src={`${cloudfront_url}/more_about/pergolas_eng_m.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={900}
@@ -163,7 +163,7 @@ const MoreAboutWholePage = () => {
             {language === "sk" && (
               <>
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fwood_sk.png?alt=media&token=114fcb73-879d-48c2-810f-a91251dacec8"
+                  src={`${cloudfront_url}/more_about/wood_sk.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={1920}
@@ -174,7 +174,7 @@ const MoreAboutWholePage = () => {
                   blurDataURL={BLUR_DATA_URL_GRAY}
                 />
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fwood_sk_m.png?alt=media&token=4c14466e-f4a4-40e4-815b-cbc077956215"
+                  src={`${cloudfront_url}/more_about/wood_sk_m.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={800}
@@ -189,7 +189,7 @@ const MoreAboutWholePage = () => {
             {language === "cz" && (
               <>
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fwood_cz.png?alt=media&token=2baa3942-b4c1-43e6-b9b4-4c38913dca69"
+                  src={`${cloudfront_url}/more_about/wood_cz.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={1920}
@@ -200,7 +200,7 @@ const MoreAboutWholePage = () => {
                   blurDataURL={BLUR_DATA_URL_GRAY}
                 />
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fwood_cz_m.png?alt=media&token=ff9f8251-bfa0-4089-bec6-055db5720f3d"
+                  src={`${cloudfront_url}/more_about/wood_cz_m.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={800}
@@ -215,7 +215,7 @@ const MoreAboutWholePage = () => {
             {language === "en" && (
               <>
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fwood_en.png?alt=media&token=09219d7b-f6ca-4e2b-b029-3d6c19596146"
+                  src={`${cloudfront_url}/more_about/wood_en.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={1920}
@@ -226,7 +226,7 @@ const MoreAboutWholePage = () => {
                   blurDataURL={BLUR_DATA_URL_GRAY}
                 />
                 <Image
-                  src="https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/languages_photos%2Fwood_en_m.png?alt=media&token=c694f687-6c3b-4537-a2da-5817dc16072a"
+                  src={`${cloudfront_url}/more_about/wood_en_m.png`}
                   alt="hlavna_fotka"
                   height={900}
                   width={800}

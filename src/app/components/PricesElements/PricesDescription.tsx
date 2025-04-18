@@ -1,4 +1,4 @@
-import { BLUR_DATA_URL_GRAY } from "@/app/lib/functionsClient";
+import { BLUR_DATA_URL_GRAY, cloudfront_url } from "@/app/lib/functionsClient";
 import { PriceOffer } from "@/app/lib/interface";
 import Image from "next/image";
 import PricesElements from "./PricesElements";
@@ -13,7 +13,6 @@ const PricesDescription = ({ data }: Props) => {
         <h3 className="custom-underline !normal-case ">
           {data?.profil_nadpis}{" "}
         </h3>
-        <p className="text-primary">{data?.profil_popis1} </p>{" "}
         <p className="text-primary">{data?.profil_popis2}</p>{" "}
         <p className="text-primary mt-8">{data?.profil_popis3}</p>{" "}
         <p className="text-primary mt-8">{data?.profil_popis4}</p>
@@ -23,9 +22,7 @@ const PricesDescription = ({ data }: Props) => {
         <p className="text-primary mt-8">{data?.profil_popis6}</p>
       </div>
       <Image
-        src={
-          "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fcennik_photo.png?alt=media&token=2824f64d-dab1-4752-80ff-7fc43262f15d"
-        }
+        src={`${cloudfront_url}/random/cennik_photo_aws.png`}
         alt="hlavna_fotka"
         height={1000}
         width={1920}

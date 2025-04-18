@@ -78,103 +78,102 @@ export const EmptyServices = [
 export const colors = [
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%207.png?alt=media&token=86fa35b8-c8d6-4211-9bf2-194fb3ddf8d4",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%207.png",
     text: "ipe",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%206.png?alt=media&token=8f4a928d-9153-4ffa-bff2-93f5aca8948b",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%206.png",
     text: "redwood",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2024.png?alt=media&token=2986ad17-d47a-49c9-8ac5-3b2f0989d0d6",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2024.png",
     text: "bangkirai",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%208.png?alt=media&token=a3fafba3-d9fd-4211-91a9-ef690e7d0548",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%208.png",
     text: "mahagony",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%209.png?alt=media&token=ab24958e-0cb8-46c3-99ed-7d34098279f8",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%209.png",
     text: "meranti",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2010.png?alt=media&token=73887293-ff56-4199-9ab9-479da5004791",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2010.png",
     text: "okume",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2011.png?alt=media&token=85b5ba3f-6ae7-4aa6-b232-e5ca7cb7630a",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2011.png",
     text: "garapa",
   },
-
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2012.png?alt=media&token=d8befabe-1ea0-429e-8564-10027d7d5a0b",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2012.png",
     text: "teak",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2013.png?alt=media&token=dbb9a37f-8c58-4022-bcf8-7aeed89ec003",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2013.png",
     text: "maple",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2014.png?alt=media&token=6adca59a-c98e-4139-8ec1-a2b0b7b0b7f7",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2014.png",
     text: "accoya",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2015.png?alt=media&token=b7d76f61-d1b8-4a24-bbec-f9fe5837e209",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2015.png",
     text: "vory",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2016.png?alt=media&token=51610635-7765-4c7e-9c61-96fea97fce2b",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2016.png",
     text: "sky",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2017.png?alt=media&token=293055ad-8015-4513-b6c1-60126bcc96f8",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2017.png",
     text: "vintage",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2018.png?alt=media&token=550cab5c-f04b-4c89-85bb-91dda62f1612",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2018.png",
     text: "stone",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2019.png?alt=media&token=8a3a6eda-14f7-4ef2-b18f-a362a5a1c06a",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2019.png",
     text: "graphite",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2020.png?alt=media&token=f53b1e31-0f48-4b55-83cd-c29d38e70902",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2020.png",
     text: "ebony",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2021.png?alt=media&token=82cd671c-c2cb-4c33-9eb8-6348030d4cda",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2021.png",
     text: "green",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%2022.png?alt=media&token=093c216d-bbd9-44dc-9105-804788033657",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%2022.png",
     text: "red",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%203.png?alt=media&token=f43771de-eacf-4ccf-b948-33503cb83f91",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%203.png",
     text: "orange",
   },
   {
     farba:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/farby%2FAsset%204.png?alt=media&token=87013b8b-3385-462e-a70d-b9332730f681",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/colors/Asset%204.png",
     text: "blue",
   },
 ];
@@ -384,9 +383,9 @@ export const localPeople = [
     job: "CEO",
     meno: "Peter Barták",
     main_image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpeter_pc.png?alt=media&token=f42bd2f6-46e5-49b6-88bc-5b1499024adf",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/peter_pc.png",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpeter_mobile.png?alt=media&token=c7b520a4-a155-4d18-b436-9fc639b96248",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/peter_mobile.png",
     text: "Stavebníctvu a WPC materiálom sa venujem už 20 rokov. Zodpovedám za finálne prevedenie zákazky, návrh dizajnu profilov a technického riešenia montáže. Spolu s Daliborom som postavil túto firmu na prepojení kvalitného materiálu so správnym technickým prevedením montáže. Pokiaľ udržíme nadstavenú latku týchto dvoch pilierov nemá potenciál firmy hraníc. Nadšenie klienta z každého detailu podľa jeho predstavy je pre mňa prioritou. Cieľom každej realizácie je, aby som si po dokončení zákazky mohol povedať, že takúto terasu či fasádu chcem mať aj u seba doma. Snažím sa kontolovať kvalitatívne prevedenie každej stavby po jej dokončení a byť pri jej finálnom odovzdaní. Aktuálne sa venujem primárne rozvoju firmy a zahraničnej expanzii.",
     tel: "+421XXXXXXXXX",
   },
@@ -394,9 +393,9 @@ export const localPeople = [
     job: "COO",
     meno: "Dalibor Lenárt",
     main_image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fdalibor_pc.png?alt=media&token=fa7c1359-45ac-464a-a76a-0e1179fc59bf",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/dalibor_pc.png",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fdalibor_mobile.png?alt=media&token=558ba676-cd46-40b5-a12b-57b02a4b6979",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/dalibor_mobile.png",
     text: "WPC materiálmi a možnostiam ich použitia sa venujem už viac ako 25 rokov. Zodpovedám za zabezpečenie plynulého chodu firmy, zefektívnenie a optimalizáciu procesov, komunikáciu s výrobným procesom, zazmluvňovanie zákaziek a koordináciu montážnych skupín. S klientom komunikujem po oficiálnom schválení cenovej ponuky, upravujem zmluvy aby sedeli presne podľa parametrov stavby a zohľadňujem v nej aj špecifické požiadavky zákazníka. Dbám na spokojnosti klientov a dodržanie stanovených časových rámcov. Dlhodobo sa venujem rozširovaniu sortimentu pre dosiahnutie najširšej škály farebných odtieňov na Európskom trhu. Spracovávam ponuky novovznikajúcich pokrokových výrobných technológii. Komunikujem s firmami o prípadnej spolupráci. ",
     tel: "+421XXXXXXXXX",
   },
@@ -404,9 +403,9 @@ export const localPeople = [
     job: "Vedúca klientely",
     meno: "Ivana Lénartová",
     main_image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fzena_pc.png?alt=media&token=d0b484ac-7366-4318-a63b-7f3b8b210c3d",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/zena_pc.png",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fzena_mobile.png?alt=media&token=b3d28e76-1bc4-45df-8976-2ef0479e300d",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/zena_mobile.png",
     text: "Patrím k služobne najskúsenejším členom postupne rozrastajúceho sa tímu. Verím v efektivitu a kvalitne odvedenú prácu. Zabezpečujem klientelistický servis, doskladňovanie materiálov, správu rozvozov objednávok a vypomáham so zazmluvňovaním zákaziek. Pri finálnom spracovaní zákazky dokážem klietom kvalitne poradiť či už pri výbere farebnosti variantov, základných technických otázkach alebo správnom umiestnení požadovaného obkladu. ",
     tel: "+421XXXXXXXXX",
   },
@@ -414,9 +413,9 @@ export const localPeople = [
     job: "Architekt",
     meno: "Pavol Remenár",
     main_image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpalo_pc.png?alt=media&token=279432e1-8188-4449-ab81-fc42e95e4a0d",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/palo_pc.png",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/timbermax.appspot.com/o/website_photos%2Fteam%2Fpalo_mobile.png?alt=media&token=138677cb-78f0-4575-9dcd-25a018f2874e",
+      "https://timbermaxopen.s3.eu-north-1.amazonaws.com/local_people/palo_mobile.png",
     text: "Materiál Timbermax spolu s nevídanými možnosťami kvality spracovania montážnych detailov a ľudský prístup vedenia firmy ma zaujaľ natoľko, že som sa s chalanmi rozhodol dlhodobo bližšie spolupracovať. Ako externá firma im spracovávam upresnenie cenových ponúk, návrhy dizajnov, návrhy možných aplikácii obkladov na nové či jestvujúce budovy, realizujem zamerania a obhliadky stavieb. Spolu s Peťom som navrhol automatický naceňovač, ktorý má za úlohu odľahčiť veľký počet žiadostí o cenové ponuky. Klienti sa týmto spôsobom vedia pred kontaktovaním firmy samostatne oboznámiť s technickými požiadavkami produktu a hlavne s cenou realizácie či samotného materiálu. Aktuálne sa zaoberám rozšírením počtu showroomových pobočiek do zvyšnej časti Slovenska a okolitých krajín EU.",
     tel: "+421XXXXXXXXX",
   },
