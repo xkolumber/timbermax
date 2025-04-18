@@ -36,3 +36,5 @@ export function createSlug(title: string): string {
 
   return slug;
 }
+
+export const LIMIT_GALLERY = 6;

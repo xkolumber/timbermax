@@ -1965,6 +1965,7 @@ export async function AdminAddPhotoGallery(actualizeGallery: Gallery) {
           kategorie: actualizeGallery.kategorie,
           profil: actualizeGallery.profil,
           datum_pridania: new Date().toISOString(),
+          partition_key: "all",
         },
       })
     );
@@ -2054,6 +2055,7 @@ export async function AdminActualizeAlbumGallery(
               profil = :profil,
               farba = :farba,
               jazyky_kontent = :jazyky_kontent
+              partition_key: partition_key
         `,
         ExpressionAttributeValues: {
           ":fotky": actualizeGallery.fotky,
@@ -2062,6 +2064,7 @@ export async function AdminActualizeAlbumGallery(
           ":profil": actualizeGallery.profil,
           ":farba": actualizeGallery.farba,
           ":jazyky_kontent": actualizeGallery.jazyky_kontent,
+          ":partition_key": actualizeGallery.partition_key,
         },
       })
     );

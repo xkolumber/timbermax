@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Lightbox, { SlideImage } from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { BLUR_DATA_URL_GRAY } from "../lib/functionsClient";
+import {
+  aws_bucket_url,
+  BLUR_DATA_URL_GRAY,
+  cloudfront_url,
+} from "../lib/functionsClient";
 import { fetchGalleryId } from "../lib/functionsServer";
 import { Gallery, GalleryTranslate } from "../lib/interface";
 import useLanguageStore from "../zustand/store";
@@ -39,7 +43,9 @@ const GalleryPageId = ({ id }: Props) => {
       ...data.fotky.slice(0, index),
       ...data.fotky.slice(index + 1),
     ];
-    const transformedAlbum = reorderedFotky.map((url) => ({ src: url }));
+    const transformedAlbum = reorderedFotky.map((url) => ({
+      src: url.replace(aws_bucket_url, cloudfront_url),
+    }));
     setChoosenAlbum(transformedAlbum);
     setOpen(true);
   };
@@ -97,7 +103,7 @@ const GalleryPageId = ({ id }: Props) => {
           )}
           {data?.fotky[0] && (
             <Image
-              src={data.fotky[0]}
+              src={data.fotky[0].replace(aws_bucket_url, cloudfront_url)}
               alt="hlavna_fotka"
               height={1000}
               width={1920}
@@ -117,7 +123,7 @@ const GalleryPageId = ({ id }: Props) => {
           <div className="flex flex-col md:flex-row gap-6  pt-8">
             {data?.fotky[1] && (
               <Image
-                src={data.fotky[1]}
+                src={data.fotky[1].replace(aws_bucket_url, cloudfront_url)}
                 alt="hlavna_fotka"
                 height={800}
                 width={800}
@@ -131,7 +137,7 @@ const GalleryPageId = ({ id }: Props) => {
             )}
             {data?.fotky[2] && (
               <Image
-                src={data.fotky[2]}
+                src={data.fotky[2].replace(aws_bucket_url, cloudfront_url)}
                 alt="hlavna_fotka"
                 height={800}
                 width={800}
@@ -154,7 +160,7 @@ const GalleryPageId = ({ id }: Props) => {
               <div className="" key={index}>
                 {object && index > 2 && (
                   <Image
-                    src={object}
+                    src={object.replace(aws_bucket_url, cloudfront_url)}
                     alt="hlavna_fotka"
                     height={1000}
                     width={1920}

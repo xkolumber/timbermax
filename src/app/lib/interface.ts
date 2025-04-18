@@ -576,6 +576,7 @@ export interface Gallery {
   farba: string;
   id: string;
   jazyky_kontent: GalleryTranslate[];
+  partition_key: string;
 }
 
 export interface BlogInterface {

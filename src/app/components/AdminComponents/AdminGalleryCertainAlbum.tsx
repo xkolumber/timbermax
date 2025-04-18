@@ -60,6 +60,7 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
     profil: "",
     farba: "",
     jazyky_kontent: [],
+    partition_key: "all",
   });
   const [isLoadingMap, setIsLoadingMap] = useState<IsLoadingMap>({});
 
@@ -184,6 +185,7 @@ const AdminGalleryCertainAlbum = ({ id }: Props) => {
         profil: data.profil ? data.profil : "",
         farba: data.farba ? data.farba : "",
         jazyky: data.jazyky_kontent ? data.jazyky_kontent : [],
+        partition_key: "all",
       }));
     }
   }, [data]);

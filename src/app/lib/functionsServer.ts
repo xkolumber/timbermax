@@ -2,7 +2,12 @@
 
 import { GetCommand, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { clientS3, docClient } from "./awsConfig";
-import { allowedLanguages, aws_bucket_name, createSlug } from "./functions";
+import {
+  allowedLanguages,
+  aws_bucket_name,
+  createSlug,
+  LIMIT_GALLERY,
+} from "./functions";
 import {
   AboutUsElements,
   Bazeny,
@@ -698,6 +703,34 @@ export async function fetchGalleries(): Promise<Gallery[]> {
   } catch (err) {
     console.log(err);
     throw new Error(`Item with  not found.`);
+  }
+}
+
+export async function fetchGalleriesLatest(
+  exclusiveStartKey?: any
+): Promise<{ items: Gallery[]; lastEvaluatedKey?: any }> {
+  try {
+    const command = new QueryCommand({
+      TableName: "galeria",
+      IndexName: "partition_key-datum_pridania-index",
+      KeyConditionExpression: "partition_key = :partition_key",
+      ExpressionAttributeValues: {
+        ":partition_key": "all",
+      },
+      ScanIndexForward: false,
+      Limit: LIMIT_GALLERY,
+      ExclusiveStartKey: exclusiveStartKey,
+    });
+
+    const response = await docClient.send(command);
+
+    return {
+      items: response.Items as Gallery[],
+      lastEvaluatedKey: response.LastEvaluatedKey,
+    };
+  } catch (err) {
+    console.error("Error fetching product references:", err);
+    return { items: [] };
   }
 }
 

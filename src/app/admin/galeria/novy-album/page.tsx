@@ -27,6 +27,7 @@ const Page = () => {
     profil: "",
     farba: "",
     jazyky_kontent: [],
+    partition_key: "all",
   });
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [photoLoading, setPhotoLoading] = useState(false);
