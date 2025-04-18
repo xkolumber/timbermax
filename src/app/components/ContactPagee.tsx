@@ -4,7 +4,9 @@ import Cookies from "js-cookie";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
+  aws_bucket_url,
   BLUR_DATA_URL_GRAY,
+  cloudfront_url,
   localPeople,
   OpeningHoursEmpty,
   prevadzky,
@@ -106,7 +108,10 @@ const ContactPagee = () => {
                   <div className="w-full h-full rounded-[12px]" key={index}>
                     <div className="relative">
                       <Image
-                        src={`${localPeople[index].image}`}
+                        src={`${localPeople[index].image.replace(
+                          aws_bucket_url,
+                          cloudfront_url
+                        )}`}
                         alt="hlavna_fotka"
                         height={342}
                         width={342}
@@ -133,7 +138,10 @@ const ContactPagee = () => {
                   <div className="w-full h-full" key={index}>
                     <div className="relative">
                       <Image
-                        src={`${localPeople[index].image}`}
+                        src={`${localPeople[index].image.replace(
+                          aws_bucket_url,
+                          cloudfront_url
+                        )}`}
                         alt="hlavna_fotka"
                         height={342}
                         width={342}
@@ -170,7 +178,7 @@ const ContactPagee = () => {
 
             <div className="relative">
               <Image
-                src="/showroom_new.svg"
+                src={`${cloudfront_url}/neutral/nova_mapa.svg`}
                 className="w-full h-full object-cover min-h-[200px] pt-8 pb-8 hidden md:block"
                 alt="referencie"
                 width={1000}
